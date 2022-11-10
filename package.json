@@ -1,0 +1,24 @@
+{
+  "name": "saidai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "saidai",
+  "author": "Maxwell Cofie",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^5.0.0",
+    "gatsby-plugin-manifest": "^5.0.0",
+    "gatsby-plugin-sitemap": "^6.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
