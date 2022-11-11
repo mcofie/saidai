@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksaidai=self.webpackChunksaidai||[]).push([[678],{6558:function(e,t,n){n.r(t),n.d(t,{Head:function(){return l}});var a=n(7294);t.default=()=>a.createElement(a.Fragment,null,a.createElement("h1",null,"Welcome 最大"));const l=()=>a.createElement("title",null,"Home Page")}}]);
+//# sourceMappingURL=component---src-pages-index-js-20fbbb204a1bd79c6408.js.map
