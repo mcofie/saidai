@@ -1,12 +1,12 @@
 import React from "react"
 import * as styles from './styles/text.module.css'
 
-const Text = ({message}) => {
+const Text = ({children}) => {
     return (<>
-            <p className={styles.text}>
-                {message}
-            </p>
-        </>)
+        <div className={styles.text}>
+            {children}
+        </div>
+    </>)
 }
 
 export default Text

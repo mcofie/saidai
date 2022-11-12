@@ -4,44 +4,57 @@ import Hero from '@components/hero'
 import Identity from '@components/identity'
 import Box from '@components/box'
 import Content from '@components/content'
+import Stack from '@components/stack'
+import Text from '@components/text'
 
 
 const IndexPage = () => {
     return (
         <>
             <Layout>
-                <Box>
+                <Stack>
+                    <Box position={'right'}>
+                        <span className="material-symbols-outlined mt-4">light_mode</span>
+                    </Box>
+                </Stack>
+                <Stack>
                     <Hero title={"最大"} subTitle={'he/him'}/>
-                </Box>
+                </Stack>
                 {/*First Box*/}
-                <Box>
+                <Stack>
                     <Content>
-                        <p style={{textAlign: 'left'}}>
+                        <Text>
                             Typically not your typical Frontend Engineer ( web & mobile) <br/>
                             from Accra, Ghana, with a sharp focus on building user centred <br/>
-                            experiences realised through design systems.
-                        </p>
+                            experiences realised through <a href={"#"} target={'_blank'}>design systems</a>.
+                        </Text>
                     </Content>
-                </Box>
-                <Box>
+                </Stack>
+                <Stack>
                     <Content>
-                        <p style={{textAlign: 'left'}}>
+                        <Text>
                             I seek to marry these two faculties UX Engineer & UX Designer.
-                        </p>
+                        </Text>
                     </Content>
-                </Box>
-                <Box>
+                </Stack>
+                <Stack>
                     <Content>
-                        <p style={{textAlign: 'left'}}>
-                            I like to tinker with ideas which sometimes become products,<br/>
-                            help when I can, try to read occasionally, write when I’m inspired <br/>
-                            and try to live whiles doing all these.
-                        </p>
+                        <Text>
+                            I like to tinker with ideas which sometimes
+                            become <a href={"#"}
+                                      target={'_blank'}>products</a>,<br/>
+                            <a href={"#"} target={'_blank'}>help</a> when I can, try to <a href={"#"}
+                                                                                           target={'_blank'}>read</a> occasionally, <a
+                            href={"#"}
+                            target={'_blank'}>write</a> when
+                            I’m inspired <br/>
+                            and be sure I live whiles doing all these.
+                        </Text>
                     </Content>
-                </Box>
-                <Box>
+                </Stack>
+                <Stack>
                     <Identity title={'COFIE'} subTitle={'Maxwell Nii Offei'}/>
-                </Box>
+                </Stack>
             </Layout>
         </>
     )

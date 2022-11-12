@@ -1,3 +1,7 @@
 .text {
     text-align: left;
+    opacity: 0.6;
+    font-weight: 300;
+    line-height: 1.9rem;
+    font-size: 1.4rem;
 }

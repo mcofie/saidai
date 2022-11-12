@@ -1,9 +1,9 @@
 import React from "react"
 
 
-const Box = ({children}) => {
+const Box = ({children, position}) => {
     return (<>
-        <div style={{width: '100%', float: 'left'}}>
+        <div style={{float: position}}>
             {children}
         </div>
     </>)

@@ -1,6 +1,6 @@
 .identity {
-    color: #FFFFFF;
     text-align: left;
+    margin: 70px 0;
 }
 
 .identity-aligned {
@@ -9,11 +9,10 @@
 }
 
 .identity__title {
-    color: #FFFFFF;
+    color: inherit;
     font-size: 5rem;
 }
 
 .identity__subtitle {
-    font-weight: bolder;
-    font-size: 3.8rem;
+    font-size: 4.0rem;
 }
