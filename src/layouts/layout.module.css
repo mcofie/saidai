@@ -1,0 +1,9 @@
+
+.container {
+    width: 1140px;
+    margin: auto auto;
+    text-align: center;
+    min-height: 700px;
+}
+
+/*Specify Container for standard screen sizes*/

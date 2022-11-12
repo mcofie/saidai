@@ -1,0 +1,19 @@
+.identity {
+    color: #FFFFFF;
+    text-align: left;
+}
+
+.identity-aligned {
+    list-style-type: none;
+    float: left;
+}
+
+.identity__title {
+    color: #FFFFFF;
+    font-size: 5rem;
+}
+
+.identity__subtitle {
+    font-weight: bolder;
+    font-size: 3.8rem;
+}

@@ -1,0 +1,20 @@
+.hero {
+    text-align: left;
+    margin: 50px 0;
+    float: left;
+}
+
+.hero-aligned {
+    list-style-type: none;
+}
+
+.hero__title {
+    font-size: 5rem;
+}
+
+.hero__subtitle {
+    color: #8E8E8E;
+    font-weight: lighter;
+}
+
+
