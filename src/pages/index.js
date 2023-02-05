@@ -26,7 +26,8 @@ const IndexPage = () => {
                         <Text>
                             Typically not your typical Frontend Engineer ( web & mobile) <br/>
                             from Accra, Ghana, with a sharp focus on building user centred <br/>
-                            experiences realised through <a href={"#"} target={'_blank'}>design systems</a>.
+                            experiences realised through <a href={"https://github.com/mcofie/Weeny"} target={'_blank'}>design
+                            systems</a>.
                         </Text>
                     </Content>
                 </Stack>
@@ -41,11 +42,14 @@ const IndexPage = () => {
                     <Content>
                         <Text>
                             I like to tinker with ideas which sometimes
-                            become <a href={"#"}
-                                      target={'_blank'}>products</a>,<br/>
-                            <a href={"#"} target={'_blank'}>help</a> when I can, try to <a href={"#"}
-                                                                                           target={'_blank'}>read</a> occasionally, <a
-                            href={"#"}
+                            become <a
+                            href={"https://purrfect-baron-20f.notion.site/Portfolio-5dc79c6d06ee404f9e7dd2f5ec05141d"}
+                            target={'_blank'}>products</a>,<br/>
+                            <a href={"https://skills-faculty.github.io/skillsfaculty.github.io/"}
+                               target={'_blank'}>help</a> when I can, try to <a
+                            href={"https://www.goodreads.com/user/show/108237344-maxwell-cofie"}
+                            target={'_blank'}>read</a> occasionally, <a
+                            href={"https://dev.to/mcofie"}
                             target={'_blank'}>write</a> when
                             I’m inspired <br/>
                             and be sure I live whiles doing all these.

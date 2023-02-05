@@ -17,6 +17,7 @@
     "deploy:ci": "gatsby build --prefix-paths && gh-pages -d public -r https://$GH_TOKEN@github.com/mcofie/saidai.git"
   },
   "dependencies": {
+    "babel-plugin-macros": "^3.1.0",
     "gatsby": "^5.0.0",
     "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-manifest": "^5.0.0",
