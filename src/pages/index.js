@@ -8,6 +8,7 @@ import Stack from '@components/stack'
 import Text from '@components/text'
 
 
+
 const IndexPage = () => {
     return (
         <>
@@ -65,5 +66,6 @@ const IndexPage = () => {
 }
 
 export default IndexPage
+
 
 export const Head = () => <title> 最大 - Maxwell Cofie</title>
