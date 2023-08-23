@@ -27,7 +27,7 @@ const IndexPage = () => {
                         <Text>
                             Typically not your typical Frontend Engineer ( web & mobile) <br/>
                             from Accra, Ghana, with a sharp focus on building user centred <br/>
-                            experiences realised through <a href={"https://github.com/mcofie/Weeny"} target={'_blank'}>design
+                            experiences realised through <a href={"https://weenydesigns.xyz"} target={'_blank'}>design
                             systems</a>.
                         </Text>
                     </Content>
