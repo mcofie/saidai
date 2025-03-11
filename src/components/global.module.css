@@ -13,8 +13,8 @@
 
 
 body {
-    color: var(--textColorDark);
-    background-color: var(--backgroundColorDark);
+    color: var(--textColorLight);
+    background-color: var(--backgroundColorLight);
 }
 
 /*body {*/
