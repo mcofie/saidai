@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Max Cofie — Portfolio</title>
+    <title>Maxwell Cofie — Portfolio</title>
     <meta name="color-scheme" content="light dark">
     <style>
-        /* ===== Reverted simple layout (plain white), Courier, theme + font controls ===== */
+        /* ===== Simple layout (no sticky header), Courier, theme + font controls ===== */
         :root {
-            --bg: #ffffff;           /* plain white in light mode */
+            --bg: #ffffff;
             --text: #111;
             --muted: #555;
             --link: #111;
@@ -16,7 +16,7 @@
             --btn-bg: #e0e0e0;
             --btn-text: #111;
             --maxw: 780px;
-            --base-size: 16px;       /* adjustable base */
+            --base-size: 16px;
         }
         @media (prefers-color-scheme: dark) {
             :root { --bg:#0b0b0b; --text:#f5f5f5; --muted:#a1a1aa; --link:#f5f5f5; --accent-bg:#1a1a1d; --btn-bg:#333; --btn-text:#f5f5f5; }
@@ -28,8 +28,7 @@
 
         header, main, footer { max-width:var(--maxw); margin:0 auto; padding:0 1.25rem; }
 
-        /* Centered sticky header */
-        header { text-align:center; padding:2rem 1.25rem 1rem; position:sticky; top:0; background:var(--bg); z-index:10; }
+        header { text-align:center; padding:2.5rem 1.25rem 1.5rem; background:var(--bg); }
 
         h1 { font-size:clamp(1.8rem,4vw,2.6rem); margin:0 0 .4rem; }
         h2 { font-size:clamp(1.3rem,3vw,1.8rem); margin-top:2.2rem; }
@@ -39,11 +38,9 @@
 
         a { color:var(--link); text-decoration:underline; text-underline-offset:3px; text-decoration-color:color-mix(in oklab, var(--link) 40%, transparent); }
 
-        /* Simple pill nav */
         nav { display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin:1rem 0 0; }
         nav a { background:var(--accent-bg); padding:.3rem .7rem; border-radius:6px; text-decoration:none; color:var(--text); }
 
-        /* Toolbar (theme + font size) */
         .toolbar { display:flex; justify-content:center; align-items:center; gap:.6rem; flex-wrap:wrap; margin-top:1rem; }
         .btn { border:none; border-radius:8px; background:var(--btn-bg); color:var(--btn-text); padding:.5rem .9rem; font-family:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:.4rem; transition:background .3s,color .3s; }
         .btn-small { padding:.35rem .6rem; font-size:.9rem; }
@@ -60,7 +57,7 @@
 </head>
 <body>
 <header>
-    <h1>Max Cofie</h1>
+    <h1>Maxwell Cofie</h1>
     <p class="muted">Software Engineer — Accra, Ghana</p>
     <p class="muted">I build simple, reliable products—fast. Currently at Hubtel. I care about clean architecture, performance budgets, and shipping value with minimal complexity.</p>
     <nav>
@@ -117,13 +114,11 @@
     </section>
 </main>
 
-<footer>© <span id="y"></span> Max Cofie</footer>
+<footer>© <span id="y"></span> Maxwell Nii Offei Cofie</footer>
 
 <script>
-    // Year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Smooth scroll for nav
     document.querySelectorAll('nav a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             e.preventDefault();
@@ -132,7 +127,6 @@
         });
     });
 
-    // Theme toggle with icon + button color
     const root = document.documentElement;
     const themeKey = 'max-theme';
     const themeLabel = document.getElementById('themeLabel');
@@ -150,7 +144,6 @@
     applyTheme(localStorage.getItem(themeKey) || 'auto');
     themeBtn.addEventListener('click',()=>{ const c=root.getAttribute('data-theme')||'auto'; const n=c==='auto'?'light':c==='light'?'dark':'auto'; applyTheme(n); });
 
-    // Font size controls (A− / A+)
     const fontKey='max-fontsize';
     const fontReadout=document.getElementById('fontReadout');
     const fontInc=document.getElementById('fontInc');
