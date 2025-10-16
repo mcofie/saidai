@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Max Cofie — Portfolio</title>
+    <meta name="color-scheme" content="light dark">
+    <style>
+        /* ===== Reverted simple layout (plain white), Courier, theme + font controls ===== */
+        :root {
+            --bg: #ffffff;           /* plain white in light mode */
+            --text: #111;
+            --muted: #555;
+            --link: #111;
+            --accent-bg: #f5f5f5;
+            --btn-bg: #e0e0e0;
+            --btn-text: #111;
+            --maxw: 780px;
+            --base-size: 16px;       /* adjustable base */
+        }
+        @media (prefers-color-scheme: dark) {
+            :root { --bg:#0b0b0b; --text:#f5f5f5; --muted:#a1a1aa; --link:#f5f5f5; --accent-bg:#1a1a1d; --btn-bg:#333; --btn-text:#f5f5f5; }
+        }
+        [data-theme="light"] { --bg:#ffffff; --text:#111; --muted:#555; --link:#111; --accent-bg:#f5f5f5; --btn-bg:#e0e0e0; --btn-text:#111; }
+        [data-theme="dark"]  { --bg:#0b0b0b; --text:#f5f5f5; --muted:#a1a1aa; --link:#f5f5f5; --accent-bg:#1a1a1d; --btn-bg:#333; --btn-text:#f5f5f5; }
+
+        html, body { height:100%; margin:0; background:var(--bg); color:var(--text); font-family:'Courier New', Courier, monospace; font-size:var(--base-size); line-height:1.7; scroll-behavior:smooth; }
+
+        header, main, footer { max-width:var(--maxw); margin:0 auto; padding:0 1.25rem; }
+
+        /* Centered sticky header */
+        header { text-align:center; padding:2rem 1.25rem 1rem; position:sticky; top:0; background:var(--bg); z-index:10; }
+
+        h1 { font-size:clamp(1.8rem,4vw,2.6rem); margin:0 0 .4rem; }
+        h2 { font-size:clamp(1.3rem,3vw,1.8rem); margin-top:2.2rem; }
+        h3 { font-size:1.05rem; margin-top:1.2rem; }
+        p, li { color:var(--text); }
+        .muted { color:var(--muted); }
+
+        a { color:var(--link); text-decoration:underline; text-underline-offset:3px; text-decoration-color:color-mix(in oklab, var(--link) 40%, transparent); }
+
+        /* Simple pill nav */
+        nav { display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin:1rem 0 0; }
+        nav a { background:var(--accent-bg); padding:.3rem .7rem; border-radius:6px; text-decoration:none; color:var(--text); }
+
+        /* Toolbar (theme + font size) */
+        .toolbar { display:flex; justify-content:center; align-items:center; gap:.6rem; flex-wrap:wrap; margin-top:1rem; }
+        .btn { border:none; border-radius:8px; background:var(--btn-bg); color:var(--btn-text); padding:.5rem .9rem; font-family:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:.4rem; transition:background .3s,color .3s; }
+        .btn-small { padding:.35rem .6rem; font-size:.9rem; }
+        .readout { color:var(--muted); font-size:.9rem; min-width:5ch; text-align:center; }
+
+        main { padding-bottom:3rem; }
+        ul { padding-left:1.2rem; }
+        li { margin-bottom:.55rem; }
+
+        footer { text-align:center; color:var(--muted); font-size:.9rem; padding:2rem 1rem; }
+
+        @media (max-width:600px){ :root{ --maxw: 92vw; } }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Max Cofie</h1>
+    <p class="muted">Software Engineer — Accra, Ghana</p>
+    <p class="muted">I build simple, reliable products—fast. Currently at Hubtel. I care about clean architecture, performance budgets, and shipping value with minimal complexity.</p>
+    <nav>
+        <a href="#bio">Bio</a>
+        <a href="#projects">Projects</a>
+        <a href="#writing">Writings</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="toolbar">
+        <button id="themeBtn" class="btn" aria-label="Toggle theme"><span id="themeIcon" aria-hidden="true">🌓</span> <span id="themeLabel">Auto</span></button>
+        <button id="fontDec" class="btn btn-small" aria-label="Decrease text size">A−</button>
+        <span id="fontReadout" class="readout" aria-live="polite">16px</span>
+        <button id="fontInc" class="btn btn-small" aria-label="Increase text size">A+</button>
+    </div>
+</header>
+
+<main>
+    <section id="bio">
+        <h2>Bio</h2>
+        <p>I build simple, reliable products—fast. Currently at Hubtel. I care about clean architecture, performance budgets, and shipping value with minimal complexity.</p>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <h3>Digital products</h3>
+        <ul>
+            <li><strong>Minutes to Match</strong> — Speed-dating events platform with themed nights and CRM. [ <a href="#">Live</a> | <a href="#">Source</a> ]</li>
+            <li><strong>Tailors CRM (MVP)</strong> — Client records and measurements with offline-friendly caching. [ <a href="#">Live</a> | <a href="#">Source</a> ]</li>
+            <li><strong>Rent-With-Me</strong> — Roommate finder by budget/area with match scoring. [ <a href="#">Live</a> | <a href="#">Source</a> ]</li>
+            <li><strong>Ghana Trip Planner</strong> — Enter a budget → get a shareable, costed itinerary. [ <a href="#">Live</a> | <a href="#">Source</a> ]</li>
+        </ul>
+        <h3>Other projects</h3>
+        <ul>
+            <li><strong>Writing Toolkit</strong> — Templates for reports, agendas, and meeting notes. [ <a href="#">View</a> ]</li>
+            <li><strong>Community Workshops</strong> — Intro to web dev sessions and mentorship. [ <a href="#">Overview</a> ]</li>
+        </ul>
+    </section>
+
+    <section id="writing">
+        <h2>Writings</h2>
+        <ul>
+            <li><a href="#">How I scope MVPs to ship in a week</a> — 2025-09-14</li>
+            <li><a href="#">Designing match scores that feel fair</a> — 2025-07-03</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <ul>
+            <li>Email: <a href="mailto:maxwell@hubtel.com">maxwell@hubtel.com</a></li>
+            <li>GitHub: <a href="https://github.com/your-github">github.com/your-github</a></li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/your-linkedin/">linkedin.com/in/your-linkedin</a></li>
+        </ul>
+    </section>
+</main>
+
+<footer>© <span id="y"></span> Max Cofie</footer>
+
+<script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Smooth scroll for nav
+    document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(a.getAttribute('href'));
+            t && t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Theme toggle with icon + button color
+    const root = document.documentElement;
+    const themeKey = 'max-theme';
+    const themeLabel = document.getElementById('themeLabel');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeBtn = document.getElementById('themeBtn');
+
+    function applyTheme(theme){
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem(themeKey, theme);
+        themeLabel.textContent = theme.charAt(0).toUpperCase()+theme.slice(1);
+        if(theme === 'dark'){ themeBtn.style.background='#333'; themeBtn.style.color='#f5f5f5'; themeIcon.textContent='🌙'; }
+        else if(theme === 'light'){ themeBtn.style.background='#e0e0e0'; themeBtn.style.color='#111'; themeIcon.textContent='☀️'; }
+        else { themeBtn.style.background='var(--btn-bg)'; themeBtn.style.color='var(--btn-text)'; themeIcon.textContent='🌓'; }
+    }
+    applyTheme(localStorage.getItem(themeKey) || 'auto');
+    themeBtn.addEventListener('click',()=>{ const c=root.getAttribute('data-theme')||'auto'; const n=c==='auto'?'light':c==='light'?'dark':'auto'; applyTheme(n); });
+
+    // Font size controls (A− / A+)
+    const fontKey='max-fontsize';
+    const fontReadout=document.getElementById('fontReadout');
+    const fontInc=document.getElementById('fontInc');
+    const fontDec=document.getElementById('fontDec');
+
+    function applyFont(px){ const c=Math.max(14, Math.min(22, px)); document.documentElement.style.setProperty('--base-size', c+'px'); fontReadout.textContent=c+'px'; localStorage.setItem(fontKey, String(c)); }
+    applyFont(parseInt(localStorage.getItem(fontKey)||'16',10));
+    fontInc.addEventListener('click',()=>{ const cur=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-size')); applyFont(cur+1); });
+    fontDec.addEventListener('click',()=>{ const cur=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--base-size')); applyFont(cur-1); });
+</script>
+</body>
+</html>
