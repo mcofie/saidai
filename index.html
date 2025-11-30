@@ -14,7 +14,8 @@
     <style>
         /* ===== VARIABLES ===== */
         :root {
-            --bg: #F3F4F6;
+            /* Default (Light) */
+            --bg: #F3F1EF;
             --card-bg: #FFFFFF;
             --text-main: #111827;
             --text-muted: #6B7280;
@@ -60,7 +61,7 @@
             background-color: var(--bg);
             color: var(--text-main);
             font-family: 'Manrope', sans-serif;
-            padding-bottom: 80px;
+            padding-bottom: 120px; /* Extra padding for mobile nav */
             min-height: 100vh;
             transition: background-color 0.4s ease, color 0.4s ease;
             -webkit-font-smoothing: antialiased;
@@ -103,6 +104,9 @@
                 top: 30px;
                 bottom: auto;
                 padding: 10px 10px 10px 24px;
+            }
+            body {
+                padding-bottom: 80px;
             }
         }
 
@@ -160,25 +164,42 @@
             margin-left: 8px;
         }
 
-        /* ===== GRID SYSTEM (TETRIS PACKING) ===== */
+        /* ===== GRID SYSTEM (RESPONSIVE) ===== */
         .grid-container {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Default Mobile: 1 Column */
             gap: var(--gap);
             max-width: 1200px;
-            margin: 100px auto;
+            margin: 40px auto 0;
             padding: 0 20px;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
+        /* Span Utility Classes */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Tablet (2 Columns) */
         @media (min-width: 640px) {
             .grid-container {
                 grid-template-columns: repeat(2, 1fr);
+                margin-top: 80px;
+            }
+
+            /* On Tablet, span-2 elements become full width */
+            .col-span-2 {
+                grid-column: span 2;
+            }
+
+            .row-span-2 {
+                grid-row: span 2;
             }
         }
 
+        /* Desktop (4 Columns) */
         @media (min-width: 1024px) {
             .grid-container {
                 grid-template-columns: repeat(4, 1fr);
@@ -283,6 +304,7 @@
         }
 
         [data-theme="light"] .card-bio .arrow-btn,
+        [data-theme="light"] .card-reading .arrow-btn,
         [data-theme="light"] .card-writing .arrow-btn,
         [data-theme="light"] .card-ventures .arrow-btn,
         [data-theme="light"] .card-social .arrow-btn {
@@ -771,7 +793,7 @@
         </div>
     </a>
 
-    <a href="https://tryitinero.com" target="_blank" class="card card-project pat-emerald col-span-2"
+    <a href="https://tryitinero.com" target="_blank" class="card card-project pat-itin col-span-2"
        data-category="solution">
         <div class="chip">AI</div>
         <div class="proj-title">Itinero</div>
@@ -824,7 +846,7 @@
         </svg>
     </a>
 
-    <div class="card card-footer col-span-4" id="contact" data-category="bio" style="grid-column: span 4;">
+    <div class="card card-footer full-width" id="contact" data-category="bio">
         <h2 style="font-size: 1.8rem; font-weight: 800;">Let's Connect.</h2>
         <p style="margin-top: 10px; color: var(--text-muted);">I'm always open to discussing systems, products, and tech
             in Africa.</p>
