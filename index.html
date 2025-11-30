@@ -78,25 +78,43 @@
             pointer-events: none;
         }
 
-        /* ===== NAVIGATION ===== */
+        /* ===== NAVIGATION (FIXED FOR MOBILE) ===== */
         nav {
             position: fixed;
-            bottom: 30px;
+            bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
             width: auto;
-            max-width: 90%;
+            max-width: 95%; /* More width on mobile */
             background: var(--nav-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            padding: 8px;
+            padding: 6px;
             border-radius: 100px;
             border: 1px solid var(--nav-border);
             box-shadow: var(--shadow);
             display: flex;
-            gap: 6px;
             align-items: center;
+            justify-content: space-between;
             z-index: 100;
+            /* Prevent overflow breaking layout on tiny screens */
+            overflow: hidden;
+        }
+
+        /* Container for the link buttons */
+        .nav-links {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            /* Allow scrolling on extremely small screens */
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            padding-right: 4px; /* Space before theme toggle */
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
         }
 
         @media (min-width: 768px) {
@@ -104,7 +122,14 @@
                 top: 30px;
                 bottom: auto;
                 padding: 10px 10px 10px 24px;
+                max-width: 90%;
             }
+
+            .nav-links {
+                gap: 6px;
+                overflow-x: visible;
+            }
+
             body {
                 padding-bottom: 80px;
             }
@@ -117,6 +142,7 @@
             margin-right: 20px;
             display: none;
             letter-spacing: -0.02em;
+            flex-shrink: 0;
         }
 
         @media (min-width: 768px) {
@@ -129,14 +155,22 @@
             background: transparent;
             border: none;
             font-family: inherit;
-            font-size: 0.85rem;
+            font-size: 0.8rem; /* Smaller font on mobile */
             font-weight: 600;
             color: var(--text-muted);
-            padding: 10px 18px;
+            padding: 8px 14px; /* Tighter padding on mobile */
             border-radius: 100px;
             cursor: pointer;
             transition: all 0.2s;
             white-space: nowrap;
+            flex-shrink: 0; /* Prevent buttons from squishing */
+        }
+
+        @media (min-width: 768px) {
+            .nav-btn {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
         }
 
         .nav-btn:hover {
@@ -151,8 +185,8 @@
         }
 
         .theme-toggle {
-            width: 40px;
-            height: 40px;
+            width: 36px; /* Slightly smaller on mobile */
+            height: 36px;
             border-radius: 50%;
             background: transparent;
             border: 1px solid var(--border);
@@ -161,7 +195,16 @@
             justify-content: center;
             cursor: pointer;
             color: var(--text-main);
-            margin-left: 8px;
+            margin-left: 4px;
+            flex-shrink: 0; /* Ensure toggle never shrinks */
+        }
+
+        @media (min-width: 768px) {
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                margin-left: 8px;
+            }
         }
 
         /* ===== GRID SYSTEM (RESPONSIVE) ===== */
@@ -189,7 +232,6 @@
                 margin-top: 80px;
             }
 
-            /* On Tablet, span-2 elements become full width */
             .col-span-2 {
                 grid-column: span 2;
             }
