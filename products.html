@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Maxwell Cofie | Solutions Architect</title>
+    <title>Products | Maxwell Cofie</title>
     <meta name="description" content="Solutions Architect & Tinkerer in Accra, Ghana.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -728,6 +728,99 @@
                 opacity: 1;
             }
         }
+
+        /* ===== DIALOG / MODAL ===== */
+        dialog {
+            border: none;
+            border-radius: var(--radius);
+            padding: 0;
+            background: transparent;
+            max-width: 600px;
+            width: 90%;
+            margin: auto;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .dialog-content {
+            background: var(--card-bg);
+            padding: 32px;
+            color: var(--text-main);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .dialog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .dialog-title {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .dialog-close {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dialog-close:hover {
+            background: var(--chip-bg);
+            color: var(--text-main);
+        }
+
+        .dialog-body {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .dialog-footer {
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: var(--text-main);
+            color: var(--bg);
+            font-weight: 700;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* Prevent scrolling when dialog is open */
+        body:has(dialog[open]) {
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -736,10 +829,8 @@
     <nav>
         <div class="logo">maxwell</div>
         <div class="nav-links">
-            <button class="nav-btn active" onclick="filterGrid('all', this)">All</button>
-            <button class="nav-btn" onclick="filterGrid('solution', this)">Solutions</button>
-            <button class="nav-btn" onclick="filterGrid('venture', this)">Ventures</button>
-            <a href="products.html" class="nav-btn" style="text-decoration: none;">Products</a>
+            <a href="index.html" class="nav-btn" style="text-decoration: none;">Home</a>
+            <button class="nav-btn active">Products</button>
         </div>
         <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
@@ -751,57 +842,28 @@
 
     <div class="grid-container">
 
-        <div class="card card-bio col-span-2" data-category="bio">
-            <div class="avatar">🧩</div>
-            <p class="bio-text">
-                I'm <strong>Maxwell</strong>, a Solutions Architect and Tinkerer in <strong>Ghana</strong>.<br>
-                I don't just write code; I architect systems that solve complex problems.
-            </p>
-        </div>
-
-        <div class="card card-location" data-category="bio">
-            <div class="map-bg-fallback"></div>
-            <div class="location-info">
-                <div class="time-display" id="timeDisplay">12:00</div>
-                <div class="loc-label">
-                    <div class="live-dot"></div>
-                    Accra, Ghana
-                </div>
-            </div>
-        </div>
-
-        <a href="https://open.spotify.com" target="_blank" class="card card-spotify" data-category="bio">
-            <div class="spotify-header">
-                <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                        d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 4.439-1.38 9.839-.72 13.439 1.56.421.24.6.78.302 1.26zm.12-3.36C14.939 8.46 8.7 8.28 5.04 9.42c-.6.18-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.16-1.02 15.66 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.379.299z" />
-                </svg>
-                <div class="equalizer">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-            </div>
-            <div>
-                <div style="font-weight: 700; font-size: 1.1rem;">Focus Flow</div>
-                <div style="font-size: 0.85rem; opacity: 0.8;">Listening</div>
-            </div>
-        </a>
-
-        <a href="https://lazypick.app" target="_blank" class="card card-project pat-lazy row-span-2 col-span-2"
-            data-category="solution">
+        <div class="card card-project pat-lazy row-span-2 col-span-2" style="cursor: pointer;" data-category="solution"
+            onclick="openModal({
+                title: 'LazyPick',
+                category: 'Lifestyle',
+                url: 'https://lazypick.app',
+                detail: 'LazyPick helps you decide what to watch or eat in seconds. With a curated database of movies and restaurants in Accra, it uses a smart algorithm to suggest options based on your mood and preferences. Stop scrolling and start enjoying.'
+             })">
             <div class="chip">Lifestyle</div>
             <div class="proj-title">LazyPick</div>
             <div class="proj-desc">A consumer app solving decision paralysis for movies & food in Accra.</div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">lazypick.app</span>
+                <span class="link-text">View Details</span>
             </div>
-        </a>
+        </div>
 
-        <a href="https://getknitted.app" target="_blank" class="card card-project pat-knit row-span-2"
-            data-category="solution">
+        <div class="card card-project pat-knit row-span-2" style="cursor: pointer;" data-category="solution" onclick="openModal({
+                title: 'Knitted',
+                category: 'SaaS',
+                url: 'https://getknitted.app',
+                detail: 'Knitted is the ultimate operating system for fashion designers and tailors. It allows you to digitally record client measurements, track order status from intake to delivery, and manage your client database—all with offline-first capabilities so you can work anywhere.'
+             })">
             <div class="chip">SaaS</div>
             <div class="proj-title">Knitted</div>
             <div class="proj-desc">Business OS for tailors. Record measurements, track orders, and manage clients
@@ -809,33 +871,31 @@
             </div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
+                <span class="link-text">View Details</span>
             </div>
-        </a>
+        </div>
 
-        <a href="https://sandboxreseau.com/" target="_blank" class="card card-project pat-sandbox"
-            data-category="solution">
-            <div class="chip">Community</div>
-            <div class="proj-title">Sandbox Reseau</div>
-            <div class="proj-desc">A digital network connecting creators and builders.</div>
-            <div class="arrow-btn">
-                <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
-            </div>
-        </a>
-
-        <a href="https://amigolease.com" target="_blank" class="card card-project pat-amigo" data-category="solution">
+        <div class="card card-project pat-amigo row-span-2" style="cursor: pointer;" data-category="solution" onclick="openModal({
+                title: 'Amigo Lease',
+                category: 'Mktplace',
+                url: 'https://amigolease.com',
+                detail: 'Amigo Lease takes the stress out of finding a roommate. Our platform matches you with verified individuals based on lifestyle compatibility, habits, and preferences. Whether you\'re a night owl or an early bird, find someone who vibes with you.'
+             })">
             <div class="chip">Mktplace</div>
             <div class="proj-title">Amigo Lease</div>
             <div class="proj-desc">Find verified roommates based on lifestyle.</div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
+                <span class="link-text">View Details</span>
             </div>
-        </a>
+        </div>
 
-        <a href="https://motorambos.com" target="_blank" class="card card-project pat-motor col-span-2"
-            data-category="solution">
+        <div class="card card-project pat-motor col-span-2" style="cursor: pointer;" data-category="solution" onclick="openModal({
+                title: 'Motor Ambos',
+                category: 'Service',
+                url: 'https://motorambos.com',
+                detail: 'Motor Ambos is your roadside companion. We connect car owners with a network of verified, reliable mechanics in their vicinity. Whether it\'s a breakdown or routine maintenance, get help instantly with transparent pricing and trusted service.'
+             })">
             <div class="chip">Service</div>
             <div class="proj-title">Motor Ambos</div>
             <div class="proj-desc">On-demand service aggregator connecting car owners with nearby verified mechanics
@@ -843,26 +903,16 @@
             </div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
+                <span class="link-text">View Details</span>
             </div>
-        </a>
+        </div>
 
-        <a href="https://open.substack.com/pub/mcofie" target="_blank" class="card card-writing col-span-2"
-            data-category="bio">
-            <div class="chip chip-dark">Thoughts</div>
-            <div style="margin-top: auto;">
-                <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 8px;">Maybe our way out is through
-                    entrepreneurship</h3>
-                <span style="color: var(--text-muted); font-size: 0.9rem;">Mar 18, 2025</span>
-            </div>
-            <div class="arrow-btn" style="top: 32px; bottom: auto; right: 32px; left: auto;">
-                <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Read</span>
-            </div>
-        </a>
-
-        <a href="https://tryitinero.com" target="_blank" class="card card-project pat-itin col-span-2"
-            data-category="solution">
+        <div class="card card-project pat-itin col-span-2" style="cursor: pointer;" data-category="solution" onclick="openModal({
+                title: 'Itinero',
+                category: 'AI',
+                url: 'https://tryitinero.com',
+                detail: 'Itinero makes exploring Africa effortless. Our AI-powered planner generates personalized travel itineraries tailored to your budget, interests, and timeline. Discover hidden gems, book experiences, and navigate your journey with confidence.'
+             })">
             <div class="chip">AI</div>
             <div class="proj-title">Itinero</div>
             <div class="proj-desc">AI-powered travel planner generating custom itineraries for exploring Africa based on
@@ -870,51 +920,24 @@
             </div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
-            </div>
-        </a>
-
-        <div class="card card-ventures col-span-2" data-category="venture">
-            <div class="chip chip-dark" style="margin-bottom: 20px;">Side Quests</div>
-            <div style="width: 100%;">
-                <a href="https://minutes2match.com/" target="_blank" class="venture-row"
-                    style="text-decoration: none; color: inherit;">
-                    <span class="venture-title">Minutes 2 Match</span>
-                    <span style="font-size: 0.9rem; color: var(--text-muted);">Speed Dating Event ↗</span>
-                </a>
-                <a href="https://voltapinefarms.com/" target="_blank" class="venture-row"
-                    style="text-decoration: none; color: inherit;">
-                    <span class="venture-title">Vita & Pine Farms</span>
-                    <span style="font-size: 0.9rem; color: var(--text-muted);">Sustainable Agriculture ↗</span>
-                </a>
+                <span class="link-text">View Details</span>
             </div>
         </div>
 
-        <a href="https://stageandbloom.co" target="_blank" class="card card-project pat-stage col-span-2"
-            data-category="solution">
+        <div class="card card-project pat-stage col-span-2" style="cursor: pointer;" data-category="solution" onclick="openModal({
+                title: 'Stage & Bloom',
+                category: 'Platform',
+                url: 'https://stageandbloom.co',
+                detail: 'Stage & Bloom simplifies event planning. Browse a comprehensive directory of top-tier vendors for weddings and corporate events. From florists to photographers, compare portfolios, read reviews, and book the perfect team to bring your vision to life.'
+             })">
             <div class="chip">Platform</div>
             <div class="proj-title">Stage & Bloom</div>
             <div class="proj-desc">A comprehensive vendor discovery platform for weddings and corporate events.</div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
+                <span class="link-text">View Details</span>
             </div>
-        </a>
-
-        <a href="https://x.com/maxwellcofie" target="_blank" class="card card-social bg-black" data-category="bio">
-            <svg width="28" height="28" fill="white" viewBox="0 0 24 24">
-                <path
-                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-            </svg>
-        </a>
-
-        <a href="https://github.com/mcofie" target="_blank" class="card card-social" data-category="bio"
-            style="background: #333;">
-            <svg width="28" height="28" fill="white" viewBox="0 0 24 24">
-                <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-        </a>
+        </div>
 
         <div class="card card-footer full-width" id="contact" data-category="bio">
             <h2 style="font-size: 1.8rem; font-weight: 800;">Let's Connect.</h2>
@@ -931,7 +954,61 @@
 
     </div>
 
+    <!-- PRODUCT DETAILS DIALOG -->
+    <dialog id="productDialog">
+        <div class="dialog-content">
+            <div class="dialog-header">
+                <div>
+                    <div class="chip" id="dialogChip"
+                        style="color: var(--text-muted); border-color: var(--border); background: var(--chip-bg); margin-bottom: 12px;">
+                        Category</div>
+                    <h2 class="dialog-title" id="dialogTitle">Product Name</h2>
+                </div>
+                <button class="dialog-close" id="closeDialogBtn" aria-label="Close">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="dialog-body" id="dialogBody">
+                Detailed description goes here.
+            </div>
+            <div class="dialog-footer">
+                <a href="#" target="_blank" class="btn-primary" id="dialogCta">Try it out ↗</a>
+            </div>
+        </div>
+    </dialog>
+
     <script>
+        // --- DIALOG LOGIC ---
+        const dialog = document.getElementById('productDialog');
+        const closeBtn = document.getElementById('closeDialogBtn');
+        const dialogTitle = document.getElementById('dialogTitle');
+        const dialogBody = document.getElementById('dialogBody');
+        const dialogChip = document.getElementById('dialogChip');
+        const dialogCta = document.getElementById('dialogCta');
+
+        function openModal(data) {
+            dialogTitle.textContent = data.title;
+            dialogBody.innerHTML = data.detail; // Use innerHTML for formatting
+            dialogChip.textContent = data.category;
+            dialogCta.href = data.url;
+            dialog.showModal();
+        }
+
+        closeBtn.addEventListener('click', () => {
+            dialog.close();
+        });
+
+        dialog.addEventListener('click', (e) => {
+            const rect = dialog.getBoundingClientRect();
+            const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+            if (!isInDialog) {
+                dialog.close();
+            }
+        });
+
         // --- LIVE CLOCK ---
         function updateTime() {
             const now = new Date();
