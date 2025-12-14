@@ -9,47 +9,38 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ===== VARIABLES ===== */
+        /* ===== VARIABLES (MODERN SWISS) ===== */
         :root {
-            /* Default (Light) */
-            --bg: #F3F1EF;
-            --card-bg: #FFFFFF;
-            --text-main: #111827;
-            --text-muted: #6B7280;
-            --border: rgba(0, 0, 0, 0.06);
+            /* Light Mode - Radical Monochrome */
+            --bg: #FFFFFF;
+            --card-bg: #F9F9F9;
+            --text-main: #000000;
+            --text-muted: #666666;
+            --text-tertiary: #999999;
+            --border: #E5E5E5;
+
             --nav-bg: rgba(255, 255, 255, 0.85);
-            --nav-border: rgba(255, 255, 255, 0.8);
-            --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
-            --chip-bg: rgba(0, 0, 0, 0.05);
 
-            /* Palette */
-            --col-indigo: #4F46E5;
-            --col-emerald: #059669;
-            --col-rose: #E11D48;
-            --col-cyan: #0891B2;
-            --col-amber: #D97706;
-            --col-slate: #334155;
-            --col-violet: #7C3AED;
+            --radius: 8px;
+            /* Tech/Structural */
+            --gap: 16px;
+            /* Tighter Grid */
 
-            --radius: 24px;
-            --gap: 20px;
-            --ease-spring: cubic-bezier(0.4, 0.0, 0.2, 1);
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         [data-theme="dark"] {
-            --bg: #0B0C10;
-            --card-bg: #15161A;
-            --text-main: #F3F4F6;
-            --text-muted: #9CA3AF;
-            --border: rgba(255, 255, 255, 0.08);
-            --nav-bg: rgba(21, 22, 26, 0.8);
-            --nav-border: rgba(255, 255, 255, 0.05);
-            --shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
-            --chip-bg: rgba(255, 255, 255, 0.1);
+            --bg: #050505;
+            --card-bg: #111111;
+            --text-main: #FFFFFF;
+            --text-muted: #A1A1A1;
+            --text-tertiary: #555555;
+            --border: #222222;
+
+            --nav-bg: rgba(5, 5, 5, 0.85);
         }
 
         * {
@@ -58,98 +49,73 @@
             padding: 0;
         }
 
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         body {
             background-color: var(--bg);
             color: var(--text-main);
-            font-family: 'Manrope', sans-serif;
-            padding-bottom: 120px;
-            /* Extra padding for mobile nav */
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            /* Slightly tighter body */
+            line-height: 1.5;
+            padding-bottom: 80px;
             min-height: 100vh;
-            transition: background-color 0.4s ease, color 0.4s ease;
-            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Noise Texture */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-            opacity: 0.5;
-            pointer-events: none;
+        /* ===== TYPOGRAPHY ===== */
+        h1,
+        h2,
+        h3,
+        h4,
+        .proj-title,
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            /* Tight tracking for headers */
         }
 
-        /* ===== NAVIGATION (FIXED FOR MOBILE) ===== */
+        p,
+        .proj-desc,
+        .link-text,
+        .nav-btn {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        /* ===== NAVIGATION ===== */
         nav {
             position: fixed;
-            bottom: 24px;
+            top: 24px;
             left: 50%;
             transform: translateX(-50%);
             width: auto;
-            max-width: 95%;
-            /* More width on mobile */
+            max-width: 90%;
+            padding: 6px;
             background: var(--nav-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            padding: 6px;
-            border-radius: 100px;
-            border: 1px solid var(--nav-border);
-            box-shadow: var(--shadow);
             display: flex;
             align-items: center;
             justify-content: space-between;
             z-index: 100;
-            /* Prevent overflow breaking layout on tiny screens */
-            overflow: hidden;
-        }
-
-        /* Container for the link buttons */
-        .nav-links {
-            display: flex;
-            gap: 4px;
-            align-items: center;
-            /* Allow scrolling on extremely small screens */
-            overflow-x: auto;
-            scrollbar-width: none;
-            /* Firefox */
-            -ms-overflow-style: none;
-            /* IE/Edge */
-            padding-right: 4px;
-            /* Space before theme toggle */
-        }
-
-        .nav-links::-webkit-scrollbar {
-            display: none;
-            /* Chrome/Safari */
-        }
-
-        @media (min-width: 768px) {
-            nav {
-                top: 30px;
-                bottom: auto;
-                padding: 10px 10px 10px 24px;
-                max-width: 90%;
-            }
-
-            .nav-links {
-                gap: 6px;
-                overflow-x: visible;
-            }
-
-            body {
-                padding-bottom: 80px;
-            }
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         .logo {
             font-size: 0.95rem;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--text-main);
-            margin-right: 20px;
+            text-transform: lowercase;
+            margin: 0 16px;
             display: none;
-            letter-spacing: -0.02em;
-            flex-shrink: 0;
         }
 
         @media (min-width: 768px) {
@@ -158,91 +124,69 @@
             }
         }
 
+        .nav-links {
+            display: flex;
+            gap: 4px;
+        }
+
         .nav-btn {
             background: transparent;
             border: none;
-            font-family: inherit;
-            font-size: 0.8rem;
-            /* Smaller font on mobile */
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 500;
             color: var(--text-muted);
-            padding: 8px 14px;
-            /* Tighter padding on mobile */
+            padding: 8px 20px;
             border-radius: 100px;
             cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-            flex-shrink: 0;
-            /* Prevent buttons from squishing */
-        }
-
-        @media (min-width: 768px) {
-            .nav-btn {
-                padding: 10px 18px;
-                font-size: 0.85rem;
-            }
+            transition: all 0.2s ease;
         }
 
         .nav-btn:hover {
             color: var(--text-main);
-            background: rgba(125, 125, 125, 0.1);
         }
 
         .nav-btn.active {
-            background: var(--card-bg);
-            color: var(--text-main);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            background: var(--text-main);
+            color: var(--bg);
+            font-weight: 600;
         }
 
         .theme-toggle {
             width: 36px;
-            /* Slightly smaller on mobile */
             height: 36px;
-            border-radius: 50%;
-            background: transparent;
-            border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
+            background: transparent;
+            border: none;
             cursor: pointer;
+            color: var(--text-muted);
+            border-radius: 50%;
+            transition: color 0.2s;
+            margin-right: 4px;
+        }
+
+        .theme-toggle:hover {
             color: var(--text-main);
-            margin-left: 4px;
-            flex-shrink: 0;
-            /* Ensure toggle never shrinks */
+            background: var(--border);
         }
 
-        @media (min-width: 768px) {
-            .theme-toggle {
-                width: 40px;
-                height: 40px;
-                margin-left: 8px;
-            }
-        }
-
-        /* ===== GRID SYSTEM (RESPONSIVE) ===== */
+        /* ===== GRID SYSTEM (BENTO) ===== */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr;
-            /* Default Mobile: 1 Column */
             gap: var(--gap);
             max-width: 1200px;
-            margin: 40px auto 0;
+            margin: 120px auto 40px;
             padding: 0 20px;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            transform: translateY(10px);
+            animation: fadeIn 0.6s var(--ease-out) forwards;
         }
 
-        /* Span Utility Classes */
-        .full-width {
-            grid-column: 1 / -1;
-        }
-
-        /* Tablet (2 Columns) */
         @media (min-width: 640px) {
             .grid-container {
                 grid-template-columns: repeat(2, 1fr);
-                margin-top: 80px;
             }
 
             .col-span-2 {
@@ -254,20 +198,10 @@
             }
         }
 
-        /* Desktop (4 Columns) */
         @media (min-width: 1024px) {
             .grid-container {
                 grid-template-columns: repeat(4, 1fr);
                 grid-auto-rows: 280px;
-                margin-top: 140px;
-            }
-
-            .col-span-2 {
-                grid-column: span 2;
-            }
-
-            .row-span-2 {
-                grid-row: span 2;
             }
 
             .col-span-4 {
@@ -275,215 +209,198 @@
             }
         }
 
-        @keyframes fadeUp {
+        @keyframes fadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .card.hidden {
-            display: none;
-        }
-
-        /* ===== CARD CORE ===== */
+        /* ===== CARD CORE (SWISS) ===== */
         .card {
             background: var(--card-bg);
             border-radius: var(--radius);
-            padding: 32px;
+            padding: 24px;
             position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             text-decoration: none;
             color: inherit;
-            transition: all 0.5s var(--ease-spring);
+            transition: all 0.2s var(--ease-out);
             border: 1px solid var(--border);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01);
-            min-height: 280px;
+            overflow: hidden;
+            min-height: 240px;
         }
 
         .card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow);
-            z-index: 10;
-            border-color: rgba(125, 125, 125, 0.2);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+            background: var(--bg);
+            z-index: 2;
         }
 
-        /* ===== CHIP ===== */
+        .card.hidden {
+            display: none;
+        }
+
+        /* ===== CONTENT STYLING ===== */
+
+        /* CHIP */
         .chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 6px 12px;
-            border-radius: 100px;
-            font-size: 0.75rem;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 100px;
             width: fit-content;
             margin-bottom: auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(4px);
+            background: transparent;
         }
 
         .chip-dark {
-            background: var(--chip-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
         }
 
-        /* ===== ARROW INTERACTION ===== */
+        /* PROJECT TYPOGRAPHY */
+        .proj-title {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        .proj-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            max-width: 90%;
+        }
+
+        /* ARROWS / LINKS */
         .arrow-btn {
             position: absolute;
             bottom: 24px;
-            left: 24px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            height: 44px;
-            width: 44px;
-            border-radius: 100px;
+            right: 24px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-            overflow: hidden;
-            white-space: nowrap;
-            z-index: 5;
-        }
-
-        [data-theme="light"] .card-bio .arrow-btn,
-        [data-theme="light"] .card-reading .arrow-btn,
-        [data-theme="light"] .card-writing .arrow-btn,
-        [data-theme="light"] .card-ventures .arrow-btn,
-        [data-theme="light"] .card-social .arrow-btn {
-            background: rgba(0, 0, 0, 0.05);
-            color: #000;
-            border-color: rgba(0, 0, 0, 0.1);
-        }
-
-        .arrow-icon-svg {
-            display: block;
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .link-text {
-            font-size: 0.85rem;
-            font-weight: 700;
-            max-width: 0;
-            opacity: 0;
-            margin-left: 0;
-            transition: all 0.6s ease;
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            transition: all 0.2s ease;
         }
 
         .card:hover .arrow-btn {
-            width: auto;
-            padding: 0 20px;
-            justify-content: space-between;
-            gap: 10px;
-            background: white;
-            color: black;
+            background: var(--text-main);
+            color: var(--bg);
+            border-color: var(--text-main);
+            transform: rotate(-45deg);
         }
 
-        .card:hover .link-text {
-            max-width: 200px;
-            opacity: 1;
+        .arrow-icon-svg {
+            font-size: 16px;
         }
 
-        .card:hover .arrow-icon-svg {
-            transform: rotate(45deg);
+        .link-text {
+            display: none;
         }
 
-        /* ===== CARD: BIO ===== */
+        /* Simplified */
+
+        /* ===== SPECIFIC CARDS ===== */
+
+        /* BIO */
         .card-bio {
-            justify-content: center;
+            justify-content: flex-end;
         }
 
         .avatar {
-            width: 64px;
-            height: 64px;
-            background: var(--bg);
+            width: 56px;
+            height: 56px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 50%;
-            margin-bottom: 24px;
-            font-size: 28px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--border);
+            font-size: 24px;
         }
 
         .bio-text {
             font-size: 1.25rem;
-            line-height: 1.4;
-            font-weight: 500;
             color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.4;
         }
 
         .bio-text strong {
             color: var(--text-main);
-            font-weight: 800;
+            font-weight: 600;
         }
 
-        /* ===== CARD: LOCATION ===== */
+        /* LOCATION */
         .card-location {
             padding: 0;
-            position: relative;
-            background: #222;
+            background: #111;
+            color: white;
+            border: none;
         }
 
         .map-bg-fallback {
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #333, #000);
-            background-image: repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(255, 255, 255, 0.1) 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(255, 255, 255, 0.1) 20px);
+            opacity: 0.3;
+            background-image: radial-gradient(#444 1px, transparent 1px);
+            background-size: 20px 20px;
         }
 
         .location-info {
             position: absolute;
-            bottom: 32px;
-            left: 32px;
-            z-index: 2;
+            bottom: 24px;
+            left: 24px;
         }
 
         .time-display {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: -0.04em;
             line-height: 1;
             margin-bottom: 4px;
-            font-variant-numeric: tabular-nums;
         }
 
         .loc-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.7;
         }
 
         .live-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background: #10B981;
             border-radius: 50%;
-            box-shadow: 0 0 10px #10B981;
+            box-shadow: 0 0 8px #10B981;
             animation: pulse 2s infinite;
         }
 
-        /* ===== CARD: SPOTIFY ===== */
+        /* SPOTIFY */
         .card-spotify {
-            background: #1DB954;
-            color: white;
+            background: var(--card-bg);
             justify-content: space-between;
-            border: none;
+        }
+
+        .card-spotify:hover {
+            border-color: #1DB954;
         }
 
         .spotify-header {
@@ -494,14 +411,14 @@
 
         .equalizer {
             display: flex;
-            gap: 4px;
+            gap: 3px;
             align-items: flex-end;
             height: 20px;
         }
 
         .bar {
-            width: 4px;
-            background: rgba(255, 255, 255, 0.8);
+            width: 3px;
+            background: var(--text-main);
             border-radius: 4px;
             animation: eq 1s ease-in-out infinite;
         }
@@ -538,147 +455,35 @@
             }
         }
 
-        /* ===== PROJECT CARDS ===== */
-        .card-project {
-            color: white;
-            justify-content: flex-start;
-            border: none;
-        }
-
-        .proj-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-top: 16px;
-            line-height: 1;
-            margin-bottom: 8px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .proj-desc {
-            font-size: 1rem;
-            font-weight: 500;
-            opacity: 0.9;
-            line-height: 1.5;
-            max-width: 90%;
-        }
-
-        @keyframes moveBg {
-            0% {
-                background-position: 0% 0%;
-            }
-
-            100% {
-                background-position: 100% 100%;
-            }
-        }
-
-        /* PATTERNS */
-        /* LazyPick (Rose + Radial) */
-        .pat-lazy {
-            background-color: var(--col-rose);
-            background-image: radial-gradient(rgba(255, 255, 255, 0.2) 2px, transparent 2px);
-            background-size: 24px 24px;
-            animation: moveBg 20s linear infinite;
-        }
-
-        /* Knitted (Indigo + Grid) */
-        .pat-knit {
-            background-color: var(--col-indigo);
-            background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 30px 30px;
-            animation: moveBg 30s linear infinite;
-        }
-
-        /* Itinero (Emerald + Waves) */
-        .pat-itin {
-            background-color: var(--col-emerald);
-            background-image: repeating-radial-gradient(circle at 0 0, transparent 0, rgba(255, 255, 255, 0.1) 20px, transparent 40px);
-            animation: moveBg 40s linear infinite;
-        }
-
-        /* Motor Ambos (Cyan + Diagonal) */
-        .pat-motor {
-            background-color: var(--col-cyan);
-            background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0, rgba(255, 255, 255, 0.1) 2px, transparent 2px, transparent 12px);
-            background-size: 20px 20px;
-        }
-
-        /* Amigo Lease (Violet + Circles) */
-        .pat-amigo {
-            background-color: var(--col-violet);
-            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 2px, transparent 2.5px);
-            background-size: 20px 20px;
-            animation: moveBg 15s linear infinite;
-        }
-
-        /* Stage (Amber + Dots) */
-        .pat-stage {
-            background-color: var(--col-amber);
-            background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px);
-            background-size: 15px 15px;
-        }
-
-        /* Sandbox (Slate + Digital Mesh) */
-        .pat-sandbox {
-            background-color: var(--col-slate);
-            background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent),
-                linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
-            background-size: 50px 50px;
-            animation: moveBg 60s linear infinite;
-        }
-
-        /* Socials & Writing */
-        .card-social {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            border: none;
-        }
-
-        .bg-black {
-            background: #000;
-        }
-
-        .card-writing,
-        .card-ventures {
-            justify-content: center;
-        }
-
-        .list-header {
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
+        /* WRITING */
         .writing-link {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 6px;
             display: block;
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 8px;
             line-height: 1.3;
         }
 
         .writing-date {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            font-weight: 500;
         }
 
+        /* VENTURES */
         .venture-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 16px 0;
             border-bottom: 1px solid var(--border);
-            transition: padding 0.3s;
+            color: var(--text-muted);
+            transition: all 0.2s;
         }
 
         .venture-row:hover {
-            padding-left: 10px;
+            color: var(--text-main);
+            padding-left: 8px;
         }
 
         .venture-row:last-child {
@@ -686,46 +491,63 @@
         }
 
         .venture-title {
-            font-weight: 700;
-            font-size: 1.05rem;
+            font-weight: 500;
         }
 
-        /* Footer */
+        /* FOOTER */
         .card-footer {
-            justify-content: center;
-            text-align: center;
+            background: transparent !important;
+            border: none !important;
+            padding-top: 40px;
+            align-items: center;
+            box-shadow: none !important;
         }
 
         .footer-links {
             display: flex;
             gap: 24px;
-            justify-content: center;
-            margin-top: 24px;
+            font-size: 0.9rem;
+            margin-top: 0;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .footer-link {
-            text-decoration: underline;
-            color: var(--text-main);
-            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
             transition: color 0.2s;
         }
 
         .footer-link:hover {
-            color: var(--col-indigo);
+            color: var(--text-main);
+        }
+
+        /* PATTERNS (Subtle Geometry) */
+        /* Reset to standard card bg first, then add subtle overlay */
+        .pat-lazy,
+        .pat-knit,
+        .pat-itin,
+        .pat-motor,
+        .pat-amigo,
+        .pat-stage,
+        .pat-sandbox {
+            background-color: var(--card-bg);
+            /* Optional: extremely subtle noise or dot pattern */
+            background-image: radial-gradient(var(--border) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: none;
+            /* Layout is key, not motion */
         }
 
         @keyframes pulse {
-            0% {
+
+            0%,
+            100% {
                 opacity: 1;
             }
 
             50% {
                 opacity: 0.5;
-            }
-
-            100% {
-                opacity: 1;
             }
         }
     </style>
@@ -772,7 +594,7 @@
 
         <a href="https://open.spotify.com" target="_blank" class="card card-spotify" data-category="bio">
             <div class="spotify-header">
-                <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path
                         d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 4.439-1.38 9.839-.72 13.439 1.56.421.24.6.78.302 1.26zm.12-3.36C14.939 8.46 8.7 8.28 5.04 9.42c-.6.18-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.16-1.02 15.66 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.379.299z" />
                 </svg>
@@ -784,66 +606,69 @@
                 </div>
             </div>
             <div>
-                <div style="font-weight: 700; font-size: 1.1rem;">Focus Flow</div>
-                <div style="font-size: 0.85rem; opacity: 0.8;">Listening</div>
+                <div style="font-weight: 700; font-size: 1rem;">Focus Flow</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">Listening</div>
             </div>
         </a>
 
         <a href="https://lazypick.app" target="_blank" class="card card-project pat-lazy row-span-2 col-span-2"
             data-category="solution">
             <div class="chip">Lifestyle</div>
-            <div class="proj-title">LazyPick</div>
-            <div class="proj-desc">A consumer app solving decision paralysis for movies & food in Accra.</div>
+            <div style="margin-top:auto; margin-bottom: 20px;">
+                <div class="proj-title">LazyPick</div>
+                <div class="proj-desc">A consumer app solving decision paralysis for movies & food in Accra.</div>
+            </div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">lazypick.app</span>
             </div>
         </a>
 
         <a href="https://getknitted.app" target="_blank" class="card card-project pat-knit row-span-2"
             data-category="solution">
             <div class="chip">SaaS</div>
-            <div class="proj-title">Knitted</div>
-            <div class="proj-desc">Business OS for tailors. Record measurements, track orders, and manage clients
-                offline.
+            <div style="margin-top:auto; margin-bottom: 20px;">
+                <div class="proj-title">Knitted</div>
+                <div class="proj-desc">Business OS for tailors. Record measurements, track orders, and manage clients.
+                </div>
             </div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
             </div>
         </a>
 
         <a href="https://sandboxreseau.com/" target="_blank" class="card card-project pat-sandbox"
             data-category="solution">
             <div class="chip">Community</div>
-            <div class="proj-title">Sandbox Reseau</div>
-            <div class="proj-desc">A digital network connecting creators and builders.</div>
+            <div style="margin-top:auto;">
+                <div class="proj-title">Sandbox Reseau</div>
+                <div class="proj-desc">A digital network connecting creators.</div>
+            </div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
             </div>
         </a>
 
         <a href="https://amigolease.com" target="_blank" class="card card-project pat-amigo" data-category="solution">
             <div class="chip">Mktplace</div>
-            <div class="proj-title">Amigo Lease</div>
-            <div class="proj-desc">Find verified roommates based on lifestyle.</div>
+            <div style="margin-top:auto;">
+                <div class="proj-title">Amigo Lease</div>
+                <div class="proj-desc">Find verified roommates based on lifestyle.</div>
+            </div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
             </div>
         </a>
 
         <a href="https://motorambos.com" target="_blank" class="card card-project pat-motor col-span-2"
             data-category="solution">
             <div class="chip">Service</div>
-            <div class="proj-title">Motor Ambos</div>
-            <div class="proj-desc">On-demand service aggregator connecting car owners with nearby verified mechanics
-                instantly.
+            <div style="margin-top:auto;">
+                <div class="proj-title">Motor Ambos</div>
+                <div class="proj-desc">On-demand service aggregator connecting car owners with nearby verified mechanics
+                    instantly.</div>
             </div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
             </div>
         </a>
 
@@ -851,26 +676,24 @@
             data-category="bio">
             <div class="chip chip-dark">Thoughts</div>
             <div style="margin-top: auto;">
-                <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 8px;">Maybe our way out is through
-                    entrepreneurship</h3>
-                <span style="color: var(--text-muted); font-size: 0.9rem;">Mar 18, 2025</span>
+                <h3 class="writing-link">Maybe our way out is through entrepreneurship</h3>
+                <span class="writing-date">Mar 18, 2025</span>
             </div>
-            <div class="arrow-btn" style="top: 32px; bottom: auto; right: 32px; left: auto;">
+            <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Read</span>
             </div>
         </a>
 
         <a href="https://tryitinero.com" target="_blank" class="card card-project pat-itin col-span-2"
             data-category="solution">
             <div class="chip">AI</div>
-            <div class="proj-title">Itinero</div>
-            <div class="proj-desc">AI-powered travel planner generating custom itineraries for exploring Africa based on
-                budget.
+            <div style="margin-top:auto;">
+                <div class="proj-title">Itinero</div>
+                <div class="proj-desc">AI-powered travel planner generating custom itineraries for exploring Africa
+                    based on budget.</div>
             </div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
             </div>
         </a>
 
@@ -880,12 +703,12 @@
                 <a href="https://minutes2match.com/" target="_blank" class="venture-row"
                     style="text-decoration: none; color: inherit;">
                     <span class="venture-title">Minutes 2 Match</span>
-                    <span style="font-size: 0.9rem; color: var(--text-muted);">Speed Dating Event ↗</span>
+                    <span style="font-size: 0.85rem; opacity: 0.7;">Speed Dating Event ↗</span>
                 </a>
                 <a href="https://voltapinefarms.com/" target="_blank" class="venture-row"
                     style="text-decoration: none; color: inherit;">
                     <span class="venture-title">Vita & Pine Farms</span>
-                    <span style="font-size: 0.9rem; color: var(--text-muted);">Sustainable Agriculture ↗</span>
+                    <span style="font-size: 0.85rem; opacity: 0.7;">Sustainable Agriculture ↗</span>
                 </a>
             </div>
         </div>
@@ -893,16 +716,18 @@
         <a href="https://stageandbloom.co" target="_blank" class="card card-project pat-stage col-span-2"
             data-category="solution">
             <div class="chip">Platform</div>
-            <div class="proj-title">Stage & Bloom</div>
-            <div class="proj-desc">A comprehensive vendor discovery platform for weddings and corporate events.</div>
+            <div style="margin-top:auto;">
+                <div class="proj-title">Stage & Bloom</div>
+                <div class="proj-desc">A comprehensive vendor discovery platform for weddings and corporate events.
+                </div>
+            </div>
             <div class="arrow-btn">
                 <span class="arrow-icon-svg">↗</span>
-                <span class="link-text">Visit</span>
             </div>
         </a>
 
         <a href="https://x.com/maxwellcofie" target="_blank" class="card card-social bg-black" data-category="bio">
-            <svg width="28" height="28" fill="white" viewBox="0 0 24 24">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
                 <path
                     d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
             </svg>
@@ -910,18 +735,17 @@
 
         <a href="https://github.com/mcofie" target="_blank" class="card card-social" data-category="bio"
             style="background: #333;">
-            <svg width="28" height="28" fill="white" viewBox="0 0 24 24">
+            <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
                 <path
                     d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
             </svg>
         </a>
 
         <div class="card card-footer full-width" id="contact" data-category="bio">
-            <h2 style="font-size: 1.8rem; font-weight: 800;">Let's Connect.</h2>
-            <p style="margin-top: 10px; color: var(--text-muted);">I'm always open to discussing systems, products, and
-                tech
-                in Africa.</p>
-            <div class="footer-links">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px;">Let's Connect.</h2>
+            <p style="margin-top: 0; color: var(--text-muted); font-size: 0.95rem;">I'm always open to discussing
+                systems in Africa.</p>
+            <div class="footer-links" style="margin-top: 24px;">
                 <a href="mailto:maxwcofie@gmail.com" class="footer-link">Send Email</a>
                 <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link">Twitter</a>
                 <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link">LinkedIn</a>
