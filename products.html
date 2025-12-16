@@ -21,7 +21,8 @@
             --text-tertiary: #999999;
             --accent: #000000;
 
-            --gap: 40px;
+            --gap: 32px;
+            /* Reduced from 40px */
             /* Airy spacing */
             --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -38,8 +39,6 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            cursor: none;
-            /* Custom cursor */
         }
 
         html {
@@ -52,14 +51,41 @@
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             font-size: 15px;
-            line-height: 1.6;
-            padding: 40px 20px 120px;
-            max-width: 640px;
+            line-height: 1.5;
+            padding: 30px 20px 80px;
+            max-width: 600px;
             /* Reading focused width */
             margin: 0 auto;
             min-height: 100vh;
             transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: none;
+        }
+
+        /* Mobile Overrides */
+        @media (max-width: 480px) {
+            body {
+                padding: 24px 16px 60px;
+                font-size: 14px;
+            }
+
+            :root {
+                --gap: 24px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            nav {
+                margin-bottom: 40px !important;
+            }
+
+            .intro {
+                margin-bottom: 32px !important;
+            }
+
+            .project-list {
+                gap: 24px !important;
+            }
         }
 
         /* NOISE TEXTURE */
@@ -73,55 +99,6 @@
             z-index: 999;
             opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        /* CUSTOM CURSOR */
-        .cursor-dot {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 8px;
-            height: 8px;
-            background: var(--text-main);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1000;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease, background-color 0.3s ease;
-        }
-
-        /* HOVER REVEAL CONTAINER */
-        .hover-reveal {
-            position: fixed;
-            width: 300px;
-            height: 200px;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 900;
-            transform: translate(-50%, -50%) scale(0.8);
-            opacity: 0;
-            transition: opacity 0.3s var(--ease-out), transform 0.4s var(--ease-out);
-            overflow: hidden;
-            border-radius: 8px;
-            background: var(--card-bg, #f0f0f0);
-        }
-
-        .hover-reveal.active {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .hover-reveal-img {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-image: linear-gradient(45deg, #eee 0%, #ddd 100%);
-        }
-
-        [data-theme="dark"] .hover-reveal-img {
-            background-image: linear-gradient(45deg, #222 0%, #333 100%);
         }
 
         /* ===== TYPOGRAPHY ===== */
@@ -149,16 +126,7 @@
         div[onclick] {
             text-decoration: none;
             color: inherit;
-            cursor: none;
-            /* Keep custom cursor logic */
-        }
-
-        /* Interactive Hover State */
-        a:hover~.cursor-dot,
-        button:hover~.cursor-dot,
-        div[onclick]:hover~.cursor-dot {
-            transform: translate(-50%, -50%) scale(2.5);
-            opacity: 0.5;
+            cursor: pointer;
         }
 
         /* ===== NAVIGATION ===== */
@@ -166,8 +134,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 80px;
-            padding-bottom: 20px;
+            margin-bottom: 60px;
+            /* Reduced */
+            padding-bottom: 16px;
             border-bottom: 1px solid transparent;
             /* Placeholder for alignment */
         }
@@ -196,7 +165,7 @@
         .theme-toggle {
             background: none;
             border: none;
-            cursor: none;
+            cursor: pointer;
             color: var(--text-main);
             padding: 0;
             display: flex;
@@ -207,7 +176,8 @@
 
         /* Intro */
         .intro {
-            margin-bottom: 60px;
+            margin-bottom: 40px;
+            /* Reduced */
             opacity: 0;
             animation: fadeIn 0.8s var(--ease-out) forwards;
         }
@@ -227,8 +197,7 @@
 
         .project-item {
             display: block;
-            cursor: none;
-            /* handled by body/JS mostly but explicit here */
+            cursor: pointer;
             transition: opacity 0.2s;
             opacity: 0;
             animation: slideIn 0.8s var(--ease-out) forwards;
@@ -344,7 +313,6 @@
             transition: all 0.2s var(--ease-out);
             overflow: visible;
             cursor: auto;
-            /* Reset cursor inside dialog for interaction */
         }
 
         dialog * {
@@ -383,7 +351,6 @@
             background: transparent;
             border: none;
             cursor: pointer;
-            /* We might want normal cursor here */
             color: var(--text-muted);
             padding: 8px;
             font-size: 24px;
@@ -446,15 +413,9 @@
 <body>
 
     <div class="noise-overlay"></div>
-    <div class="cursor-dot"></div>
-
-    <!-- REVEAL ELEMENT -->
-    <div class="hover-reveal">
-        <div class="hover-reveal-img" id="revealImg"></div>
-    </div>
 
     <nav>
-        <div class="logo">maxwell</div>
+        <div class="logo">Maxwell Cofie</div>
         <div class="nav-links">
             <a href="index.html" class="nav-link">Work</a>
             <a href="#" class="nav-link active">Products</a>
@@ -473,7 +434,7 @@
 
     <div class="project-list">
 
-        <div class="project-item" data-category="solution" data-color="#ff4757" onclick="openModal({
+        <div class="project-item" data-category="solution" onclick="openModal({
                 title: 'GatePass',
                 category: 'Marketplace',
                 url: 'https://gatepass.so',
@@ -487,7 +448,7 @@
             <div class="proj-meta">Marketplace</div>
         </div>
 
-        <div class="project-item" data-category="solution" data-color="#3742fa" onclick="openModal({
+        <div class="project-item" data-category="solution" onclick="openModal({
                 title: 'LazyPick',
                 category: 'Lifestyle',
                 url: 'https://lazypick.app',
@@ -501,7 +462,7 @@
             <div class="proj-meta">Lifestyle</div>
         </div>
 
-        <div class="project-item" data-category="solution" data-color="#2ed573" onclick="openModal({
+        <div class="project-item" data-category="solution" onclick="openModal({
                 title: 'Knitted',
                 category: 'SaaS',
                 url: 'https://getknitted.app',
@@ -515,7 +476,7 @@
             <div class="proj-meta">SaaS</div>
         </div>
 
-        <div class="project-item" data-category="solution" data-color="#70a1ff" onclick="openModal({
+        <div class="project-item" data-category="solution" onclick="openModal({
                 title: 'Amigo Lease',
                 category: 'Mktplace',
                 url: 'https://amigolease.com',
@@ -529,7 +490,7 @@
             <div class="proj-meta">Marketplace</div>
         </div>
 
-        <div class="project-item" data-category="solution" data-color="#ffa502" onclick="openModal({
+        <div class="project-item" data-category="solution" onclick="openModal({
                 title: 'Motor Ambos',
                 category: 'Service',
                 url: 'https://motorambos.com',
@@ -543,7 +504,7 @@
             <div class="proj-meta">Service</div>
         </div>
 
-        <div class="project-item" data-category="solution" data-color="#1e90ff" onclick="openModal({
+        <div class="project-item" data-category="solution" onclick="openModal({
                 title: 'Itinero',
                 category: 'AI',
                 url: 'https://tryitinero.com',
@@ -557,7 +518,7 @@
             <div class="proj-meta">AI</div>
         </div>
 
-        <div class="project-item" data-category="solution" data-color="#ff6348" onclick="openModal({
+        <div class="project-item" data-category="solution" onclick="openModal({
                 title: 'Stage & Bloom',
                 category: 'Platform',
                 url: 'https://stageandbloom.co',
@@ -593,54 +554,6 @@
     </dialog>
 
     <script>
-        // --- CURSOR & REVEAL LOGIC ---
-        const cursorDot = document.querySelector('.cursor-dot');
-        const reveal = document.querySelector('.hover-reveal');
-        const revealImg = document.getElementById('revealImg');
-        const projectItems = document.querySelectorAll('.project-item');
-
-        // Move cursor dot
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-
-            if (reveal.classList.contains('active')) {
-                const moveX = posX;
-                const moveY = posY;
-
-                reveal.animate({
-                    left: `${moveX}px`,
-                    top: `${moveY}px`
-                }, {
-                    duration: 500,
-                    fill: "forwards"
-                });
-            }
-        });
-
-        // Hover Logic
-        projectItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                reveal.classList.add('active');
-                const color = item.getAttribute('data-color');
-                if (color) {
-                    revealImg.style.backgroundImage = 'none';
-                    revealImg.style.backgroundColor = color;
-                } else {
-                    revealImg.style.backgroundColor = '#ccc';
-                }
-                cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)';
-            });
-
-            item.addEventListener('mouseleave', () => {
-                reveal.classList.remove('active');
-                cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-            });
-        });
-
         // --- DIALOG ---
         const dialog = document.getElementById('productDialog');
         const closeBtn = document.getElementById('closeDialogBtn');

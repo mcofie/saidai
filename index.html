@@ -21,7 +21,8 @@
             --text-tertiary: #999999;
             --accent: #000000;
 
-            --gap: 40px;
+            --gap: 32px;
+            /* Reduced from 40px */
             /* Airy spacing */
             --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -52,13 +53,43 @@
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             font-size: 15px;
-            line-height: 1.6;
-            padding: 40px 20px 120px;
-            max-width: 640px;
-            /* Reading focused width */
+            line-height: 1.5;
+            /* Slightly tighter line height */
+            padding: 30px 20px 80px;
+            /* Reduced padding */
+            max-width: 600px;
+            /* Slightly tighter width */
             margin: 0 auto;
             min-height: 100vh;
             transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Mobile Overrides */
+        @media (max-width: 480px) {
+            body {
+                padding: 24px 16px 60px;
+                font-size: 14px;
+            }
+
+            :root {
+                --gap: 24px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            nav {
+                margin-bottom: 40px !important;
+            }
+
+            .intro {
+                margin-bottom: 32px !important;
+            }
+
+            .project-list {
+                gap: 24px !important;
+            }
         }
 
         /* NOISE TEXTURE */
@@ -103,8 +134,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 80px;
-            padding-bottom: 20px;
+            margin-bottom: 60px;
+            /* Reduced from 80px */
+            padding-bottom: 16px;
             border-bottom: 1px solid transparent;
             /* Placeholder for alignment */
         }
@@ -144,7 +176,8 @@
 
         /* Intro */
         .intro {
-            margin-bottom: 60px;
+            margin-bottom: 40px;
+            /* Reduced from 60px */
             opacity: 0;
             animation: fadeIn 0.8s var(--ease-out) forwards;
         }
@@ -317,7 +350,7 @@
     <div class="noise-overlay"></div>
 
     <nav>
-        <div class="logo">maxwell</div>
+        <div class="logo">Maxwell Cofie</div>
         <div class="nav-links">
             <a href="#" class="nav-link active" onclick="filterGrid('all', event)">Work</a>
             <a href="#" class="nav-link" onclick="filterGrid('venture', event)">Ventures</a>
@@ -333,8 +366,8 @@
 
     <div class="intro">
         <p>
-            I'm <strong>Maxwell</strong>, a Solutions Architect in Ghana.<br>
-            Architecting systems that solve complex problems.
+            Engineer, Tinkerer & Builder 🇬🇭.<br>
+            Shipping products that solve problems in Africa & beyond.
         </p>
     </div>
 
