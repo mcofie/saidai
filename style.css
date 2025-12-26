@@ -55,6 +55,20 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Noise Texture */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
 /* Mobile Overrides */
 @media (max-width: 480px) {
     body {
@@ -74,7 +88,8 @@ h3,
 .proj-title,
 .dialog-title {
     font-weight: 500;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.025em;
+    /* Tighter Swiss tracking */
     color: var(--text-main);
 }
 
@@ -85,13 +100,14 @@ p,
 .btn-primary {
     font-weight: 400;
     color: var(--text-muted);
+    letter-spacing: -0.01em;
 }
 
 a {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: color 0.2s, opacity 0.2s;
 }
 
 a:hover {
@@ -111,6 +127,7 @@ nav {
     font-size: 15px;
     color: var(--text-main);
     flex-shrink: 0;
+    letter-spacing: -0.02em;
 }
 
 .nav-links {
@@ -194,7 +211,8 @@ nav {
 
 /* ===== CONTENT ===== */
 .intro {
-    margin-bottom: 60px;
+    margin-bottom: 80px;
+    /* More whitespace */
     opacity: 0;
     animation: fadeIn 0.8s var(--ease-out) forwards;
 }
@@ -204,7 +222,7 @@ nav {
     font-weight: 400;
     line-height: 1.5;
     color: var(--text-main);
-    max-width: 520px;
+    max-width: 540px;
     letter-spacing: -0.02em;
 }
 
@@ -212,11 +230,41 @@ nav {
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    /* Slightly more tracking for uppercase */
     color: var(--text-tertiary);
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     opacity: 0;
     animation: fadeIn 0.8s var(--ease-out) 0.1s forwards;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+    width: 100%;
+}
+
+/* Alphabetical Index Style */
+.letter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.letter-header {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 24px 0 8px;
+    margin-bottom: 0;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    /* For sticky to work without transparency overlap */
+    z-index: 10;
+}
+
+.letter-group.hidden {
+    display: none;
 }
 
 /* List Layout - Tabular Style */
@@ -225,13 +273,25 @@ nav {
     flex-direction: column;
 }
 
+/* Focus Mode Hover Effect */
+.project-list:hover .project-item {
+    opacity: 0.4;
+    /* Dim all items when hovering container */
+}
+
+.project-list .project-item:hover {
+    opacity: 1;
+    /* Highlight the specific item */
+}
+
 .project-item {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 12px;
-    padding: 24px 0;
+    padding: 20px 0;
+    /* Slightly tighter vertical rhythm */
     border-bottom: 1px solid var(--border-color);
-    transition: opacity 0.2s, transform 0.2s;
+    transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
     opacity: 0;
     animation: slideIn 0.8s var(--ease-out) forwards;
     align-items: baseline;
@@ -242,6 +302,7 @@ nav {
 @media (max-width: 480px) {
     .project-item {
         display: block;
+        padding: 24px 0;
     }
 
     .proj-meta {
@@ -250,11 +311,8 @@ nav {
 }
 
 .project-item:first-child {
-    border-top: 1px solid var(--border-color);
-}
-
-.project-item:hover {
-    opacity: 0.6;
+    border-top: none;
+    /* Cleaner look without top border on list */
 }
 
 .project-item.hidden {
