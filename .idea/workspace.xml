@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="content changes" />
+    <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="content changes">
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,6 +87,7 @@
       <workItem from="1764739524551" duration="663000" />
       <workItem from="1764944002334" duration="2641000" />
       <workItem from="1765753232814" duration="1241000" />
+      <workItem from="1765915145277" duration="2556000" />
     </task>
     <task id="LOCAL-00001" summary="Reversed the website">
       <option name="closed" value="true" />
@@ -190,7 +193,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765754208309</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1765916694568</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1765916694568</updated>
+    </task>
+    <task id="LOCAL-00015" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1765917489952</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1765917489952</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
