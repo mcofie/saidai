@@ -9,354 +9,30 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <style>
-        /* ===== VARIABLES (ULTRA MINIMAL) ===== */
-        :root {
-            /* Light Mode */
-            --bg: #FFFFFF;
-            --text-main: #000000;
-            --text-muted: #555555;
-            --text-tertiary: #999999;
-            --accent: #000000;
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
-            --gap: 32px;
-            /* Reduced from 40px */
-            /* Airy spacing */
-            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        [data-theme="dark"] {
-            --bg: #050505;
-            --text-main: #FFFFFF;
-            --text-muted: #999999;
-            --text-tertiary: #555555;
-            --accent: #FFFFFF;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            cursor: auto;
-            /* Reset to default */
-        }
-
-        html {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            line-height: 1.5;
-            /* Slightly tighter line height */
-            padding: 30px 20px 80px;
-            /* Reduced padding */
-            max-width: 600px;
-            /* Slightly tighter width */
-            margin: 0 auto;
-            min-height: 100vh;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        /* Mobile Overrides */
-        @media (max-width: 480px) {
-            body {
-                padding: 24px 16px 60px;
-                font-size: 14px;
-            }
-
-            :root {
-                --gap: 24px;
-            }
-
-            .nav-links {
-                gap: 16px;
-            }
-
-            nav {
-                margin-bottom: 40px !important;
-            }
-
-            .intro {
-                margin-bottom: 32px !important;
-            }
-
-            .project-list {
-                gap: 24px !important;
-            }
-        }
-
-        /* NOISE TEXTURE */
-        .noise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        /* ===== TYPOGRAPHY ===== */
-        h1,
-        h2,
-        h3,
-        .proj-title {
-            font-weight: 500;
-            letter-spacing: -0.02em;
-            color: var(--text-main);
-        }
-
-        p,
-        .proj-desc,
-        .bio-text {
-            font-weight: 400;
-            letter-spacing: -0.01em;
-            color: var(--text-muted);
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-        }
-
-        /* ===== NAVIGATION ===== */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 60px;
-            /* Reduced from 80px */
-            padding-bottom: 16px;
-            border-bottom: 1px solid transparent;
-            /* Placeholder for alignment */
-        }
-
-        .logo {
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .nav-link {
-            font-size: 14px;
-            color: var(--text-tertiary);
-            transition: color 0.2s;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--text-main);
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--text-main);
-            padding: 0;
-            display: flex;
-            align-items: center;
-        }
-
-        /* ===== MAIN CONTENT ===== */
-
-        /* Intro */
-        .intro {
-            margin-bottom: 40px;
-            /* Reduced from 60px */
-            opacity: 0;
-            animation: fadeIn 0.8s var(--ease-out) forwards;
-        }
-
-        .intro p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--text-muted);
-        }
-
-        .intro strong {
-            color: var(--text-main);
-            font-weight: 500;
-        }
-
-        /* Section Headers */
-        .section-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-tertiary);
-            margin-bottom: 24px;
-            opacity: 0;
-            animation: fadeIn 0.8s var(--ease-out) 0.1s forwards;
-        }
-
-        /* List Layout */
-        .project-list {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .project-item {
-            display: block;
-            /* group: project;  Removed invalid property */
-            transition: opacity 0.2s;
-            opacity: 0;
-            /* Initial for stagger */
-            animation: slideIn 0.8s var(--ease-out) forwards;
-        }
-
-        /* Stagger delays handled in JS or precise CSS nth-child */
-        .project-item:nth-child(1) {
-            animation-delay: 0.15s;
-        }
-
-        .project-item:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .project-item:nth-child(3) {
-            animation-delay: 0.25s;
-        }
-
-        .project-item:nth-child(4) {
-            animation-delay: 0.3s;
-        }
-
-        .project-item:nth-child(5) {
-            animation-delay: 0.35s;
-        }
-
-        .project-item:nth-child(6) {
-            animation-delay: 0.4s;
-        }
-
-        .project-item:nth-child(7) {
-            animation-delay: 0.45s;
-        }
-
-        .project-item:nth-child(8) {
-            animation-delay: 0.5s;
-        }
-
-        .project-item:hover {
-            opacity: 0.5;
-        }
-
-        .project-item.hidden {
-            display: none !important;
-        }
-
-        .proj-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 4px;
-        }
-
-        .proj-title {
-            font-size: 16px;
-        }
-
-        .arrow {
-            font-size: 14px;
-            opacity: 0;
-            transform: translateX(-5px);
-            transition: all 0.2s var(--ease-out);
-        }
-
-        .project-item:hover .arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .proj-desc {
-            font-size: 14px;
-            margin: 0;
-            max-width: 90%;
-        }
-
-        .proj-meta {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            margin-top: 4px;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* FOOTER */
-        footer {
-            margin-top: 100px;
-            border-top: 1px solid var(--text-tertiary);
-            padding-top: 24px;
-            display: flex;
-            gap: 24px;
-            opacity: 0;
-            animation: fadeIn 0.8s var(--ease-out) 0.6s forwards;
-        }
-
-        .footer-link {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .footer-link:hover {
-            color: var(--text-main);
-            text-decoration: underline;
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
+    <!-- Open Graph / SEO -->
+    <meta property="og:title" content="Maxwell Cofie">
+    <meta property="og:description" content="Solutions Architect & Tinkerer in Accra, Ghana.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://maxwellcofie.com">
 </head>
 
 <body>
 
-    <div class="noise-overlay"></div>
+
 
     <nav>
-        <div class="logo">Maxwell Cofie</div>
+        <a href="index.html" class="logo">Maxwell Cofie</a>
         <div class="nav-links">
-            <a href="#" class="nav-link active" onclick="filterGrid('all', event)">Work</a>
+            <a href="index.html" class="nav-link active" onclick="filterGrid('all', event)">Work</a>
             <a href="#" class="nav-link" onclick="filterGrid('venture', event)">Ventures</a>
-            <a href="products.html" class="nav-link">Products</a>
+            <a href="writing.html" class="nav-link">Writing</a>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
                     <path
                         d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
                 </svg>
@@ -365,10 +41,8 @@
     </nav>
 
     <div class="intro">
-        <p>
-            Engineer, Tinkerer & Builder 🇬🇭.<br>
-            Shipping products that solve problems in Africa & beyond.
-        </p>
+        <p>I'm a Solutions Architect & Tinkerer based in Accra, Ghana. I build products that solve problems in Africa &
+            beyond.</p>
     </div>
 
     <div class="project-list-container">
@@ -378,74 +52,90 @@
         <div class="project-list">
 
             <a href="https://gatepass.so" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-header">
-                    <span class="proj-title">GatePass</span>
-                    <span class="arrow">↗</span>
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">GatePass</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">First video-powered marketplace for events.</span>
                 </div>
-                <p class="proj-desc">First video-powered marketplace for events.</p>
-                <div class="proj-meta">Marketplace / Events</div>
+                <div class="proj-meta">Marketplace</div>
             </a>
 
             <a href="https://lazypick.app" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-header">
-                    <span class="proj-title">LazyPick</span>
-                    <span class="arrow">↗</span>
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">LazyPick</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">Solving decision paralysis for movies & food.</span>
                 </div>
-                <p class="proj-desc">Consumer app solving decision paralysis for movies & food.</p>
-                <div class="proj-meta">Lifestyle / App</div>
+                <div class="proj-meta">Lifestyle App</div>
             </a>
 
             <a href="https://getknitted.app" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-header">
-                    <span class="proj-title">Knitted</span>
-                    <span class="arrow">↗</span>
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Knitted</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">Business OS for tailors to record measurements.</span>
                 </div>
-                <p class="proj-desc">Business OS for tailors to record measurements and track orders.</p>
-                <div class="proj-meta">SaaS / Web</div>
+                <div class="proj-meta">SaaS</div>
             </a>
 
             <a href="https://motorambos.com" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-header">
-                    <span class="proj-title">Motor Ambos</span>
-                    <span class="arrow">↗</span>
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Motor Ambos</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">Connecting car owners with mechanics.</span>
                 </div>
-                <p class="proj-desc">On-demand service aggregtor connecting car owners with mechanics.</p>
-                <div class="proj-meta">Service / Platform</div>
+                <div class="proj-meta">Service</div>
             </a>
 
             <a href="https://tryitinero.com" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-header">
-                    <span class="proj-title">Itinero</span>
-                    <span class="arrow">↗</span>
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Itinero</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">AI-powered travel planner for Africa.</span>
                 </div>
-                <p class="proj-desc">AI-powered travel planner generating custom African itineraries.</p>
-                <div class="proj-meta">AI / Travel</div>
+                <div class="proj-meta">AI Travel</div>
             </a>
 
             <a href="https://amigolease.com" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-header">
-                    <span class="proj-title">Amigo Lease</span>
-                    <span class="arrow">↗</span>
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Amigo Lease</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">Verified roommate finder.</span>
                 </div>
-                <p class="proj-desc">Verified roommate finder based on lifestyle compatibility.</p>
                 <div class="proj-meta">Marketplace</div>
             </a>
 
             <a href="https://sandboxreseau.com/" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-header">
-                    <span class="proj-title">Sandbox Reseau</span>
-                    <span class="arrow">↗</span>
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Sandbox Reseau</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">Digital network connecting creators.</span>
                 </div>
-                <p class="proj-desc">Digital network connecting creators.</p>
                 <div class="proj-meta">Community</div>
             </a>
 
             <a href="https://stageandbloom.co" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-header">
-                    <span class="proj-title">Stage & Bloom</span>
-                    <span class="arrow">↗</span>
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Stage & Bloom</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">Vendor discovery platform for events.</span>
                 </div>
-                <p class="proj-desc">Vendor discovery platform for weddings and corporate events.</p>
                 <div class="proj-meta">Platform</div>
             </a>
 
@@ -455,32 +145,75 @@
         <div class="section-label">Ventures</div>
         <div class="project-list">
             <a href="https://minutes2match.com/" target="_blank" class="project-item" data-category="venture">
-                <div class="proj-header">
-                    <span class="proj-title">Minutes 2 Match</span>
-                    <span class="arrow">↗</span>
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Minutes 2 Match</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">Speed Dating Event Series.</span>
                 </div>
-                <p class="proj-desc">Speed Dating Event Series.</p>
+                <div class="proj-meta">Events</div>
             </a>
             <a href="https://voltapinefarms.com/" target="_blank" class="project-item" data-category="venture">
-                <div class="proj-header">
-                    <span class="proj-title">Vita & Pine Farms</span>
-                    <span class="arrow">↗</span>
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Vita & Pine Farms</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">Sustainable Agriculture.</span>
                 </div>
-                <p class="proj-desc">Sustainable Agriculture.</p>
+                <div class="proj-meta">Agro</div>
+            </a>
+            <a href="https://monochromespaces.com/" target="_blank" class="project-item" data-category="venture">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Monochrome Spaces</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">Premium affordable, modular furniture that adapt to changing needs.</span>
+                </div>
+                <div class="proj-meta">Furniture</div>
+            </a>
+            <a href="https://outpost233.com/" target="_blank" class="project-item" data-category="venture">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Outpost 233</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc">A serene cluster of sustainable off-grid tiny homes designed for
+                        rest.</span>
+                </div>
+                <div class="proj-meta">Hospitality</div>
             </a>
         </div>
 
         <br><br>
         <div class="section-label">Writing</div>
+        <!-- WRITING_LIST_START -->
         <div class="project-list">
-            <a href="https://open.substack.com/pub/mcofie" target="_blank" class="project-item" data-category="writing">
-                <div class="proj-header">
-                    <span class="proj-title">Maybe our way out is through entrepreneurship</span>
-                    <span class="arrow">↗</span>
+            
+            <a href="posts/hello-world.html" class="project-item" data-category="writing">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Hello, World</span>
+                        <span class="arrow">→</span>
+                    </div>
                 </div>
-                <div class="proj-meta">Mar 18, 2025</div>
+                <div class="proj-meta">Dec 2025</div>
+            </a>
+            
+             <!-- Fallback Substack Link (Optional) -->
+             <a href="https://open.substack.com/pub/mcofie" target="_blank" class="project-item" data-category="writing">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title" style="color: var(--text-tertiary);">Archives (Substack)</span>
+                        <span class="arrow">↗</span>
+                    </div>
+                </div>
+                <div class="proj-meta"></div>
             </a>
         </div>
+        <!-- WRITING_LIST_END -->
     </div>
 
     <footer>
@@ -491,65 +224,14 @@
     </footer>
 
     <script>
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            // Native cursor replaced by dot
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-
-            // Reveal follows cursor but slightly slower or offset usually
-            // Here strict follow for responsiveness
-            // We only show reveal if active
-            if (reveal.classList.contains('active')) {
-                // Offset reveal to not cover text? Or centered?
-                // Centered is bold. Let's try offset.
-                // Actually centering on cursor is the 'sleek' trend, text content is usually legible through interaction or z-index handling?
-                // No, usually it floats behind or to the side.
-                // Let's center it but keep z-index low? No, it's a reveal.
-                // Let's follow cursor with slight delay.
-
-                const moveX = posX;
-                const moveY = posY;
-
-                reveal.animate({
-                    left: `${moveX}px`,
-                    top: `${moveY}px`
-                }, { duration: 500, fill: "forwards" });
-            }
-        });
-
-        // Hover Logic
-        projectItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                reveal.classList.add('active');
-
-                // Get Color or potentially Image (if we had them)
-                const color = item.getAttribute('data-color');
-                if (color) {
-                    revealImg.style.backgroundImage = 'none';
-                    revealImg.style.backgroundColor = color;
-                } else {
-                    revealImg.style.backgroundColor = '#ccc';
-                }
-
-                // Scale up cursor?
-                cursorDot.style.transform = 'translate(-50%, -50%) scale(0.5)'; // Shrink dot when revealing?
-            });
-
-            item.addEventListener('mouseleave', () => {
-                reveal.classList.remove('active');
-                cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-            });
-        });
-
         // --- FILTERING ---
         function filterGrid(category, event) {
-            event.preventDefault();
-            const btn = event.target;
-            document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            if (event) event.preventDefault();
+
+            // Update nav state
+            const buttons = document.querySelectorAll('.nav-link[onclick]');
+            buttons.forEach(b => b.classList.remove('active'));
+            if (event) event.target.classList.add('active');
 
             const items = document.querySelectorAll('.project-item');
 
@@ -566,7 +248,7 @@
                 if (category === 'all' || itemCat === category) {
                     item.classList.remove('hidden');
                     // Re-apply animation with index calculation for stagger
-                    item.style.animation = `slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delayCounter * 0.05}s forwards`;
+                    item.style.animation = `slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delayCounter * 0.05}s forwards`;
                     delayCounter++;
                 } else {
                     item.classList.add('hidden');
