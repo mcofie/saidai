@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Writing | Maxwell Cofie</title>
+    <meta name="description" content="Thoughts on technology, design, and building products in Africa.">
+    <!-- View Transitions -->
+    <meta name="view-transition" content="same-origin" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .project-item { align-items: center; }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Maxwell Cofie</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Work</a>
+            <a href="#" class="nav-link" onclick="location.href='index.html?filter=venture'">Ventures</a>
+            <a href="#" class="nav-link active">Writing</a>
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="intro">
+        <p>Thoughts on technology, design, and building products.</p>
+    </div>
+
+    <div class="project-list-container">
+        <div class="section-label">Articles</div>
+
+        <div class="project-list">
+            
+            <a href="posts/hello-world.html" class="project-item">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Hello, World</span>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+                <div class="proj-meta">Dec 2025</div>
+            </a>
+            
+        </div>
+    </div>
+
+    <footer>
+        <a href="mailto:maxwcofie@gmail.com" class="footer-link">Email</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link">LinkedIn</a>
+        <a href="https://github.com/mcofie" target="_blank" class="footer-link">GitHub</a>
+    </footer>
+
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        const root = document.documentElement;
+
+        function setTheme(theme) {
+            root.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) setTheme(savedTheme);
+        else setTheme(systemDark ? 'dark' : 'light');
+
+        themeBtn.addEventListener('click', () => {
+            const current = root.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+    </script>
+</body>
+</html>

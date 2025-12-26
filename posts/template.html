@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Post Title | Maxwell Cofie</title>
+    <meta name="description" content="Post excerpt or description.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        /* Blog Post Specifics */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--text-main);
+        }
+
+        article {
+            max-width: 100%;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .post-date {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-bottom: 40px;
+            display: block;
+        }
+
+        .post-content p {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            color: var(--text-muted);
+        }
+
+        .post-content h2 {
+            font-size: 18px;
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        .post-content ul {
+            margin-bottom: 24px;
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        .post-content li {
+            margin-bottom: 8px;
+        }
+
+        .post-content a {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: var(--border-color);
+        }
+
+        .post-content a:hover {
+            text-decoration-color: var(--text-main);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Maxwell Cofie</div>
+        <!-- Simplified Nav for posts: Just Theme Toggle -->
+        <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
+            </svg>
+        </button>
+    </nav>
+
+    <a href="../writing.html" class="back-link">← Writing</a>
+
+    <article>
+        <h1>Post Title</h1>
+        <span class="post-date">December 26, 2025</span>
+
+        <div class="post-content">
+            <p>
+                This is the content of the blog post. It uses the same ultra-minimalist styling but with slightly
+                adjusted typography for long-form reading.
+            </p>
+            <p>
+                Paragraphs have comfortable breathing room.
+            </p>
+            <h2>Subheading</h2>
+            <p>
+                More content here.
+            </p>
+        </div>
+    </article>
+
+    <footer>
+        <a href="mailto:maxwcofie@gmail.com" class="footer-link">Email</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link">LinkedIn</a>
+    </footer>
+
+    <script>
+        // --- THEME ---
+        const themeBtn = document.getElementById('themeBtn');
+        const root = document.documentElement;
+
+        function setTheme(theme) {
+            root.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme(systemDark ? 'dark' : 'light');
+        }
+
+        themeBtn.addEventListener('click', () => {
+            const current = root.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+    </script>
+</body>
+
+</html>

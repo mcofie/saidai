@@ -1,0 +1,26 @@
+{
+  "name": "saidai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcofie/saidai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mcofie/saidai/issues"
+  },
+  "homepage": "https://github.com/mcofie/saidai#readme",
+  "dependencies": {
+    "front-matter": "^4.0.2",
+    "highlight.js": "^11.11.1",
+    "marked": "^17.0.1"
+  }
+}
