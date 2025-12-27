@@ -247,27 +247,32 @@ nav {
     width: 100%;
 }
 
-/* Alphabetical Index Style */
+/* Alphabetical Index - Editorial Grid */
 .letter-group {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    /* Gutter | Content */
+    gap: 0;
+    margin-bottom: 24px;
 }
 
 .letter-header {
-    text-align: right;
+    text-align: left;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-tertiary);
-    /* border-bottom: 1px solid var(--border-color);  <-- REMOVED */
-    padding: 24px 0 8px;
-    margin-bottom: 0;
+    padding: 20px 0 0;
+    margin: 0;
     position: sticky;
-    top: 0;
-    background: var(--bg);
-    /* For sticky to work without transparency overlap */
+    top: 24px;
+    height: fit-content;
     z-index: 10;
-    opacity: 0.5;
-    /* Subtler */
+    opacity: 0.6;
+}
+
+.group-items {
+    display: flex;
+    flex-direction: column;
 }
 
 .letter-group.hidden {
@@ -313,7 +318,10 @@ nav {
     }
 
     .proj-meta {
-        display: none;
+        display: block;
+        text-align: left;
+        margin-top: 6px;
+        opacity: 0.6;
     }
 }
 

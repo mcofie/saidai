@@ -8,12 +8,15 @@ const hljs = require('highlight.js');
 const CONTENT_DIR = path.join(__dirname, 'content/posts');
 const OUTPUT_DIR = path.join(__dirname, 'posts');
 const INDEX_PATH = path.join(__dirname, 'index.html');
-const TEMPLATE_PATH = path.join(__dirname, 'posts/template.html'); // We'll update this to be a "source" template
-const INDEX_TEMPLATE_PATH = path.join(__dirname, 'writing.html'); // We'll overwrite the list part of this
+const WRITING_DIR = path.join(__dirname, 'writing');
+const WRITING_INDEX_PATH = path.join(WRITING_DIR, 'index.html');
 
-// Ensure output dir exists
+// Ensure output dirs exist
 if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+}
+if (!fs.existsSync(WRITING_DIR)) {
+    fs.mkdirSync(WRITING_DIR, { recursive: true });
 }
 
 // 1. Configure Marked with Highlight.js
@@ -41,7 +44,8 @@ files.forEach(file => {
         ...attributes,
         slug,
         htmlContent,
-        outputFile: `${slug}.html`
+        outputFile: `${slug}/index.html`, // Directory pattern
+        url: `${slug}/` // Clean URL for links
     });
 });
 
@@ -49,9 +53,6 @@ files.forEach(file => {
 posts.sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
 
 // 3. Generate HTML Files for each post
-// We need a base HTML template string. I will hardcode a cleaner version here for the build process
-// to avoid reading/writing race conditions on specific files. 
-
 const HTML_TEMPLATE = `<!doctype html>
 <html lang="en" data-theme="system">
 <head>
@@ -66,7 +67,7 @@ const HTML_TEMPLATE = `<!doctype html>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="../../style.css">
     
     <!-- Prism/Highlight Theme - Minimal Monochrome -->
     <style>
@@ -188,15 +189,20 @@ const HTML_TEMPLATE = `<!doctype html>
 
 <body>
     <nav>
-        <a href="../index.html" class="logo">Maxwell Cofie</a>
-         <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
-            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
-            </svg>
-        </button>
+        <a href="../../" class="logo">Maxwell Cofie</a>
+        <div class="nav-links">
+            <a href="../../" class="nav-link">Work</a>
+            <a href="../../ventures/" class="nav-link">Ventures</a>
+            <a href="../../writing/" class="nav-link">Writing</a>
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
+                </svg>
+            </button>
+        </div>
     </nav>
     
-    <a href="../writing.html" class="back-link">← Writing</a>
+    <a href="../../writing/" class="back-link">← Writing</a>
 
     <article>
         <h1>{{TITLE}}</h1>
@@ -211,6 +217,9 @@ const HTML_TEMPLATE = `<!doctype html>
         <a href="mailto:maxwcofie@gmail.com" class="footer-link">Email</a>
         <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link">Twitter</a>
         <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link">LinkedIn</a>
+        <a href="https://github.com/mcofie" target="_blank" class="footer-link">GitHub</a>
+        <span style="flex-grow: 1;"></span>
+        <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
     </footer>
 
     <script>
@@ -253,13 +262,19 @@ posts.forEach(post => {
         .replace('{{DESCRIPTION}}', post.description)
         .replace('{{CONTENT}}', post.htmlContent);
 
-    fs.writeFileSync(path.join(OUTPUT_DIR, post.outputFile), html);
+    const postPath = path.join(OUTPUT_DIR, post.outputFile); // posts/slug/index.html
+    const postDir = path.dirname(postPath);
+
+    if (!fs.existsSync(postDir)) {
+        fs.mkdirSync(postDir, { recursive: true });
+    }
+
+    fs.writeFileSync(postPath, html);
     console.log(`Generated: ${post.outputFile}`);
 });
 
 
-// 4. Update writing.html Index
-// We will basically replicate writing.html structure but inject the list.
+// 4. Update writing/index.html Index
 const INDEX_HTML = `<!doctype html>
 <html lang="en" data-theme="system">
 
@@ -274,7 +289,7 @@ const INDEX_HTML = `<!doctype html>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     
     <style>
         .project-item { align-items: center; }
@@ -284,11 +299,11 @@ const INDEX_HTML = `<!doctype html>
 <body>
 
     <nav>
-        <a href="index.html" class="logo">Maxwell Cofie</a>
+        <a href="../" class="logo">Maxwell Cofie</a>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">Work</a>
-            <a href="#" class="nav-link" onclick="location.href='index.html?filter=venture'">Ventures</a>
-            <a href="#" class="nav-link active">Writing</a>
+            <a href="../" class="nav-link">Work</a>
+            <a href="../ventures/" class="nav-link">Ventures</a>
+            <a href="./" class="nav-link active">Writing</a>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
                 <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
@@ -306,7 +321,7 @@ const INDEX_HTML = `<!doctype html>
 
         <div class="project-list">
             ${posts.map(post => `
-            <a href="posts/${post.outputFile}" class="project-item">
+            <a href="../posts/${post.url}" class="project-item">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">${post.title}</span>
@@ -324,6 +339,8 @@ const INDEX_HTML = `<!doctype html>
         <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link">Twitter</a>
         <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link">LinkedIn</a>
         <a href="https://github.com/mcofie" target="_blank" class="footer-link">GitHub</a>
+        <span style="flex-grow: 1;"></span>
+        <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
     </footer>
 
     <script>
@@ -354,8 +371,8 @@ const INDEX_HTML = `<!doctype html>
 </body>
 </html>`;
 
-fs.writeFileSync(path.join(__dirname, 'writing.html'), INDEX_HTML);
-console.log('--- Updated writing.html ---');
+fs.writeFileSync(WRITING_INDEX_PATH, INDEX_HTML);
+console.log(`--- Updated ${WRITING_INDEX_PATH} ---`);
 
 // 4.5 Update Homepage (index.html) with Latest Posts
 const indexContent = fs.readFileSync(INDEX_PATH, 'utf8');
@@ -363,7 +380,7 @@ const latestPosts = posts.slice(0, 3); // Get top 3
 const latestPostsHTML = `<!-- WRITING_LIST_START -->
         <div class="project-list">
             ${latestPosts.map(post => `
-            <a href="posts/${post.outputFile}" class="project-item" data-category="writing">
+            <a href="posts/${post.url}" class="project-item" data-category="writing">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">${post.title}</span>
@@ -411,8 +428,8 @@ const RSS_TEMPLATE = `<?xml version="1.0" encoding="UTF-8" ?>
   <item>
    <title>${post.title}</title>
    <description>${post.description}</description>
-   <link>https://maxwellcofie.com/posts/${post.outputFile}</link>
-   <guid>https://maxwellcofie.com/posts/${post.outputFile}</guid>
+   <link>https://maxwellcofie.com/posts/${post.url}</link>
+   <guid>https://maxwellcofie.com/posts/${post.url}</guid>
    <pubDate>${new Date(post.isoDate).toUTCString()}</pubDate>
   </item>
  `).join('')}

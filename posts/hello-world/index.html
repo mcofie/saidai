@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="../../style.css">
     
     <!-- Prism/Highlight Theme - Minimal Monochrome -->
     <style>
@@ -134,15 +134,20 @@
 
 <body>
     <nav>
-        <a href="../index.html" class="logo">Maxwell Cofie</a>
-         <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
-            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
-            </svg>
-        </button>
+        <a href="../../" class="logo">Maxwell Cofie</a>
+        <div class="nav-links">
+            <a href="../../" class="nav-link">Work</a>
+            <a href="../../ventures/" class="nav-link">Ventures</a>
+            <a href="../../writing/" class="nav-link">Writing</a>
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
+                </svg>
+            </button>
+        </div>
     </nav>
     
-    <a href="../writing.html" class="back-link">← Writing</a>
+    <a href="../../writing/" class="back-link">← Writing</a>
 
     <article>
         <h1>{{TITLE}}</h1>
@@ -173,6 +178,9 @@
         <a href="mailto:maxwcofie@gmail.com" class="footer-link">Email</a>
         <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link">Twitter</a>
         <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link">LinkedIn</a>
+        <a href="https://github.com/mcofie" target="_blank" class="footer-link">GitHub</a>
+        <span style="flex-grow: 1;"></span>
+        <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
     </footer>
 
     <script>

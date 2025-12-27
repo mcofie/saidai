@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ventures | Maxwell Cofie</title>
+    <meta name="description" content="Ventures and experiments by Maxwell Cofie.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Open Graph / SEO -->
+    <meta property="og:title" content="Ventures | Maxwell Cofie">
+    <meta property="og:description" content="Ventures and experiments.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://maxwellcofie.com/ventures.html">
+</head>
+
+<body>
+
+    <nav>
+        <a href="../" class="logo">Maxwell Cofie</a>
+        <div class="nav-links">
+            <a href="../" class="nav-link">Work</a>
+            <a href="./" class="nav-link active">Ventures</a>
+            <a href="../writing/" class="nav-link">Writing</a>
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="intro">
+        <p>A collection of commercial ventures and experiments in Ghana 🇬🇭.</p>
+    </div>
+
+    <div class="project-list-container">
+
+        <div class="section-label">Ventures</div>
+
+        <div class="project-list">
+
+            <!-- M -->
+            <div class="letter-group">
+                <div class="letter-header">M</div>
+                <div class="group-items">
+                    <a href="https://minutes2match.com/" target="_blank" class="project-item">
+                        <div class="proj-left">
+                            <div class="proj-header">
+                                <span class="proj-title">Minutes 2 Match</span>
+                                <span class="arrow">↗</span>
+                            </div>
+                            <span class="proj-desc">Speed Dating Event Series.</span>
+                        </div>
+                        <div class="proj-meta">Events</div>
+                    </a>
+                    <a href="https://monochromespaces.com/" target="_blank" class="project-item">
+                        <div class="proj-left">
+                            <div class="proj-header">
+                                <span class="proj-title">Monochrome Spaces</span>
+                                <span class="arrow">↗</span>
+                            </div>
+                            <span class="proj-desc">Premium affordable, modular furniture that adapt to changing
+                                needs.</span>
+                        </div>
+                        <div class="proj-meta">Furniture</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- O -->
+            <div class="letter-group">
+                <div class="letter-header">O</div>
+                <div class="group-items">
+                    <a href="https://outpost233.com/" target="_blank" class="project-item">
+                        <div class="proj-left">
+                            <div class="proj-header">
+                                <span class="proj-title">Outpost 233</span>
+                                <span class="arrow">↗</span>
+                            </div>
+                            <span class="proj-desc">A serene cluster of sustainable off-grid tiny homes designed for
+                                rest.</span>
+                        </div>
+                        <div class="proj-meta">Hospitality</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- V -->
+            <div class="letter-group">
+                <div class="letter-header">V</div>
+                <div class="group-items">
+                    <a href="https://voltapinefarms.com/" target="_blank" class="project-item">
+                        <div class="proj-left">
+                            <div class="proj-header">
+                                <span class="proj-title">Vita & Pine Farms</span>
+                                <span class="arrow">↗</span>
+                            </div>
+                            <span class="proj-desc">Sustainable Agriculture.</span>
+                        </div>
+                        <div class="proj-meta">Agro</div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <a href="mailto:maxwcofie@gmail.com" class="footer-link">Email</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link">LinkedIn</a>
+        <a href="https://github.com/mcofie" target="_blank" class="footer-link">GitHub</a>
+        <span style="flex-grow: 1;"></span>
+        <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
+    </footer>
+
+    <script>
+        // --- THEME ---
+        const themeBtn = document.getElementById('themeBtn');
+        const root = document.documentElement;
+
+        // Minimalist Icons
+        const sunIcon = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+        const moonIcon = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+
+        function setTheme(theme) {
+            root.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeBtn.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme(systemDark ? 'dark' : 'light');
+        }
+
+        themeBtn.addEventListener('click', () => {
+            const current = root.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+    </script>
+</body>
+
+</html>
