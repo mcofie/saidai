@@ -123,11 +123,15 @@ nav {
 }
 
 .logo {
-    font-weight: 600;
-    font-size: 15px;
+    font-family: 'Cedarville Cursive', cursive;
+    font-weight: 400;
+    font-size: 22px;
+    /* Needs to be larger to be readable */
     color: var(--text-main);
     flex-shrink: 0;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
+    transform: rotate(-2deg);
+    /* Slight organic tilt */
 }
 
 .nav-links {
@@ -218,12 +222,13 @@ nav {
 }
 
 .intro p {
-    font-size: clamp(16px, 2.5vw, 18px);
-    font-weight: 400;
-    line-height: 1.5;
+    font-size: clamp(20px, 3vw, 24px);
+    /* Larger, more impactful */
+    font-weight: 500;
+    line-height: 1.4;
     color: var(--text-main);
-    max-width: 540px;
-    letter-spacing: -0.02em;
+    max-width: 600px;
+    letter-spacing: -0.03em;
 }
 
 .section-label {
@@ -253,7 +258,7 @@ nav {
     font-size: 11px;
     font-weight: 600;
     color: var(--text-tertiary);
-    border-bottom: 1px solid var(--border-color);
+    /* border-bottom: 1px solid var(--border-color);  <-- REMOVED */
     padding: 24px 0 8px;
     margin-bottom: 0;
     position: sticky;
@@ -261,6 +266,8 @@ nav {
     background: var(--bg);
     /* For sticky to work without transparency overlap */
     z-index: 10;
+    opacity: 0.5;
+    /* Subtler */
 }
 
 .letter-group.hidden {
@@ -288,9 +295,9 @@ nav {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 12px;
-    padding: 20px 0;
-    /* Slightly tighter vertical rhythm */
-    border-bottom: 1px solid var(--border-color);
+    padding: 16px 0;
+    /* Slightly tighter to keep them grouping nicely without lines */
+    /* border-bottom: 1px solid var(--border-color); <-- REMOVED */
     transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
     opacity: 0;
     animation: slideIn 0.8s var(--ease-out) forwards;
