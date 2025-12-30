@@ -328,6 +328,7 @@ const INDEX_HTML = `<!doctype html>
                         <span class="proj-title">${post.title}</span>
                         <span class="arrow">→</span>
                     </div>
+                    <span class="proj-desc">${post.description}</span>
                 </div>
                 <div class="proj-meta">${post.date}</div>
             </a>
@@ -387,6 +388,7 @@ const latestPostsHTML = `<!-- WRITING_LIST_START -->
                         <span class="proj-title">${post.title}</span>
                         <span class="arrow">→</span>
                     </div>
+                    <span class="proj-desc">${post.description}</span>
                 </div>
                 <div class="proj-meta">${post.date}</div>
             </a>

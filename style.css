@@ -42,6 +42,10 @@ html {
     color: var(--bg);
 }
 
+
+
+
+
 body {
     background-color: var(--bg);
     color: var(--text-main);
@@ -53,6 +57,13 @@ body {
     margin: 0 auto;
     min-height: 100vh;
     transition: background-color 0.3s ease, color 0.3s ease;
+    /* Swiss typography */
+    /* letter-spacing: -0.01em; Reverted */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Noise Texture */
@@ -81,6 +92,27 @@ body::before {
     }
 }
 
+/* ===== NAVIGATION ===== */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.logo {
+    font-family: 'Mansalva', cursive;
+    font-size: 22px;
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
 /* ===== TYPOGRAPHY ===== */
 h1,
 h2,
@@ -88,7 +120,6 @@ h3,
 .proj-title,
 .dialog-title {
     font-weight: 500;
-    letter-spacing: -0.025em;
     /* Tighter Swiss tracking */
     color: var(--text-main);
 }
@@ -97,55 +128,11 @@ p,
 .proj-desc,
 .bio-text,
 .dialog-body,
-.btn-primary {
+.btn-primary,
+.nav-link {
     font-weight: 400;
     color: var(--text-muted);
     letter-spacing: -0.01em;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-    transition: color 0.2s, opacity 0.2s;
-}
-
-a:hover {
-    color: var(--text-main);
-}
-
-/* ===== NAVIGATION ===== */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 80px;
-}
-
-.logo {
-    font-family: 'Mansalva', cursive;
-    font-weight: 400;
-    font-size: 24px;
-    /* Hand-written style */
-    color: var(--text-main);
-    flex-shrink: 0;
-    letter-spacing: 0;
-    transform: none;
-    line-height: 1;
-}
-
-.nav-links {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-}
-
-.nav-link {
-    font-size: 13px;
-    color: var(--text-tertiary);
-    letter-spacing: -0.01em;
-    transition: color 0.2s;
-    position: relative;
 }
 
 .nav-link:hover,
@@ -562,10 +549,5 @@ dialog::backdrop {
     color: var(--text-main);
     font-weight: 500;
     font-size: 0.95rem;
-    text-decoration: underline;
     transition: opacity 0.2s;
-}
-
-.btn-primary:hover {
-    opacity: 0.7;
 }
