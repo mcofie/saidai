@@ -66,7 +66,7 @@ const HTML_TEMPLATE = `<!doctype html>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../style.css">
     
     <!-- Prism/Highlight Theme - Minimal Monochrome -->
@@ -257,10 +257,10 @@ const HTML_TEMPLATE = `<!doctype html>
 console.log('--- Generating Posts ---');
 posts.forEach(post => {
     let html = HTML_TEMPLATE
-        .replace('{{TITLE}}', post.title)
-        .replace('{{DATE}}', post.date)
-        .replace('{{DESCRIPTION}}', post.description)
-        .replace('{{CONTENT}}', post.htmlContent);
+        .replace(/{{TITLE}}/g, post.title)
+        .replace(/{{DATE}}/g, post.date)
+        .replace(/{{DESCRIPTION}}/g, post.description)
+        .replace(/{{CONTENT}}/g, post.htmlContent);
 
     const postPath = path.join(OUTPUT_DIR, post.outputFile); // posts/slug/index.html
     const postDir = path.dirname(postPath);
@@ -289,7 +289,7 @@ const INDEX_HTML = `<!doctype html>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     
     <style>

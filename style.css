@@ -123,15 +123,15 @@ nav {
 }
 
 .logo {
-    font-family: 'Cedarville Cursive', cursive;
+    font-family: 'Mansalva', cursive;
     font-weight: 400;
-    font-size: 22px;
-    /* Needs to be larger to be readable */
+    font-size: 24px;
+    /* Hand-written style */
     color: var(--text-main);
     flex-shrink: 0;
     letter-spacing: 0;
-    transform: rotate(-2deg);
-    /* Slight organic tilt */
+    transform: none;
+    line-height: 1;
 }
 
 .nav-links {
@@ -201,6 +201,8 @@ nav {
         /* Firefox */
         padding-right: 20px;
         /* space for last item */
+        padding-bottom: 12px;
+        /* space for active dot */
 
         /* Mask for fade effect on right edge */
         mask-image: linear-gradient(to right, black 90%, transparent 100%);
@@ -349,6 +351,13 @@ nav {
 .proj-title {
     font-size: 15px;
     font-weight: 500;
+}
+
+.year-label {
+    font-weight: 400;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    margin-left: 4px;
 }
 
 .arrow {
@@ -559,8 +568,4 @@ dialog::backdrop {
 
 .btn-primary:hover {
     opacity: 0.7;
-}
-
-body:has(dialog[open]) {
-    overflow: hidden;
 }
