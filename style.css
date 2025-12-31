@@ -6,6 +6,7 @@
     --text-tertiary: #A0A0A0;
     --border-color: #F0F0F0;
     --accent: #000000;
+    --surface: #F4F4F5;
 
     --gap: 32px;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -23,6 +24,7 @@
     --text-tertiary: #555555;
     --border-color: #1A1A1A;
     --accent: #FFFFFF;
+    --surface: #161616;
 }
 
 * {
@@ -165,9 +167,57 @@ p,
     transition: color 0.2s;
 }
 
+
 .theme-toggle:hover {
     color: var(--text-main);
 }
+
+
+/* Language Switcher - Segmented Control */
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    background-color: var(--surface);
+    padding: 3px;
+    border-radius: 8px;
+    gap: 0;
+    margin-left: -4px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-tertiary);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 9px;
+    border-radius: 6px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+    position: relative;
+    user-select: none;
+    /* Optical align */
+    line-height: 1;
+}
+
+.lang-btn:hover {
+    color: var(--text-muted);
+}
+
+.lang-btn.active {
+    background-color: var(--bg);
+    color: var(--text-main);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Hide separators */
+.lang-sep {
+    display: none;
+}
+
+
 
 /* MOBILE NAV overrides */
 @media (max-width: 480px) {
@@ -178,23 +228,30 @@ p,
         margin-bottom: 60px;
     }
 
+
     .nav-links {
         width: 100%;
         gap: 24px;
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
-        /* smooth scroll iOS */
         scrollbar-width: none;
-        /* Firefox */
         padding-right: 20px;
-        /* space for last item */
         padding-bottom: 12px;
-        /* space for active dot */
+        align-items: center;
+        /* vertical align */
 
-        /* Mask for fade effect on right edge */
-        mask-image: linear-gradient(to right, black 90%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+        mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    }
+
+    .lang-switcher {
+        margin-left: auto;
+        /* Just in case */
+        flex-shrink: 0;
+        /* Prevent squashing */
+        margin-right: 24px;
+        /* Extra padding at end */
     }
 
     .nav-links::-webkit-scrollbar {

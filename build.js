@@ -67,7 +67,12 @@ const HTML_TEMPLATE = `<!doctype html>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../style.css">
+    <style>
+        /* FOUC fix for i18n */
+        [data-i18n] { visibility: visible; }
+    </style>
     
     <!-- Prism/Highlight Theme - Minimal Monochrome -->
     <style>
@@ -191,18 +196,23 @@ const HTML_TEMPLATE = `<!doctype html>
     <nav>
         <a href="../../" class="logo">Maxwell Cofie</a>
         <div class="nav-links">
-            <a href="../../" class="nav-link">Work</a>
-            <a href="../../ventures/" class="nav-link">Ventures</a>
-            <a href="../../writing/" class="nav-link">Writing</a>
+            <a href="../../" class="nav-link" data-i18n="nav.work">Work</a>
+            <a href="../../ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
+            <a href="../../writing/" class="nav-link" data-i18n="nav.writing">Writing</a>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 0 24 24">
                     <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
                 </svg>
             </button>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+                <button class="lang-btn" data-lang="es">ES</button>
+            </div>
         </div>
     </nav>
     
-    <a href="../../writing/" class="back-link">← Writing</a>
+    <a href="../../writing/" class="back-link" data-i18n="nav.back_writing">← Writing</a>
 
     <article>
         <h1>{{TITLE}}</h1>
@@ -214,13 +224,14 @@ const HTML_TEMPLATE = `<!doctype html>
     </article>
 
     <footer>
-        <a href="mailto:maxwcofie@gmail.com" class="footer-link">Email</a>
-        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link">Twitter</a>
-        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link">LinkedIn</a>
-        <a href="https://github.com/mcofie" target="_blank" class="footer-link">GitHub</a>
+        <a href="mailto:maxwcofie@gmail.com" class="footer-link" data-i18n="footer.email">Email</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
+        <a href="https://github.com/mcofie" target="_blank" class="footer-link" data-i18n="footer.github">GitHub</a>
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
     </footer>
+    <script src="../../locale.js"></script>
 
     <script>
         // --- THEME ---
@@ -291,6 +302,10 @@ const INDEX_HTML = `<!doctype html>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
+    <style>
+        /* FOUC fix for i18n */
+        [data-i18n] { visibility: visible; }
+    </style>
     
     <style>
         .project-item { align-items: center; }
@@ -302,23 +317,28 @@ const INDEX_HTML = `<!doctype html>
     <nav>
         <a href="../" class="logo">Maxwell Cofie</a>
         <div class="nav-links">
-            <a href="../" class="nav-link">Work</a>
-            <a href="../ventures/" class="nav-link">Ventures</a>
-            <a href="./" class="nav-link active">Writing</a>
+            <a href="../" class="nav-link" data-i18n="nav.work">Work</a>
+            <a href="../ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
+            <a href="./" class="nav-link active" data-i18n="nav.writing">Writing</a>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
                 <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
                 </svg>
             </button>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+                <button class="lang-btn" data-lang="es">ES</button>
+            </div>
         </div>
     </nav>
 
     <div class="intro">
-        <p>Thoughts on technology, design, and building products.</p>
+            <p data-i18n="writing.intro">Thoughts on technology, design, and building products.</p>
     </div>
 
     <div class="project-list-container">
-        <div class="section-label">Articles</div>
+        <div class="section-label" data-i18n="writing.articles">Articles</div>
 
         <div class="project-list">
             ${posts.map(post => `
@@ -337,13 +357,14 @@ const INDEX_HTML = `<!doctype html>
     </div>
 
     <footer>
-        <a href="mailto:maxwcofie@gmail.com" class="footer-link">Email</a>
-        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link">Twitter</a>
-        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link">LinkedIn</a>
-        <a href="https://github.com/mcofie" target="_blank" class="footer-link">GitHub</a>
+        <a href="mailto:maxwcofie@gmail.com" class="footer-link" data-i18n="footer.email">Email</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
+        <a href="https://github.com/mcofie" target="_blank" class="footer-link" data-i18n="footer.github">GitHub</a>
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
     </footer>
+    <script src="../locale.js"></script>
 
     <script>
         const themeBtn = document.getElementById('themeBtn');
@@ -397,7 +418,7 @@ const latestPostsHTML = `<!-- WRITING_LIST_START -->
              <a href="https://open.substack.com/pub/mcofie" target="_blank" class="project-item" data-category="writing">
                 <div class="proj-left">
                     <div class="proj-header">
-                        <span class="proj-title" style="color: var(--text-tertiary);">Archives (Substack)</span>
+                        <span class="proj-title" style="color: var(--text-tertiary);" data-i18n="writing.archives">Archives (Substack)</span>
                         <span class="arrow">↗</span>
                     </div>
                 </div>

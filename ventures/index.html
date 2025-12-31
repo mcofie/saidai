@@ -10,6 +10,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* FOUC fix for i18n */
+        [data-i18n] {
+            visibility: visible;
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 
@@ -25,25 +31,30 @@
     <nav>
         <a href="../" class="logo">Maxwell Cofie</a>
         <div class="nav-links">
-            <a href="../" class="nav-link">Work</a>
-            <a href="./" class="nav-link active">Ventures</a>
-            <a href="../writing/" class="nav-link">Writing</a>
+            <a href="../" class="nav-link" data-i18n="nav.work">Work</a>
+            <a href="./" class="nav-link active" data-i18n="nav.ventures">Ventures</a>
+            <a href="../writing/" class="nav-link" data-i18n="nav.writing">Writing</a>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
                 <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
                     <path
                         d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
                 </svg>
             </button>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+                <button class="lang-btn" data-lang="es">ES</button>
+            </div>
         </div>
     </nav>
 
     <div class="intro">
-        <p>A collection of commercial ventures and experiments in Ghana 🇬🇭.</p>
+        <p data-i18n="ventures.intro">A collection of commercial ventures and experiments in Ghana 🇬🇭.</p>
     </div>
 
     <div class="project-list-container">
 
-        <div class="section-label">Ventures</div>
+        <div class="section-label" data-i18n="section.ventures">Ventures</div>
 
         <div class="project-list">
 
@@ -54,9 +65,9 @@
                         <span class="proj-title">Minutes 2 Match <span class="year-label">(2024)</span></span>
                         <span class="arrow">↗</span>
                     </div>
-                    <span class="proj-desc">Speed Dating Event Series.</span>
+                    <span class="proj-desc" data-i18n="proj.minutes">Speed Dating Event Series.</span>
                 </div>
-                <div class="proj-meta">Events</div>
+                <div class="proj-meta" data-i18n="meta.events">Events</div>
             </a>
 
             <!-- Monochrome Spaces -->
@@ -66,10 +77,11 @@
                         <span class="proj-title">Monochrome Spaces <span class="year-label">(2023)</span></span>
                         <span class="arrow">↗</span>
                     </div>
-                    <span class="proj-desc">Premium affordable, modular furniture that adapt to changing
+                    <span class="proj-desc" data-i18n="proj.monochrome">Premium affordable, modular furniture that adapt
+                        to changing
                         needs.</span>
                 </div>
-                <div class="proj-meta">Furniture</div>
+                <div class="proj-meta" data-i18n="meta.furniture">Furniture</div>
             </a>
 
             <!-- Outpost 233 -->
@@ -79,10 +91,11 @@
                         <span class="proj-title">Outpost 233 <span class="year-label">(2023)</span></span>
                         <span class="arrow">↗</span>
                     </div>
-                    <span class="proj-desc">A serene cluster of sustainable off-grid tiny homes designed for
+                    <span class="proj-desc" data-i18n="proj.outpost">A serene cluster of sustainable off-grid tiny homes
+                        designed for
                         rest.</span>
                 </div>
-                <div class="proj-meta">Hospitality</div>
+                <div class="proj-meta" data-i18n="meta.hospitality">Hospitality</div>
             </a>
 
             <!-- Vita & Pine Farms -->
@@ -92,22 +105,25 @@
                         <span class="proj-title">Vita & Pine Farms <span class="year-label">(2021)</span></span>
                         <span class="arrow">↗</span>
                     </div>
-                    <span class="proj-desc">Sustainable Agriculture.</span>
+                    <span class="proj-desc" data-i18n="proj.vita">Sustainable Agriculture.</span>
                 </div>
-                <div class="proj-meta">Agro</div>
+                <div class="proj-meta" data-i18n="meta.agro">Agro</div>
             </a>
 
         </div>
     </div>
 
     <footer>
-        <a href="mailto:maxwcofie@gmail.com" class="footer-link">Email</a>
-        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link">Twitter</a>
-        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link">LinkedIn</a>
-        <a href="https://github.com/mcofie" target="_blank" class="footer-link">GitHub</a>
+        <a href="mailto:maxwcofie@gmail.com" class="footer-link" data-i18n="footer.email">Email</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link"
+            data-i18n="footer.linkedin">LinkedIn</a>
+        <a href="https://github.com/mcofie" target="_blank" class="footer-link" data-i18n="footer.github">GitHub</a>
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
     </footer>
+
+    <script src="../locale.js"></script>
 
     <script>
         // --- THEME ---
