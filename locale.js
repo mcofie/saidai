@@ -6,7 +6,7 @@ const translations = {
         "nav.back_writing": "← Writing",
         "writing.archives": "Archives (Substack)",
         "home.intro": "I'm a Solutions Architect & Tinkerer based in Accra, Ghana 🇬🇭 <span style='color: var(--text-tertiary);' id='clock'></span>. I build products that solve problems in Africa & beyond.",
-        "home.say_hi": "Say Hi!",
+        "home.say_hi": "Break the Ice",
         "puzzle.title": "Quick Check",
         "puzzle.desc": "Solve to say hi:",
         "video.caption": "Thanks for checking in! 🎉",
@@ -47,7 +47,9 @@ const translations = {
         "meta.events": "Events",
         "meta.furniture": "Furniture",
         "meta.hospitality": "Hospitality",
-        "meta.agro": "Agro"
+        "meta.agro": "Agro",
+        "error.not_found": "The page you're looking for doesn't exist.",
+        "error.return_home": "Return Home"
     },
     fr: {
         "nav.work": "Travail",
@@ -56,7 +58,7 @@ const translations = {
         "nav.back_writing": "← Écriture",
         "writing.archives": "Archives (Substack)",
         "home.intro": "Je suis un Architecte de Solutions & Bricoleur basé à Accra, Ghana 🇬🇭 <span style='color: var(--text-tertiary);' id='clock'></span>. Je construis des produits qui résolvent des problèmes en Afrique et au-delà.",
-        "home.say_hi": "Dites Bonjour!",
+        "home.say_hi": "Briser la Glace",
         "puzzle.title": "Vérification Rapide",
         "puzzle.desc": "Résoudre pour dire bonjour:",
         "video.caption": "Merci de votre visite! 🎉",
@@ -97,7 +99,9 @@ const translations = {
         "meta.events": "Événements",
         "meta.furniture": "Meubles",
         "meta.hospitality": "Hôtellerie",
-        "meta.agro": "Agro"
+        "meta.agro": "Agro",
+        "error.not_found": "La page que vous recherchez n'existe pas.",
+        "error.return_home": "Retour à l'accueil"
     },
     es: {
         "nav.work": "Trabajo",
@@ -106,7 +110,7 @@ const translations = {
         "nav.back_writing": "← Escritura",
         "writing.archives": "Archivos (Substack)",
         "home.intro": "Soy Arquitecto de Soluciones y Experimentador basado en Accra, Ghana 🇬🇭 <span style='color: var(--text-tertiary);' id='clock'></span>. Construyo productos que resuelven problemas en África y más allá.",
-        "home.say_hi": "¡Di Hola!",
+        "home.say_hi": "Romper el Hielo",
         "puzzle.title": "Verificación Rápida",
         "puzzle.desc": "Resolver para saludar:",
         "video.caption": "¡Gracias por visitar! 🎉",
@@ -147,7 +151,9 @@ const translations = {
         "meta.events": "Eventos",
         "meta.furniture": "Muebles",
         "meta.hospitality": "Hospitalidad",
-        "meta.agro": "Agro"
+        "meta.agro": "Agro",
+        "error.not_found": "La página que buscas no existe.",
+        "error.return_home": "Volver al inicio"
     }
 };
 

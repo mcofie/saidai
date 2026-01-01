@@ -609,33 +609,34 @@ dialog::backdrop {
 }
 
 
+
 .profile-trigger {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
-    background: var(--surface);
-    border: 1px solid var(--border-color);
-    border-radius: 99px;
+    padding: 0;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-main);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
     margin-top: 16px;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    box-shadow: none;
 }
 
 .profile-trigger:hover {
-    transform: scale(1.05);
-    background: var(--text-main);
-    color: var(--bg);
-    border-color: var(--text-main);
+    color: var(--text-main);
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
 }
 
-.profile-trigger:active {
-    transform: scale(0.95);
+.profile-trigger span:first-child {
+    font-size: 16px;
 }
 
 /* Modals */

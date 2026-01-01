@@ -59,7 +59,7 @@
             that solve problems in Africa & beyond.</p>
 
         <button class="profile-trigger" onclick="popStickers()">
-            <span>👋</span>
+            <span>🧊</span>
             <span data-i18n="home.say_hi">Say Hi!</span>
         </button>
     </div>
@@ -219,7 +219,7 @@
     </div>
 
     <footer>
-        <a href="mailto:maxwcofie@gmail.com" class="footer-link" data-i18n="footer.email">Email</a>
+        <a href="mailto:hello@maxwellcofie.com" class="footer-link" data-i18n="footer.email">Email</a>
         <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
         <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link"
             data-i18n="footer.linkedin">LinkedIn</a>
@@ -228,209 +228,6 @@
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
     </footer>
     <script src="locale.js"></script>
-
-    <script>
-        // --- FILTERING ---
-        function filterGrid(category, event) {
-            if (event) event.preventDefault();
-            // ... (rest of function)
-
-            // Update nav state
-            const buttons = document.querySelectorAll('.nav-link[onclick]');
-            buttons.forEach(b => b.classList.remove('active'));
-            if (event) event.target.classList.add('active');
-
-            const items = document.querySelectorAll('.project-item');
-
-            // Reset animations
-            items.forEach((item) => {
-                item.style.animation = 'none';
-                item.offsetHeight; /* trigger reflow */
-            });
-
-            let delayCounter = 0;
-            items.forEach(item => {
-                const itemCat = item.getAttribute('data-category');
-
-                // Allow items that match category OR if category is 'all'
-                // Note: Ventures are in a separate list, but this function runs globally on .project-item
-                if (category === 'all' || itemCat === category) {
-                    item.classList.remove('hidden');
-                    // Re-apply animation with index calculation for stagger
-                    item.style.animation = `slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delayCounter * 0.05}s forwards`;
-                    delayCounter++;
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-
-            // Update Letter Groups Visibility
-            const groups = document.querySelectorAll('.letter-group');
-            groups.forEach(group => {
-                // Check if this group has any visible children
-                const visibleChild = group.querySelector('.project-item:not(.hidden)');
-                if (visibleChild) {
-                    group.classList.remove('hidden');
-                } else {
-                    group.classList.add('hidden');
-                }
-            });
-        }
-
-        // --- PUZZLE & VIDEO LOGIC ---
-        let correctAnswer = 0;
-
-        // This function is designated as the onclick handler for "Say Hi"
-        // This function is designated as the onclick handler for "Say Hi"
-        function popStickers() {
-            const modal = document.getElementById('puzzle-modal');
-
-            // Randomly select operation: 0=Add, 1=Sub, 2=Mult, 3=Div, 4=Square
-            const op = Math.floor(Math.random() * 5);
-            let a, b, symbol;
-            let questionText = "";
-
-            if (op === 0) {
-                // Addition
-                a = Math.floor(Math.random() * 15) + 1;
-                b = Math.floor(Math.random() * 15) + 1;
-                correctAnswer = a + b;
-                questionText = `${a} + ${b} = ?`;
-            } else if (op === 1) {
-                // Subtraction (Result always positive)
-                a = Math.floor(Math.random() * 20) + 5;
-                b = Math.floor(Math.random() * a) + 1; // b < a
-                correctAnswer = a - b;
-                questionText = `${a} - ${b} = ?`;
-            } else if (op === 2) {
-                // Multiplication
-                a = Math.floor(Math.random() * 9) + 2;
-                b = Math.floor(Math.random() * 9) + 2;
-                correctAnswer = a * b;
-                questionText = `${a} × ${b} = ?`;
-            } else if (op === 3) {
-                // Division (Clean Integer)
-                b = Math.floor(Math.random() * 9) + 2; // Divisor
-                const result = Math.floor(Math.random() * 9) + 2; // Quotient
-                a = b * result; // Dividend
-                correctAnswer = result;
-                questionText = `${a} ÷ ${b} = ?`;
-            } else {
-                // Square
-                a = Math.floor(Math.random() * 10) + 2;
-                correctAnswer = a * a;
-                questionText = `${a}² = ?`;
-            }
-
-            document.getElementById('puzzle-question').innerText = questionText;
-            document.getElementById('puzzle-input').value = '';
-
-            modal.classList.add('active');
-            setTimeout(() => document.getElementById('puzzle-input').focus(), 100);
-        }
-
-        function closePuzzle() {
-            document.getElementById('puzzle-modal').classList.remove('active');
-        }
-
-        function checkPuzzle() {
-            const input = document.getElementById('puzzle-input');
-            const val = parseInt(input.value);
-
-            if (val === correctAnswer) {
-                // SUCCESS!
-                closePuzzle();
-                triggerCelebration();
-            } else {
-                // Error shake
-                input.style.borderColor = 'red';
-                input.animate([
-                    { transform: 'translateX(0)' },
-                    { transform: 'translateX(-10px)' },
-                    { transform: 'translateX(10px)' },
-                    { transform: 'translateX(0)' }
-                ], { duration: 300 });
-                setTimeout(() => input.style.borderColor = 'var(--border-color)', 2000);
-            }
-        }
-
-        function triggerCelebration() {
-            // 1. Fire Confetti
-            if (window.fireConfetti) {
-                window.fireConfetti();
-            }
-
-            // 2. Open Video Modal
-            const vModal = document.getElementById('video-modal');
-            const video = document.getElementById('greeting-video');
-
-            vModal.classList.add('active');
-
-            // Auto play if possible
-            video.currentTime = 0;
-            video.play().catch(e => console.log('Autoplay blocked', e));
-        }
-
-        function closeVideo() {
-            const vModal = document.getElementById('video-modal');
-            const video = document.getElementById('greeting-video');
-
-            vModal.classList.remove('active');
-            video.pause();
-        }
-
-        // --- THEME ---
-        // --- THEME ---
-        const themeBtn = document.getElementById('themeBtn');
-        const root = document.documentElement;
-
-        // Minimalist Icons
-        const sunIcon = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
-        const moonIcon = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
-
-        function setTheme(theme) {
-            root.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            // If theme is dark, show Sun icon (to switch to light)
-            // If theme is light, show Moon icon (to switch to dark)
-            themeBtn.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
-        }
-
-        const savedTheme = localStorage.getItem('theme');
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        if (savedTheme) {
-            setTheme(savedTheme);
-        } else {
-            setTheme(systemDark ? 'dark' : 'light');
-        }
-
-        themeBtn.addEventListener('click', () => {
-            const current = root.getAttribute('data-theme');
-            setTheme(current === 'dark' ? 'light' : 'dark');
-        });
-
-        // --- CLOCK ---
-        function updateTime() {
-            const now = new Date();
-            // Accra is GMT
-            const timeString = now.toLocaleTimeString('en-US', {
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true,
-                timeZone: 'Africa/Accra'
-            });
-            const clockEl = document.getElementById('clock');
-            if (clockEl) {
-                clockEl.textContent = timeString;
-            }
-        }
-        updateTime();
-        setInterval(updateTime, 60000); // Update every minute
-    </script>
-
-
-
 
     <!-- Puzzle Modal -->
     <div id="puzzle-modal" class="modal-overlay">
@@ -448,7 +245,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- Video Modal -->
     <div id="video-modal" class="modal-overlay">
@@ -469,7 +265,7 @@
         </div>
     </div>
 
-    <!-- Confetti Script -->
+    <script src="app.js"></script>
     <script src="confetti.js"></script>
 </body>
 
