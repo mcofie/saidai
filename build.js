@@ -40,10 +40,15 @@ files.forEach(file => {
     const htmlContent = marked.parse(body);
     const slug = path.basename(file, '.md');
 
+
+    const wordCount = body.split(/\s+/).length;
+    const readTime = Math.ceil(wordCount / 200);
+
     posts.push({
         ...attributes,
         slug,
         htmlContent,
+        readTime,
         outputFile: `${slug}/index.html`, // Directory pattern
         url: `${slug}/` // Clean URL for links
     });
@@ -67,8 +72,11 @@ const HTML_TEMPLATE = `<!doctype html>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../style.css">
+    <!-- Readability Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,200..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../style.css?v=2">
+    
     <style>
         /* FOUC fix for i18n */
         [data-i18n] { visibility: visible; }
@@ -77,6 +85,18 @@ const HTML_TEMPLATE = `<!doctype html>
     <!-- Prism/Highlight Theme - Minimal Monochrome -->
     <style>
         /* Blog Post Specifics */
+        :root {
+            --post-font: 'Inter', sans-serif;
+            --post-size: 17px;
+            --post-lh: 1.6;
+            --post-max-w: 680px;
+        }
+
+        [data-font="serif"] {
+            --post-font: 'Newsreader', serif;
+            --post-size: 20px; /* Serif needs to be slightly larger */
+        }
+        
         .back-link {
             display: inline-block;
             margin-bottom: 40px;
@@ -91,59 +111,71 @@ const HTML_TEMPLATE = `<!doctype html>
         }
 
         article {
-            max-width: 100%;
+            max-width: var(--post-max-w);
+            margin: 0 auto;
             view-transition-name: article-content;
         }
 
         h1 {
-            font-size: clamp(24px, 4vw, 32px);
-            margin-bottom: 8px;
+            font-size: clamp(28px, 4vw, 40px);
+            margin-bottom: 12px;
             letter-spacing: -0.02em;
-            line-height: 1.2;
+            line-height: 1.1;
+            font-weight: 500;
         }
 
-        .post-date {
+        .post-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 64px;
             font-size: 13px;
             color: var(--text-tertiary);
-            margin-bottom: 48px;
-            display: block;
-            font-variant-numeric: tabular-nums;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+        }
+
+        .reading-time::before {
+             content: "•";
+             margin-right: 16px;
+             opacity: 0.4;
         }
 
         .post-content {
-            font-size: 16px; 
-            line-height: 1.7;
+            font-family: var(--post-font);
+            font-size: var(--post-size); 
+            line-height: var(--post-lh);
             color: var(--text-muted);
         }
 
         .post-content p {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
         .post-content h2 {
-            font-size: 20px;
-            margin-top: 48px;
-            margin-bottom: 16px;
+            font-size: 24px;
+            margin-top: 64px;
+            margin-bottom: 24px;
             color: var(--text-main);
             letter-spacing: -0.01em;
             font-weight: 500;
         }
 
         .post-content h3 {
-             font-size: 16px;
-             margin-top: 32px;
-             margin-bottom: 12px;
+             font-size: 18px;
+             margin-top: 40px;
+             margin-bottom: 16px;
              font-weight: 600;
              color: var(--text-main);
         }
 
         .post-content ul {
-            margin-bottom: 24px;
+            margin-bottom: 32px;
             padding-left: 20px;
         }
 
         .post-content li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         
         .post-content a {
@@ -151,48 +183,117 @@ const HTML_TEMPLATE = `<!doctype html>
             text-underline-offset: 4px;
             text-decoration-color: var(--border-color);
             color: var(--text-main);
+            transition: all 0.2s;
         }
         
         .post-content a:hover {
             text-decoration-color: var(--text-main);
+            background-color: var(--surface);
+            border-radius: 2px;
         }
 
         .post-content blockquote {
-             border-left: 2px solid var(--border-color);
-             padding-left: 20px;
+             border-left: 2px solid var(--text-main);
+             padding-left: 24px;
+             font-family: 'Newsreader', serif;
              font-style: italic;
-             margin: 32px 0;
+             font-size: 1.1em;
+             margin: 40px 0;
              color: var(--text-main);
         }
 
         /* Syntax Highlighting - Minimal */
         pre {
-            background-color: var(--tag-bg, #f4f4f4); /* Make sure to define tag-bg or use a fallback */
-            padding: 20px;
-            border-radius: 4px;
+            background-color: var(--surface); 
+            padding: 24px;
+            border-radius: 8px;
             overflow-x: auto;
-            margin: 32px 0;
+            margin: 40px -24px; /* Slight bleed */
             font-size: 13px; 
-            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             border: 1px solid var(--border-color);
         }
 
-        [data-theme="dark"] pre {
-            background-color: #111;
+        @media (max-width: 600px) {
+            pre {
+                margin: 32px -20px;
+                border-radius: 0;
+                border-left: 0;
+                border-right: 0;
+            }
         }
 
         .hljs-keyword, .hljs-selector-tag, .hljs-title, .hljs-section, .hljs-doctag, .hljs-name, .hljs-strong {
-            font-weight: bold;
+            font-weight: 500;
+            color: var(--text-main);
         }
-        .hljs-comment { color: #999; }
-        .hljs-string, .hljs-title, .hljs-section, .hljs-built_in, .hljs-literal, .hljs-type, .hljs-addition, .hljs-tag, .hljs-quote, .hljs-name, .hljs-selector-id, .hljs-selector-class {
-            color: var(--text-main); 
+        .hljs-comment { color: var(--text-tertiary); font-style: italic; }
+        .hljs-string, .hljs-built_in, .hljs-literal, .hljs-type {
+            color: var(--text-muted); 
+        }
+
+        /* --- READER TOOLS --- */
+        .reader-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--text-main);
+            width: 0%;
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+
+        .reader-controls {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.6s var(--ease-out) 1s forwards;
+        }
+
+        .control-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            color: var(--text-main);
+            border-color: var(--text-tertiary);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+        
+        .control-btn.active {
+            background: var(--text-main);
+            color: var(--bg);
+            border-color: var(--text-main);
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
     </style>
 </head>
 
 <body>
+    <div class="reader-progress" id="progressBar"></div>
+
     <nav>
         <a href="../../" class="logo">Maxwell Cofie</a>
         <div class="nav-links">
@@ -216,12 +317,25 @@ const HTML_TEMPLATE = `<!doctype html>
 
     <article>
         <h1>{{TITLE}}</h1>
-        <span class="post-date">{{DATE}}</span>
+        <div class="post-meta-row">
+            <span class="post-date">{{DATE}}</span>
+            <span class="reading-time">{{READ_TIME}} min read</span>
+        </div>
 
-        <div class="post-content">
+        <div class="post-content" id="postContent">
             {{CONTENT}}
         </div>
     </article>
+    
+    <!-- Reader Controls FAB -->
+    <div class="reader-controls">
+        <button class="control-btn" id="fontToggle" aria-label="Toggle Serif/Sans">
+            <span style="font-family: 'Newsreader', serif; font-size: 18px;">A</span>
+        </button>
+        <button class="control-btn" id="topBtn" aria-label="Back to Top">
+            ↑
+        </button>
+    </div>
 
     <footer>
         <a href="mailto:maxwcofie@gmail.com" class="footer-link" data-i18n="footer.email">Email</a>
@@ -261,6 +375,38 @@ const HTML_TEMPLATE = `<!doctype html>
             const current = root.getAttribute('data-theme');
             setTheme(current === 'dark' ? 'light' : 'dark');
         });
+
+        // --- READER MODE ---
+        // 1. Progress Bar
+        window.addEventListener('scroll', () => {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // 2. Font Toggle (Serif/Sans)
+        const fontBtn = document.getElementById('fontToggle');
+        const article = document.querySelector('article');
+        
+        // Load saved font preference
+        const savedFont = localStorage.getItem('reader-font');
+        if (savedFont) {
+            article.setAttribute('data-font', savedFont);
+            fontBtn.classList.toggle('active', savedFont === 'serif');
+        }
+
+        fontBtn.addEventListener('click', () => {
+            const current = article.getAttribute('data-font');
+            const newFont = current === 'serif' ? 'sans' : 'serif';
+            article.setAttribute('data-font', newFont);
+            localStorage.setItem('reader-font', newFont);
+            fontBtn.classList.toggle('active');
+        });
+
+        // 3. Back to Top
+        document.getElementById('topBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     </script>
 </body>
 </html>`;
@@ -271,6 +417,7 @@ posts.forEach(post => {
         .replace(/{{TITLE}}/g, post.title)
         .replace(/{{DATE}}/g, post.date)
         .replace(/{{DESCRIPTION}}/g, post.description)
+        .replace(/{{READ_TIME}}/g, post.readTime)
         .replace(/{{CONTENT}}/g, post.htmlContent);
 
     const postPath = path.join(OUTPUT_DIR, post.outputFile); // posts/slug/index.html

@@ -19,7 +19,7 @@
 
 
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 
     <!-- Open Graph / SEO -->
     <meta property="og:title" content="Maxwell Cofie">
@@ -57,6 +57,11 @@
         <p data-i18n="home.intro">I'm a Solutions Architect & Tinkerer based in Accra, Ghana 🇬🇭 <span
                 style="color: var(--text-tertiary);" id="clock"></span>. I build products
             that solve problems in Africa & beyond.</p>
+
+        <button class="profile-trigger" onclick="popStickers()">
+            <span>👋</span>
+            <span data-i18n="home.say_hi">Say Hi!</span>
+        </button>
     </div>
 
     <div class="project-list-container">
@@ -272,6 +277,108 @@
             });
         }
 
+        // --- PUZZLE & VIDEO LOGIC ---
+        let correctAnswer = 0;
+
+        // This function is designated as the onclick handler for "Say Hi"
+        // This function is designated as the onclick handler for "Say Hi"
+        function popStickers() {
+            const modal = document.getElementById('puzzle-modal');
+
+            // Randomly select operation: 0=Add, 1=Sub, 2=Mult, 3=Div, 4=Square
+            const op = Math.floor(Math.random() * 5);
+            let a, b, symbol;
+            let questionText = "";
+
+            if (op === 0) {
+                // Addition
+                a = Math.floor(Math.random() * 15) + 1;
+                b = Math.floor(Math.random() * 15) + 1;
+                correctAnswer = a + b;
+                questionText = `${a} + ${b} = ?`;
+            } else if (op === 1) {
+                // Subtraction (Result always positive)
+                a = Math.floor(Math.random() * 20) + 5;
+                b = Math.floor(Math.random() * a) + 1; // b < a
+                correctAnswer = a - b;
+                questionText = `${a} - ${b} = ?`;
+            } else if (op === 2) {
+                // Multiplication
+                a = Math.floor(Math.random() * 9) + 2;
+                b = Math.floor(Math.random() * 9) + 2;
+                correctAnswer = a * b;
+                questionText = `${a} × ${b} = ?`;
+            } else if (op === 3) {
+                // Division (Clean Integer)
+                b = Math.floor(Math.random() * 9) + 2; // Divisor
+                const result = Math.floor(Math.random() * 9) + 2; // Quotient
+                a = b * result; // Dividend
+                correctAnswer = result;
+                questionText = `${a} ÷ ${b} = ?`;
+            } else {
+                // Square
+                a = Math.floor(Math.random() * 10) + 2;
+                correctAnswer = a * a;
+                questionText = `${a}² = ?`;
+            }
+
+            document.getElementById('puzzle-question').innerText = questionText;
+            document.getElementById('puzzle-input').value = '';
+
+            modal.classList.add('active');
+            setTimeout(() => document.getElementById('puzzle-input').focus(), 100);
+        }
+
+        function closePuzzle() {
+            document.getElementById('puzzle-modal').classList.remove('active');
+        }
+
+        function checkPuzzle() {
+            const input = document.getElementById('puzzle-input');
+            const val = parseInt(input.value);
+
+            if (val === correctAnswer) {
+                // SUCCESS!
+                closePuzzle();
+                triggerCelebration();
+            } else {
+                // Error shake
+                input.style.borderColor = 'red';
+                input.animate([
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-10px)' },
+                    { transform: 'translateX(10px)' },
+                    { transform: 'translateX(0)' }
+                ], { duration: 300 });
+                setTimeout(() => input.style.borderColor = 'var(--border-color)', 2000);
+            }
+        }
+
+        function triggerCelebration() {
+            // 1. Fire Confetti
+            if (window.fireConfetti) {
+                window.fireConfetti();
+            }
+
+            // 2. Open Video Modal
+            const vModal = document.getElementById('video-modal');
+            const video = document.getElementById('greeting-video');
+
+            vModal.classList.add('active');
+
+            // Auto play if possible
+            video.currentTime = 0;
+            video.play().catch(e => console.log('Autoplay blocked', e));
+        }
+
+        function closeVideo() {
+            const vModal = document.getElementById('video-modal');
+            const video = document.getElementById('greeting-video');
+
+            vModal.classList.remove('active');
+            video.pause();
+        }
+
         // --- THEME ---
         // --- THEME ---
         const themeBtn = document.getElementById('themeBtn');
@@ -323,6 +430,47 @@
     </script>
 
 
+
+
+    <!-- Puzzle Modal -->
+    <div id="puzzle-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 data-i18n="puzzle.title">Quick Check</h3>
+            <p data-i18n="puzzle.desc" style="margin-bottom: 16px; color: var(--text-muted);">Solve to say hi:</p>
+            <div class="puzzle-row">
+                <span id="puzzle-question" style="font-family: 'Mansalva', cursive; font-size: 24px;">1 + 1 = ?</span>
+            </div>
+            <input type="number" id="puzzle-input" placeholder="?"
+                onkeydown="if(event.key === 'Enter') checkPuzzle()" />
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closePuzzle()" data-i18n="btn.cancel">Cancel</button>
+                <button class="btn-primary" onclick="checkPuzzle()" data-i18n="btn.verify">Verify</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="modal-overlay">
+        <div class="modal-content video-content">
+            <button class="close-btn" onclick="closeVideo()">×</button>
+            <div class="video-wrapper">
+                <!-- Placeholder Video Source (User needs to replace this) -->
+                <video id="greeting-video" controls playsinline>
+                    <source src="#" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-placeholder-msg">
+                    <span>(Video Placeholder)</span>
+                </div>
+            </div>
+            <p style="margin-top: 16px; font-size: 14px; text-align: center;" data-i18n="video.caption">Thanks for
+                checking in! 🎉</p>
+        </div>
+    </div>
+
+    <!-- Confetti Script -->
+    <script src="confetti.js"></script>
 </body>
 
 </html>
