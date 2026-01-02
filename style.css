@@ -613,26 +613,32 @@ dialog::backdrop {
 .profile-trigger {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 0;
+    gap: 10px;
+    padding: 10px 20px;
     background: transparent;
-    border: none;
+    border: 1px solid var(--border-color);
+    border-radius: 99px;
+    /* Pill */
     cursor: pointer;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text-muted);
-    transition: color 0.2s ease;
-    margin-top: 16px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 24px;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    box-shadow: none;
 }
 
 .profile-trigger:hover {
+    background: var(--surface);
     color: var(--text-main);
-    transform: none;
-    box-shadow: none;
-    border-color: transparent;
+    border-color: var(--text-tertiary);
+    /* Subtle darken on hover */
+    transform: translateY(-1px);
+}
+
+.profile-trigger:active {
+    transform: translateY(0) scale(0.98);
 }
 
 .profile-trigger span:first-child {
