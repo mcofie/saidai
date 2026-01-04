@@ -101,6 +101,11 @@ body::before {
     .nav-links {
         gap: 16px;
     }
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
 }
 
 /* ===== NAVIGATION ===== */
@@ -317,14 +322,24 @@ p,
     animation: fadeIn 0.8s var(--ease-out) forwards;
 }
 
-.intro p {
-    font-size: clamp(20px, 3vw, 24px);
-    /* Larger, more impactful */
-    font-weight: 500;
-    line-height: 1.4;
-    color: var(--text-main);
-    max-width: 600px;
+/* Intro Headline - Punchy & Action Oriented */
+.intro-headline {
+    font-size: clamp(32px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.05;
     letter-spacing: -0.03em;
+    color: var(--text-main);
+    margin-bottom: 32px;
+    max-width: 600px;
+}
+
+/* Intro Description - Clean & Readable */
+.intro-desc {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 600px;
 }
 
 .section-label {

@@ -5,7 +5,12 @@ const translations = {
         "nav.writing": "Writing",
         "nav.back_writing": "← Writing",
         "writing.archives": "Archives (Substack)",
-        "home.intro": "I'm a Solutions Architect & Tinkerer based in Accra, Ghana 🇬🇭 <span style='color: var(--text-tertiary);' id='clock'></span>. I build products that solve problems in Africa & beyond.",
+        "home.headline": "Architecting digital platforms & building businesses for Africa & beyond.",
+        "home.role": "Solutions Architect & Tinkerer",
+        "home.location": "Accra, Ghana 🇬🇭",
+        "home.label_role": "Role",
+        "home.label_base": "Base",
+        "home.mission": "Solutions Architect & Tinkerer based in Accra, Ghana 🇬🇭. Currently exploring the intersection of design, technology, and culture.",
         "home.say_hi": "My Story",
         "puzzle.title": "Quick Check",
         "puzzle.desc": "Solve to say hi:",
@@ -57,7 +62,15 @@ const translations = {
         "nav.writing": "Écriture",
         "nav.back_writing": "← Écriture",
         "writing.archives": "Archives (Substack)",
+        "nav.back_writing": "← Écriture",
+        "writing.archives": "Archives (Substack)",
         "home.intro": "Je suis un Architecte de Solutions & Bricoleur basé à Accra, Ghana 🇬🇭 <span style='color: var(--text-tertiary);' id='clock'></span>. Je construis des produits qui résolvent des problèmes en Afrique et au-delà.",
+        "home.headline": "Architecte de plateformes numériques et créateur d'entreprises.",
+        "home.role": "Architecte de Solutions & Bricoleur",
+        "home.location": "Accra, Ghana 🇬🇭",
+        "home.label_role": "Rôle",
+        "home.label_base": "Base",
+        "home.mission": "Architecte de Solutions & Bricoleur basé à Accra, Ghana 🇬🇭. Actuellement, j'explore l'intersection du design, de la technologie et de la culture.",
         "home.say_hi": "Mon Histoire",
         "puzzle.title": "Vérification Rapide",
         "puzzle.desc": "Résoudre pour dire bonjour:",
@@ -109,7 +122,15 @@ const translations = {
         "nav.writing": "Escritura",
         "nav.back_writing": "← Escritura",
         "writing.archives": "Archivos (Substack)",
+        "nav.back_writing": "← Escritura",
+        "writing.archives": "Archivos (Substack)",
         "home.intro": "Soy Arquitecto de Soluciones y Experimentador basado en Accra, Ghana 🇬🇭 <span style='color: var(--text-tertiary);' id='clock'></span>. Construyo productos que resuelven problemas en África y más allá.",
+        "home.headline": "Arquitecto de plataformas digitales y constructor de negocios.",
+        "home.role": "Arquitecto de Soluciones y Inventor",
+        "home.location": "Accra, Ghana 🇬🇭",
+        "home.label_role": "Rol",
+        "home.label_base": "Base",
+        "home.mission": "Arquitecto de Soluciones y Experimentador basado en Accra, Ghana 🇬🇭. Actualmente explorando la intersección del diseño, la tecnología y la cultura.",
         "home.say_hi": "Mi Historia",
         "puzzle.title": "Verificación Rápida",
         "puzzle.desc": "Resolver para saludar:",
@@ -185,6 +206,10 @@ function setLanguage(lang) {
                     if (typeof updateTime === 'function') updateTime();
                 }
             } else {
+                // Special handling for location to preserve clock if needed, though clock is separate now in new structure.
+                // Actually, the new structure has the clock OUTSIDE the translated span.
+                // <span data-i18n="home.location">Accra, Ghana 🇬🇭</span> <span id="clock"></span>
+                // So simple text replacement is fine for home.location.
                 el.textContent = translations[lang][key];
             }
         }
