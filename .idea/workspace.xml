@@ -89,6 +89,7 @@
       <workItem from="1766708549516" duration="10061000" />
       <workItem from="1767051499792" duration="2472000" />
       <workItem from="1767057601322" duration="12000" />
+      <workItem from="1767151249327" duration="4366000" />
     </task>
     <task id="LOCAL-00001" summary="Reversed the website">
       <option name="closed" value="true" />
@@ -290,7 +291,39 @@
       <option name="project" value="LOCAL" />
       <updated>1767057606880</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767151861505</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1767151861505</updated>
+    </task>
+    <task id="LOCAL-00027" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767307198444</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1767307198444</updated>
+    </task>
+    <task id="LOCAL-00028" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767311684151</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1767311684151</updated>
+    </task>
+    <task id="LOCAL-00029" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767312869259</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1767312869259</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
