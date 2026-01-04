@@ -319,7 +319,7 @@ p,
     margin-bottom: 80px;
     /* More whitespace */
     opacity: 0;
-    animation: fadeIn 0.8s var(--ease-out) forwards;
+    animation: slideIn 0.8s var(--ease-out) forwards;
 }
 
 /* Intro Headline - Punchy & Action Oriented */
@@ -404,6 +404,7 @@ p,
 
 .project-list .project-item:hover {
     opacity: 1;
+    transform: translateX(4px);
     /* Highlight the specific item */
 }
 
@@ -528,6 +529,54 @@ p,
     animation-delay: 0.45s;
 }
 
+.project-item:nth-child(9) {
+    animation-delay: 0.5s;
+}
+
+.project-item:nth-child(10) {
+    animation-delay: 0.55s;
+}
+
+.project-item:nth-child(11) {
+    animation-delay: 0.6s;
+}
+
+.project-item:nth-child(12) {
+    animation-delay: 0.65s;
+}
+
+.project-item:nth-child(13) {
+    animation-delay: 0.7s;
+}
+
+.project-item:nth-child(14) {
+    animation-delay: 0.75s;
+}
+
+.project-item:nth-child(15) {
+    animation-delay: 0.8s;
+}
+
+.project-item:nth-child(16) {
+    animation-delay: 0.85s;
+}
+
+.project-item:nth-child(17) {
+    animation-delay: 0.9s;
+}
+
+.project-item:nth-child(18) {
+    animation-delay: 0.95s;
+}
+
+.project-item:nth-child(19) {
+    animation-delay: 1.0s;
+}
+
+.project-item:nth-child(20) {
+    animation-delay: 1.05s;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -575,11 +624,16 @@ footer {
 .footer-link {
     font-size: 14px;
     color: var(--text-muted);
-    transition: color 0.2s;
+    transition: color 0.2s, opacity 0.2s;
+}
+
+footer:hover .footer-link {
+    opacity: 0.4;
 }
 
 .footer-link:hover {
     color: var(--text-main);
+    opacity: 1 !important;
 }
 
 /* DIALOG (From products.html) */
