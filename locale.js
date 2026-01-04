@@ -41,6 +41,8 @@ const translations = {
         "proj.monochrome": "Premium affordable, modular furniture that adapt to changing needs.",
         "proj.outpost": "A serene cluster of sustainable off-grid tiny homes designed for rest.",
         "proj.vita": "Sustainable Agriculture.",
+        "proj.loosewear": "Undergarments & sleepwear for everyday comfort. Soft, breathable, easy-to-wear.",
+        "proj.offstage": "A platform for intimate theatre experiences and modern storytelling in Accra.",
         "meta.marketplace": "Marketplace",
         "meta.eventtech": "Event Tech",
         "meta.aitravel": "AI Travel",
@@ -53,6 +55,8 @@ const translations = {
         "meta.furniture": "Furniture",
         "meta.hospitality": "Hospitality",
         "meta.agro": "Agro",
+        "meta.apparel": "Apparel",
+        "meta.theatre": "Theatre",
         "error.not_found": "The page you're looking for doesn't exist.",
         "error.return_home": "Return Home"
     },
@@ -101,6 +105,8 @@ const translations = {
         "proj.monochrome": "Meubles modulaires haut de gamme et abordables qui s'adaptent aux besoins changeants.",
         "proj.outpost": "Un groupe serein de petites maisons durables hors réseau conçues pour le repos.",
         "proj.vita": "Agriculture Durable.",
+        "proj.loosewear": "Sous-vêtements et vêtements de nuit pour le confort quotidien. Doux, respirant, facile à porter.",
+        "proj.offstage": "Une plateforme pour des expériences théâtrales intimes et des récits modernes à Accra.",
         "meta.marketplace": "Place de marché",
         "meta.eventtech": "Technologie Événementielle",
         "meta.aitravel": "Voyage IA",
@@ -113,6 +119,8 @@ const translations = {
         "meta.furniture": "Meubles",
         "meta.hospitality": "Hôtellerie",
         "meta.agro": "Agro",
+        "meta.apparel": "Vêtements",
+        "meta.theatre": "Théâtre",
         "error.not_found": "La page que vous recherchez n'existe pas.",
         "error.return_home": "Retour à l'accueil"
     },
@@ -161,6 +169,8 @@ const translations = {
         "proj.monochrome": "Muebles modulares premium y asequibles que se adaptan a las necesidades cambiantes.",
         "proj.outpost": "Un grupo sereno de pequeñas casas sostenibles fuera de la red diseñadas para el descanso.",
         "proj.vita": "Agricultura Sostenible.",
+        "proj.loosewear": "Ropa interior y de dormir para la comodidad diaria. Suave, transpirable, fácil de llevar.",
+        "proj.offstage": "Una plataforma para experiencias teatrales íntimas y narración moderna en Accra.",
         "meta.marketplace": "Mercado",
         "meta.eventtech": "Tecnología de Eventos",
         "meta.aitravel": "Viajes IA",
@@ -173,6 +183,8 @@ const translations = {
         "meta.furniture": "Muebles",
         "meta.hospitality": "Hospitalidad",
         "meta.agro": "Agro",
+        "meta.apparel": "Ropa",
+        "meta.theatre": "Teatro",
         "error.not_found": "La página que buscas no existe.",
         "error.return_home": "Volver al inicio"
     }

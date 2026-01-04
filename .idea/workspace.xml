@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="content changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locale.js" beforeDir="false" afterPath="$PROJECT_DIR$/locale.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ventures/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ventures/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +98,7 @@
       <workItem from="1767151249327" duration="4366000" />
       <workItem from="1767489739878" duration="730000" />
       <workItem from="1767529763219" duration="6656000" />
+      <workItem from="1767554887252" duration="1204000" />
     </task>
     <task id="LOCAL-00001" summary="Reversed the website">
       <option name="closed" value="true" />
@@ -377,11 +380,46 @@
       <option name="project" value="LOCAL" />
       <updated>1767547310095</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767551772853</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1767551772853</updated>
+    </task>
+    <task id="LOCAL-00037" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767551777241</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1767551777241</updated>
+    </task>
+    <task id="LOCAL-00038" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767554269027</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1767554269027</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Reversed the website" />
