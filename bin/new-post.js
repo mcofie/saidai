@@ -23,7 +23,7 @@ const askQuestion = (query) => {
 
 const createPost = async () => {
     console.log('--- Create New Post ---');
-    
+
     const title = await askQuestion('Post Title: ');
     if (!title) {
         console.error('Title is required!');
@@ -32,6 +32,10 @@ const createPost = async () => {
     }
 
     const description = await askQuestion('Description (optional): ');
+
+    // Default to 'Thought' if empty, or allow user input
+    let category = await askQuestion('Category (default: Thought): ');
+    if (!category) category = 'Thought';
 
     // Generate Slug
     const slug = title
@@ -60,6 +64,7 @@ title: "${title}"
 date: "${dateStr}"
 isoDate: "${isoDate}"
 description: "${description}"
+category: "${category}"
 ---
 
 Write your content here...
@@ -68,7 +73,7 @@ Write your content here...
     fs.writeFileSync(filePath, content);
     console.log(`\n✅ Post created successfully:`);
     console.log(`   ${filePath}`);
-    
+
     rl.close();
 };
 

@@ -59,12 +59,13 @@ posts.sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
 
 // 3. Generate HTML Files for each post
 const HTML_TEMPLATE = `<!doctype html>
-<html lang="en" data-theme="system">
+<html lang="en" data-theme="system" itemscope itemtype="https://schema.org/BlogPosting">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{TITLE}} | Maxwell Cofie</title>
     <meta name="description" content="{{DESCRIPTION}}">
+    <link rel="canonical" href="https://maxwellcofie.com/posts/{{SLUG}}/">
     <!-- View Transitions -->
     <meta name="view-transition" content="same-origin" />
 
@@ -289,6 +290,24 @@ const HTML_TEMPLATE = `<!doctype html>
         }
 
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "{{TITLE}}",
+      "description": "{{DESCRIPTION}}",
+      "author": {
+        "@type": "Person",
+        "name": "Maxwell Cofie",
+        "url": "https://maxwellcofie.com"
+      },
+      "datePublished": "{{ISO_DATE}}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://maxwellcofie.com/posts/{{SLUG}}/"
+      }
+    }
+    </script>
 </head>
 
 <body>
@@ -320,6 +339,7 @@ const HTML_TEMPLATE = `<!doctype html>
         <div class="post-meta-row">
             <span class="post-date">{{DATE}}</span>
             <span class="reading-time">{{READ_TIME}} min read</span>
+            {{CATEGORY_TAG}}
         </div>
 
         <div class="post-content" id="postContent">
@@ -391,9 +411,12 @@ posts.forEach(post => {
     let html = HTML_TEMPLATE
         .replace(/{{TITLE}}/g, post.title)
         .replace(/{{DATE}}/g, post.date)
+        .replace(/{{ISO_DATE}}/g, new Date(post.isoDate).toISOString())
         .replace(/{{DESCRIPTION}}/g, post.description)
+        .replace(/{{SLUG}}/g, post.slug)
         .replace(/{{READ_TIME}}/g, post.readTime)
-        .replace(/{{CONTENT}}/g, post.htmlContent);
+        .replace(/{{CONTENT}}/g, post.htmlContent)
+        .replace(/{{CATEGORY_TAG}}/g, post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : '');
 
     const postPath = path.join(OUTPUT_DIR, post.outputFile); // posts/slug/index.html
     const postDir = path.dirname(postPath);
@@ -408,6 +431,14 @@ posts.forEach(post => {
 
 
 // 4. Update writing/index.html Index
+const categories = [...new Set(posts.map(p => p.category).filter(Boolean))].sort();
+const filterHTML = `
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterPosts(this, 'all')">All</button>
+        ${categories.map(cat => `<button class="filter-btn" onclick="filterPosts(this, '${cat}')">${cat}</button>`).join('')}
+    </div>
+`;
+
 const INDEX_HTML = `<!doctype html>
 <html lang="en" data-theme="system">
 
@@ -416,6 +447,7 @@ const INDEX_HTML = `<!doctype html>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Writing | Maxwell Cofie</title>
     <meta name="description" content="Thoughts on technology, design, and building products in Africa.">
+    <link rel="canonical" href="https://maxwellcofie.com/writing/">
     <!-- View Transitions -->
     <meta name="view-transition" content="same-origin" />
 
@@ -461,13 +493,15 @@ const INDEX_HTML = `<!doctype html>
 
     <div class="project-list-container">
         <div class="section-label" data-i18n="writing.articles">Articles</div>
+        ${filterHTML}
 
         <div class="project-list">
             ${posts.map(post => `
-            <a href="../posts/${post.url}" class="project-item">
+            <a href="../posts/${post.url}" class="project-item" data-category="${post.category}">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">${post.title}</span>
+                         ${post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : ''}
                         <span class="arrow">→</span>
                     </div>
                     <span class="proj-desc">${post.description}</span>
@@ -488,6 +522,26 @@ const INDEX_HTML = `<!doctype html>
     </footer>
     <script src="../locale.js"></script>
     <script src="../app.js"></script>
+    <script>
+        function filterPosts(btn, category) {
+            // Update buttons
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter items
+            const items = document.querySelectorAll('.project-list .project-item');
+            items.forEach(item => {
+                 const itemCat = item.getAttribute('data-category');
+                 if (!itemCat) return; 
+
+                 if (category === 'all' || itemCat === category) {
+                     item.style.display = 'flex';
+                 } else {
+                     item.style.display = 'none';
+                 }
+            });
+        }
+    </script>
 </body>
 </html>`;
 
@@ -504,6 +558,7 @@ const latestPostsHTML = `<!-- WRITING_LIST_START -->
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">${post.title}</span>
+                        ${post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : ''}
                         <span class="arrow">→</span>
                     </div>
                     <span class="proj-desc">${post.description}</span>

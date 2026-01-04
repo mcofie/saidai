@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Writing | Maxwell Cofie</title>
     <meta name="description" content="Thoughts on technology, design, and building products in Africa.">
+    <link rel="canonical" href="https://maxwellcofie.com/writing/">
     <!-- View Transitions -->
     <meta name="view-transition" content="same-origin" />
 
@@ -51,16 +52,23 @@
 
     <div class="project-list-container">
         <div class="section-label" data-i18n="writing.articles">Articles</div>
+        
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterPosts(this, 'all')">All</button>
+        <button class="filter-btn" onclick="filterPosts(this, 'Community')">Community</button>
+    </div>
+
 
         <div class="project-list">
             
-            <a href="../posts/the-genesis-of-the-reseau/" class="project-item">
+            <a href="../posts/the-genesis-of-the-reseau/" class="project-item" data-category="Community">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">The Genesis of the Réseau</span>
+                         <span class="post-category community">Community</span>
                         <span class="arrow">→</span>
                     </div>
-                    <span class="proj-desc">I’m often amazed at how a casual meetup can lead to the birth of incredible ideas and initiatives.</span>
+                    <span class="proj-desc">How a casual meetup led to the birth of a builder community.</span>
                 </div>
                 <div class="proj-meta">Dec 2025</div>
             </a>
@@ -78,5 +86,25 @@
     </footer>
     <script src="../locale.js"></script>
     <script src="../app.js"></script>
+    <script>
+        function filterPosts(btn, category) {
+            // Update buttons
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter items
+            const items = document.querySelectorAll('.project-list .project-item');
+            items.forEach(item => {
+                 const itemCat = item.getAttribute('data-category');
+                 if (!itemCat) return; 
+
+                 if (category === 'all' || itemCat === category) {
+                     item.style.display = 'flex';
+                 } else {
+                     item.style.display = 'none';
+                 }
+            });
+        }
+    </script>
 </body>
 </html>

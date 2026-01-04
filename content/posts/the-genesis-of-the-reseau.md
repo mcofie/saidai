@@ -2,7 +2,8 @@
 title: "The Genesis of the Réseau"
 date: "Dec 2025"
 isoDate: "2025-12-30"
-description: "I’m often amazed at how a casual meetup can lead to the birth of incredible ideas and initiatives."
+description: "How a casual meetup led to the birth of a builder community."
+category: "Community"
 ---
 
 I’m often amazed at how a casual meetup can lead to the birth of incredible ideas and initiatives.

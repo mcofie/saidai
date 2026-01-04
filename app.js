@@ -8,14 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initClock();
     initKonami();
+    initCopyButtons();
 
     // Expose functions required by HTML onclick attributes
     window.filterGrid = filterGrid;
-    window.popStickers = popStickers;
-    window.closePuzzle = closePuzzle;
-    window.checkPuzzle = checkPuzzle;
-    window.triggerCelebration = triggerCelebration;
+    window.playStory = playStory;
     window.closeVideo = closeVideo;
+    window.triggerCelebration = triggerCelebration; // Kept for Konami
 });
 
 /* =========================================
@@ -108,129 +107,60 @@ function filterGrid(category, event) {
 }
 
 /* =========================================
-   4. PUZZLE & GAMIFICATION
+   4. VIDEO STORY TELLING
    ========================================= */
-let correctPuzzleAnswer = 0;
-
-function popStickers() {
-    const modal = document.getElementById('puzzle-modal');
-
-    // Randomly select operation: 0-2 (Basic), 3-5 (Intermediate), 6-7 (Complex)
-    // 0=Add, 1=Sub, 2=Mult, 3=Div, 4=Square, 5=Order of Ops, 6=Algebra, 7=Square Root
-    const op = Math.floor(Math.random() * 8);
-    let a, b, c;
-    let questionText = "";
-
-    if (op === 0) { // Addition
-        a = Math.floor(Math.random() * 15) + 1;
-        b = Math.floor(Math.random() * 15) + 1;
-        correctPuzzleAnswer = a + b;
-        questionText = `${a} + ${b} = ?`;
-    } else if (op === 1) { // Subtraction
-        a = Math.floor(Math.random() * 20) + 5;
-        b = Math.floor(Math.random() * a) + 1;
-        correctPuzzleAnswer = a - b;
-        questionText = `${a} - ${b} = ?`;
-    } else if (op === 2) { // Multiplication
-        a = Math.floor(Math.random() * 9) + 2;
-        b = Math.floor(Math.random() * 9) + 2;
-        correctPuzzleAnswer = a * b;
-        questionText = `${a} × ${b} = ?`;
-    } else if (op === 3) { // Division
-        b = Math.floor(Math.random() * 9) + 2;
-        const result = Math.floor(Math.random() * 9) + 2;
-        a = b * result;
-        correctPuzzleAnswer = result;
-        questionText = `${a} ÷ ${b} = ?`;
-    } else if (op === 4) { // Square
-        a = Math.floor(Math.random() * 10) + 2;
-        correctPuzzleAnswer = a * a;
-        questionText = `${a}² = ?`;
-    } else if (op === 5) { // Order of Operations (A + B * C)
-        a = Math.floor(Math.random() * 10) + 1;
-        b = Math.floor(Math.random() * 5) + 1;
-        c = Math.floor(Math.random() * 5) + 1;
-        correctPuzzleAnswer = a + (b * c);
-        questionText = `${a} + ${b} × ${c} = ?`;
-    } else if (op === 6) { // Simple Algebra (Ax + B = C)
-        // We generate x first to ensure integer solution
-        const x = Math.floor(Math.random() * 8) + 2; // Answer
-        a = Math.floor(Math.random() * 5) + 2;       // Coefficient
-        b = Math.floor(Math.random() * 10) + 1;      // Constant
-        const result = (a * x) + b;                  // Total
-        correctPuzzleAnswer = x;
-        questionText = `${a}x + ${b} = ${result}, x = ?`;
-    } else { // Square Root
-        const root = Math.floor(Math.random() * 12) + 2; // 2 to 13
-        a = root * root;
-        correctPuzzleAnswer = root;
-        questionText = `√${a} = ?`;
-    }
-
-    const qEl = document.getElementById('puzzle-question');
-    const iEl = document.getElementById('puzzle-input');
-
-    if (qEl) qEl.innerText = questionText;
-    if (iEl) iEl.value = '';
-
-    if (modal) modal.classList.add('active');
-    setTimeout(() => {
-        if (iEl) iEl.focus();
-    }, 100);
-}
-
-function closePuzzle() {
-    const modal = document.getElementById('puzzle-modal');
-    if (modal) modal.classList.remove('active');
-}
-
-function checkPuzzle() {
-    const input = document.getElementById('puzzle-input');
-    if (!input) return;
-
-    const val = parseInt(input.value);
-
-    if (val === correctPuzzleAnswer) {
-        closePuzzle();
-        triggerCelebration();
-    } else {
-        // Error shake
-        input.style.borderColor = 'red';
-        input.animate([
-            { transform: 'translateX(0)' },
-            { transform: 'translateX(-10px)' },
-            { transform: 'translateX(10px)' },
-            { transform: 'translateX(0)' }
-        ], { duration: 300 });
-        setTimeout(() => input.style.borderColor = 'var(--surface)', 2000);
-    }
-}
-
-function triggerCelebration() {
-    // 1. Fire Confetti
-    if (window.fireConfetti) {
-        window.fireConfetti();
-    }
-
-    // 2. Open Video Modal
+function playStory() {
     const vModal = document.getElementById('video-modal');
+    const container = document.querySelector('.video-container-crt');
     const video = document.getElementById('greeting-video');
 
-    if (vModal) vModal.classList.add('active');
+    if (vModal) {
+        vModal.classList.add('active');
 
-    // Auto play if possible
-    if (video) {
-        video.currentTime = 0;
-        video.play().catch(e => console.log('Autoplay blocked', e));
+        // Trigger CRT Animation
+        if (container) {
+            container.classList.remove('animate-on');
+            void container.offsetWidth; // Force reflow
+            container.classList.add('animate-on');
+        }
+
+        // Auto play with slight delay to match animation peak
+        if (video) {
+            video.currentTime = 0;
+            // Unmute if possible, but browsers block unmuted autoplay often. 
+            // We rely on user interaction (click) so unmuted *might* work.
+            // video.muted = false; 
+
+            setTimeout(() => {
+                video.play().catch(e => console.log('Autoplay blocked', e));
+            }, 300); // Wait for the "flash" of the CRT
+        }
     }
 }
 
 function closeVideo() {
     const vModal = document.getElementById('video-modal');
     const video = document.getElementById('greeting-video');
+    const container = document.querySelector('.video-container-crt');
 
     if (vModal) vModal.classList.remove('active');
-    if (video) video.pause();
+
+    // Stop video
+    if (video) {
+        video.pause();
+        video.currentTime = 0;
+    }
+
+    // Reset Animation State
+    if (container) {
+        container.classList.remove('animate-on');
+    }
+}
+
+// Kept for Konami Easter Egg
+function triggerCelebration() {
+    if (window.fireConfetti) window.fireConfetti();
+    // We could launch the video here too if we want
 }
 
 /* =========================================
@@ -265,7 +195,45 @@ function activateEasterEgg() {
     alert("🚀 CHEAT CODE ACTIVATED: You are awesome!");
 
     // 3. Matrix Mode (Just for fun CSS swap)
-    document.documentElement.style.setProperty('--bg', '#000');
-    document.documentElement.style.setProperty('--text-main', '#00FF00');
     document.documentElement.style.setProperty('--text-muted', '#008800');
+}
+
+/* =========================================
+   6. CODE COPY BUTTONS
+   ========================================= */
+function initCopyButtons() {
+    // Wait a tick for Prism/Highlight if needed, though they usually run sync or we don't depend on them for text content
+    const codeBlocks = document.querySelectorAll('pre');
+
+    codeBlocks.forEach(block => {
+        // Check if button already exists (if re-initializing)
+        if (block.querySelector('.copy-btn')) return;
+
+        const btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.textContent = 'Copy';
+
+        // Find code content
+        const code = block.querySelector('code');
+        const textToCopy = code ? code.innerText : block.innerText;
+
+        btn.addEventListener('click', () => {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const originalText = btn.textContent;
+                    btn.textContent = 'Copied!';
+                    btn.classList.add('copied');
+
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy class', err);
+                });
+            }
+        });
+
+        block.appendChild(btn);
+    });
 }

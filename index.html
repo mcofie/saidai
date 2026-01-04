@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Maxwell Cofie | Solutions Architect</title>
     <meta name="description" content="Solutions Architect & Tinkerer in Accra, Ghana.">
+    <link rel="canonical" href="https://maxwellcofie.com/">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧊</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +30,20 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://maxwellcofie.com">
     <link rel="alternate" type="application/rss+xml" title="Maxwell Cofie" href="/rss.xml" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Maxwell Cofie",
+      "url": "https://maxwellcofie.com",
+      "jobTitle": "Solutions Architect",
+      "sameAs": [
+        "https://x.com/maxwellcofie",
+        "https://linkedin.com/in/maxwell-cofie",
+        "https://github.com/mcofie"
+      ]
+    }
+    </script>
 </head>
 
 <body>
@@ -58,9 +75,9 @@
                 style="color: var(--text-tertiary);" id="clock"></span>. I build products
             that solve problems in Africa & beyond.</p>
 
-        <button class="profile-trigger" onclick="popStickers()">
-            <span>🧊</span>
-            <span data-i18n="home.say_hi">meet me</span>
+        <button class="profile-trigger" onclick="playStory()">
+            <span>▶</span>
+            <span data-i18n="home.say_hi">My Story</span>
         </button>
     </div>
 
@@ -197,9 +214,10 @@
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">The Genesis of the Réseau</span>
+                        <span class="post-category community">Community</span>
                         <span class="arrow">→</span>
                     </div>
-                    <span class="proj-desc">I’m often amazed at how a casual meetup can lead to the birth of incredible ideas and initiatives.</span>
+                    <span class="proj-desc">How a casual meetup led to the birth of a builder community.</span>
                 </div>
                 <div class="proj-meta">Dec 2025</div>
             </a>
@@ -229,39 +247,26 @@
     </footer>
     <script src="locale.js"></script>
 
-    <!-- Puzzle Modal -->
-    <div id="puzzle-modal" class="modal-overlay">
-        <div class="modal-content">
-            <h3 data-i18n="puzzle.title">Quick Check</h3>
-            <p data-i18n="puzzle.desc" style="margin-bottom: 16px; color: var(--text-muted);">Solve to say hi:</p>
-            <div class="puzzle-row">
-                <span id="puzzle-question" style="font-family: 'Mansalva', cursive; font-size: 24px;">1 + 1 = ?</span>
-            </div>
-            <input type="number" id="puzzle-input" placeholder="?"
-                onkeydown="if(event.key === 'Enter') checkPuzzle()" />
-            <div class="modal-actions">
-                <button class="btn-secondary" onclick="closePuzzle()" data-i18n="btn.cancel">Cancel</button>
-                <button class="btn-primary" onclick="checkPuzzle()" data-i18n="btn.verify">Verify</button>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Video Modal -->
     <div id="video-modal" class="modal-overlay">
         <div class="modal-content video-content">
+
+
             <button class="close-btn" onclick="closeVideo()">×</button>
-            <div class="video-wrapper">
-                <!-- Placeholder Video Source (User needs to replace this) -->
-                <video id="greeting-video" controls playsinline>
-                    <source src="#" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="video-placeholder-msg">
-                    <span>(Video Placeholder)</span>
+            <div class="video-container-crt">
+                <div class="video-wrapper">
+                    <!-- Placeholder Video Source (User needs to replace this) -->
+                    <video id="greeting-video" playsinline>
+                        <source src="assets/video/story.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-placeholder-msg">
+                        <span>(Video Loading...)</span>
+                    </div>
                 </div>
             </div>
-            <p style="margin-top: 16px; font-size: 14px; text-align: center;" data-i18n="video.caption">Thanks for
-                checking in! 🎉</p>
         </div>
     </div>
 
