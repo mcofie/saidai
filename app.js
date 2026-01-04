@@ -125,14 +125,10 @@ function playStory() {
         }
 
         // Auto play with slight delay to match animation peak
-        if (video) {
-            video.currentTime = 0;
-            // Unmute if possible, but browsers block unmuted autoplay often. 
-            // We rely on user interaction (click) so unmuted *might* work.
-            // video.muted = false; 
-
+        if (video && video.contentWindow) {
             setTimeout(() => {
-                video.play().catch(e => console.log('Autoplay blocked', e));
+                // Send Play command to YouTube iframe
+                video.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
             }, 300); // Wait for the "flash" of the CRT
         }
     }
@@ -145,10 +141,9 @@ function closeVideo() {
 
     if (vModal) vModal.classList.remove('active');
 
-    // Stop video
-    if (video) {
-        video.pause();
-        video.currentTime = 0;
+    // Stop video (YouTube API)
+    if (video && video.contentWindow) {
+        video.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
     }
 
     // Reset Animation State
