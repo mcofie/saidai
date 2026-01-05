@@ -82,6 +82,16 @@ const HTML_TEMPLATE = `<!doctype html>
         /* FOUC fix for i18n */
         [data-i18n] { visibility: visible; }
     </style>
+    <script>
+        (function() {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme ? savedTheme : (systemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();
+    </script>
     
     <!-- Prism/Highlight Theme - Minimal Monochrome -->
     <style>
@@ -460,6 +470,16 @@ const INDEX_HTML = `<!doctype html>
         /* FOUC fix for i18n */
         [data-i18n] { visibility: visible; }
     </style>
+    <script>
+        (function() {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme ? savedTheme : (systemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();
+    </script>
     
     <style>
         .project-item { align-items: center; }

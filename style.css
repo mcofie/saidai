@@ -349,6 +349,8 @@ p,
     letter-spacing: 0.08em;
     /* Slightly more tracking for uppercase */
     color: var(--text-tertiary);
+    margin-top: 60px;
+    /* Standardize spacing */
     margin-bottom: 24px;
     opacity: 0;
     animation: fadeIn 0.8s var(--ease-out) 0.1s forwards;
@@ -1122,6 +1124,7 @@ pre:hover .copy-btn {
 ::-webkit-scrollbar-thumb:hover {
     background-color: var(--text-tertiary);
 }
+
 /* --- POST IMAGE GRID --- */
 .image-grid {
     display: grid;
@@ -1134,9 +1137,12 @@ pre:hover .copy-btn {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    aspect-ratio: 1 / 1; /* uniform squares */
-    border-radius: 4px; /* subtle rounding */
-    margin-bottom: 0 !important; /* override post p margin */
+    aspect-ratio: 1 / 1;
+    /* uniform squares */
+    border-radius: 4px;
+    /* subtle rounding */
+    margin-bottom: 0 !important;
+    /* override post p margin */
 }
 
 /* --- LIGHTBOX (ZOOM) --- */
@@ -1168,7 +1174,7 @@ pre:hover .copy-btn {
     max-width: 90%;
     max-height: 90vh;
     border-radius: 4px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     transform: scale(0.95);
     transition: transform 0.3s var(--ease-out);
     object-fit: contain;
@@ -1185,4 +1191,162 @@ pre:hover .copy-btn {
 
 .image-grid img:hover {
     filter: brightness(0.95);
+}
+
+/* --- GOODREADS CARD (Redesigned) --- */
+.goodreads-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: transparent;
+    padding: 16px 0;
+    /* Match project text vertical padding */
+    border-radius: 0;
+    text-decoration: none;
+    transition: all 0.3s var(--ease-out);
+    margin: 0;
+    border: none;
+    /* Remove box styling to match list */
+    position: relative;
+    width: 100%;
+}
+
+/* Custom hover specifically for this item if needed, 
+   but it will inherit project-item styling if we add that class, 
+   OR we style it independently to look 'special' but aligned.
+   Let's make it a hybrid: clearer 'button' feel but minimal.
+*/
+
+.goodreads-card {
+    /* Re-adding border for Widget Feel but minimal */
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px 18px;
+    background: var(--bg);
+}
+
+.goodreads-card:hover {
+    border-color: var(--text-tertiary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.gr-icon {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--surface);
+    border-radius: 8px;
+    /* Standardize radius */
+    color: var(--text-main);
+}
+
+.gr-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex-grow: 1;
+}
+
+.gr-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.gr-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.gr-arrow {
+    opacity: 0.3;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.goodreads-card:hover .gr-arrow {
+    opacity: 1;
+    transform: translateX(2px);
+}
+
+.project-list-container .section-label:first-child {
+    margin-top: 0;
+}
+/* --- INTRO ACTIONS --- */
+.intro-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.intro-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--surface);
+    border: 1px solid transparent;
+    border-radius: 99px;
+    color: var(--text-main);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s var(--ease-out);
+}
+
+.intro-action-btn:hover {
+    background: var(--bg);
+    border-color: var(--border-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+}
+
+.intro-action-btn span {
+    display: inline-block;
+}
+
+.intro-action-btn .icon {
+    font-size: 14px;
+    color: var(--text-tertiary);
+}
+
+/* --- TOOLBOX --- */
+.toolbox-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.tool-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--surface);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    cursor: default;
+}
+
+.tool-chip:hover {
+    color: var(--text-main);
+    background: var(--bg);
+    border-color: var(--border-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.tool-chip img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    opacity: 0.8;
 }

@@ -19,6 +19,16 @@
             visibility: visible;
         }
     </style>
+    <script>
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme ? savedTheme : (systemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) { }
+        })();
+    </script>
 
 
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
@@ -80,13 +90,27 @@
             <span id="clock" style="color: var(--text-tertiary); margin-left: 6px;"></span>
         </p>
 
-        <button class="profile-trigger" onclick="playStory()">
-            <span>▶</span>
-            <span data-i18n="home.say_hi">My Story</span>
-        </button>
+        <div class="intro-actions">
+            <!-- My Story Button -->
+            <button class="intro-action-btn" onclick="playStory()">
+                <span class="icon">▶</span>
+                <span data-i18n="home.say_hi">My Story</span>
+            </button>
+
+            <!-- Goodreads Link (redesigned as button) -->
+            <a href="https://www.goodreads.com/review/list/108237344-maxwell-cofie?order=d&shelf=currently-reading&sort=position"
+                target="_blank" class="intro-action-btn">
+                <span class="icon">📖</span>
+                <span data-i18n="proj.goodreads">My Bookshelf</span>
+            </a>
+        </div>
     </div>
 
     <div class="project-list-container">
+
+
+
+
 
         <div class="section-label" data-i18n="section.selected_works">Selected Works</div>
 
@@ -155,7 +179,8 @@
             </a>
 
             <!-- LazyPick -->
-            <a href="https://lazypick.app" target="_blank" class="project-item extra-project" data-category="solution" style="display: none;">
+            <a href="https://lazypick.app" target="_blank" class="project-item extra-project" data-category="solution"
+                style="display: none;">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">LazyPick <span class="year-label">(2025)</span></span>
@@ -168,7 +193,8 @@
             </a>
 
             <!-- Motor Ambos -->
-            <a href="https://motorambos.com" target="_blank" class="project-item extra-project" data-category="solution" style="display: none;">
+            <a href="https://motorambos.com" target="_blank" class="project-item extra-project" data-category="solution"
+                style="display: none;">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">Motor Ambos <span class="year-label">(2025)</span></span>
@@ -180,7 +206,8 @@
             </a>
 
             <!-- Stage & Bloom -->
-            <a href="https://stageandbloom.co" target="_blank" class="project-item extra-project" data-category="solution" style="display: none;">
+            <a href="https://stageandbloom.co" target="_blank" class="project-item extra-project"
+                data-category="solution" style="display: none;">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">Stage & Bloom <span class="year-label">(2025)</span></span>
@@ -192,7 +219,8 @@
             </a>
 
             <div id="showMoreContainer" style="margin-top: 24px; text-align: center;">
-                <button onclick="toggleMoreProjects()" class="profile-trigger" style="margin: 0 auto; display: inline-flex; width: auto; font-size: 13px; padding: 10px 24px;">
+                <button onclick="toggleMoreProjects()" class="profile-trigger"
+                    style="margin: 0 auto; display: inline-flex; width: auto; font-size: 13px; padding: 10px 24px;">
                     <span style="font-size: 14px;">↓</span>
                     <span data-i18n="home.show_more">Show More</span>
                 </button>
@@ -202,7 +230,7 @@
 
 
 
-        <br><br>
+
         <div class="section-label" data-i18n="section.initiatives">Initiatives</div>
         <div class="project-list">
             <a href="https://sandboxreseau.com/" target="_blank" class="project-item" data-category="initiative">
@@ -217,7 +245,7 @@
             </a>
         </div>
 
-        <br><br>
+
         <div class="section-label" data-i18n="section.writing">Writing</div>
         <!-- WRITING_LIST_START -->
         <div class="project-list">

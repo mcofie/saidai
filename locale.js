@@ -17,6 +17,7 @@ const translations = {
         "video.caption": "Thanks for checking in! 🎉",
         "btn.cancel": "Cancel",
         "btn.verify": "Verify",
+
         "section.selected_works": "Selected Works",
         "home.show_more": "Show More",
         "section.initiatives": "Initiatives",
@@ -56,8 +57,10 @@ const translations = {
         "meta.furniture": "Furniture",
         "meta.hospitality": "Hospitality",
         "meta.agro": "Agro",
-        "meta.apparel": "Apparel",
         "meta.theatre": "Theatre",
+        "section.reading": "Currently Reading",
+        "proj.goodreads": "My Bookshelf",
+        "meta.goodreads": "Books",
         "error.not_found": "The page you're looking for doesn't exist.",
         "error.return_home": "Return Home"
     },
@@ -82,6 +85,7 @@ const translations = {
         "video.caption": "Merci de votre visite! 🎉",
         "btn.cancel": "Annuler",
         "btn.verify": "Vérifier",
+
         "section.selected_works": "Travaux Sélectionnés",
         "home.show_more": "Voir plus",
         "section.initiatives": "Initiatives",
@@ -123,6 +127,9 @@ const translations = {
         "meta.agro": "Agro",
         "meta.apparel": "Vêtements",
         "meta.theatre": "Théâtre",
+        "section.reading": "Lectures en cours",
+        "proj.goodreads": "Ma Bibliothèque",
+        "meta.goodreads": "Livres",
         "error.not_found": "La page que vous recherchez n'existe pas.",
         "error.return_home": "Retour à l'accueil"
     },
@@ -147,6 +154,7 @@ const translations = {
         "video.caption": "¡Gracias por visitar! 🎉",
         "btn.cancel": "Cancelar",
         "btn.verify": "Verificar",
+
         "section.selected_works": "Trabajos Seleccionados",
         "home.show_more": "Ver más",
         "section.initiatives": "Iniciativas",
@@ -188,6 +196,9 @@ const translations = {
         "meta.agro": "Agro",
         "meta.apparel": "Ropa",
         "meta.theatre": "Teatro",
+        "section.reading": "Lectura Actual",
+        "proj.goodreads": "Mi Biblioteca",
+        "meta.goodreads": "Libros",
         "error.not_found": "La página que buscas no existe.",
         "error.return_home": "Volver al inicio"
     }

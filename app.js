@@ -32,24 +32,28 @@ function initTheme() {
     if (!themeBtn) return;
 
     const root = document.documentElement;
-    const savedTheme = localStorage.getItem('theme');
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Theme is mostly likely already set by inline script in head to prevent FOUC
+    // But we check just in case, or to start the icon state correctly
+    let currentTheme = root.getAttribute('data-theme');
 
-    const setTheme = (theme) => {
-        root.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        themeBtn.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
-    };
-
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else {
-        setTheme(systemDark ? 'dark' : 'light');
+    // Fallback if script didn't run for some reason (rare)
+    if (!currentTheme) {
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        currentTheme = savedTheme ? savedTheme : (systemDark ? 'dark' : 'light');
+        root.setAttribute('data-theme', currentTheme);
     }
+
+    // Set initial icon
+    themeBtn.innerHTML = currentTheme === 'dark' ? sunIcon : moonIcon;
 
     themeBtn.addEventListener('click', () => {
         const current = root.getAttribute('data-theme');
-        setTheme(current === 'dark' ? 'light' : 'dark');
+        const newTheme = current === 'dark' ? 'light' : 'dark';
+
+        root.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        themeBtn.innerHTML = newTheme === 'dark' ? sunIcon : moonIcon;
     });
 }
 
