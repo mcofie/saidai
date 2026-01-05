@@ -61,6 +61,7 @@ const translations = {
         "section.reading": "Currently Reading",
         "proj.goodreads": "My Bookshelf",
         "meta.goodreads": "Books",
+        "status.music": "On Repeat: Pop Rising",
         "error.not_found": "The page you're looking for doesn't exist.",
         "error.return_home": "Return Home"
     },
@@ -130,6 +131,7 @@ const translations = {
         "section.reading": "Lectures en cours",
         "proj.goodreads": "Ma Bibliothèque",
         "meta.goodreads": "Livres",
+        "status.music": "En boucle: Pop Rising",
         "error.not_found": "La page que vous recherchez n'existe pas.",
         "error.return_home": "Retour à l'accueil"
     },
@@ -199,6 +201,7 @@ const translations = {
         "section.reading": "Lectura Actual",
         "proj.goodreads": "Mi Biblioteca",
         "meta.goodreads": "Libros",
+        "status.music": "En repetición: Pop Rising",
         "error.not_found": "La página que buscas no existe.",
         "error.return_home": "Volver al inicio"
     }
