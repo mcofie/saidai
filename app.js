@@ -9,12 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
     initClock();
     initKonami();
     initCopyButtons();
+    initLightbox();
+
 
     // Expose functions required by HTML onclick attributes
     window.filterGrid = filterGrid;
     window.playStory = playStory;
     window.closeVideo = closeVideo;
     window.triggerCelebration = triggerCelebration; // Kept for Konami
+    window.toggleMoreProjects = toggleMoreProjects;
+
 });
 
 /* =========================================
@@ -230,5 +234,71 @@ function initCopyButtons() {
         });
 
         block.appendChild(btn);
+    });
+}
+
+/* =========================================
+   7. HOMEPAGE SHOW MORE
+   ========================================= */
+function toggleMoreProjects() {
+    const extras = document.querySelectorAll('.extra-project');
+    const btnContainer = document.getElementById('showMoreContainer');
+
+    extras.forEach((el, index) => {
+        el.style.display = ''; // Reverts to CSS (grid/block)
+        el.style.animation = 'none';
+        el.offsetHeight; /* trigger reflow */
+        el.style.animation = `slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s forwards`;
+    });
+
+    if (btnContainer) {
+        btnContainer.style.display = 'none';
+    }
+}
+
+/* =========================================
+   8. LIGHTBOX
+   ========================================= */
+function initLightbox() {
+    // Only run if we have images
+    const images = document.querySelectorAll('.image-grid img, .post-content img:not(.emoji)');
+    if (!images.length) return;
+
+    // Create lightbox elements
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox-container';
+
+    const imgElement = document.createElement('img');
+    imgElement.className = 'lightbox-img';
+
+    lightbox.appendChild(imgElement);
+    document.body.appendChild(lightbox);
+
+    // Add click listeners
+    images.forEach(img => {
+        img.addEventListener('click', (e) => {
+            e.stopPropagation(); // prevent document click
+            imgElement.src = img.src;
+            imgElement.alt = img.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // prevent scroll
+        });
+    });
+
+    // Close on click
+    lightbox.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+            imgElement.src = ''; // clear for next time
+        }, 300);
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     });
 }
