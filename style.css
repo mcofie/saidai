@@ -1275,6 +1275,7 @@ pre:hover .copy-btn {
 .project-list-container .section-label:first-child {
     margin-top: 0;
 }
+
 /* --- INTRO ACTIONS --- */
 .intro-actions {
     display: flex;
@@ -1302,7 +1303,7 @@ pre:hover .copy-btn {
 .intro-action-btn:hover {
     background: var(--bg);
     border-color: var(--border-color);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     transform: translateY(-1px);
 }
 
@@ -1341,7 +1342,7 @@ pre:hover .copy-btn {
     color: var(--text-main);
     background: var(--bg);
     border-color: var(--border-color);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .tool-chip img {
@@ -1349,4 +1350,15 @@ pre:hover .copy-btn {
     height: 16px;
     object-fit: contain;
     opacity: 0.8;
+}
+
+/* --- POST CONTENT IMAGES --- */
+.post-img {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    max-height: 800px;
+    margin: 24px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }

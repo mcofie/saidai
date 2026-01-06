@@ -19,8 +19,31 @@ if (!fs.existsSync(WRITING_DIR)) {
     fs.mkdirSync(WRITING_DIR, { recursive: true });
 }
 
-// 1. Configure Marked with Highlight.js
+// 1. Configure Marked with Highlight.js and Custom Renderer
+const renderer = new marked.Renderer();
+
+// Override image renderer to support video embeds
+// Override image renderer to support video embeds
+renderer.image = function (tokenOrHref, title, text) {
+    // Handle both new Object signature (Marked v12+) and old arguments
+    const isToken = typeof tokenOrHref === 'object' && tokenOrHref !== null;
+    const href = isToken ? tokenOrHref.href : tokenOrHref;
+    const finalTitle = isToken ? tokenOrHref.title : title;
+    const finalText = isToken ? tokenOrHref.text : text;
+
+    if (href && (href.endsWith('.webm') || href.endsWith('.mp4') || href.endsWith('.mov'))) {
+        return `
+        <video controls playsinline loop muted autoplay style="max-width: 100%; width: auto; max-height: 800px; display: block; margin: 24px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+            <source src="${href}" type="video/${href.split('.').pop()}">
+            Your browser does not support the video tag.
+        </video>`;
+    }
+    // Default image rendering
+    return `<img src="${href}" alt="${finalText}" title="${finalTitle || ''}" class="post-img">`;
+};
+
 marked.setOptions({
+    renderer: renderer,
     highlight: function (code, lang) {
         const language = hljs.getLanguage(lang) ? lang : 'plaintext';
         return hljs.highlight(code, { language }).value;

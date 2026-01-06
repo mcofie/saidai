@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en" data-theme="system" itemscope itemtype="https://schema.org/BlogPosting">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GatePass: The TikTok for Modern-Day Events | Maxwell Cofie</title>
+    <meta name="description" content="A reflection on why experience, energy, and short-form video now play a central role in how people discover and choose events.">
+    <link rel="canonical" href="https://maxwellcofie.com/posts/gatepass-the-tiktok-for-modern-day-events/">
+    <!-- View Transitions -->
+    <meta name="view-transition" content="same-origin" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
+    <!-- Readability Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,200..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../style.css?v=2">
+    
+    <style>
+        /* FOUC fix for i18n */
+        [data-i18n] { visibility: visible; }
+    </style>
+    <script>
+        (function() {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme ? savedTheme : (systemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();
+    </script>
+    
+    <!-- Prism/Highlight Theme - Minimal Monochrome -->
+    <style>
+        /* Blog Post Specifics */
+        :root {
+            --post-font: 'Inter', sans-serif;
+            --post-size: 17px;
+            --post-lh: 1.6;
+            --post-max-w: 680px;
+        }
+
+        [data-font="serif"] {
+            --post-font: 'Newsreader', serif;
+            --post-size: 20px; /* Serif needs to be slightly larger */
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            color: var(--text-main);
+        }
+
+        article {
+            max-width: var(--post-max-w);
+            margin: 0 auto;
+            view-transition-name: article-content;
+        }
+
+        h1 {
+            font-size: clamp(28px, 4vw, 40px);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            font-weight: 500;
+        }
+
+        .post-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 64px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 24px;
+        }
+
+        .reading-time::before {
+             content: "•";
+             margin-right: 16px;
+             opacity: 0.4;
+        }
+
+        .post-content {
+            font-family: var(--post-font);
+            font-size: var(--post-size); 
+            line-height: var(--post-lh);
+            color: var(--text-muted);
+        }
+
+        .post-content p {
+            margin-bottom: 28px;
+        }
+
+        .post-content h2 {
+            font-size: 24px;
+            margin-top: 64px;
+            margin-bottom: 24px;
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+            font-weight: 500;
+        }
+
+        .post-content h3 {
+             font-size: 18px;
+             margin-top: 40px;
+             margin-bottom: 16px;
+             font-weight: 600;
+             color: var(--text-main);
+        }
+
+        .post-content ul {
+            margin-bottom: 32px;
+            padding-left: 20px;
+        }
+
+        .post-content li {
+            margin-bottom: 12px;
+        }
+        
+        .post-content a {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: var(--border-color);
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+        
+        .post-content a:hover {
+            text-decoration-color: var(--text-main);
+            background-color: var(--surface);
+            border-radius: 2px;
+        }
+
+        .post-content blockquote {
+             border-left: 2px solid var(--text-main);
+             padding-left: 24px;
+             font-family: 'Newsreader', serif;
+             font-style: italic;
+             font-size: 1.1em;
+             margin: 40px 0;
+             color: var(--text-main);
+        }
+
+        /* Syntax Highlighting - Minimal */
+        pre {
+            background-color: var(--surface); 
+            padding: 24px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 40px -24px; /* Slight bleed */
+            font-size: 13px; 
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 600px) {
+            pre {
+                margin: 32px -20px;
+                border-radius: 0;
+                border-left: 0;
+                border-right: 0;
+            }
+        }
+
+        .hljs-keyword, .hljs-selector-tag, .hljs-title, .hljs-section, .hljs-doctag, .hljs-name, .hljs-strong {
+            font-weight: 500;
+            color: var(--text-main);
+        }
+        .hljs-comment { color: var(--text-tertiary); font-style: italic; }
+        .hljs-string, .hljs-built_in, .hljs-literal, .hljs-type {
+            color: var(--text-muted); 
+        }
+
+        /* --- READER TOOLS --- */
+        .reader-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--text-main);
+            width: 0%;
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+
+        .reader-controls {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.6s var(--ease-out) 1s forwards;
+        }
+
+        .control-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            color: var(--text-main);
+            border-color: var(--text-tertiary);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+        
+        .control-btn.active {
+            background: var(--text-main);
+            color: var(--bg);
+            border-color: var(--text-main);
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "GatePass: The TikTok for Modern-Day Events",
+      "description": "A reflection on why experience, energy, and short-form video now play a central role in how people discover and choose events.",
+      "author": {
+        "@type": "Person",
+        "name": "Maxwell Cofie",
+        "url": "https://maxwellcofie.com"
+      },
+      "datePublished": "2026-01-06T00:00:00.000Z",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://maxwellcofie.com/posts/gatepass-the-tiktok-for-modern-day-events/"
+      }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="reader-progress" id="progressBar"></div>
+
+    <nav>
+        <a href="../../" class="logo">Maxwell Cofie</a>
+        <div class="nav-links">
+            <a href="../../" class="nav-link" data-i18n="nav.work">Work</a>
+            <a href="../../ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
+            <a href="../../writing/" class="nav-link" data-i18n="nav.writing">Writing</a>
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 0 24 24">
+                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
+                </svg>
+            </button>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+                <button class="lang-btn" data-lang="es">ES</button>
+            </div>
+        </div>
+    </nav>
+    
+    <a href="../../writing/" class="back-link" data-i18n="nav.back_writing">← Writing</a>
+
+    <article>
+        <h1>GatePass: The TikTok for Modern-Day Events</h1>
+        <div class="post-meta-row">
+            <span class="post-date">Jan 2026</span>
+            <span class="reading-time">4 min read</span>
+            <span class="post-category product">Product</span>
+        </div>
+
+        <div class="post-content" id="postContent">
+            <p><em>Why experience, energy, and video now drive event attendance</em></p>
+<!-- HERO IMAGE: GatePass product or event video collage -->
+
+<div class="image-grid">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8880_kqcu0v" alt="Trip photo">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8881_ongksc" alt="Trip photo">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8882_o6uzzq" alt="Trip photo">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8883_fsyxrc" alt="Trip photo">
+</div>
+
+<p>I’ve spent some time thinking about why people choose to attend certain events and ignore others. On the surface, it’s easy to assume content is the main driver—who’s speaking, what’s on the agenda, or what value people will get. But the more events I’ve attended and observed, the more I’ve realised that something else plays an equally important role: <strong>how the event feels</strong>.</p>
+<p>GatePass, in many ways, is our response to this realisation. I often describe it as <em>the TikTok for modern-day events</em>, and that comparison usually raises eyebrows. What I mean by that is simple: a significant part of event attendance is influenced by atmosphere and energy—how an event is perceived before it even happens. People are naturally drawn to experiences that feel alive, engaging, and worth their time. This isn’t just a hunch; there are articles and studies that support this behaviour.</p>
+<p>People don’t attend events purely for content. They attend for the experience that surrounds it.</p>
+<h2>Why Video Matters</h2>
+<p>Video makes that experience visible. It allows potential attendees to get a sense of what they’re signing up for, reducing uncertainty and making the decision to attend feel easier and more exciting.</p>
+<p>In a short span—sometimes just <strong>30 to 60 seconds</strong>—a well-captured event video can communicate things that paragraphs of text simply can’t, such as:</p>
+<ul>
+<li>the overall vibe of the event</li>
+<li>the type of audience that shows up</li>
+<li>the energy in the room</li>
+<li>the quality of previous editions</li>
+</ul>
+<p>
+        <video controls playsinline loop muted autoplay style="max-width: 100%; width: auto; max-height: 800px; display: block; margin: 24px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+            <source src="https://res.cloudinary.com/dmbc2infa/video/upload/q_51/v1767663599/ScreenRecording_01-06-2026_01-24-59_1_z1pkjq.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+<img src="https://player.cloudinary.com/embed/?cloud_name=dmbc2infa&public_id=ScreenRecording_01-06-2026_01-25-32_1_cqugr1&profile=cld-looping" alt="My Video" title="" class="post-img"></p>
+<p>These were exactly the ideas we had in mind when we started building <strong>GatePass</strong>.</p>
+<h2>What We Set Out to Do</h2>
+<p>At its core, we set out to do three simple things:</p>
+<ol>
+<li>Curate better user experiences</li>
+<li>Help organisers drive event attendance and sign-ups, which eventually lead to sales</li>
+<li>Do all of this at a price that feels reasonable and accessible</li>
+</ol>
+<div class="image-grid">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_700,w_700/Screenshot_2026-01-05_at_6.23.26_PM_cm5l7z" alt="Trip photo">
+</div>
+<div class="image-grid">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_700,w_700/Screenshot_2026-01-05_at_6.23.56_PM_bjajwt" alt="Trip photo">
+</div>
+<div class="image-grid">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_700,w_700/Screenshot_2026-01-06_at_1.37.56_AM_lcqo3g" alt="Trip photo">
+</div>
+
+<h2>The Problem with Traditional Event Promotion</h2>
+<p>Most event promotion today still leans heavily on static posters, long captions, and text-heavy descriptions. While these formats serve a purpose, they often fall short of answering the most important question on a potential attendee’s mind:</p>
+<blockquote>
+<p><em>What will this event actually feel like?</em></p>
+</blockquote>
+<p>A poster can tell you what’s happening. A flyer can tell you when and where. But neither can convincingly communicate atmosphere, energy, or the dynamics of a crowd. When that gap exists, people hesitate. They postpone decisions or simply move on to something else.</p>
+<h2>The GatePass Approach</h2>
+<p>GatePass was built around the idea that event discovery should be <strong>experience-first</strong>, not information-first. Instead of asking people to imagine what an event might be like, we show them.</p>
+<p>Short-form video gives organisers the ability to capture real moments—laughter, applause, movement, interaction—and present them in a way that feels honest and immediate. This aligns naturally with how people already consume content today, especially on platforms like TikTok and Instagram.</p>
+<!-- IMAGE: GatePass event feed on mobile -->
+
+<p>In that sense, GatePass doesn’t try to create a new behaviour. It simply fits into one that already exists.</p>
+<h2>Why Video-First Works</h2>
+<p>Video removes friction from decision-making. When someone can quickly see:</p>
+<ul>
+<li>the kind of crowd an event attracts</li>
+<li>the energy in the room</li>
+<li>how previous editions unfolded</li>
+</ul>
+<p>the decision to attend no longer feels like a gamble.</p>
+<p>For organisers, this means attracting people who genuinely resonate with the event. For attendees, it reduces the chances of unmet expectations.</p>
+<h2>Looking Ahead</h2>
+<p>As attention spans continue to shrink and competition for people’s time increases, events that rely solely on static promotion will find it harder to stand out. The future of event discovery feels increasingly <strong>visual</strong>, <strong>dynamic</strong>, and <strong>experience-led</strong>.</p>
+<p>GatePass exists to support that shift—helping organisers tell their story more clearly and allowing attendees to choose experiences that truly resonate with them.</p>
+<!-- IMAGE: Happy attendees / packed event moment -->
+
+<p>Events, after all, are no longer just about content. They’re about connection, energy, and shared moments. GatePass is our attempt to bring those moments forward—<strong>before the event even begins</strong>.</p>
+
+        </div>
+    </article>
+    
+    <!-- Reader Controls FAB -->
+    <div class="reader-controls">
+        <button class="control-btn" id="fontToggle" aria-label="Toggle Serif/Sans">
+            <span style="font-family: 'Newsreader', serif; font-size: 18px;">A</span>
+        </button>
+        <button class="control-btn" id="topBtn" aria-label="Back to Top">
+            ↑
+        </button>
+    </div>
+
+    <footer>
+        <a href="mailto:hello@maxwellcofie.com" class="footer-link" data-i18n="footer.email">Email</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
+        <a href="https://github.com/mcofie" target="_blank" class="footer-link" data-i18n="footer.github">GitHub</a>
+        <span style="flex-grow: 1;"></span>
+        <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
+    </footer>
+    <script src="../../locale.js"></script>
+
+    <script src="../../locale.js"></script>
+    <script src="../../app.js"></script>
+
+    <script>
+        // --- READER MODE ---
+        // 1. Progress Bar
+        window.addEventListener('scroll', () => {
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = (window.scrollY / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // 2. Font Toggle (Serif/Sans)
+        const fontBtn = document.getElementById('fontToggle');
+        const article = document.querySelector('article');
+        
+        // Load saved font preference
+        const savedFont = localStorage.getItem('reader-font');
+        if (savedFont) {
+            article.setAttribute('data-font', savedFont);
+            fontBtn.classList.toggle('active', savedFont === 'serif');
+        }
+
+        fontBtn.addEventListener('click', () => {
+            const current = article.getAttribute('data-font');
+            const newFont = current === 'serif' ? 'sans' : 'serif';
+            article.setAttribute('data-font', newFont);
+            localStorage.setItem('reader-font', newFont);
+            fontBtn.classList.toggle('active');
+        });
+
+        // 3. Back to Top
+        document.getElementById('topBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
