@@ -17,9 +17,9 @@ category: "Product"
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/IMG_8883_fsyxrc" alt="Trip photo">
 </div>
 
-I’ve spent some time thinking about why people choose to attend certain events and ignore others. On the surface, it’s easy to assume content is the main driver—who’s speaking, what’s on the agenda, or what value people will get. But the more events I’ve attended and observed, the more I’ve realised that something else plays an equally important role: **how the event feels**.
+I’ve spent some time thinking about why people choose to attend certain events and ignore others. On the surface, it’s easy to assume content is the main driver who’s speaking, what’s on the agenda, or what value people will get. But the more events I’ve attended and observed, the more I’ve realised that something else plays an equally important role: **how the event feels**.
 
-[GatePass](https://gatepass.so), in many ways, is our response to this realisation. I often describe it as *the TikTok for modern-day events*, and that comparison usually raises eyebrows. What I mean by that is simple: a significant part of event attendance is influenced by atmosphere and energy—how an event is perceived before it even happens. People are naturally drawn to experiences that feel alive, engaging, and worth their time. This isn’t just a hunch; there are articles and studies that support this behaviour.
+[GatePass](https://gatepass.so), in many ways, is our response to this realisation. I often describe it as *the TikTok for modern-day events*, and that comparison usually raises eyebrows. What I mean by that is simple: a significant part of event attendance is influenced by atmosphere and energy how an event is perceived before it even happens. People are naturally drawn to experiences that feel alive, engaging, and worth their time. This isn’t just a hunch; there are articles and studies that support this behaviour.
 
 People don’t attend events purely for content. They attend for the experience that surrounds it.
 
@@ -28,7 +28,7 @@ People don’t attend events purely for content. They attend for the experience 
 
 Video makes that experience visible. It allows potential attendees to get a sense of what they’re signing up for, reducing uncertainty and making the decision to attend feel easier and more exciting.
 
-In a short span—sometimes just **30 to 60 seconds**—a well-captured event video can communicate things that paragraphs of text simply can’t, such as:
+In a short span sometimes just **30 to 60 seconds** a well-captured event video can communicate things that paragraphs of text simply can’t, such as:
 
 - the overall vibe of the event
 - the type of audience that shows up
@@ -64,7 +64,7 @@ A poster can tell you what’s happening. A flyer can tell you when and where. B
 
 [GatePass](https://gatepass.so) was built around the idea that event discovery should be **experience-first**, not information-first. Instead of asking people to imagine what an event might be like, we show them.
 
-Short-form video gives organisers the ability to capture real moments—laughter, applause, movement, interaction—and present them in a way that feels honest and immediate. This aligns naturally with how people already consume content today, especially on platforms like TikTok and Instagram.
+Short-form video gives organisers the ability to capture real moments laughter, applause, movement, interaction and present them in a way that feels honest and immediate. This aligns naturally with how people already consume content today, especially on platforms like TikTok and Instagram.
 
 <!-- IMAGE: GatePass event feed on mobile -->
 
@@ -88,6 +88,6 @@ For organisers, this means attracting people who genuinely resonate with the eve
 
 As attention spans continue to shrink and competition for people’s time increases, events that rely solely on static promotion will find it harder to stand out. The future of event discovery feels increasingly **visual**, **dynamic**, and **experience-led**.
 
-[GatePass](https://gatepass.so) exists to support that shift—helping organisers tell their story more clearly and allowing attendees to choose experiences that truly resonate with them.
+[GatePass](https://gatepass.so) exists to support that shift helping organisers tell their story more clearly and allowing attendees to choose experiences that truly resonate with them.
 
-Events, after all, are no longer just about content. They’re about connection, energy, and shared moments. GatePass is our attempt to bring those moments forward—**before the event even begins**.
+Events, after all, are no longer just about content. They’re about connection, energy, and shared moments. GatePass is our attempt to bring those moments forward **before the event even begins**.

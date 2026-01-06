@@ -1,5 +1,5 @@
 ---
-title: "My Journey to the West: Ivory Coast - Abidjan"
+title: "My Journey to the West: Ivory Coast Abidjan"
 date: "Jan 2026"
 isoDate: "2026-01-05"
 description: "A first-time visit to Abidjan that sparked reflections on language, mobility, mobile money, and the complexities of building and scaling digital products across Africa."
@@ -8,13 +8,13 @@ category: "Travel & Technology"
 
 > “Max, have you visited any of the neighbouring West African countries like Benin, Togo, Burkina Faso, Ivory Coast, Nigeria, etc.?”
 
-My usual answer is a big **“no”**, though I’ve driven close enough to the Togo–Ghana border—so that’s about as close as I’ve been. As amusing as that sounds, in December 2025, I finally decided to visit one of our neighbouring countries, just for fun.
+My usual answer is a big **“no”**, though I’ve driven close enough to the Togo–Ghana border so that’s about as close as I’ve been. As amusing as that sounds, in December 2025, I finally decided to visit one of our neighbouring countries, just for fun.
 
 
 
 ## Choosing Abidjan
 
-I chose **Abidjan, Ivory Coast**. A couple of my friends had been there and sang great songs about it, so I decided to experience it for myself—and maybe even sing a better song, perhaps in a different key or pitch.
+I chose **Abidjan, Ivory Coast**. A couple of my friends had been there and sang great songs about it, so I decided to experience it for myself and maybe even sing a better song, perhaps in a different key or pitch.
 
 I opted to travel by road. There’s a route from Accra, through Cape Coast, to the western region of Ghana, where you’ll find the border town of **Elubo**.
 
@@ -26,7 +26,7 @@ On **27th December 2025**, I headed to a cross-country bus terminal at **Kwame N
 
 The border procedures were a bit tedious, and for someone who enjoys adventure and usually gets a thrill from such experiences, I wasn’t particularly keen on that part.
 
-From Elubo to Abidjan was another **four-hour journey**—and by then, I was truly exhausted.
+From Elubo to Abidjan was another **four-hour journey** and by then, I was truly exhausted.
 
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8432_ruat6o" alt="Trip photo">
@@ -49,7 +49,7 @@ Minutes into the journey, I noticed that Ghana isn’t so different from Ivory C
 
 ## The Language Reality
 
-It’s quite surprising that Ghana is surrounded by three French-speaking countries, yet many people back home can barely say a word in French—even if held at gunpoint.
+It’s quite surprising that Ghana is surrounded by three French-speaking countries, yet many people back home can barely say a word in French even if held at gunpoint.
 
 As for me, I could only recall a few verbs I knew how to conjugate, along with some scattered words, sentences, and phrases. That was about as far as my French could take me. Yes, I studied French from elementary school through to senior high school, but you should have seen me gasping for air when my very limited French was put to the test.
 
@@ -61,7 +61,7 @@ I quickly realised that Abidjan is a proper **“we speak only French”** city,
 
 I’ll get back to the language barrier shortly, but first, let’s take a moment to appreciate the beauty of Abidjan.
 
-Known as the **Manhattan of Africa** and the **Paris of West Africa**, the city lived up to its names. I was impressed by its design, thoughtfully built around numerous lagoons and water bodies. The architecture stands out, with distinctive buildings and structures, and the streets are filled with electric vehicles—an encouraging sign of a city moving toward a smarter, more sustainable future.
+Known as the **Manhattan of Africa** and the **Paris of West Africa**, the city lived up to its names. I was impressed by its design, thoughtfully built around numerous lagoons and water bodies. The architecture stands out, with distinctive buildings and structures, and the streets are filled with electric vehicles an encouraging sign of a city moving toward a smarter, more sustainable future.
 
 I stayed in **Cocody** for a couple of days and later moved to **Île de Petit-Bassam**, close to **Koumassi**.
 
@@ -79,7 +79,7 @@ One of the aspects I often observe when travelling is the level of technological
 
 I’m also fascinated by how digital products transcend borders across African countries. This is something I pay close attention to whenever I travel, and Abidjan was no exception.
 
-One thing I quickly noticed, however, was how challenging it was to get around the city. I typically rely on popular ride-hailing apps like **Uber** or **Bolt** when I travel, so I was visibly shocked when I opened my Uber app and saw that no trips were available—meaning Uber isn’t operational in Abidjan. I then opened Bolt and was met with the same outcome.
+One thing I quickly noticed, however, was how challenging it was to get around the city. I typically rely on popular ride-hailing apps like **Uber** or **Bolt** when I travel, so I was visibly shocked when I opened my Uber app and saw that no trips were available meaning Uber isn’t operational in Abidjan. I then opened Bolt and was met with the same outcome.
 
 
 
@@ -106,7 +106,7 @@ Two payment options, however, stood out: **Wave** and **Orange Money**. From sho
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8506_gzrvgc" alt="Payment QR Codes">
 </div>
 
-Mobile money truly reigns supreme in Africa and forms the backbone of everyday payments—a similar observation I made during my visit to **Nairobi, Kenya**.
+Mobile money truly reigns supreme in Africa and forms the backbone of everyday payments a similar observation I made during my visit to **Nairobi, Kenya**.
 
 
 
@@ -116,17 +116,17 @@ From these learnings and observations, I’ve been pondering what it will take f
 
 Given our similarities and cultural differences, it’s understandable why many tech startups in countries like **Ghana, Nigeria, Kenya, and South Africa** can thrive and scale within their respective markets.
 
-Africa is a vast continent made up of diverse markets and verticals, and understanding how these markets intersect and collide is a fascinating study—one I’d love to undertake.
+Africa is a vast continent made up of diverse markets and verticals, and understanding how these markets intersect and collide is a fascinating study one I’d love to undertake.
 
 
 
 ## Final Thoughts
 
-This trip reminded me that while Africa often looks similar on the surface, the details tell very different stories. Language, payments, mobility, and technology all shape how people live, move, and do business—and they vary more than we sometimes assume.
+This trip reminded me that while Africa often looks similar on the surface, the details tell very different stories. Language, payments, mobility, and technology all shape how people live, move, and do business and they vary more than we sometimes assume.
 
-Abidjan challenged some of my assumptions and reaffirmed others, especially around how deeply mobile money has embedded itself into everyday life across the continent. More importantly, it left me thinking about the real work required for digital products to scale beyond borders in Africa—not just technically, but culturally and contextually.
+Abidjan challenged some of my assumptions and reaffirmed others, especially around how deeply mobile money has embedded itself into everyday life across the continent. More importantly, it left me thinking about the real work required for digital products to scale beyond borders in Africa not just technically, but culturally and contextually.
 
-Travel, for me, continues to be one of the most honest ways to learn. This experience didn’t just show me a new city; it gave me new questions to explore—and that, perhaps, is the most valuable takeaway.
+Travel, for me, continues to be one of the most honest ways to learn. This experience didn’t just show me a new city; it gave me new questions to explore and that, perhaps, is the most valuable takeaway.
 
 
 <div class="image-grid">
