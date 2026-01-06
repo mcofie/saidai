@@ -33,7 +33,7 @@ renderer.image = function (tokenOrHref, title, text) {
 
     if (href && (href.endsWith('.webm') || href.endsWith('.mp4') || href.endsWith('.mov'))) {
         return `
-        <video controls playsinline loop muted autoplay style="max-width: 100%; width: auto; max-height: 800px; display: block; margin: 24px auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <video controls playsinline loop muted autoplay class="post-video">
             <source src="${href}" type="video/${href.split('.').pop()}">
             Your browser does not support the video tag.
         </video>`;

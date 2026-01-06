@@ -11,15 +11,15 @@ category: "Product"
 <!-- HERO IMAGE: GatePass product or event video collage -->
 
 <div class="image-grid">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8880_kqcu0v" alt="Trip photo">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8881_ongksc" alt="Trip photo">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8882_o6uzzq" alt="Trip photo">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8883_fsyxrc" alt="Trip photo">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/IMG_8880_kqcu0v" alt="Trip photo">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/IMG_8881_ongksc" alt="Trip photo">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/IMG_8882_o6uzzq" alt="Trip photo">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/IMG_8883_fsyxrc" alt="Trip photo">
 </div>
 
 I’ve spent some time thinking about why people choose to attend certain events and ignore others. On the surface, it’s easy to assume content is the main driver—who’s speaking, what’s on the agenda, or what value people will get. But the more events I’ve attended and observed, the more I’ve realised that something else plays an equally important role: **how the event feels**.
 
-GatePass, in many ways, is our response to this realisation. I often describe it as *the TikTok for modern-day events*, and that comparison usually raises eyebrows. What I mean by that is simple: a significant part of event attendance is influenced by atmosphere and energy—how an event is perceived before it even happens. People are naturally drawn to experiences that feel alive, engaging, and worth their time. This isn’t just a hunch; there are articles and studies that support this behaviour.
+[GatePass](https://gatepass.so), in many ways, is our response to this realisation. I often describe it as *the TikTok for modern-day events*, and that comparison usually raises eyebrows. What I mean by that is simple: a significant part of event attendance is influenced by atmosphere and energy—how an event is perceived before it even happens. People are naturally drawn to experiences that feel alive, engaging, and worth their time. This isn’t just a hunch; there are articles and studies that support this behaviour.
 
 People don’t attend events purely for content. They attend for the experience that surrounds it.
 
@@ -35,10 +35,10 @@ In a short span—sometimes just **30 to 60 seconds**—a well-captured event vi
 - the energy in the room
 - the quality of previous editions
 
-![My Video](https://res.cloudinary.com/dmbc2infa/video/upload/q_51/v1767663599/ScreenRecording_01-06-2026_01-24-59_1_z1pkjq.webm)
-![My Video](https://player.cloudinary.com/embed/?cloud_name=dmbc2infa&public_id=ScreenRecording_01-06-2026_01-25-32_1_cqugr1&profile=cld-looping)
+| ![My Video](https://res.cloudinary.com/dmbc2infa/video/upload/q_51/v1767663599/ScreenRecording_01-06-2026_01-24-59_1_z1pkjq.webm) | ![My Video](https://res.cloudinary.com/dmbc2infa/video/upload/v1767663594/ScreenRecording_01-06-2026_01-25-32_1_cqugr1.mp4) |
+| :--- | :--- |
 
-These were exactly the ideas we had in mind when we started building **GatePass**.
+These were exactly the ideas we had in mind when we started building **[GatePass](https://gatepass.so)**.
 
 
 ## What We Set Out to Do
@@ -49,15 +49,7 @@ At its core, we set out to do three simple things:
 2. Help organisers drive event attendance and sign-ups, which eventually lead to sales
 3. Do all of this at a price that feels reasonable and accessible
 
-<div class="image-grid">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_700,w_700/Screenshot_2026-01-05_at_6.23.26_PM_cm5l7z" alt="Trip photo">
-</div>
-<div class="image-grid">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_700,w_700/Screenshot_2026-01-05_at_6.23.56_PM_bjajwt" alt="Trip photo">
-</div>
-<div class="image-grid">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_700,w_700/Screenshot_2026-01-06_at_1.37.56_AM_lcqo3g" alt="Trip photo">
-</div>
+
 
 ## The Problem with Traditional Event Promotion
 
@@ -70,7 +62,7 @@ A poster can tell you what’s happening. A flyer can tell you when and where. B
 
 ## The GatePass Approach
 
-GatePass was built around the idea that event discovery should be **experience-first**, not information-first. Instead of asking people to imagine what an event might be like, we show them.
+[GatePass](https://gatepass.so) was built around the idea that event discovery should be **experience-first**, not information-first. Instead of asking people to imagine what an event might be like, we show them.
 
 Short-form video gives organisers the ability to capture real moments—laughter, applause, movement, interaction—and present them in a way that feels honest and immediate. This aligns naturally with how people already consume content today, especially on platforms like TikTok and Instagram.
 
@@ -96,8 +88,6 @@ For organisers, this means attracting people who genuinely resonate with the eve
 
 As attention spans continue to shrink and competition for people’s time increases, events that rely solely on static promotion will find it harder to stand out. The future of event discovery feels increasingly **visual**, **dynamic**, and **experience-led**.
 
-GatePass exists to support that shift—helping organisers tell their story more clearly and allowing attendees to choose experiences that truly resonate with them.
-
-<!-- IMAGE: Happy attendees / packed event moment -->
+[GatePass](https://gatepass.so) exists to support that shift—helping organisers tell their story more clearly and allowing attendees to choose experiences that truly resonate with them.
 
 Events, after all, are no longer just about content. They’re about connection, energy, and shared moments. GatePass is our attempt to bring those moments forward—**before the event even begins**.
