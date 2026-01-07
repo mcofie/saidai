@@ -17,21 +17,25 @@
     <link rel="stylesheet" href="../style.css">
     <style>
         /* FOUC fix for i18n */
-        [data-i18n] { visibility: visible; }
+        [data-i18n] {
+            visibility: visible;
+        }
     </style>
     <script>
-        (function() {
+        (function () {
             try {
                 const savedTheme = localStorage.getItem('theme');
                 const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 const theme = savedTheme ? savedTheme : (systemDark ? 'dark' : 'light');
                 document.documentElement.setAttribute('data-theme', theme);
-            } catch (e) {}
+            } catch (e) { }
         })();
     </script>
-    
+
     <style>
-        .project-item { align-items: center; }
+        .project-item {
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -42,10 +46,12 @@
         <div class="nav-links">
             <a href="../" class="nav-link" data-i18n="nav.work">Work</a>
             <a href="../ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
+
             <a href="./" class="nav-link active" data-i18n="nav.writing">Writing</a>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
                 <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
+                    <path
+                        d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
                 </svg>
             </button>
             <div class="lang-switcher">
@@ -57,64 +63,72 @@
     </nav>
 
     <div class="intro">
-            <p data-i18n="writing.intro">Thoughts on technology, design, and building products.</p>
+        <p data-i18n="writing.intro">Thoughts on technology, design, and building products.</p>
     </div>
 
     <div class="project-list-container">
         <div class="section-label" data-i18n="writing.articles">Articles</div>
-        
-    <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterPosts(this, 'all')">All</button>
-        <button class="filter-btn" onclick="filterPosts(this, 'Community')">Community</button><button class="filter-btn" onclick="filterPosts(this, 'Product')">Product</button><button class="filter-btn" onclick="filterPosts(this, 'Travel & Technology')">Travel & Technology</button>
-    </div>
+
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterPosts(this, 'all')">All</button>
+            <button class="filter-btn" onclick="filterPosts(this, 'Community')">Community</button><button
+                class="filter-btn" onclick="filterPosts(this, 'Product')">Product</button><button class="filter-btn"
+                onclick="filterPosts(this, 'Travel & Technology')">Travel & Technology</button>
+        </div>
 
 
         <div class="project-list">
-            
+
             <a href="../posts/gatepass-the-tiktok-for-modern-day-events/" class="project-item" data-category="Product">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">GatePass: The TikTok for Modern-Day Events</span>
-                         <span class="post-category product">Product</span>
+                        <span class="post-category product">Product</span>
                         <span class="arrow">→</span>
                     </div>
-                    <span class="proj-desc">A reflection on why experience, energy, and short-form video now play a central role in how people discover and choose events.</span>
+                    <span class="proj-desc">A reflection on why experience, energy, and short-form video now play a
+                        central role in how people discover and choose events.</span>
                 </div>
                 <div class="proj-meta">Jan 2026</div>
             </a>
-            
-            <a href="../posts/my-journey-to-the-west-ivory-coast-abidjan/" class="project-item" data-category="Travel & Technology">
+
+            <a href="../posts/my-journey-to-the-west-ivory-coast-abidjan/" class="project-item"
+                data-category="Travel & Technology">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">My Journey to the West: Ivory Coast Abidjan</span>
-                         <span class="post-category travel & technology">Travel & Technology</span>
+                        <span class="post-category travel & technology">Travel & Technology</span>
                         <span class="arrow">→</span>
                     </div>
-                    <span class="proj-desc">A first-time visit to Abidjan that sparked reflections on language, mobility, mobile money, and the complexities of building and scaling digital products across Africa.</span>
+                    <span class="proj-desc">A first-time visit to Abidjan that sparked reflections on language,
+                        mobility, mobile money, and the complexities of building and scaling digital products across
+                        Africa.</span>
                 </div>
                 <div class="proj-meta">Jan 2026</div>
             </a>
-            
+
             <a href="../posts/the-genesis-of-the-reseau/" class="project-item" data-category="Community">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">The Genesis of the Réseau</span>
-                         <span class="post-category community">Community</span>
+                        <span class="post-category community">Community</span>
                         <span class="arrow">→</span>
                     </div>
                     <span class="proj-desc">How a casual meetup led to the birth of a builder community.</span>
                 </div>
                 <div class="proj-meta">Dec 2025</div>
             </a>
-            
+
         </div>
     </div>
 
     <footer>
         <a href="mailto:hello@maxwellcofie.com" class="footer-link" data-i18n="footer.email">Email</a>
         <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
-        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link"
+            data-i18n="footer.linkedin">LinkedIn</a>
         <a href="https://github.com/mcofie" target="_blank" class="footer-link" data-i18n="footer.github">GitHub</a>
+        <a href="../dev/" class="footer-link" data-i18n="nav.dev">Dev</a>
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
     </footer>
@@ -129,16 +143,17 @@
             // Filter items
             const items = document.querySelectorAll('.project-list .project-item');
             items.forEach(item => {
-                 const itemCat = item.getAttribute('data-category');
-                 if (!itemCat) return; 
+                const itemCat = item.getAttribute('data-category');
+                if (!itemCat) return;
 
-                 if (category === 'all' || itemCat === category) {
-                     item.style.display = 'flex';
-                 } else {
-                     item.style.display = 'none';
-                 }
+                if (category === 'all' || itemCat === category) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
             });
         }
     </script>
 </body>
+
 </html>

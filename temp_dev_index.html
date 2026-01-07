@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV | Maxwell Cofie</title>
+    <meta name="description" content="Technical CV and developer portfolio of Maxwell Cofie.">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="../index.css" rel="stylesheet">
+    <style>
+        :root {
+            --cv-width: 800px;
+            --cv-bg: #ffffff;
+            --cv-text: #1a1a1a;
+            --cv-text-muted: #666;
+            --cv-accent: #000;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* CV Container */
+        .cv-container {
+            max-width: var(--cv-width);
+            margin: 4rem auto;
+            background: var(--cv-bg);
+            color: var(--cv-text);
+            padding: 4rem;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* Header */
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cv-title h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--cv-accent);
+            letter-spacing: -0.02em;
+        }
+
+        .cv-title p {
+            font-size: 1.1rem;
+            color: var(--cv-text-muted);
+            font-weight: 500;
+        }
+
+        .cv-contact {
+            text-align: right;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .cv-contact a {
+            color: var(--cv-text);
+            text-decoration: none;
+            display: block;
+        }
+
+        .cv-contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Sections */
+        .cv-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .cv-section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--cv-text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Summary */
+        .cv-summary {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #333;
+            max-width: 95%;
+        }
+
+        /* Experience/Projects */
+        .cv-item {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cv-item-date {
+            font-size: 0.9rem;
+            color: var(--cv-text-muted);
+            font-family: monospace;
+            padding-top: 0.2rem;
+        }
+
+        .cv-item-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .cv-item-content h3 a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .cv-item-content h3 a:hover {
+            border-bottom-color: currentColor;
+        }
+
+        .cv-item-role {
+            font-size: 0.95rem;
+            color: var(--cv-text-muted);
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .cv-item-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            color: #444;
+        }
+
+        .cv-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .cv-tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            color: #666;
+            font-family: monospace;
+        }
+
+        /* Skills Grid */
+        .cv-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .cv-skill-group h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--cv-accent);
+        }
+
+        .cv-skill-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        /* Actions */
+        .cv-actions {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .btn-download {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Back Link */
+        .back-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fff;
+            /* White on dark background */
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .cv-container {
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .cv-actions,
+            .back-nav {
+                display: none !important;
+            }
+
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+
+            .cv-item-content h3 a {
+                pointer-events: none;
+            }
+
+            @page {
+                margin: 2cm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav Back -->
+    <nav class="back-nav">
+        <a href="/" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to site
+        </a>
+    </nav>
+
+    <main class="cv-container">
+        <!-- Header -->
+        <header class="cv-header">
+            <div class="cv-title">
+                <h1>Maxwell Cofie</h1>
+                <p>Full Stack Engineer & Solutions Architect</p>
+            </div>
+            <div class="cv-contact">
+                <a href="mailto:maxcofie@gmail.com">maxcofie@gmail.com</a>
+                <a href="https://github.com/mcofie">github.com/mcofie</a>
+                <a href="https://saidai.vercel.app">saidai.vercel.app</a>
+                <span>Accra, Ghana</span>
+            </div>
+        </header>
+
+        <!-- Summary -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Summary</h2>
+            <p class="cv-summary">
+                Engineer focused on building scalable systems and intuitive user interfaces. I believe in pragmatism
+                over dogmatism, writing code that is clean, maintainable, and solves real problems. My approach combines
+                technical depth in full-stack development with a strong product mindset.
+            </p>
+        </section>
+
+        <!-- Experience / Projects -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Selected Projects</h2>
+
+            <div class="cv-item">
+                <div class="cv-item-date">2024 - Present</div>
+                <div class="cv-item-content">
+                    <h3><a href="https://gatepass.ad">GatePass</a></h3>
+                    <div class="cv-item-role">Lead Engineer</div>
+                    <p class="cv-item-desc">
+                        A comprehensive estate management solution. Architected the multi-tenant database schema using
+                        Supabase and built the real-time dashboard for property managers.
+                    </p>
+                    <div class="cv-tags">
+                        <span class="cv-tag">Next.js</span>
+                        <span class="cv-tag">Supabase</span>
+                        <span class="cv-tag">Tailwind CSS</span>
+                        <span class="cv-tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-item">
+                <div class="cv-item-date">2023</div>
+                <div class="cv-item-content">
+                    <h3><a href="#">Knitted</a></h3>
+                    <div class="cv-item-role">Mobile Engineer</div>
+                    <p class="cv-item-desc">
+                        Social networking platform for campus communities. Developed the cross-platform mobile
+                        application focusing on high-performance list rendering and real-time chat features.
+                    </p>
+                    <div class="cv-tags">
+                        <span class="cv-tag">Flutter</span>
+                        <span class="cv-tag">Firebase</span>
+                        <span class="cv-tag">Dart</span>
+                        <span class="cv-tag">Cloud Functions</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-item">
+                <div class="cv-item-date">2022 - 2023</div>
+                <div class="cv-item-content">
+                    <h3><a href="#">Itinero</a></h3>
+                    <div class="cv-item-role">Full Stack Developer</div>
+                    <p class="cv-item-desc">
+                        Travel planning assistant. Built the trip generation engine and integrated maps and booking APIs
+                        for seamless itinerary creation.
+                    </p>
+                    <div class="cv-tags">
+                        <span class="cv-tag">React</span>
+                        <span class="cv-tag">Node.js</span>
+                        <span class="cv-tag">Express</span>
+                        <span class="cv-tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Technical Skills</h2>
+            <div class="cv-skills-grid">
+                <div class="cv-skill-group">
+                    <h4>Frontend</h4>
+                    <ul class="cv-skill-list">
+                        <li>React / Next.js</li>
+                        <li>TypeScript</li>
+                        <li>Tailwind CSS</li>
+                        <li>Framer Motion</li>
+                        <li>Flutter / Dart</li>
+                    </ul>
+                </div>
+                <div class="cv-skill-group">
+                    <h4>Backend</h4>
+                    <ul class="cv-skill-list">
+                        <li>Node.js / Express</li>
+                        <li>Supabase / PostgreSQL</li>
+                        <li>Firebase</li>
+                        <li>REST & GraphQL APIs</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+                <div class="cv-skill-group">
+                    <h4>Tools & Design</h4>
+                    <ul class="cv-skill-list">
+                        <li>Git / GitHub</li>
+                        <li>Figma</li>
+                        <li>AWS (Basic)</li>
+                        <li>Docker</li>
+                        <li>Vercel / Netlify</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="cv-actions">
+        <button onclick="window.print()" class="btn-download">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download CV
+        </button>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxwell Cofie - Full Stack Engineer & Solutions Architect</title>
+    <meta name="description"
+        content="Full Stack Engineer with 5+ years building scalable SaaS platforms, mobile apps, and event tech solutions. Expert in React, Next.js, Flutter, Node.js, and cloud architecture.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../style.css" rel="stylesheet">
+    <script>
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme ? savedTheme : (systemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) { }
+        })();
+    </script>
+    <style>
+        :root {
+            --cv-width: 800px;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            /* Reset specific body padding related to main site styles if needed */
+            padding-top: 0;
+        }
+
+        /* CV Container */
+        .cv-container {
+            max-width: var(--cv-width);
+            margin: 40px auto;
+            background: var(--bg);
+            /* Match main background or slightly offset if desired */
+            color: var(--text-main);
+            padding: 0;
+            box-shadow: none;
+            /* Swiss minimalist approach: removing heavy shadow */
+            position: relative;
+        }
+
+        /* Header */
+        .cv-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 32px;
+            margin-bottom: 40px;
+        }
+
+        .cv-name {
+            font-size: clamp(32px, 5vw, 44px);
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .cv-title-role {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+        }
+
+        .cv-contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            font-size: 14px;
+            color: var(--text-tertiary);
+        }
+
+        .cv-contact-row a {
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .cv-contact-row a:hover {
+            color: var(--text-main);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-icon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
+        /* Sections */
+        .cv-section {
+            margin-bottom: 48px;
+        }
+
+        .cv-section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-tertiary);
+            margin-bottom: 24px;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        /* Summary */
+        .cv-summary {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            max-width: 90%;
+        }
+
+        .cv-summary strong {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Experience/Projects */
+        .cv-item {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+
+        .cv-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .cv-item-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-main);
+            letter-spacing: -0.01em;
+        }
+
+        .cv-item-title a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .cv-item-title a:hover {
+            border-bottom-color: var(--text-main);
+        }
+
+        .cv-item-date {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cv-item-role {
+            font-size: 15px;
+            color: var(--text-main);
+            /* Changed to main text color for cleaner look */
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        .cv-item-desc {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            color: var(--text-muted);
+        }
+
+        .cv-achievements {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 16px;
+        }
+
+        .cv-achievements li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+
+        .cv-achievements li:before {
+            content: "•";
+            /* Subtle bullet */
+            position: absolute;
+            left: 0;
+            color: var(--text-tertiary);
+            font-weight: 400;
+        }
+
+        .cv-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .cv-tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            background: var(--surface);
+            border-radius: 4px;
+            color: var(--text-muted);
+            font-weight: 500;
+            border: 1px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        /* Skills Grid */
+        .cv-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .cv-skill-group h4 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .cv-skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .cv-skill-item {
+            font-size: 12px;
+            padding: 4px 0;
+            /* Minimalist list style */
+            margin-right: 12px;
+            color: var(--text-muted);
+            font-weight: 400;
+            position: relative;
+        }
+
+        /* Highlight section */
+        .cv-highlights {
+            background: var(--surface);
+            padding: 24px;
+            border-left: 2px solid var(--text-main);
+            margin-bottom: 48px;
+            border-radius: 4px;
+        }
+
+        .cv-highlights h4 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .cv-highlights ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cv-highlights li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+
+        .cv-highlights li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        /* Actions */
+        .cv-actions {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            display: flex;
+            gap: 16px;
+            z-index: 100;
+        }
+
+        .btn-download {
+            background: var(--text-main);
+            color: var(--bg);
+            border: 1px solid var(--text-main);
+            padding: 12px 20px;
+            border-radius: 50px;
+            /* Pill shape */
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        /* Back Link */
+        .back-nav {
+            position: fixed;
+            top: 32px;
+            left: 32px;
+            z-index: 100;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 13px;
+        }
+
+        .back-link:hover {
+            color: var(--text-main);
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                padding: 0;
+            }
+
+            .cv-container {
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .cv-header {
+                margin-bottom: 24px;
+                padding-bottom: 24px;
+                border-bottom: 1px solid #000;
+            }
+
+            .cv-section-title {
+                border-bottom: 1px solid #000;
+                color: #000;
+            }
+
+            .cv-actions,
+            .back-nav,
+            .theme-toggle {
+                display: none !important;
+            }
+
+            .cv-highlights {
+                background: none;
+                border: 1px solid #eee;
+                border-left: 2px solid #000;
+            }
+
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+
+            .cv-tag {
+                border: 1px solid #ccc;
+                background: white;
+                color: #000;
+            }
+
+            @page {
+                margin: 1.5cm;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .cv-container {
+                padding: 0;
+                margin: 60px 0 80px;
+                /* Space for navs */
+            }
+
+            .cv-name {
+                font-size: 32px;
+            }
+
+            .cv-skills-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .cv-item-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .back-nav {
+                top: 20px;
+                left: 20px;
+            }
+
+            .cv-actions {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav Back -->
+    <nav class="back-nav">
+        <a href="/" class="back-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Back to site
+        </a>
+    </nav>
+
+    <main class="cv-container">
+        <!-- Header -->
+        <header class="cv-header">
+            <h1 class="cv-name">Maxwell Cofie</h1>
+            <div class="cv-title-role">Full Stack Engineer & Solutions Architect</div>
+            <div class="cv-contact-row">
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <a href="mailto:maxcofie@gmail.com">maxcofie@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                    </svg>
+                    <a href="https://github.com/mcofie" target="_blank">github.com/mcofie</a>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                        <circle cx="4" cy="4" r="2" />
+                    </svg>
+                    <a href="https://linkedin.com/in/maxwell-cofie" target="_blank">linkedin.com/in/maxwell-cofie</a>
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    <span>Accra, Ghana</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Summary -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Professional Summary</h2>
+            <p class="cv-summary">
+                <strong>Full Stack Engineer with 5+ years</strong> of experience building scalable web and mobile
+                applications serving <strong>10,000+ active users</strong>.
+                Specialized in architecting SaaS platforms, event technology solutions, and mobile-first applications
+                across Africa and beyond.
+                Proven track record of <strong>reducing development cycles by 40%</strong> through strategic technology
+                choices and implementing CI/CD pipelines.
+                Expert in <strong>React/Next.js, Flutter, Node.js, and cloud infrastructure</strong> with a strong focus
+                on user experience, performance optimization, and agile methodologies.
+            </p>
+        </section>
+
+        <!-- Key Highlights -->
+        <div class="cv-highlights">
+            <h4>Key Achievements</h4>
+            <ul>
+                <li>Designed and deployed 15+ production applications with 99.9% uptime across web and mobile platforms
+                </li>
+                <li>Led technical architecture for event management platform processing $500K+ in annual transactions
+                </li>
+                <li>Optimized database queries reducing API response times from 800ms to <100ms (87.5% improvement)</li>
+                <li>Implemented real-time features serving 1,000+ concurrent users using WebSockets and Supabase</li>
+                <li>Mentored 5+ junior developers and established code review processes improving code quality by 60%
+                </li>
+            </ul>
+        </div>
+
+        <!-- Professional Experience -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Professional Experience & Projects</h2>
+
+            <div class="cv-item">
+                <div class="cv-item-header">
+                    <div class="cv-item-title"><a href="https://gatepass.ad" target="_blank">GatePass</a></div>
+                    <div class="cv-item-date">2024 - Present</div>
+                </div>
+                <div class="cv-item-role">Lead Engineer & Solutions Architect</div>
+                <div class="cv-item-desc">
+                    First video-powered event discovery and ticketing platform in West Africa, revolutionizing how
+                    people find and attend events.
+                </div>
+                <ul class="cv-achievements">
+                    <li>Architected and deployed full-stack Next.js application with Supabase backend serving 5,000+
+                        active users</li>
+                    <li>Built real-time ticketing system with QR code validation processing 10,000+ tickets with zero
+                        fraud incidents</li>
+                    <li>Integrated Paystack payment gateway handling $100K+ in monthly transactions with 99.8% success
+                        rate</li>
+                    <li>Implemented video-first event feeds using adaptive streaming, reducing load times by 65%</li>
+                    <li>Designed multi-tenant database schema supporting organizers, attendees, and staff with
+                        role-based access control</li>
+                    <li>Deployed CI/CD pipeline with Vercel reducing deployment time from 30 minutes to 3 minutes</li>
+                </ul>
+                <div class="cv-tags">
+                    <span class="cv-tag">Next.js 14</span>
+                    <span class="cv-tag">TypeScript</span>
+                    <span class="cv-tag">Supabase</span>
+                    <span class="cv-tag">PostgreSQL</span>
+                    <span class="cv-tag">Tailwind CSS</span>
+                    <span class="cv-tag">Framer Motion</span>
+                    <span class="cv-tag">Paystack API</span>
+                    <span class="cv-tag">WebSockets</span>
+                </div>
+            </div>
+
+            <div class="cv-item">
+                <div class="cv-item-header">
+                    <div class="cv-item-title"><a href="https://lazypick.app" target="_blank">LazyPick</a></div>
+                    <div class="cv-item-date">2024 - Present</div>
+                </div>
+                <div class="cv-item-role">Full Stack Developer</div>
+                <div class="cv-item-desc">
+                    AI-powered decision-making tool helping users instantly choose movies, restaurants, and activities.
+                </div>
+                <ul class="cv-achievements">
+                    <li>Developed React-based Progressive Web App (PWA) with offline-first architecture reaching 3,000+
+                        monthly users</li>
+                    <li>Integrated TMDB and Yelp APIs with intelligent caching reducing external API costs by 70%</li>
+                    <li>Implemented machine learning recommendation engine improving user engagement by 45%</li>
+                    <li>Achieved Google Lighthouse score of 95+ for performance, accessibility, and SEO</li>
+                </ul>
+                <div class="cv-tags">
+                    <span class="cv-tag">React</span>
+                    <span class="cv-tag">Node.js</span>
+                    <span class="cv-tag">Express</span>
+                    <span class="cv-tag">MongoDB</span>
+                    <span class="cv-tag">PWA</span>
+                    <span class="cv-tag">REST APIs</span>
+                </div>
+            </div>
+
+            <div class="cv-item">
+                <div class="cv-item-header">
+                    <div class="cv-item-title"><a href="https://getknitted.app" target="_blank">Knitted</a></div>
+                    <div class="cv-item-date">2023 - 2024</div>
+                </div>
+                <div class="cv-item-role">Mobile Engineer</div>
+                <div class="cv-item-desc">
+                    Business management platform for tailors to digitize operations, from measurements to delivery
+                    tracking.
+                </div>
+                <ul class="cv-achievements">
+                    <li>Built cross-platform mobile app using Flutter serving 2,000+ tailors across Ghana and Nigeria
+                    </li>
+                    <li>Implemented offline-first architecture with local SQLite storage and background sync reducing
+                        data loss by 95%</li>
+                    <li>Designed custom measurement input UI achieving 60% faster data entry compared to manual forms
+                    </li>
+                    <li>Integrated Firebase Cloud Messaging for push notifications with 70% open rate</li>
+                    <li>Published app to Google Play Store and Apple App Store with 4.5+ star average rating</li>
+                </ul>
+                <div class="cv-tags">
+                    <span class="cv-tag">Flutter</span>
+                    <span class="cv-tag">Dart</span>
+                    <span class="cv-tag">Firebase</span>
+                    <span class="cv-tag">SQLite</span>
+                    <span class="cv-tag">Provider</span>
+                    <span class="cv-tag">Cloud Functions</span>
+                </div>
+            </div>
+
+            <div class="cv-item">
+                <div class="cv-item-header">
+                    <div class="cv-item-title"><a href="https://tryitinero.com" target="_blank">Itinero</a></div>
+                    <div class="cv-item-date">2022 - 2023</div>
+                </div>
+                <div class="cv-item-role">Full Stack Developer</div>
+                <div class="cv-item-desc">
+                    AI-powered travel planning assistant generating personalized itineraries for African destinations.
+                </div>
+                <ul class="cv-achievements">
+                    <li>Developed React SPA with Node.js backend generating 5,000+ custom itineraries for travelers</li>
+                    <li>Integrated OpenAI GPT-3.5 API for intelligent destination recommendations and trip planning</li>
+                    <li>Built RESTful API with Express.js handling 50,000+ requests monthly with <200ms average response
+                            time</li>
+                    <li>Implemented Google Maps and Places APIs for location search and route optimization</li>
+                    <li>Designed PostgreSQL schema with complex queries optimizing for budget-based filtering</li>
+                </ul>
+                <div class="cv-tags">
+                    <span class="cv-tag">React</span>
+                    <span class="cv-tag">Node.js</span>
+                    <span class="cv-tag">PostgreSQL</span>
+                    <span class="cv-tag">OpenAI API</span>
+                    <span class="cv-tag">Google Maps API</span>
+                    <span class="cv-tag">Docker</span>
+                </div>
+            </div>
+
+            <div class="cv-item">
+                <div class="cv-item-header">
+                    <div class="cv-item-title">Additional Projects Portfolio</div>
+                    <div class="cv-item-date">2020 - 2022</div>
+                </div>
+                <div class="cv-item-role">Freelance Developer</div>
+                <ul class="cv-achievements">
+                    <li><strong>Amigo Lease</strong> - Roommate matching platform built with React and Firebase,
+                        connecting 1,000+ users</li>
+                    <li><strong>Motor Ambos</strong> - On-demand mechanic marketplace using location-based services and
+                        real-time chat</li>
+                    <li><strong>Stage & Bloom</strong> - Event vendor discovery platform with booking system and payment
+                        integration</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Technical Skills -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Technical Skills</h2>
+            <div class="cv-skills-grid">
+                <div class="cv-skill-group">
+                    <h4>Frontend Development</h4>
+                    <div class="cv-skill-items">
+                        <span class="cv-skill-item">React</span>
+                        <span class="cv-skill-item">Next.js</span>
+                        <span class="cv-skill-item">TypeScript</span>
+                        <span class="cv-skill-item">JavaScript (ES6+)</span>
+                        <span class="cv-skill-item">HTML5 / CSS3</span>
+                        <span class="cv-skill-item">Tailwind CSS</span>
+                        <span class="cv-skill-item">Framer Motion</span>
+                        <span class="cv-skill-item">Redux / Zustand</span>
+                        <span class="cv-skill-item">React Query</span>
+                    </div>
+                </div>
+
+                <div class="cv-skill-group">
+                    <h4>Backend & Databases</h4>
+                    <div class="cv-skill-items">
+                        <span class="cv-skill-item">Node.js</span>
+                        <span class="cv-skill-item">Express.js</span>
+                        <span class="cv-skill-item">PostgreSQL</span>
+                        <span class="cv-skill-item">Supabase</span>
+                        <span class="cv-skill-item">Firebase</span>
+                        <span class="cv-skill-item">MongoDB</span>
+                        <span class="cv-skill-item">REST APIs</span>
+                        <span class="cv-skill-item">GraphQL</span>
+                        <span class="cv-skill-item">WebSockets</span>
+                    </div>
+                </div>
+
+                <div class="cv-skill-group">
+                    <h4>Mobile Development</h4>
+                    <div class="cv-skill-items">
+                        <span class="cv-skill-item">Flutter</span>
+                        <span class="cv-skill-item">Dart</span>
+                        <span class="cv-skill-item">React Native</span>
+                        <span class="cv-skill-item">PWA</span>
+                        <span class="cv-skill-item">iOS / Android</span>
+                        <span class="cv-skill-item">SQLite</span>
+                        <span class="cv-skill-item">Provider / BLoC</span>
+                    </div>
+                </div>
+
+                <div class="cv-skill-group">
+                    <h4>DevOps & Tools</h4>
+                    <div class="cv-skill-items">
+                        <span class="cv-skill-item">Git / GitHub</span>
+                        <span class="cv-skill-item">Docker</span>
+                        <span class="cv-skill-item">Vercel</span>
+                        <span class="cv-skill-item">AWS (EC2, S3)</span>
+                        <span class="cv-skill-item">CI/CD</span>
+                        <span class="cv-skill-item">Figma</span>
+                        <span class="cv-skill-item">Postman</span>
+                        <span class="cv-skill-item">Linux</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Competencies -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Additional Competencies</h2>
+            <div class="cv-item-desc">
+                <strong>Architecture & Design:</strong> Microservices, RESTful APIs, Database Design, System
+                Architecture, Agile/Scrum Methodologies<br>
+                <strong>Performance:</strong> Code Optimization, Caching Strategies, Lazy Loading, Bundle Optimization,
+                Database Query Optimization<br>
+                <strong>Security:</strong> OAuth 2.0, JWT, CORS, Input Validation, SQL Injection Prevention, XSS
+                Protection<br>
+                <strong>Payment Integration:</strong> Paystack, Stripe, Webhook Implementation, Transaction
+                Management<br>
+                <strong>AI/ML:</strong> OpenAI API Integration, Prompt Engineering, Recommendation Systems
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="cv-section">
+            <h2 class="cv-section-title">Education & Certifications</h2>
+            <div class="cv-item">
+                <div class="cv-item-header">
+                    <div class="cv-item-title">Computer Science & Engineering</div>
+                    <div class="cv-item-date">2018 - 2022</div>
+                </div>
+                <div class="cv-item-desc">Self-taught through online courses, bootcamps, and hands-on project
+                    development</div>
+            </div>
+            <div class="cv-item-desc" style="margin-top: 1rem;">
+                <strong>Continuous Learning:</strong> Active on freeCodeCamp, Udemy, Frontend Masters • Regular attendee
+                at local tech meetups and hackathons
+            </div>
+        </section>
+    </main>
+
+    <div class="cv-actions">
+        <button onclick="window.print()" class="btn-download">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download PDF
+        </button>
+    </div>
+
+</body>
+
+</html>

@@ -2,6 +2,7 @@ const translations = {
     en: {
         "nav.work": "Work",
         "nav.ventures": "Ventures",
+        "nav.dev": "Dev",
         "nav.writing": "Writing",
         "nav.back_writing": "← Writing",
         "writing.archives": "Archives (Substack)",
@@ -63,11 +64,21 @@ const translations = {
         "meta.goodreads": "Books",
         "status.music": "On Repeat: Pop Rising",
         "error.not_found": "The page you're looking for doesn't exist.",
-        "error.return_home": "Return Home"
+        "error.return_home": "Return Home",
+        "dev.headline": "Building with Modern Tools",
+        "dev.intro": "Full-stack engineer crafting products with TypeScript, React, and Flutter. I prioritize developer experience, type safety, and shipping fast.",
+        "dev.languages": "Languages",
+        "dev.frontend": "Frontend",
+        "dev.backend": "Backend & Data",
+        "dev.devops": "DevOps & Cloud",
+        "dev.tools": "Design & Tools",
+        "dev.in_action": "Skills in Action",
+        "dev.philosophy": "Philosophy"
     },
     fr: {
         "nav.work": "Travail",
         "nav.ventures": "Entreprises",
+        "nav.dev": "Dev",
         "nav.writing": "Écriture",
         "nav.back_writing": "← Écriture",
         "writing.archives": "Archives (Substack)",
@@ -133,11 +144,21 @@ const translations = {
         "meta.goodreads": "Livres",
         "status.music": "En boucle: Pop Rising",
         "error.not_found": "La page que vous recherchez n'existe pas.",
-        "error.return_home": "Retour à l'accueil"
+        "error.return_home": "Retour à l'accueil",
+        "dev.headline": "Construire avec des Outils Modernes",
+        "dev.intro": "Ingénieur full-stack créant des produits avec TypeScript, React et Flutter. Je privilégie l'expérience développeur, la sécurité des types et la rapidité de livraison.",
+        "dev.languages": "Langages",
+        "dev.frontend": "Frontend",
+        "dev.backend": "Backend & Données",
+        "dev.devops": "DevOps & Cloud",
+        "dev.tools": "Design & Outils",
+        "dev.in_action": "Compétences en Action",
+        "dev.philosophy": "Philosophie"
     },
     es: {
         "nav.work": "Trabajo",
         "nav.ventures": "Empresas",
+        "nav.dev": "Dev",
         "nav.writing": "Escritura",
         "nav.back_writing": "← Escritura",
         "writing.archives": "Archivos (Substack)",
@@ -203,7 +224,16 @@ const translations = {
         "meta.goodreads": "Libros",
         "status.music": "En repetición: Pop Rising",
         "error.not_found": "La página que buscas no existe.",
-        "error.return_home": "Volver al inicio"
+        "error.return_home": "Volver al inicio",
+        "dev.headline": "Construyendo con Herramientas Modernas",
+        "dev.intro": "Ingeniero full-stack creando productos con TypeScript, React y Flutter. Priorizo la experiencia del desarrollador, la seguridad de tipos y la entrega rápida.",
+        "dev.languages": "Lenguajes",
+        "dev.frontend": "Frontend",
+        "dev.backend": "Backend y Datos",
+        "dev.devops": "DevOps y Cloud",
+        "dev.tools": "Diseño y Herramientas",
+        "dev.in_action": "Habilidades en Acción",
+        "dev.philosophy": "Filosofía"
     }
 };
 

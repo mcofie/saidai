@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" data-theme="auto">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,8 +10,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
 
     <style>
         /* ===== Refined Editorial Theme ===== */
@@ -21,7 +23,8 @@
             --text: #1f1f1f;
             --text-light: #555;
             --border: #eaeaea;
-            --accent: #2563eb; /* International Klein Blue style */
+            --accent: #2563eb;
+            /* International Klein Blue style */
             --tag-bg: #f1f1f1;
             --tag-text: #444;
 
@@ -96,7 +99,9 @@
         }
 
         /* ===== Typography ===== */
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             font-family: var(--font-head);
             color: var(--text);
             font-weight: 700;
@@ -156,7 +161,8 @@
         .status-dot {
             height: 8px;
             width: 8px;
-            background-color: #10b981; /* Green */
+            background-color: #10b981;
+            /* Green */
             border-radius: 50%;
             display: inline-block;
             box-shadow: 0 0 0 3px var(--bg-subtle);
@@ -168,10 +174,12 @@
                 opacity: 1;
                 box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.4);
             }
+
             70% {
                 opacity: 1;
                 box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
             }
+
             100% {
                 opacity: 1;
                 box-shadow: 0 0 0 0px rgba(16, 185, 129, 0);
@@ -186,7 +194,8 @@
         }
 
         .project-item {
-            display: block; /* Make entire row clickable */
+            display: block;
+            /* Make entire row clickable */
             padding: 1.5rem 0;
             border-bottom: 1px solid var(--border);
             transition: transform 0.2s ease, opacity 0.2s;
@@ -350,215 +359,226 @@
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <header>
-        <h1>Maxwell Cofie</h1>
-        <div class="bio-meta">
-            <span class="status-dot"></span>
-            <span>Building in Accra, Ghana 🇬🇭</span>
-        </div>
-        <p>
-            I’m a software engineer who loves building products that solve real problems. I blend creativity, code, and
-            strategy to build simple, reliable tools without unnecessary complexity.
-        </p>
-        <div class="contact-links" style="margin-top: 1rem; font-size: 0.9rem;">
-            <a href="#projects">Projects</a>
-            <a href="#writing">Writing</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </header>
-
-    <main>
-        <section id="projects">
-            <h2>Selected Projects</h2>
-            <div class="list-group">
-
-                <a href="https://lazypick.app" class="project-item">
-                    <div class="project-header">
-                        <span class="project-title">LazyPick</span>
-                        <span class="project-link-icon">Visit ↗</span>
-                    </div>
-                    <span class="project-desc">A smart decision-making tool that helps you pick movies, food, and activities instantly.</span>
-                    <div class="tags">
-                        <span class="tag">Decision Tool</span>
-                        <span class="tag">Lifestyle</span>
-                    </div>
-                </a>
-
-                <a href="https://getknitted.app" class="project-item">
-                    <div class="project-header">
-                        <span class="project-title">Knitted</span>
-                        <span class="project-link-icon">Visit ↗</span>
-                    </div>
-                    <span class="project-desc">A tool for tailors to record measurements, track orders, and manage deliveries.</span>
-                    <div class="tags">
-                        <span class="tag">Offline-First</span>
-                        <span class="tag">SaaS</span>
-                        <span class="tag">Mobile</span>
-                    </div>
-                </a>
-
-                <a href="https://tryitinero.com" class="project-item">
-                    <div class="project-header">
-                        <span class="project-title">Itinero</span>
-                        <span class="project-link-icon">Visit ↗</span>
-                    </div>
-                    <span class="project-desc">Generates custom itineraries based on budget to help travelers explore Africa.</span>
-                    <div class="tags">
-                        <span class="tag">AI</span>
-                        <span class="tag">Travel</span>
-                    </div>
-                </a>
-
-                <a href="https://amigolease.com" class="project-item">
-                    <div class="project-header">
-                        <span class="project-title">Amigo Lease</span>
-                        <span class="project-link-icon">Visit ↗</span>
-                    </div>
-                    <span class="project-desc">Roommate-matching app connecting users by budget, area, and lifestyle.</span>
-                    <div class="tags">
-                        <span class="tag">Marketplace</span>
-                        <span class="tag">Real Estate</span>
-                    </div>
-                </a>
-
-                <a href="https://motorambos.com" class="project-item">
-                    <div class="project-header">
-                        <span class="project-title">Motor Ambos</span>
-                        <span class="project-link-icon">Visit ↗</span>
-                    </div>
-                    <span class="project-desc">Connecting car owners with nearby verified mechanics for fast repairs.</span>
-                    <div class="tags">
-                        <span class="tag">Service Aggregator</span>
-                        <span class="tag">Geo-location</span>
-                    </div>
-                </a>
-
-                <a href="https://stageandbloom.co" class="project-item">
-                    <div class="project-header">
-                        <span class="project-title">Stage & Bloom</span>
-                        <span class="project-link-icon">Visit ↗</span>
-                    </div>
-                    <span class="project-desc">Platform to discover and book trusted vendors for weddings and events.</span>
-                    <div class="tags">
-                        <span class="tag">Booking System</span>
-                        <span class="tag">Discovery</span>
-                    </div>
-                </a>
-
+    <div class="container">
+        <header>
+            <h1>Maxwell Cofie</h1>
+            <div class="bio-meta">
+                <span class="status-dot"></span>
+                <span>Building in Accra, Ghana 🇬🇭</span>
             </div>
-        </section>
-
-        <section id="ventures">
-            <h2>Ventures</h2>
-            <div class="list-group">
-                <a href="https://minutes2match.com/" class="project-item">
-                    <div class="project-header">
-                        <span class="project-title">Minutes 2 Match</span>
-                        <span class="project-link-icon">Visit ↗</span>
-                    </div>
-                    <span class="project-desc">Themed speed dating experiences for meaningful connections.</span>
-                </a>
-                <a href="https://voltapinefarms.com/" class="project-item">
-                    <div class="project-header">
-                        <span class="project-title">Vita & Pine Farms</span>
-                        <span class="project-link-icon">Visit ↗</span>
-                    </div>
-                    <span class="project-desc">Providing fresh, healthy produce year-round at affordable prices.</span>
-                </a>
+            <p>
+                I’m a software engineer who loves building products that solve real problems. I blend creativity, code,
+                and
+                strategy to build simple, reliable tools without unnecessary complexity.
+            </p>
+            <div class="contact-links" style="margin-top: 1rem; font-size: 0.9rem;">
+                <a href="#projects">Projects</a>
+                <a href="#writing">Writing</a>
+                <a href="#contact">Contact</a>
             </div>
-        </section>
+        </header>
 
-        <section id="writing">
-            <h2>Writing</h2>
-            <div class="list-group">
-                <a href="https://open.substack.com/pub/mcofie/p/maybe-our-way-out-is-through-entrepreneurship"
-                   class="writing-item">
-                    <span class="writing-title">Maybe our way out is through entrepreneurship</span>
-                    <span class="writing-date">Mar 18, 2025</span>
-                </a>
-                <a href="https://open.substack.com/pub/mcofie/p/a-furniture-piece-for-changing-times"
-                   class="writing-item">
-                    <span class="writing-title">A Furniture Piece for Changing Times</span>
-                    <span class="writing-date">Mar 14, 2025</span>
-                </a>
-                <a href="https://open.substack.com/pub/mcofie/p/how-i-ended-up-with-a-12-acre-cassava"
-                   class="writing-item">
-                    <span class="writing-title">How I Ended Up with a 12-Acre Cassava Farm</span>
-                    <span class="writing-date">Mar 14, 2025</span>
-                </a>
-            </div>
-        </section>
+        <main>
+            <section id="projects">
+                <h2>Selected Projects</h2>
+                <div class="list-group">
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>I'm always open to discussing new projects or just chatting about tech in Africa.</p>
-            <div class="contact-links">
-                <a href="mailto:maxwcofie@gmail.com">Email</a>
-                <a href="https://github.com/mcofie">GitHub</a>
-                <a href="https://www.linkedin.com/in/maxwell-cofie/">LinkedIn</a>
-                <a href="https://x.com/maxwellcofie">X (Twitter)</a>
-                <a href="https://www.instagram.com/mcofie/">Instagram</a>
-            </div>
-        </section>
-    </main>
+                    <a href="https://lazypick.app" class="project-item">
+                        <div class="project-header">
+                            <span class="project-title">LazyPick</span>
+                            <span class="project-link-icon">Visit ↗</span>
+                        </div>
+                        <span class="project-desc">A smart decision-making tool that helps you pick movies, food, and
+                            activities instantly.</span>
+                        <div class="tags">
+                            <span class="tag">Decision Tool</span>
+                            <span class="tag">Lifestyle</span>
+                        </div>
+                    </a>
 
-    <footer>
-        © <span id="year"></span> Maxwell Nii Offei Cofie
-    </footer>
-</div>
+                    <a href="https://getknitted.app" class="project-item">
+                        <div class="project-header">
+                            <span class="project-title">Knitted</span>
+                            <span class="project-link-icon">Visit ↗</span>
+                        </div>
+                        <span class="project-desc">A tool for tailors to record measurements, track orders, and manage
+                            deliveries.</span>
+                        <div class="tags">
+                            <span class="tag">Offline-First</span>
+                            <span class="tag">SaaS</span>
+                            <span class="tag">Mobile</span>
+                        </div>
+                    </a>
 
-<div class="settings-fab">
-    <button id="themeBtn" class="fab-btn" aria-label="Toggle Theme" title="Toggle Theme">🌓</button>
-    <button id="fontInc" class="fab-btn" aria-label="Increase Font" title="Increase Font Size">A+</button>
-    <button id="fontDec" class="fab-btn" aria-label="Decrease Font" title="Decrease Font Size">A-</button>
-</div>
+                    <a href="https://tryitinero.com" class="project-item">
+                        <div class="project-header">
+                            <span class="project-title">Itinero</span>
+                            <span class="project-link-icon">Visit ↗</span>
+                        </div>
+                        <span class="project-desc">Generates custom itineraries based on budget to help travelers
+                            explore Africa.</span>
+                        <div class="tags">
+                            <span class="tag">AI</span>
+                            <span class="tag">Travel</span>
+                        </div>
+                    </a>
 
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+                    <a href="https://amigolease.com" class="project-item">
+                        <div class="project-header">
+                            <span class="project-title">Amigo Lease</span>
+                            <span class="project-link-icon">Visit ↗</span>
+                        </div>
+                        <span class="project-desc">Roommate-matching app connecting users by budget, area, and
+                            lifestyle.</span>
+                        <div class="tags">
+                            <span class="tag">Marketplace</span>
+                            <span class="tag">Real Estate</span>
+                        </div>
+                    </a>
 
-    // Theme Logic
-    const root = document.documentElement;
-    const themeBtn = document.getElementById('themeBtn');
-    const themeKey = 'max-refined-theme';
+                    <a href="https://motorambos.com" class="project-item">
+                        <div class="project-header">
+                            <span class="project-title">Motor Ambos</span>
+                            <span class="project-link-icon">Visit ↗</span>
+                        </div>
+                        <span class="project-desc">Connecting car owners with nearby verified mechanics for fast
+                            repairs.</span>
+                        <div class="tags">
+                            <span class="tag">Service Aggregator</span>
+                            <span class="tag">Geo-location</span>
+                        </div>
+                    </a>
 
-    function applyTheme(theme) {
-        root.setAttribute('data-theme', theme);
-        localStorage.setItem(themeKey, theme);
-        themeBtn.textContent = theme === 'dark' ? '🌙' : (theme === 'light' ? '☀️' : '🌓');
-    }
+                    <a href="https://stageandbloom.co" class="project-item">
+                        <div class="project-header">
+                            <span class="project-title">Stage & Bloom</span>
+                            <span class="project-link-icon">Visit ↗</span>
+                        </div>
+                        <span class="project-desc">Platform to discover and book trusted vendors for weddings and
+                            events.</span>
+                        <div class="tags">
+                            <span class="tag">Booking System</span>
+                            <span class="tag">Discovery</span>
+                        </div>
+                    </a>
 
-    applyTheme(localStorage.getItem(themeKey) || 'auto');
+                </div>
+            </section>
 
-    themeBtn.addEventListener('click', () => {
-        const current = root.getAttribute('data-theme') || 'auto';
-        const next = current === 'auto' ? 'light' : current === 'light' ? 'dark' : 'auto';
-        applyTheme(next);
-    });
+            <section id="ventures">
+                <h2>Ventures</h2>
+                <div class="list-group">
+                    <a href="https://minutes2match.com/" class="project-item">
+                        <div class="project-header">
+                            <span class="project-title">Minutes 2 Match</span>
+                            <span class="project-link-icon">Visit ↗</span>
+                        </div>
+                        <span class="project-desc">Themed speed dating experiences for meaningful connections.</span>
+                    </a>
+                    <a href="https://voltapinefarms.com/" class="project-item">
+                        <div class="project-header">
+                            <span class="project-title">Vita & Pine Farms</span>
+                            <span class="project-link-icon">Visit ↗</span>
+                        </div>
+                        <span class="project-desc">Providing fresh, healthy produce year-round at affordable
+                            prices.</span>
+                    </a>
+                </div>
+            </section>
 
-    // Font Size Logic
-    const fontInc = document.getElementById('fontInc');
-    const fontDec = document.getElementById('fontDec');
-    const fontKey = 'max-refined-font';
+            <section id="writing">
+                <h2>Writing</h2>
+                <div class="list-group">
+                    <a href="https://open.substack.com/pub/mcofie/p/maybe-our-way-out-is-through-entrepreneurship"
+                        class="writing-item">
+                        <span class="writing-title">Maybe our way out is through entrepreneurship</span>
+                        <span class="writing-date">Mar 18, 2025</span>
+                    </a>
+                    <a href="https://open.substack.com/pub/mcofie/p/a-furniture-piece-for-changing-times"
+                        class="writing-item">
+                        <span class="writing-title">A Furniture Piece for Changing Times</span>
+                        <span class="writing-date">Mar 14, 2025</span>
+                    </a>
+                    <a href="https://open.substack.com/pub/mcofie/p/how-i-ended-up-with-a-12-acre-cassava"
+                        class="writing-item">
+                        <span class="writing-title">How I Ended Up with a 12-Acre Cassava Farm</span>
+                        <span class="writing-date">Mar 14, 2025</span>
+                    </a>
+                </div>
+            </section>
 
-    function applyFont(px) {
-        const size = Math.max(15, Math.min(22, px));
-        document.documentElement.style.setProperty('--base-size', size + 'px');
-        localStorage.setItem(fontKey, String(size));
-    }
+            <section id="contact">
+                <h2>Contact</h2>
+                <p>I'm always open to discussing new projects or just chatting about tech in Africa.</p>
+                <div class="contact-links">
+                    <a href="mailto:maxwcofie@gmail.com">Email</a>
+                    <a href="https://github.com/mcofie">GitHub</a>
+                    <a href="https://www.linkedin.com/in/maxwell-cofie/">LinkedIn</a>
+                    <a href="https://x.com/maxwellcofie">X (Twitter)</a>
+                    <a href="https://www.instagram.com/mcofie/">Instagram</a>
+                    <a href="dev/">Dev</a>
+                </div>
+            </section>
+        </main>
 
-    applyFont(parseInt(localStorage.getItem(fontKey) || '16', 10));
+        <footer>
+            © <span id="year"></span> Maxwell Nii Offei Cofie
+        </footer>
+    </div>
 
-    fontInc.addEventListener('click', () => {
-        const cur = parseInt(getComputedStyle(root).getPropertyValue('--base-size'));
-        applyFont(cur + 1);
-    });
-    fontDec.addEventListener('click', () => {
-        const cur = parseInt(getComputedStyle(root).getPropertyValue('--base-size'));
-        applyFont(cur - 1);
-    });
-</script>
+    <div class="settings-fab">
+        <button id="themeBtn" class="fab-btn" aria-label="Toggle Theme" title="Toggle Theme">🌓</button>
+        <button id="fontInc" class="fab-btn" aria-label="Increase Font" title="Increase Font Size">A+</button>
+        <button id="fontDec" class="fab-btn" aria-label="Decrease Font" title="Decrease Font Size">A-</button>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme Logic
+        const root = document.documentElement;
+        const themeBtn = document.getElementById('themeBtn');
+        const themeKey = 'max-refined-theme';
+
+        function applyTheme(theme) {
+            root.setAttribute('data-theme', theme);
+            localStorage.setItem(themeKey, theme);
+            themeBtn.textContent = theme === 'dark' ? '🌙' : (theme === 'light' ? '☀️' : '🌓');
+        }
+
+        applyTheme(localStorage.getItem(themeKey) || 'auto');
+
+        themeBtn.addEventListener('click', () => {
+            const current = root.getAttribute('data-theme') || 'auto';
+            const next = current === 'auto' ? 'light' : current === 'light' ? 'dark' : 'auto';
+            applyTheme(next);
+        });
+
+        // Font Size Logic
+        const fontInc = document.getElementById('fontInc');
+        const fontDec = document.getElementById('fontDec');
+        const fontKey = 'max-refined-font';
+
+        function applyFont(px) {
+            const size = Math.max(15, Math.min(22, px));
+            document.documentElement.style.setProperty('--base-size', size + 'px');
+            localStorage.setItem(fontKey, String(size));
+        }
+
+        applyFont(parseInt(localStorage.getItem(fontKey) || '16', 10));
+
+        fontInc.addEventListener('click', () => {
+            const cur = parseInt(getComputedStyle(root).getPropertyValue('--base-size'));
+            applyFont(cur + 1);
+        });
+        fontDec.addEventListener('click', () => {
+            const cur = parseInt(getComputedStyle(root).getPropertyValue('--base-size'));
+            applyFont(cur - 1);
+        });
+    </script>
 </body>
+
 </html>
