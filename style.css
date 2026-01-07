@@ -432,10 +432,13 @@ p,
     }
 
     .proj-meta {
-        display: block;
+        display: flex;
+        justify-content: flex-start;
         text-align: left;
-        margin-top: 6px;
+        margin-top: 8px;
         opacity: 0.6;
+        width: 100%;
+        flex-wrap: wrap;
     }
 }
 
@@ -496,6 +499,10 @@ p,
     color: var(--text-tertiary);
     text-align: right;
     font-variant-numeric: tabular-nums;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
 }
 
 /* Stagger delays */
@@ -1032,15 +1039,11 @@ dialog::backdrop {
     letter-spacing: 0.08em;
     padding: 3px 8px;
     border-radius: 99px;
-    /* Pill shape */
-    margin-left: 8px;
-    vertical-align: middle;
-    font-weight: 600;
-
     /* Default (Monochrome) */
     background: var(--surface);
     color: var(--text-muted);
     border: 1px solid transparent;
+    line-height: 1;
 }
 
 /* Color Themes (Subtle/Pastel) */
@@ -1062,6 +1065,46 @@ dialog::backdrop {
 .post-category.product {
     background: rgba(52, 199, 89, 0.1);
     color: #28CD41;
+}
+
+.post-category.thoughts {
+    background: rgba(255, 45, 85, 0.1);
+    color: #FF2D55;
+}
+
+.post-category.tutorial {
+    background: rgba(48, 176, 199, 0.1);
+    color: #30B0C7;
+}
+
+.post-category.news {
+    background: rgba(88, 86, 214, 0.1);
+    color: #5856D6;
+}
+
+.post-category.business {
+    background: rgba(142, 142, 147, 0.1);
+    color: #8E8E93;
+}
+
+.post-category.technology {
+    background: rgba(0, 199, 190, 0.1);
+    color: #00C7BE;
+}
+
+.post-category.travel {
+    background: rgba(255, 204, 0, 0.1);
+    color: #FFCC00;
+}
+
+.post-category.africa {
+    background: rgba(162, 132, 94, 0.1);
+    color: #A2845E;
+}
+
+.post-category.lifestyle {
+    background: rgba(50, 173, 230, 0.1);
+    color: #32ADE6;
 }
 
 /* Dark Mode Adjustments provided automatically by opacity */
@@ -1301,6 +1344,29 @@ pre:hover .copy-btn {
     border-color: var(--border-color);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     transform: translateY(-1px);
+}
+
+.show-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    padding: 8px 12px;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.show-more-btn:hover {
+    color: var(--text-main);
+}
+
+.show-more-btn span {
+    display: inline-block;
 }
 
 .intro-action-btn span {

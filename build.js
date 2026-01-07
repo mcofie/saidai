@@ -100,7 +100,7 @@ const HTML_TEMPLATE = `<!doctype html>
     <!-- Readability Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,200..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="../../style.css?v=2">
+    <link rel="stylesheet" href="../../style.css?v=6">
     
     <style>
         /* FOUC fix for i18n */
@@ -170,6 +170,7 @@ const HTML_TEMPLATE = `<!doctype html>
             padding-bottom: 24px;
         }
 
+        .post-date::before,
         .reading-time::before {
              content: "•";
              margin-right: 16px;
@@ -372,6 +373,7 @@ const HTML_TEMPLATE = `<!doctype html>
     <article>
         <h1>{{TITLE}}</h1>
         <div class="post-meta-row">
+            <span class="post-author">{{AUTHOR}}</span>
             <span class="post-date">{{DATE}}</span>
             <span class="reading-time">{{READ_TIME}} min read</span>
             {{CATEGORY_TAG}}
@@ -446,6 +448,7 @@ console.log('--- Generating Posts ---');
 posts.forEach(post => {
     let html = HTML_TEMPLATE
         .replace(/{{TITLE}}/g, post.title)
+        .replace(/{{AUTHOR}}/g, post.author || 'Maxwell Cofie')
         .replace(/{{DATE}}/g, post.date)
         .replace(/{{ISO_DATE}}/g, new Date(post.isoDate).toISOString())
         .replace(/{{DESCRIPTION}}/g, post.description)
@@ -549,12 +552,14 @@ const INDEX_HTML = `<!doctype html>
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">${post.title}</span>
-                         ${post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : ''}
                         <span class="arrow">→</span>
                     </div>
                     <span class="proj-desc">${post.description}</span>
                 </div>
-                <div class="proj-meta">${post.date}</div>
+                <div class="proj-meta">
+                     ${post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : ''}
+                     <span>${post.date}</span>
+                </div>
             </a>
             `).join('')}
         </div>
@@ -607,12 +612,14 @@ const latestPostsHTML = `<!-- WRITING_LIST_START -->
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">${post.title}</span>
-                        ${post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : ''}
                         <span class="arrow">→</span>
                     </div>
                     <span class="proj-desc">${post.description}</span>
                 </div>
-                <div class="proj-meta">${post.date}</div>
+                <div class="proj-meta">
+                    ${post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : ''}
+                    <span>${post.date}</span>
+                </div>
             </a>
             `).join('')}
              <!-- Fallback Substack Link (Optional) -->

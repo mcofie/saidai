@@ -47,12 +47,21 @@ Posts are automatically tagged based on the `category` field in the Front Matter
 -   **Engineering** (Blue)
 -   **Design** (Purple)
 -   **Product** (Green)
+-   **Thoughts** (Pink/Rose)
+-   **Tutorial** (Teal)
+-   **News** (Indigo)
+-   **Business** (Slate Gray)
+-   **Technology** (Turquoise)
+-   **Travel** (Yellow)
+-   **Africa** (Earth)
+-   **Lifestyle** (Sky Blue)
 -   *Others* (Gray default)
 
 ### 2. Writing Content
 
 Navigate to `content/posts/` and open your newly created file. Write your post using standard Markdown. The generator supports:
 -   **Code Highlighting**: Automatic syntax highlighting via `highlight.js`.
+-   **Video Embeds**: Use standard Markdown image syntax (`![alt](video.mp4)`) to embed standard video formats.
 -   **Front Matter**: Metadata configuration at the top of the file.
 
 ### 3. Building the Site
@@ -69,9 +78,26 @@ This script performs the following actions:
 -   **Updates Indices**:
     -   Updates the **Writing** page (`writing/index.html`) with the full list of posts.
     -   Updates the **Homepage** (`index.html`) to feature the 3 most recent posts.
--   **Generates Feeds**:
     -   `rss.xml` for blog subscribers.
     -   `sitemap.xml` for SEO.
+
+## ✨ Features
+
+### Multimedia Support
+The generator extends the default Markdown renderer. You can embed videos directly using standard image syntax. If the file extension is `.mp4`, `.webm`, or `.mov`, it will automatically render as a responsive HTML5 video player.
+
+### Reader Mode
+Blog posts come equipped with tools for long-form reading:
+-   **Progress Bar**: Visual indicator of reading progress at the top of the viewport.
+-   **Font Toggle**: Switch between **Inter** (Sans-Serif) and **Newsreader** (Serif) for optimal reading comfort.
+-   **Back to Top**: Quick navigation control.
+
+### Localization (i18n)
+The site supports client-side localization for **English**, **French**, and **Spanish**. Text replacement is handled via `locale.js` based on `data-i18n` attributes.
+
+### Theming
+-   **Dark Mode**: Respects system preferences by default, with a manual toggle (sun/moon) saved to `localStorage`.
+-   **Design System**: Built on a "Swiss/Ultra-Minimal" aesthetic with refined typography and strict spacing.
 
 ## 📂 Project Structure
 
