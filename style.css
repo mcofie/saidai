@@ -1806,3 +1806,53 @@ th .post-video {
     font-size: 12px;
     color: var(--text-muted);
 }
+
+/* Section Headers with See More */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+    margin-top: 60px;
+    border-bottom: 1px solid var(--border-color);
+    /* Underline the whole header */
+    padding-bottom: 12px;
+}
+
+.section-header .section-label {
+    margin-top: 0;
+    margin-bottom: 0;
+    width: auto;
+    border-bottom: none;
+    /* Remove individual label underline */
+    padding-bottom: 0;
+}
+
+.see-more-link {
+    color: var(--text-muted);
+    /* Slightly darker than tertiary */
+    text-decoration: none;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.see-more-link::after {
+    content: "→";
+    transition: transform 0.2s ease;
+}
+
+.see-more-link:hover {
+    color: var(--text-main);
+    background-color: var(--surface);
+}
+
+.see-more-link:hover::after {
+    transform: translateX(4px);
+}

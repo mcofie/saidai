@@ -63,7 +63,7 @@
     <nav>
         <a href="./" class="logo">Maxwell Cofie</a>
         <div class="nav-links">
-            <a href="./" class="nav-link active" data-i18n="nav.work">Work</a>
+            <a href="work/" class="nav-link" data-i18n="nav.work">Work</a>
             <a href="ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
 
             <a href="writing/" class="nav-link" data-i18n="nav.writing">Writing</a>
@@ -121,190 +121,73 @@
 
 
 
-        <div class="section-label" data-i18n="section.selected_works">Selected Works</div>
-
-        <div class="project-list">
-
-            <!-- Amigo Lease -->
-            <a href="https://amigolease.com" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-left">
-                    <div class="proj-header">
-                        <span class="proj-title">Amigo Lease <span class="year-label">(2025)</span></span>
-                        <span class="arrow">↗</span>
-                    </div>
-                    <span class="proj-desc" data-i18n="proj.amigo">Verified roommate finder.</span>
-                </div>
-                <div class="proj-meta" data-i18n="meta.marketplace">Marketplace</div>
-            </a>
-
-            <!-- GatePass -->
-            <a href="https://gatepass.so" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-left">
-                    <div class="proj-header">
-                        <span class="proj-title">GatePass <span class="year-label">(2025)</span></span>
-                        <span class="arrow">↗</span>
-                    </div>
-                    <span class="proj-desc" data-i18n="proj.gatepass">First video-powered marketplace for events.</span>
-                </div>
-                <div class="proj-meta" data-i18n="meta.marketplace">Marketplace</div>
-            </a>
-
-            <!-- HappeningNow -->
-            <a href="https://happeningnow.online/" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-left">
-                    <div class="proj-header">
-                        <span class="proj-title">HappeningNow <span class="year-label">(2025)</span></span>
-                        <span class="arrow">↗</span>
-                    </div>
-                    <span class="proj-desc" data-i18n="proj.happening">A real-time "Departure Board" for live
-                        events.</span>
-                </div>
-                <div class="proj-meta" data-i18n="meta.eventtech">Event Tech</div>
-            </a>
-
-            <!-- Itinero -->
-            <a href="https://tryitinero.com" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-left">
-                    <div class="proj-header">
-                        <span class="proj-title">Itinero <span class="year-label">(2025)</span></span>
-                        <span class="arrow">↗</span>
-                    </div>
-                    <span class="proj-desc" data-i18n="proj.itinero">AI-powered travel planner for Africa.</span>
-                </div>
-                <div class="proj-meta" data-i18n="meta.aitravel">AI Travel</div>
-            </a>
-
-            <!-- Knitted -->
-            <a href="https://getknitted.app" target="_blank" class="project-item" data-category="solution">
-                <div class="proj-left">
-                    <div class="proj-header">
-                        <span class="proj-title">Knitted <span class="year-label">(2020)</span></span>
-                        <span class="arrow">↗</span>
-                    </div>
-                    <span class="proj-desc" data-i18n="proj.knitted">Business OS for tailors to record
-                        measurements.</span>
-                </div>
-                <div class="proj-meta" data-i18n="meta.saas">SaaS</div>
-            </a>
-
-            <!-- LazyPick -->
-            <a href="https://lazypick.app" target="_blank" class="project-item extra-project" data-category="solution"
-                style="display: none;">
-                <div class="proj-left">
-                    <div class="proj-header">
-                        <span class="proj-title">LazyPick <span class="year-label">(2025)</span></span>
-                        <span class="arrow">↗</span>
-                    </div>
-                    <span class="proj-desc" data-i18n="proj.lazypick">Solving decision paralysis for movies &
-                        food.</span>
-                </div>
-                <div class="proj-meta" data-i18n="meta.lifestyle">Lifestyle App</div>
-            </a>
-
-            <!-- Motor Ambos -->
-            <a href="https://motorambos.com" target="_blank" class="project-item extra-project" data-category="solution"
-                style="display: none;">
-                <div class="proj-left">
-                    <div class="proj-header">
-                        <span class="proj-title">Motor Ambos <span class="year-label">(2025)</span></span>
-                        <span class="arrow">↗</span>
-                    </div>
-                    <span class="proj-desc" data-i18n="proj.motorambos">Connecting car owners with mechanics.</span>
-                </div>
-                <div class="proj-meta" data-i18n="meta.service">Service</div>
-            </a>
-
-            <!-- Stage & Bloom -->
-            <a href="https://stageandbloom.co" target="_blank" class="project-item extra-project"
-                data-category="solution" style="display: none;">
-                <div class="proj-left">
-                    <div class="proj-header">
-                        <span class="proj-title">Stage & Bloom <span class="year-label">(2025)</span></span>
-                        <span class="arrow">↗</span>
-                    </div>
-                    <span class="proj-desc" data-i18n="proj.stage">Vendor discovery platform for events.</span>
-                </div>
-                <div class="proj-meta" data-i18n="meta.platform">Platform</div>
-            </a>
-
-            <div id="showMoreContainer" style="margin-top: 16px; margin-bottom: 24px; text-align: center;">
-                <button onclick="toggleMoreProjects()" class="show-more-btn">
-                    <span data-i18n="home.show_more">Show More</span>
-                    <span>↓</span>
-                </button>
-            </div>
-
+        <div class="section-header">
+            <div class="section-label" data-i18n="section.selected_works">Selected Works</div>
+            <a href="work/" class="see-more-link" data-i18n="home.show_more">Show More</a>
         </div>
 
+        <div id="project-list" class="project-list"></div>
 
-
-
-        <div class="section-label" data-i18n="section.initiatives">Initiatives</div>
-        <div class="project-list">
-            <a href="https://sandboxreseau.com/" target="_blank" class="project-item" data-category="initiative">
-                <div class="proj-left">
-                    <div class="proj-header">
-                        <span class="proj-title">Sandbox Reseau <span class="year-label">(2025)</span></span>
-                        <span class="arrow">↗</span>
-                    </div>
-                    <span class="proj-desc" data-i18n="proj.sandbox">Digital network connecting creators.</span>
-                </div>
-                <div class="proj-meta" data-i18n="meta.community">Community</div>
-            </a>
+        <div class="section-header">
+            <div class="section-label" data-i18n="section.writing">Writing</div>
+            <a href="writing/" class="see-more-link" data-i18n="home.show_more">Show More</a>
         </div>
-
-
-        <div class="section-label" data-i18n="section.writing">Writing</div>
         <!-- WRITING_LIST_START -->
         <div class="project-list">
-            
-            <a href="posts/wrapped-reflection-and-the-art-of-intentional-product-design/" class="project-item" data-category="writing">
+
+            <a href="posts/wrapped-reflection-and-the-art-of-intentional-product-design/" class="project-item"
+                data-category="writing">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">Wrapped, Reflection, and the Art of Intentional Product Design</span>
                         <span class="arrow">→</span>
                     </div>
-                    <span class="proj-desc">An exploration of the “Wrapped” phenomenon and the product thinking behind turning user data into stories that actually matter.</span>
+                    <span class="proj-desc">An exploration of the “Wrapped” phenomenon and the product thinking behind
+                        turning user data into stories that actually matter.</span>
                 </div>
                 <div class="proj-meta">
                     <span class="post-category thoughts">Thoughts</span>
                     <span>Jan 2026</span>
                 </div>
             </a>
-            
+
             <a href="posts/gatepass-the-tiktok-for-modern-day-events/" class="project-item" data-category="writing">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">GatePass: The TikTok for Modern-Day Events</span>
                         <span class="arrow">→</span>
                     </div>
-                    <span class="proj-desc">A reflection on why experience, energy, and short-form video now play a central role in how people discover and choose events.</span>
+                    <span class="proj-desc">A reflection on why experience, energy, and short-form video now play a
+                        central role in how people discover and choose events.</span>
                 </div>
                 <div class="proj-meta">
                     <span class="post-category product">Product</span>
                     <span>Jan 2026</span>
                 </div>
             </a>
-            
+
             <a href="posts/my-journey-to-the-west-ivory-coast-abidjan/" class="project-item" data-category="writing">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">My Journey to the West: Ivory Coast Abidjan</span>
                         <span class="arrow">→</span>
                     </div>
-                    <span class="proj-desc">A first-time visit to Abidjan that sparked reflections on language, mobility, mobile money, and the complexities of building and scaling digital products across Africa.</span>
+                    <span class="proj-desc">A first-time visit to Abidjan that sparked reflections on language,
+                        mobility, mobile money, and the complexities of building and scaling digital products across
+                        Africa.</span>
                 </div>
                 <div class="proj-meta">
                     <span class="post-category travel & technology">Travel & Technology</span>
                     <span>Jan 2026</span>
                 </div>
             </a>
-            
-             <!-- Fallback Substack Link (Optional) -->
-             <a href="https://open.substack.com/pub/mcofie" target="_blank" class="project-item" data-category="writing">
+
+            <!-- Fallback Substack Link (Optional) -->
+            <a href="https://open.substack.com/pub/mcofie" target="_blank" class="project-item" data-category="writing">
                 <div class="proj-left">
                     <div class="proj-header">
-                        <span class="proj-title" style="color: var(--text-tertiary);" data-i18n="writing.archives">Archives (Substack)</span>
+                        <span class="proj-title" style="color: var(--text-tertiary);"
+                            data-i18n="writing.archives">Archives (Substack)</span>
                         <span class="arrow">↗</span>
                     </div>
                 </div>
@@ -324,7 +207,17 @@
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
     </footer>
+    <script src="data.js"></script>
     <script src="locale.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects('project-list', {
+                limit: 3,
+                randomize: true,
+                persistRandom: true
+            });
+        });
+    </script>
 
 
 

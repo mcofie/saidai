@@ -18,7 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.playStory = playStory;
     window.closeVideo = closeVideo;
     window.triggerCelebration = triggerCelebration; // Kept for Konami
-    window.toggleMoreProjects = toggleMoreProjects;
+    // window.renderProjects is now exposed globally at the bottom of the file
+    // No need to do it here inside the listener if it's defined at top level scope
+
 
 });
 
@@ -265,23 +267,98 @@ function initShareButton() {
 }
 
 /* =========================================
-   7. HOMEPAGE SHOW MORE
+   7. PROJECT RENDERING
    ========================================= */
-function toggleMoreProjects() {
-    const extras = document.querySelectorAll('.extra-project');
-    const btnContainer = document.getElementById('showMoreContainer');
+/* =========================================
+   7. PROJECT RENDERING
+   ========================================= */
+/**
+ * Renders a list of projects into a container.
+ * @param {string} containerId - The ID of the container element.
+ * @param {Object} options - Options for rendering.
+ * @param {Array} [options.dataSource] - specific array of projects to use (defaults to window.allProjects)
+ * @param {number} [options.limit] - max number of items to show
+ * @param {boolean} [options.randomize] - whether to shuffle the list
+ * @param {boolean} [options.persistRandom] - if true, saves/loads the random selection from sessionStorage (for homepage)
+ */
+function renderProjects(containerId, options = {}) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-    extras.forEach((el, index) => {
-        el.style.display = ''; // Reverts to CSS (grid/block)
-        el.style.animation = 'none';
-        el.offsetHeight; /* trigger reflow */
-        el.style.animation = `slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s forwards`;
+    // Default to all projects if no specific source provided
+    let items = options.dataSource ? [...options.dataSource] : (window.allProjects ? [...window.allProjects] : []);
+
+    if (items.length === 0) return;
+
+    // Handle Randomization
+    if (options.randomize) {
+        if (options.persistRandom) {
+            // Try to get cached order for session consistency
+            const storedOrder = sessionStorage.getItem('hp_project_order');
+            if (storedOrder) {
+                const ids = JSON.parse(storedOrder);
+                // Sort items based on the saved ID list
+                // We map the IDs back to the item objects. 
+                // Filter ensures if we removed a project from data.js it doesn't break.
+                const orderedItems = ids.map(id => items.find(i => i.id === id)).filter(Boolean);
+
+                // If we have items (and data hasn't drastically changed), use them.
+                // Otherwise fall back to new random.
+                if (orderedItems.length > 0) {
+                    items = orderedItems;
+                } else {
+                    items.sort(() => 0.5 - Math.random());
+                    sessionStorage.setItem('hp_project_order', JSON.stringify(items.map(i => i.id)));
+                }
+            } else {
+                // New random order
+                items.sort(() => 0.5 - Math.random());
+                sessionStorage.setItem('hp_project_order', JSON.stringify(items.map(i => i.id)));
+            }
+        } else {
+            // Pure random (no stickiness)
+            items.sort(() => 0.5 - Math.random());
+        }
+    }
+
+    // Apply Limit
+    if (options.limit) {
+        items = items.slice(0, options.limit);
+    }
+
+    container.innerHTML = '';
+
+    items.forEach((proj, index) => {
+        const item = document.createElement('a');
+        item.href = proj.url;
+        item.target = '_blank';
+        item.className = 'project-item';
+        item.setAttribute('data-category', proj.category);
+
+        // Stagger animation
+        item.style.animation = `slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s forwards`;
+
+        item.innerHTML = `
+            <div class="proj-left">
+                <div class="proj-header">
+                    <span class="proj-title">${proj.title} <span class="year-label">(${proj.year})</span></span>
+                    <span class="arrow">↗</span>
+                </div>
+                <span class="proj-desc" data-i18n="${proj.descKey}">Loading...</span>
+            </div>
+            <div class="proj-meta" data-i18n="${proj.metaKey}">Type</div>
+        `;
+        container.appendChild(item);
     });
 
-    if (btnContainer) {
-        btnContainer.style.display = 'none';
+    // Re-apply current language
+    const currentLang = localStorage.getItem('lang') || 'en';
+    if (typeof setLanguage === 'function') {
+        setLanguage(currentLang);
     }
 }
+// Explicitly expose to window to be safe across different script loading contexts
+window.renderProjects = renderProjects;
 
 /* =========================================
    8. LIGHTBOX
