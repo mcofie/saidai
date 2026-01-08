@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Wrapped, Reflection, and the Art of Intentional Product Design | Maxwell Cofie</title>
     <meta name="description" content="An exploration of the “Wrapped” phenomenon and the product thinking behind turning user data into stories that actually matter.">
-    <link rel="canonical" href="https://maxwellcofie.com/posts/wrapped-reflection-and-the-art-of-intentional-product-design/">
+    <link rel="canonical" href="https://maxwellcofie.com/posts/wrapped-reflection-and-the-art-of-intentional-product-design//">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇬🇭</text></svg>">
     <!-- View Transitions -->
     <meta name="view-transition" content="same-origin" />
@@ -92,6 +92,19 @@
              content: "•";
              margin-right: 16px;
              opacity: 0.4;
+        }
+
+        @media (max-width: 600px) {
+            .post-meta-row {
+                flex-wrap: wrap;
+                gap: 8px 12px; /* Row gap 8px, Col gap 12px */
+                line-height: 1.6;
+            }
+            
+            .post-date::before,
+            .reading-time::before {
+                 margin-right: 8px;
+            }
         }
 
         .post-content {
@@ -256,7 +269,7 @@
       "datePublished": "2026-01-07T00:00:00.000Z",
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://maxwellcofie.com/posts/wrapped-reflection-and-the-art-of-intentional-product-design/"
+        "@id": "https://maxwellcofie.com/posts/wrapped-reflection-and-the-art-of-intentional-product-design//"
       }
     }
     </script>
@@ -343,6 +356,46 @@ A couple of years ago, I had the idea that Netflix could introduce a “Wrapped�
 <p>Not every product needs a year-in-review feature, and forcing one often does more harm than good. The real work of product thinking is knowing when a feature adds meaning to a user’s journey and when it’s just noise.</p>
 <p>In the case of Itinero, travel is inherently reflective. People naturally want to look back at where they’ve been, what they’ve explored, and how they’ve moved through the world. When builders lead with empathy and storytelling, engagement becomes a by-product, not the goal.</p>
 
+        </div>
+
+        <div class="post-footer">
+            <div class="share-row">
+                <span class="share-label">Share this post</span>
+                <button class="share-btn" id="copyLinkBtn">
+                    🔗 Copy Link
+                </button>
+                <a href="https://twitter.com/intent/tweet?text=Wrapped, Reflection, and the Art of Intentional Product Design&url=https://maxwellcofie.com/posts/wrapped-reflection-and-the-art-of-intentional-product-design/" target="_blank" class="share-btn">
+                    Twitter
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://maxwellcofie.com/posts/wrapped-reflection-and-the-art-of-intentional-product-design/" target="_blank" class="share-btn">
+                    LinkedIn
+                </a>
+            </div>
+
+            <div class="subscribe-box">
+                <div class="sub-title">Enjoyed this reading?</div>
+                <div class="sub-desc">I write about product, design, and building in Africa. Subscribe to my Substack to get updates.</div>
+                <a href="https://open.substack.com/pub/mcofie" target="_blank" class="sub-btn">Subscribe on Substack</a>
+            </div>
+        </div>
+        
+        <div class="related-section">
+            <div class="related-label">Read Next</div>
+            <div class="related-grid">
+                
+        <a href="../../posts/gatepass-the-tiktok-for-modern-day-events/" class="related-card">
+            <span class="related-cat">Product</span>
+            <div class="related-title">GatePass: The TikTok for Modern-Day Events</div>
+            <div class="related-date">Jan 2026</div>
+        </a>
+    
+        <a href="../../posts/my-journey-to-the-west-ivory-coast-abidjan/" class="related-card">
+            <span class="related-cat">Travel & Technology</span>
+            <div class="related-title">My Journey to the West: Ivory Coast Abidjan</div>
+            <div class="related-date">Jan 2026</div>
+        </a>
+    
+            </div>
         </div>
     </article>
     

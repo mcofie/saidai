@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initKonami();
     initCopyButtons();
     initLightbox();
+    initShareButton();
 
 
     // Expose functions required by HTML onclick attributes
@@ -238,6 +239,28 @@ function initCopyButtons() {
         });
 
         block.appendChild(btn);
+    });
+}
+
+function initShareButton() {
+    const btn = document.getElementById('copyLinkBtn');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✨ Copied!';
+                btn.classList.add('copied');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy', err);
+            });
+        }
     });
 }
 

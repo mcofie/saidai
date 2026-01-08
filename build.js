@@ -177,6 +177,19 @@ const HTML_TEMPLATE = `<!doctype html>
              opacity: 0.4;
         }
 
+        @media (max-width: 600px) {
+            .post-meta-row {
+                flex-wrap: wrap;
+                gap: 8px 12px; /* Row gap 8px, Col gap 12px */
+                line-height: 1.6;
+            }
+            
+            .post-date::before,
+            .reading-time::before {
+                 margin-right: 8px;
+            }
+        }
+
         .post-content {
             font-family: var(--post-font);
             font-size: var(--post-size); 
@@ -382,6 +395,34 @@ const HTML_TEMPLATE = `<!doctype html>
         <div class="post-content" id="postContent">
             {{CONTENT}}
         </div>
+
+        <div class="post-footer">
+            <div class="share-row">
+                <span class="share-label">Share this post</span>
+                <button class="share-btn" id="copyLinkBtn">
+                    🔗 Copy Link
+                </button>
+                <a href="https://twitter.com/intent/tweet?text={{TITLE}}&url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" class="share-btn">
+                    Twitter
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" class="share-btn">
+                    LinkedIn
+                </a>
+            </div>
+
+            <div class="subscribe-box">
+                <div class="sub-title">Enjoyed this reading?</div>
+                <div class="sub-desc">I write about product, design, and building in Africa. Subscribe to my Substack to get updates.</div>
+                <a href="https://open.substack.com/pub/mcofie" target="_blank" class="sub-btn">Subscribe on Substack</a>
+            </div>
+        </div>
+        
+        <div class="related-section">
+            <div class="related-label">Read Next</div>
+            <div class="related-grid">
+                {{RELATED_POSTS}}
+            </div>
+        </div>
     </article>
     
     <!-- Reader Controls FAB -->
@@ -446,16 +487,34 @@ const HTML_TEMPLATE = `<!doctype html>
 
 console.log('--- Generating Posts ---');
 posts.forEach(post => {
+    // Find related posts (exclude self, prioritize same category)
+    let related = posts.filter(p => p.url !== post.url && p.category === post.category);
+    if (related.length < 2) {
+        let others = posts.filter(p => p.url !== post.url && p.category !== post.category);
+        related = related.concat(others);
+    }
+    related = related.slice(0, 2);
+
+    const relatedHTML = related.map(p => `
+        <a href="../../posts/${p.url}" class="related-card">
+            <span class="related-cat">${p.category || 'Writing'}</span>
+            <div class="related-title">${p.title}</div>
+            <div class="related-date">${p.date}</div>
+        </a>
+    `).join('');
+
     let html = HTML_TEMPLATE
         .replace(/{{TITLE}}/g, post.title)
         .replace(/{{AUTHOR}}/g, post.author || 'Maxwell Cofie')
         .replace(/{{DATE}}/g, post.date)
+        .replace(/{{SLUG}}/g, post.url.replace('/index.html', ''))
         .replace(/{{ISO_DATE}}/g, new Date(post.isoDate).toISOString())
         .replace(/{{DESCRIPTION}}/g, post.description)
         .replace(/{{SLUG}}/g, post.slug)
         .replace(/{{READ_TIME}}/g, post.readTime)
         .replace(/{{CONTENT}}/g, post.htmlContent)
-        .replace(/{{CATEGORY_TAG}}/g, post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : '');
+        .replace(/{{CATEGORY_TAG}}/g, post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : '')
+        .replace(/{{RELATED_POSTS}}/g, relatedHTML);
 
     const postPath = path.join(OUTPUT_DIR, post.outputFile); // posts/slug/index.html
     const postDir = path.dirname(postPath);
