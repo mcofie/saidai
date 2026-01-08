@@ -96,12 +96,14 @@
             if (window.renderProjects) {
                 // Render Selected Works
                 window.renderProjects('works-list', {
-                    dataSource: window.works
+                    dataSource: window.works,
+                    sortAlphabetical: true
                 });
 
                 // Render Initiatives
                 window.renderProjects('initiatives-list', {
-                    dataSource: window.initiatives
+                    dataSource: window.initiatives,
+                    sortAlphabetical: true
                 });
             }
         });

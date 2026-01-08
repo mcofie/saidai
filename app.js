@@ -281,6 +281,7 @@ function initShareButton() {
  * @param {number} [options.limit] - max number of items to show
  * @param {boolean} [options.randomize] - whether to shuffle the list
  * @param {boolean} [options.persistRandom] - if true, saves/loads the random selection from sessionStorage (for homepage)
+ * @param {boolean} [options.sortAlphabetical] - if true, sorts items alphabetically by title
  */
 function renderProjects(containerId, options = {}) {
     const container = document.getElementById(containerId);
@@ -291,7 +292,12 @@ function renderProjects(containerId, options = {}) {
 
     if (items.length === 0) return;
 
-    // Handle Randomization
+    // Handle Sorting (Alphabetical)
+    if (options.sortAlphabetical) {
+        items.sort((a, b) => a.title.localeCompare(b.title));
+    }
+
+    // Handle Randomization (overrides sort if both true, but usually mutually exclusive)
     if (options.randomize) {
         if (options.persistRandom) {
             // Try to get cached order for session consistency
