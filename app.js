@@ -74,7 +74,8 @@ function initClock() {
         });
         const clockEl = document.getElementById('clock');
         if (clockEl) {
-            clockEl.textContent = timeString;
+            // Uses .innerHTML to include the dot
+            clockEl.innerHTML = `<span class="live-dot"></span>${timeString}`;
         }
     };
     updateTime();
