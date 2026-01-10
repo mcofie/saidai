@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="content changes">
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/build.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/gatepass-the-tiktok-for-modern-day-events/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/gatepass-the-tiktok-for-modern-day-events/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/wrapped-reflection-and-the-art-of-intentional-product-design/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/wrapped-reflection-and-the-art-of-intentional-product-design/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
-    </list>
+    <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="content changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,24 +43,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/maxwellcofie/WebstormProjects/saidai/assets/video",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.new-post.executor": "Run",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/maxwellcofie/WebstormProjects/saidai/assets/video&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.new-post.executor&quot;: &quot;Run&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/assets/video" />
@@ -125,39 +115,7 @@
       <workItem from="1767554887252" duration="2938000" />
       <workItem from="1767626281655" duration="14692000" />
       <workItem from="1767792170317" duration="2296000" />
-      <workItem from="1767815305409" duration="6239000" />
-    </task>
-    <task id="LOCAL-00002" summary="removed giihub workflows files">
-      <option name="closed" value="true" />
-      <created>1760648694810</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1760648694810</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Changed the sticker header">
-      <option name="closed" value="true" />
-      <created>1760649002223</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1760649002223</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Added the correct content">
-      <option name="closed" value="true" />
-      <created>1760651682048</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1760651682048</updated>
-    </task>
-    <task id="LOCAL-00005" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1760651927043</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1760651927043</updated>
+      <workItem from="1767815305409" duration="9035000" />
     </task>
     <task id="LOCAL-00006" summary="content changes">
       <option name="closed" value="true" />
@@ -519,7 +477,39 @@
       <option name="project" value="LOCAL" />
       <updated>1767823746226</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767836479306</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1767836479306</updated>
+    </task>
+    <task id="LOCAL-00052" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767870461202</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1767870461202</updated>
+    </task>
+    <task id="LOCAL-00053" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767870739622</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1767870739622</updated>
+    </task>
+    <task id="LOCAL-00054" summary="content changes">
+      <option name="closed" value="true" />
+      <created>1767870936232</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1767870936232</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
