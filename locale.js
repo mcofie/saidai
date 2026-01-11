@@ -7,7 +7,7 @@ const translations = {
         "nav.writing": "Logbook",
         "nav.back_writing": "← Logbook",
         "writing.archives": "Archives (Substack)",
-        "work.intro": "A selection of projects where I've led product design and engineering.",
+        "work.intro": "A selection of projects where I've led product design and engineering. Visit <a href='https://stage2.xyz/'>stage2.xyz</a> to read more.",
         "home.headline": "Building for African Markets. Designing for Scale.",
         "home.role": "Solutions Architect & Tinkerer",
         "home.location": "Accra, Ghana 🇬🇭",
