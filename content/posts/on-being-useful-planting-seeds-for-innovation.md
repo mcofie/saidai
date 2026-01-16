@@ -13,7 +13,7 @@ category: Thoughts
 description: "Reflecting on usefulness as the driver of legacy. How a casual conversation planted the seed for a new venture, and why problems are the raw material of innovation."
 ---
 <div class="image-grid">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,b_gen_fill,c_pad/e_enhance/r_20/ar_1:1,c_auto/Screenshot_2026-01-16_at_2.35.03_PM_agcxd0.jpg" alt="Trip photo">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_4:3,c_auto/Screenshot_2026-01-16_at_2.35.03_PM_agcxd0.jpg" alt="Trip photo">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/Screenshot_2026-01-16_at_2.54.57_PM_zb5lfo.jpg" alt="Trip photo">
 </div>
 
