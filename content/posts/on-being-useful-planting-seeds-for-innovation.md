@@ -6,12 +6,6 @@ description: "Reflecting on usefulness as the driver of legacy. How a casual con
 category: "Thoughts"
 ---
 
----
-title: "On Being Useful: Planting Seeds for Innovation"
-date: 2026-01-16
-category: Thoughts
-description: "Reflecting on usefulness as the driver of legacy. How a casual conversation planted the seed for a new venture, and why problems are the raw material of innovation."
----
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_4:3,c_auto/Screenshot_2026-01-16_at_2.35.03_PM_agcxd0.jpg" alt="Trip photo">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/Screenshot_2026-01-16_at_2.54.57_PM_zb5lfo.jpg" alt="Trip photo">
