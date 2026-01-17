@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="content changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/build.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/gatepass-the-tiktok-for-modern-day-events/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/gatepass-the-tiktok-for-modern-day-events/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" afterDir="false" />
+    <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
+      <change beforePath="$PROJECT_DIR$/content/posts/the-genesis-of-the-reseau.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/the-genesis-of-the-reseau.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/wrapped-reflection-and-the-art-of-intentional-product-design/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/wrapped-reflection-and-the-art-of-intentional-product-design/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sitemap.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/writing/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/writing/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -143,31 +137,7 @@
       <workItem from="1767815305409" duration="9035000" />
       <workItem from="1768030416813" duration="1338000" />
       <workItem from="1768156501743" duration="1016000" />
-      <workItem from="1768572908397" duration="2526000" />
-    </task>
-    <task id="LOCAL-00008" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1764480665239</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1764480665239</updated>
-    </task>
-    <task id="LOCAL-00009" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1764490183321</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1764490183321</updated>
-    </task>
-    <task id="LOCAL-00010" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1764491381714</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1764491381714</updated>
+      <workItem from="1768572908397" duration="5553000" />
     </task>
     <task id="LOCAL-00011" summary="content changes">
       <option name="closed" value="true" />
@@ -537,7 +507,31 @@
       <option name="project" value="LOCAL" />
       <updated>1768156762618</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1768575463943</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1768575463943</updated>
+    </task>
+    <task id="LOCAL-00058" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1768575655186</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1768575655186</updated>
+    </task>
+    <task id="LOCAL-00059" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1768575805239</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1768575805240</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -560,6 +554,7 @@
     <MESSAGE value="Changed the sticker header" />
     <MESSAGE value="Added the correct content" />
     <MESSAGE value="content changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="content changes" />
+    <MESSAGE value="pushed an article" />
+    <option name="LAST_COMMIT_MESSAGE" value="pushed an article" />
   </component>
 </project>
