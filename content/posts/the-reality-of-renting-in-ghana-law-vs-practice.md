@@ -6,7 +6,11 @@ description: "Analyzing Ghana's rental crisis and why government schemes fall sh
 category: "Product & Africa "
 ---
 
-[![Watch the video](https://img.youtube.com/vi/MDkBDZw5S-c/0.jpg)](https://youtu.be/MDkBDZw5S-c)
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/MDkBDZw5S-c"
+frameborder="0"
+allowfullscreen>
+</iframe>
 
 The video above clearly illustrates the challenges faced by renters in Ghana, highlighting the stark contrast between the [Rent Act, 1963 (Act 220)](https://housingfinanceafrica.org/wp-content/uploads/2025/01/RENT-ACT-1963-ACT-220.pdf), and the realities on the ground. The Rent Act was enacted to protect both tenants and landlords. However, in practice, many landlords have drifted away from its guiding principles, while enforcement by the relevant authorities remains largely ineffective. As a result, renters are often left unprotected and at the mercy of property owners.
 
