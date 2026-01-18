@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/gatepass-the-tiktok-for-modern-day-events/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/gatepass-the-tiktok-for-modern-day-events/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/on-being-useful-planting-seeds-for-innovation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/on-being-useful-planting-seeds-for-innovation/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/wrapped-reflection-and-the-art-of-intentional-product-design/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/wrapped-reflection-and-the-art-of-intentional-product-design/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sitemap.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/writing/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/writing/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/posts/the-reality-of-renting-in-ghana-law-vs-practice.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/the-reality-of-renting-in-ghana-law-vs-practice.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,23 +134,7 @@
       <workItem from="1767815305409" duration="9035000" />
       <workItem from="1768030416813" duration="1338000" />
       <workItem from="1768156501743" duration="1016000" />
-      <workItem from="1768572908397" duration="12731000" />
-    </task>
-    <task id="LOCAL-00013" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1765754208309</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1765754208309</updated>
-    </task>
-    <task id="LOCAL-00014" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1765916694568</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1765916694568</updated>
+      <workItem from="1768572908397" duration="13859000" />
     </task>
     <task id="LOCAL-00015" summary="content changes">
       <option name="closed" value="true" />
@@ -536,7 +512,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768660489755</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1768738021460</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1768738021460</updated>
+    </task>
+    <task id="LOCAL-00063" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1768738254906</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1768738254906</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
