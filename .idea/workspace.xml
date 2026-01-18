@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
-      <change beforePath="$PROJECT_DIR$/content/posts/the-genesis-of-the-reseau.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/the-genesis-of-the-reseau.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/gatepass-the-tiktok-for-modern-day-events/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/gatepass-the-tiktok-for-modern-day-events/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/on-being-useful-planting-seeds-for-innovation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/on-being-useful-planting-seeds-for-innovation/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/wrapped-reflection-and-the-art-of-intentional-product-design/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/wrapped-reflection-and-the-art-of-intentional-product-design/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sitemap.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/writing/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/writing/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,23 +142,7 @@
       <workItem from="1767815305409" duration="9035000" />
       <workItem from="1768030416813" duration="1338000" />
       <workItem from="1768156501743" duration="1016000" />
-      <workItem from="1768572908397" duration="5553000" />
-    </task>
-    <task id="LOCAL-00011" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1764492935317</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1764492935317</updated>
-    </task>
-    <task id="LOCAL-00012" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1764946012099</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1764946012099</updated>
+      <workItem from="1768572908397" duration="12731000" />
     </task>
     <task id="LOCAL-00013" summary="content changes">
       <option name="closed" value="true" />
@@ -531,7 +520,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768575805240</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1768660251357</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1768660251357</updated>
+    </task>
+    <task id="LOCAL-00061" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1768660489755</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1768660489755</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
