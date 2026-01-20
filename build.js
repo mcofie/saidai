@@ -96,8 +96,17 @@ files.forEach(file => {
     const wordCount = body.split(/\s+/).length;
     const readTime = Math.ceil(wordCount / 200);
 
+    // Normalize categories
+    let categories = [];
+    if (attributes.categories) {
+        categories = Array.isArray(attributes.categories) ? attributes.categories : [attributes.categories];
+    } else if (attributes.category) {
+        categories = [attributes.category];
+    }
+
     posts.push({
         ...attributes,
+        categories,
         slug,
         htmlContent, // This will be regenerated with IDs in the loop below properly
         readTime,
@@ -733,9 +742,14 @@ const HTML_TEMPLATE = `<!doctype html>
 console.log('--- Generating Posts ---');
 posts.forEach(post => {
     // Find related posts (exclude self, prioritize same category)
-    let related = posts.filter(p => p.url !== post.url && p.category === post.category);
+    // Find related posts (exclude self, prioritize shared category)
+    let related = posts.filter(p => {
+        if (p.url === post.url) return false;
+        return p.categories.some(c => post.categories.includes(c));
+    });
+
     if (related.length < 2) {
-        let others = posts.filter(p => p.url !== post.url && p.category !== post.category);
+        let others = posts.filter(p => p.url !== post.url && !related.includes(p));
         related = related.concat(others);
     }
     related = related.slice(0, 2);
@@ -759,7 +773,9 @@ posts.forEach(post => {
         .replace(/{{READ_TIME}}/g, post.readTime)
         .replace(/{{CONTENT}}/g, post.htmlContent)
         .replace(/{{TOC}}/g, post.tocHTML)
-        .replace(/{{CATEGORY_TAG}}/g, post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : '')
+        .replace(/{{CATEGORY_TAG}}/g, post.categories.map(cat =>
+            `<span class="post-category ${cat.toLowerCase().replace(/\s+/g, '-')}">${cat}</span>`
+        ).join(''))
         .replace(/{{RELATED_POSTS}}/g, relatedHTML);
 
     const postPath = path.join(OUTPUT_DIR, post.outputFile); // posts/slug/index.html
@@ -775,7 +791,7 @@ posts.forEach(post => {
 
 
 // 4. Update writing/index.html Index
-const categories = [...new Set(posts.map(p => p.category).filter(Boolean))].sort();
+const categories = [...new Set(posts.flatMap(p => p.categories))].sort();
 const filterHTML = `
     <div class="filter-bar">
         <button class="filter-btn active" onclick="filterPosts(this, 'all')">All</button>
@@ -852,7 +868,7 @@ const INDEX_HTML = `<!doctype html>
 
         <div class="project-list">
             ${posts.map(post => `
-            <a href="../posts/${post.url}" class="project-item" data-category="${post.category}">
+            <a href="../posts/${post.url}" class="project-item" data-category="${post.categories.join(',')}">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">${post.title}</span>
@@ -861,7 +877,7 @@ const INDEX_HTML = `<!doctype html>
                     <span class="proj-desc">${post.description}</span>
                 </div>
                 <div class="proj-meta">
-                     ${post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : ''}
+                     ${post.categories.map(cat => `<span class="post-category ${cat.toLowerCase().replace(/\s+/g, '-')}">${cat}</span>`).join('')}
                      <span>${post.date}</span>
                 </div>
             </a>
@@ -892,7 +908,7 @@ const INDEX_HTML = `<!doctype html>
                  const itemCat = item.getAttribute('data-category');
                  if (!itemCat) return; 
 
-                 if (category === 'all' || itemCat === category) {
+                 if (category === 'all' || itemCat.split(',').includes(category)) {
                      item.style.display = 'flex';
                  } else {
                      item.style.display = 'none';
@@ -921,7 +937,7 @@ const latestPostsHTML = `<!-- WRITING_LIST_START -->
                     <span class="proj-desc">${post.description}</span>
                 </div>
                 <div class="proj-meta">
-                    ${post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : ''}
+                    ${post.categories.map(cat => `<span class="post-category ${cat.toLowerCase().replace(/\s+/g, '-')}">${cat}</span>`).join('')}
                     <span>${post.date}</span>
                 </div>
             </a>

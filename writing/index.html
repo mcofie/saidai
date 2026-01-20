@@ -137,7 +137,7 @@
                     <span class="proj-desc">A first-time visit to Abidjan that sparked reflections on language, mobility, mobile money, and the complexities of building and scaling digital products across Africa.</span>
                 </div>
                 <div class="proj-meta">
-                     <span class="post-category travel & technology">Travel & Technology</span>
+                     <span class="post-category travel-&-technology">Travel & Technology</span>
                      <span>Jan 2026</span>
                 </div>
             </a>
@@ -182,7 +182,7 @@
                  const itemCat = item.getAttribute('data-category');
                  if (!itemCat) return; 
 
-                 if (category === 'all' || itemCat === category) {
+                 if (category === 'all' || itemCat.split(',').includes(category)) {
                      item.style.display = 'flex';
                  } else {
                      item.style.display = 'none';

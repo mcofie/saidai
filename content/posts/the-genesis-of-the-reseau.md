@@ -3,7 +3,7 @@ title: "The Genesis of the Sandbox Réseau"
 date: "Dec 2025"
 isoDate: "2025-12-30"
 description: "How a casual meetup led to the birth of a builder community."
-category: "Community"
+categories: "Community"
 ---
 
 <div class="image-grid">

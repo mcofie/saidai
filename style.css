@@ -1118,6 +1118,11 @@ dialog::backdrop {
     color: #32ADE6;
 }
 
+.post-category.start-up {
+    background: rgba(255, 20, 147, 0.1);
+    color: #FF1493;
+}
+
 /* Dark Mode Adjustments provided automatically by opacity */
 
 /* Copy Button */
@@ -1944,6 +1949,7 @@ th .post-video {
 .status-line .separator {
     color: var(--border-color);
 }
+
 /* --- LIKE BUTTON --- */
 .like-section {
     display: flex;
@@ -1972,7 +1978,7 @@ th .post-video {
     background: var(--bg);
     border-color: var(--text-tertiary);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     color: var(--text-main);
 }
 
@@ -1986,9 +1992,11 @@ th .post-video {
 }
 
 .like-btn.liked {
-    background: rgba(255, 0, 80, 0.05); /* Soft Red/Pink Tint */
+    background: rgba(255, 0, 80, 0.05);
+    /* Soft Red/Pink Tint */
     border-color: rgba(255, 0, 80, 0.3);
-    color: #E0245E; /* Twitter Like Color-ish */
+    color: #E0245E;
+    /* Twitter Like Color-ish */
 }
 
 [data-theme="dark"] .like-btn.liked {
@@ -2010,9 +2018,17 @@ th .post-video {
 
 /* Pulse Animation for Click */
 @keyframes likePulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.4); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .like-btn.animating svg {
@@ -2031,7 +2047,8 @@ th .post-video {
     color: var(--text-tertiary);
     font-size: 13px;
     font-weight: 500;
-    margin-left: auto; /* Push to right */
+    margin-left: auto;
+    /* Push to right */
     transition: all 0.2s;
 }
 
@@ -2065,7 +2082,7 @@ th .post-video {
 
 /* Update Post Meta Row for Alignment */
 .post-meta-row {
-  /* Should already be flex, but ensuring */
-  display: flex;
-  align-items: center;
+    /* Should already be flex, but ensuring */
+    display: flex;
+    align-items: center;
 }
