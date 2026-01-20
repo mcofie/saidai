@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initCopyButtons();
     initLightbox();
     initShareButton();
+    initLikeButton();
+    initTOC();
+    initSmartFootnotes();
+    initShareQuote();
 
 
     // Expose functions required by HTML onclick attributes
@@ -411,5 +415,263 @@ function initLightbox() {
             lightbox.classList.remove('active');
             document.body.style.overflow = '';
         }
+    });
+}
+
+/* =========================================
+   9. LIKE BUTTON LOGIC
+   ========================================= */
+function initLikeButton() {
+    // Select all like buttons on the page (top and bottom)
+    const btns = document.querySelectorAll('.js-like-btn');
+    const countEls = document.querySelectorAll('.js-like-count');
+
+    if (btns.length === 0) return;
+
+    // Assume all buttons on the page are for the same post (same slug)
+    // We grab the slug from the first one
+    const firstBtn = btns[0];
+    const slug = firstBtn.getAttribute('data-slug');
+    if (!slug) return;
+
+    const storageKey = `liked_${slug}`;
+    const isLiked = localStorage.getItem(storageKey) === 'true';
+
+    // 1. Generate Deterministic Base Count
+    let hash = 0;
+    for (let i = 0; i < slug.length; i++) {
+        hash = ((hash << 5) - hash) + slug.charCodeAt(i);
+        hash |= 0;
+    }
+    const baseCount = Math.abs(hash) % 50 + 12;
+
+    // 2. Initialize State
+    let currentCount = baseCount + (isLiked ? 1 : 0);
+
+    // Helper to update all UI elements
+    const updateUI = (liked, count, animateBtn = null) => {
+        // Update all buttons
+        btns.forEach(b => {
+            if (liked) b.classList.add('liked');
+            else b.classList.remove('liked');
+
+            if (animateBtn && b === animateBtn && liked) {
+                b.classList.add('animating');
+                setTimeout(() => b.classList.remove('animating'), 600);
+            }
+        });
+
+        // Update all counters
+        countEls.forEach(el => {
+            el.style.opacity = 0;
+            setTimeout(() => {
+                el.textContent = count;
+                el.style.opacity = 1;
+            }, 150);
+        });
+    };
+
+    // Initial Render
+    updateUI(isLiked, currentCount);
+
+    // 3. Attach Listeners
+    btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const currentlyLiked = btn.classList.contains('liked');
+
+            if (currentlyLiked) {
+                // Unlike
+                currentCount--;
+                localStorage.removeItem(storageKey);
+                updateUI(false, currentCount);
+            } else {
+                // Like
+                currentCount++;
+                localStorage.setItem(storageKey, 'true');
+
+                // Trigger Confetti
+                if (window.fireConfetti) {
+                    const rect = btn.getBoundingClientRect();
+                    const x = (rect.left + rect.width / 2) / window.innerWidth;
+                    const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+                    window.fireConfetti({
+                        origin: { x: x, y: y },
+                        particleCount: 40,
+                        startVelocity: 20,
+                        spread: 60,
+                        scalar: 0.6,
+                        ticks: 60
+                    });
+                }
+
+                updateUI(true, currentCount, btn);
+            }
+        });
+    });
+}
+
+/* =========================================
+   10. TABLE OF CONTENTS (Active State)
+   ========================================= */
+function initTOC() {
+    const tocLinks = document.querySelectorAll('.toc a');
+    const sections = document.querySelectorAll('.post-content h2, .post-content h3');
+
+    if (!tocLinks.length || !sections.length) return;
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-100px 0px -60% 0px', // Trigger when section is near top
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                // Remove active from all
+                tocLinks.forEach(link => link.classList.remove('active'));
+                // Add active to current
+                const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+}
+
+/* =========================================
+   11. SMART FOOTNOTES (Popover)
+   ========================================= */
+function initSmartFootnotes() {
+    const refs = document.querySelectorAll('.footnote-ref, sup a'); // Matches standard markdown footnotes
+    if (!refs.length) return;
+
+    // Create popover element
+    const popover = document.createElement('div');
+    popover.className = 'fn-popover';
+    document.body.appendChild(popover);
+
+    let activeRef = null;
+
+    const hidePopover = () => {
+        popover.classList.remove('active');
+        activeRef = null;
+    };
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+        if (activeRef && !activeRef.contains(e.target) && !popover.contains(e.target)) {
+            hidePopover();
+        }
+    });
+
+    refs.forEach(ref => {
+        ref.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const href = ref.getAttribute('href'); // e.g. #fn1
+            if (!href) return;
+
+            // Allow default behavior if it's not a hash link
+            if (!href.startsWith('#')) return;
+
+            const targetId = href.substring(1); // fn1
+            // Try to find the footnote content
+            // Standard markdown puts footnotes at bottom in a list
+            const targetEl = document.getElementById(targetId);
+            if (!targetEl) return;
+
+            // Get text content (strip back link arrows if any)
+            let content = targetEl.innerHTML;
+            // Remove the "return" link often present in footnotes
+            content = content.replace(/<a[^>]*class="footnote-backref"[^>]*>.*?<\/a>/g, '');
+
+            popover.innerHTML = content;
+            popover.classList.add('active');
+            activeRef = ref;
+
+            // Positioning
+            const rect = ref.getBoundingClientRect();
+            const popRect = popover.getBoundingClientRect();
+
+            // Center above the reference
+            let left = rect.left + rect.width / 2 - popRect.width / 2;
+            let top = rect.top + window.scrollY - popRect.height - 10;
+
+            // Boundary checks
+            if (left < 10) left = 10;
+            if (left + popRect.width > window.innerWidth - 10) left = window.innerWidth - popRect.width - 10;
+
+            popover.style.left = `${left}px`;
+            popover.style.top = `${top}px`;
+        });
+
+        // Optional: Hover support
+        ref.addEventListener('mouseenter', () => {
+            // We could trigger it here too, but click is often safer for mobile
+        });
+    });
+}
+
+/* =========================================
+   12. SHARE QUOTE TOOLTIP
+   ========================================= */
+function initShareQuote() {
+    const tooltip = document.getElementById('shareTooltip');
+    const article = document.querySelector('.post-content');
+    if (!tooltip || !article) return;
+
+    const handleSelection = () => {
+        const selection = window.getSelection();
+        if (selection.isCollapsed) {
+            tooltip.classList.remove('visible');
+            return;
+        }
+
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+
+        // Ensure selection is within article
+        if (!article.contains(range.commonAncestorContainer) && !range.commonAncestorContainer.contains(article)) {
+            tooltip.classList.remove('visible');
+            return;
+        }
+
+        const quote = selection.toString().trim();
+        if (quote.length < 5) return;
+
+        // Position tooltip
+        tooltip.style.left = `${rect.left + rect.width / 2}px`;
+        tooltip.style.top = `${rect.top + window.scrollY}px`;
+        tooltip.classList.add('visible');
+
+        // Store quote for click
+        tooltip.dataset.quote = quote;
+    };
+
+    document.addEventListener('mouseup', handleSelection);
+    document.addEventListener('keyup', handleSelection); // For keyboard selection
+    document.addEventListener('scroll', () => {
+        // Hide on scroll to prevent misalignment
+        if (tooltip.classList.contains('visible')) {
+            tooltip.classList.remove('visible');
+            // Deselect? No, just hide tooltip
+        }
+    });
+
+    tooltip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        const quote = tooltip.dataset.quote;
+        const url = window.location.href;
+        const twitterUrl = `https://twitter.com/intent/tweet?text="${encodeURIComponent(quote)}" — @maxwellcofie&url=${encodeURIComponent(url)}`;
+
+        window.open(twitterUrl, '_blank', 'width=550,height=420');
+        tooltip.classList.remove('visible');
     });
 }

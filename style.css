@@ -1944,3 +1944,128 @@ th .post-video {
 .status-line .separator {
     color: var(--border-color);
 }
+/* --- LIKE BUTTON --- */
+.like-section {
+    display: flex;
+    justify-content: center;
+    margin: 60px 0 40px;
+}
+
+.like-btn {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 99px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.like-btn:hover {
+    background: var(--bg);
+    border-color: var(--text-tertiary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    color: var(--text-main);
+}
+
+.like-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 2;
+    transition: all 0.3s ease;
+}
+
+.like-btn.liked {
+    background: rgba(255, 0, 80, 0.05); /* Soft Red/Pink Tint */
+    border-color: rgba(255, 0, 80, 0.3);
+    color: #E0245E; /* Twitter Like Color-ish */
+}
+
+[data-theme="dark"] .like-btn.liked {
+    background: rgba(249, 24, 128, 0.15);
+    border-color: rgba(249, 24, 128, 0.5);
+    color: #F91880;
+}
+
+.like-btn.liked svg {
+    fill: currentColor;
+    stroke: currentColor;
+    transform: scale(1.1);
+}
+
+.like-count {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+
+/* Pulse Animation for Click */
+@keyframes likePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+.like-btn.animating svg {
+    animation: likePulse 0.4s ease forwards;
+}
+
+/* --- INLINE LIKE BUTTON (TOP) --- */
+.like-btn-inline {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: auto; /* Push to right */
+    transition: all 0.2s;
+}
+
+.like-btn-inline:hover {
+    color: var(--text-main);
+    transform: translateY(-1px);
+}
+
+.like-btn-inline svg {
+    width: 16px;
+    height: 16px;
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 2;
+    transition: all 0.2s ease;
+}
+
+.like-btn-inline.liked {
+    color: #E0245E;
+}
+
+[data-theme="dark"] .like-btn-inline.liked {
+    color: #F91880;
+}
+
+.like-btn-inline.liked svg {
+    fill: currentColor;
+    stroke: currentColor;
+    transform: scale(1.1);
+}
+
+/* Update Post Meta Row for Alignment */
+.post-meta-row {
+  /* Should already be flex, but ensuring */
+  display: flex;
+  align-items: center;
+}

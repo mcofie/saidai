@@ -62,10 +62,78 @@
             color: var(--text-main);
         }
 
+        /* LAYOUT GRID FOR TOC + CONTENT */
+        .post-wrapper {
+            display: grid;
+            grid-template-columns: 1fr var(--post-max-w) 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* TOC SIDEBAR */
+        .toc-sidebar {
+            position: sticky;
+            top: 40px;
+            font-size: 13px;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            display: none; /* Hidden on small screens by default */
+        }
+        
+        @media (min-width: 1100px) {
+            .toc-sidebar { display: block; }
+        }
+
+        .toc-label {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .toc a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            border-left: 1px solid transparent;
+            padding-left: 12px;
+            display: block;
+            margin-left: -13px; /* visual align */
+        }
+
+        .toc a:hover {
+            color: var(--text-main);
+        }
+
+        .toc a.active {
+            color: var(--text-main);
+            border-left-color: var(--text-main);
+            font-weight: 500;
+        }
+        
+        .toc-level-3 {
+            padding-left: 12px;
+            font-size: 0.95em;
+        }
+
         article {
             max-width: var(--post-max-w);
-            margin: 0 auto;
+            min-width: 0; /* flex/grid fix */
             view-transition-name: article-content;
+            grid-column: 2; /* Center column */
         }
 
         h1 {
@@ -117,6 +185,11 @@
         .post-content p {
             margin-bottom: 28px;
         }
+        
+        /* Offset anchors for fixed header or spacing */
+        .post-content h2, .post-content h3 {
+            scroll-margin-top: 40px;
+        }
 
         .post-content h2 {
             font-size: 24px;
@@ -167,28 +240,124 @@
              margin: 40px 0;
              color: var(--text-main);
         }
-
-        /* Syntax Highlighting - Minimal */
-        pre {
-            background-color: var(--surface); 
-            padding: 24px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 40px -24px; /* Slight bleed */
-            font-size: 13px; 
-            font-family: 'JetBrains Mono', monospace;
+        
+        /* FOOTNOTES */
+        .footnote-ref {
+            font-size: 0.8em;
+            vertical-align: super;
+            text-decoration: none !important;
+            margin-left: 2px;
+            color: var(--text-main) !important;
+            cursor: pointer;
+        }
+        
+        /* Popover Footnote */
+        .fn-popover {
+            position: absolute;
+            background: var(--bg);
             border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            width: 300px;
+            font-size: 14px;
+            color: var(--text-main);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px) scale(0.98);
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+        
+        .fn-popover.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
         }
 
-        @media (max-width: 600px) {
-            pre {
-                margin: 32px -20px;
+        /* --- CODE BLOCKS & HEADERS --- */
+        .code-block-wrapper {
+            margin: 40px -24px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--surface); 
+            overflow: hidden;
+        }
+        
+        .code-header {
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(255,255,255,0.02);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            display: flex;
+            align-items: center;
+        }
+
+        pre {
+            background-color: transparent !important; 
+            padding: 24px;
+            margin: 0 !important;
+            border: none !important;
+            overflow-x: auto;
+            font-size: 13px; 
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* SHARE QUOTE TOOLTIP */
+        .share-tooltip {
+            position: absolute;
+            background: var(--text-main);
+            color: var(--bg);
+            padding: 8px 16px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 600;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, 10px);
+            transition: all 0.2s var(--ease-out);
+            z-index: 2000;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .share-tooltip.visible {
+            opacity: 1;
+            transform: translate(-50%, -140%); /* Sit above selection */
+            pointer-events: auto;
+        }
+        
+        .share-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid var(--text-main);
+        }
+
+        @media (max-width: 1100px) {
+            .post-wrapper {
+                 display: block; /* Stack */
+            }
+            article {
+                 min-width: 100%;
+            }
+            .code-block-wrapper {
                 border-radius: 0;
                 border-left: 0;
                 border-right: 0;
             }
         }
 
+        /* Syntax Highlighting - Minimal */
         .hljs-keyword, .hljs-selector-tag, .hljs-title, .hljs-section, .hljs-doctag, .hljs-name, .hljs-strong {
             font-weight: 500;
             color: var(--text-main);
@@ -277,6 +446,10 @@
 
 <body>
     <div class="reader-progress" id="progressBar"></div>
+    <div id="shareTooltip" class="share-tooltip">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg> 
+        Share
+    </div>
 
     <nav>
         <a href="../../" class="logo">Maxwell Cofie</a>
@@ -298,26 +471,42 @@
     </nav>
     
     <a href="../../writing/" class="back-link" data-i18n="nav.back_writing">← Logbook</a>
+    
+    <div class="post-wrapper">
+        <aside class="toc-sidebar">
+            
+        <nav class="toc">
+            <div class="toc-label">Table of Contents</div>
+            <ul>
+                <li class="toc-level-2"><a href="#choosing-abidjan">Choosing Abidjan</a></li><li class="toc-level-2"><a href="#the-journey">The Journey</a></li><li class="toc-level-2"><a href="#first-impressions-on-the-road">First Impressions on the Road</a></li><li class="toc-level-2"><a href="#the-language-reality">The Language Reality</a></li><li class="toc-level-2"><a href="#appreciating-abidjan">Appreciating Abidjan</a></li><li class="toc-level-2"><a href="#mobility-tech-convenience">Mobility, Tech & Convenience</a></li><li class="toc-level-2"><a href="#navigating-without-ride-hailing">Navigating Without Ride-Hailing</a></li><li class="toc-level-2"><a href="#payments-cash-vs-mobile-money">Payments: Cash vs Mobile Money</a></li><li class="toc-level-2"><a href="#reflections-on-scaling-in-africa">Reflections on Scaling in Africa</a></li><li class="toc-level-2"><a href="#final-thoughts">Final Thoughts</a></li>
+            </ul>
+        </nav>
+        </aside>
 
-    <article>
-        <h1>My Journey to the West: Ivory Coast Abidjan</h1>
-        <div class="post-meta-row">
-            <span class="post-author">Maxwell Cofie</span>
-            <span class="post-date">Jan 2026</span>
-            <span class="reading-time">6 min read</span>
-            <span class="post-category travel & technology">Travel & Technology</span>
-        </div>
-
-        <div class="post-content" id="postContent">
-            <blockquote>
+        <article>
+            <h1>My Journey to the West: Ivory Coast Abidjan</h1>
+            <div class="post-meta-row">
+                <span class="post-author">Maxwell Cofie</span>
+                <span class="post-date">Jan 2026</span>
+                <span class="reading-time">6 min read</span>
+                <span class="post-category travel & technology">Travel & Technology</span>
+                
+                <button class="like-btn-inline js-like-btn" aria-label="Like this post" data-slug="my-journey-to-the-west-ivory-coast-abidjan/">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span class="like-count js-like-count">--</span>
+                </button>
+            </div>
+    
+            <div class="post-content" id="postContent">
+                <blockquote>
 <p>“Max, have you visited any of the neighbouring West African countries like Benin, Togo, Burkina Faso, Ivory Coast, Nigeria, etc.?”</p>
 </blockquote>
 <p>My usual answer is a big <strong>“no”</strong>, though I’ve driven close enough to the Togo–Ghana border so that’s about as close as I’ve been. As amusing as that sounds, in December 2025, I finally decided to visit one of our neighbouring countries, just for fun.</p>
-<h2>Choosing Abidjan</h2>
-<p>I chose <strong>Abidjan, Ivory Coast</strong>. A couple of my friends had been there and sang great songs about it, so I decided to experience it for myself and maybe even sing a better song, perhaps in a different key or pitch.</p>
+<h2 id="choosing-abidjan">Choosing Abidjan</h2><p>I chose <strong>Abidjan, Ivory Coast</strong>. A couple of my friends had been there and sang great songs about it, so I decided to experience it for myself and maybe even sing a better song, perhaps in a different key or pitch.</p>
 <p>I opted to travel by road. There’s a route from Accra, through Cape Coast, to the western region of Ghana, where you’ll find the border town of <strong>Elubo</strong>.</p>
-<h2>The Journey</h2>
-<p>On <strong>27th December 2025</strong>, I headed to a cross-country bus terminal at <strong>Kwame Nkrumah Circle</strong>, Accra. The trip was meant to be an eight-hour journey, but it took about <strong>nine hours and forty minutes</strong> to reach the border due to poor road conditions caused by ongoing rehabilitation works along that stretch.</p>
+<h2 id="the-journey">The Journey</h2><p>On <strong>27th December 2025</strong>, I headed to a cross-country bus terminal at <strong>Kwame Nkrumah Circle</strong>, Accra. The trip was meant to be an eight-hour journey, but it took about <strong>nine hours and forty minutes</strong> to reach the border due to poor road conditions caused by ongoing rehabilitation works along that stretch.</p>
 <p>The border procedures were a bit tedious, and for someone who enjoys adventure and usually gets a thrill from such experiences, I wasn’t particularly keen on that part.</p>
 <p>From Elubo to Abidjan was another <strong>four-hour journey</strong> and by then, I was truly exhausted.</p>
 <div class="image-grid">
@@ -327,8 +516,7 @@
 </div>
 
 
-<h2>First Impressions on the Road</h2>
-<p>One thing that stood out as we began the Elubo–Abidjan leg of the trip was how motorable the roads were. They can indeed boast of good roads, that’s for sure.</p>
+<h2 id="first-impressions-on-the-road">First Impressions on the Road</h2><p>One thing that stood out as we began the Elubo–Abidjan leg of the trip was how motorable the roads were. They can indeed boast of good roads, that’s for sure.</p>
 <p>Minutes into the journey, I noticed that Ghana isn’t so different from Ivory Coast after all. The landscape, arable land, and vegetation looked similar to many parts of Ghana. However, that realisation was short-lived once I arrived in <strong>Abidjan proper</strong>.</p>
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_fit,h_500,w_500/IMG_8451_zijn3r" alt="Trip photo">
@@ -336,12 +524,10 @@
 </div>
 
 
-<h2>The Language Reality</h2>
-<p>It’s quite surprising that Ghana is surrounded by three French-speaking countries, yet many people back home can barely say a word in French even if held at gunpoint.</p>
+<h2 id="the-language-reality">The Language Reality</h2><p>It’s quite surprising that Ghana is surrounded by three French-speaking countries, yet many people back home can barely say a word in French even if held at gunpoint.</p>
 <p>As for me, I could only recall a few verbs I knew how to conjugate, along with some scattered words, sentences, and phrases. That was about as far as my French could take me. Yes, I studied French from elementary school through to senior high school, but you should have seen me gasping for air when my very limited French was put to the test.</p>
 <p>I quickly realised that Abidjan is a proper <strong>“we speak only French”</strong> city, with very little room for <strong>“we speak English as well.”</strong></p>
-<h2>Appreciating Abidjan</h2>
-<p>I’ll get back to the language barrier shortly, but first, let’s take a moment to appreciate the beauty of Abidjan.</p>
+<h2 id="appreciating-abidjan">Appreciating Abidjan</h2><p>I’ll get back to the language barrier shortly, but first, let’s take a moment to appreciate the beauty of Abidjan.</p>
 <p>Known as the <strong>Manhattan of Africa</strong> and the <strong>Paris of West Africa</strong>, the city lived up to its names. I was impressed by its design, thoughtfully built around numerous lagoons and water bodies. The architecture stands out, with distinctive buildings and structures, and the streets are filled with electric vehicles an encouraging sign of a city moving toward a smarter, more sustainable future.</p>
 <p>I stayed in <strong>Cocody</strong> for a couple of days and later moved to <strong>Île de Petit-Bassam</strong>, close to <strong>Koumassi</strong>.</p>
 <div class="image-grid">
@@ -352,15 +538,12 @@
 
 
 
-<h2>Mobility, Tech &amp; Convenience</h2>
-<p>One of the aspects I often observe when travelling is the level of technological advancement within a city and among its people. I usually look out for how people get around the city, how payments for goods and services are handled, and, more broadly, anything designed to make life more convenient.</p>
+<h2 id="mobility-tech-convenience">Mobility, Tech & Convenience</h2><p>One of the aspects I often observe when travelling is the level of technological advancement within a city and among its people. I usually look out for how people get around the city, how payments for goods and services are handled, and, more broadly, anything designed to make life more convenient.</p>
 <p>I’m also fascinated by how digital products transcend borders across African countries. This is something I pay close attention to whenever I travel, and Abidjan was no exception.</p>
 <p>One thing I quickly noticed, however, was how challenging it was to get around the city. I typically rely on popular ride-hailing apps like <strong>Uber</strong> or <strong>Bolt</strong> when I travel, so I was visibly shocked when I opened my Uber app and saw that no trips were available meaning Uber isn’t operational in Abidjan. I then opened Bolt and was met with the same outcome.</p>
-<h2>Navigating Without Ride-Hailing</h2>
-<p>I had to rely on traditional taxis to get around, and as you may have guessed, the language barrier showed up again and again.</p>
+<h2 id="navigating-without-ride-hailing">Navigating Without Ride-Hailing</h2><p>I had to rely on traditional taxis to get around, and as you may have guessed, the language barrier showed up again and again.</p>
 <p>The <strong>Translate app</strong> on my iPhone was particularly helpful in these situations. It became my primary communication tool, and I was amazed at how easily people could read and understand the French it produced.</p>
-<h2>Payments: Cash vs Mobile Money</h2>
-<p>One problem solved, another arises: paying for goods and services.</p>
+<h2 id="payments-cash-vs-mobile-money">Payments: Cash vs Mobile Money</h2><p>One problem solved, another arises: paying for goods and services.</p>
 <p>In my opinion, a golden rule of travel is to always carry physical cash in the local currency of any city or country you visit. In the absence of reliable digital payment options, cash remains king.</p>
 <p>I struggled to make payments with my Visa cards, as most restaurants, eateries, shops, and even ATMs I visited didn’t support them.</p>
 <p>Two payment options, however, stood out: <strong>Wave</strong> and <strong>Orange Money</strong>. From shop owners to restaurants and taxi drivers, almost everyone displayed QR codes for either service to receive payments from customers.</p>
@@ -370,12 +553,10 @@
 </div>
 
 <p>Mobile money truly reigns supreme in Africa and forms the backbone of everyday payments a similar observation I made during my visit to <strong>Nairobi, Kenya</strong>.</p>
-<h2>Reflections on Scaling in Africa</h2>
-<p>From these learnings and observations, I’ve been pondering what it will take for digital products to scale across Africa once more.</p>
+<h2 id="reflections-on-scaling-in-africa">Reflections on Scaling in Africa</h2><p>From these learnings and observations, I’ve been pondering what it will take for digital products to scale across Africa once more.</p>
 <p>Given our similarities and cultural differences, it’s understandable why many tech startups in countries like <strong>Ghana, Nigeria, Kenya, and South Africa</strong> can thrive and scale within their respective markets.</p>
 <p>Africa is a vast continent made up of diverse markets and verticals, and understanding how these markets intersect and collide is a fascinating study one I’d love to undertake.</p>
-<h2>Final Thoughts</h2>
-<p>This trip reminded me that while Africa often looks similar on the surface, the details tell very different stories. Language, payments, mobility, and technology all shape how people live, move, and do business and they vary more than we sometimes assume.</p>
+<h2 id="final-thoughts">Final Thoughts</h2><p>This trip reminded me that while Africa often looks similar on the surface, the details tell very different stories. Language, payments, mobility, and technology all shape how people live, move, and do business and they vary more than we sometimes assume.</p>
 <p>Abidjan challenged some of my assumptions and reaffirmed others, especially around how deeply mobile money has embedded itself into everyday life across the continent. More importantly, it left me thinking about the real work required for digital products to scale beyond borders in Africa not just technically, but culturally and contextually.</p>
 <p>Travel, for me, continues to be one of the most honest ways to learn. This experience didn’t just show me a new city; it gave me new questions to explore and that, perhaps, is the most valuable takeaway.</p>
 <div class="image-grid">
@@ -385,33 +566,46 @@
 </div>
 
 
-        </div>
-
-        <div class="post-footer">
-            <div class="share-row">
-                <span class="share-label">Share this post</span>
-                <button class="share-btn" id="copyLinkBtn">
-                    🔗 Copy Link
-                </button>
-                <a href="https://twitter.com/intent/tweet?text=My Journey to the West: Ivory Coast Abidjan&url=https://maxwellcofie.com/posts/my-journey-to-the-west-ivory-coast-abidjan/" target="_blank" class="share-btn">
-                    Twitter
-                </a>
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://maxwellcofie.com/posts/my-journey-to-the-west-ivory-coast-abidjan/" target="_blank" class="share-btn">
-                    LinkedIn
-                </a>
             </div>
-
-            <div class="subscribe-box">
-                <div class="sub-title">Enjoyed this reading?</div>
-                <div class="sub-desc">I write about product, design, and building in Africa. Subscribe to my Substack to get updates.</div>
-                <a href="https://open.substack.com/pub/mcofie" target="_blank" class="sub-btn">Subscribe on Substack</a>
+    
+            <div class="like-section">
+                <!-- Reaction Bar (Micro-Feedback) -->
+                <div class="reaction-bar">
+                   <button class="like-btn js-like-btn" aria-label="Like this post" data-slug="my-journey-to-the-west-ivory-coast-abidjan/">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <span class="like-count js-like-count">--</span>
+                    </button>
+                    <!-- We can add more reactions here later -->
+                </div>
             </div>
-        </div>
-        
-        <div class="related-section">
-            <div class="related-label">Read Next</div>
-            <div class="related-grid">
-                
+    
+            <div class="post-footer">
+                <div class="share-row">
+                    <span class="share-label">Share this post</span>
+                    <button class="share-btn" id="copyLinkBtn">
+                        🔗 Copy Link
+                    </button>
+                    <a href="https://twitter.com/intent/tweet?text=My Journey to the West: Ivory Coast Abidjan&url=https://maxwellcofie.com/posts/my-journey-to-the-west-ivory-coast-abidjan/" target="_blank" class="share-btn">
+                        Twitter
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://maxwellcofie.com/posts/my-journey-to-the-west-ivory-coast-abidjan/" target="_blank" class="share-btn">
+                        LinkedIn
+                    </a>
+                </div>
+    
+                <div class="subscribe-box">
+                    <div class="sub-title">Enjoyed this reading?</div>
+                    <div class="sub-desc">I write about product, design, and building in Africa. Subscribe to my Substack to get updates.</div>
+                    <a href="https://open.substack.com/pub/mcofie" target="_blank" class="sub-btn">Subscribe on Substack</a>
+                </div>
+            </div>
+            
+            <div class="related-section">
+                <div class="related-label">Read Next</div>
+                <div class="related-grid">
+                    
         <a href="../../posts/the-reality-of-renting-in-ghana-law-vs-practice/" class="related-card">
             <span class="related-cat">Product</span>
             <div class="related-title">The Reality of Renting in Ghana: Law vs. Practice</div>
@@ -424,9 +618,13 @@
             <div class="related-date">Jan 2026</div>
         </a>
     
+                </div>
             </div>
-        </div>
-    </article>
+        </article>
+        
+        <!-- Right column empty for balance or future use -->
+        <div></div>
+    </div>
     
     <!-- Reader Controls FAB -->
     <div class="reader-controls">

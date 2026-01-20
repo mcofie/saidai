@@ -23,14 +23,7 @@ if (!fs.existsSync(WRITING_DIR)) {
 const renderer = new marked.Renderer();
 
 // Override image renderer to support video embeds
-// Override image renderer to support video embeds
-renderer.image = function (tokenOrHref, title, text) {
-    // Handle both new Object signature (Marked v12+) and old arguments
-    const isToken = typeof tokenOrHref === 'object' && tokenOrHref !== null;
-    const href = isToken ? tokenOrHref.href : tokenOrHref;
-    const finalTitle = isToken ? tokenOrHref.title : title;
-    const finalText = isToken ? tokenOrHref.text : text;
-
+renderer.image = ({ href, title, text }) => {
     if (href && (href.endsWith('.webm') || href.endsWith('.mp4') || href.endsWith('.mov'))) {
         return `
         <video controls playsinline loop muted autoplay class="post-video">
@@ -38,16 +31,33 @@ renderer.image = function (tokenOrHref, title, text) {
             Your browser does not support the video tag.
         </video>`;
     }
-    // Default image rendering
-    return `<img src="${href}" alt="${finalText}" title="${finalTitle || ''}" class="post-img">`;
+    return `<img src="${href}" alt="${text}" title="${title || ''}" class="post-img">`;
+};
+
+// Override code renderer to support filenames
+renderer.code = ({ text, lang, escaped }) => {
+    // Check if lang has a filename: e.g. "javascript:app.js"
+    let language = (lang || '').split(':')[0];
+    const filename = (lang || '').split(':')[1];
+
+    const validLang = hljs.getLanguage(language) ? language : 'plaintext';
+    const highlighted = hljs.highlight(text, { language: validLang }).value;
+
+    let headerHTML = '';
+    if (filename) {
+        headerHTML = `<div class="code-header">
+                        <span class="code-filename">${filename}</span>
+                      </div>`;
+    }
+
+    return `<div class="code-block-wrapper">
+                ${headerHTML}
+                <pre><code class="hljs language-${validLang}">${highlighted}</code></pre>
+            </div>`;
 };
 
 marked.setOptions({
     renderer: renderer,
-    highlight: function (code, lang) {
-        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-        return hljs.highlight(code, { language }).value;
-    },
     langPrefix: 'hljs language-'
 });
 
@@ -60,22 +70,56 @@ files.forEach(file => {
 
     const content = fs.readFileSync(path.join(CONTENT_DIR, file), 'utf8');
     const { attributes, body } = fm(content);
+
+    // Extract TOC before parsing full body
+    const tokens = marked.lexer(body);
+    const headings = tokens.filter(t => t.type === 'heading' && (t.depth === 2 || t.depth === 3));
+
+    const tocHTML = headings.length > 0 ? `
+        <nav class="toc">
+            <div class="toc-label">Table of Contents</div>
+            <ul>
+                ${headings.map(h => {
+        const id = h.text.toLowerCase().replace(/[^\w]+/g, '-');
+        return `<li class="toc-level-${h.depth}"><a href="#${id}">${h.text}</a></li>`;
+    }).join('')}
+            </ul>
+        </nav>` : '';
+
     const htmlContent = marked.parse(body);
+
+    // Inject IDs into headings in htmlContent? 
+    // Marked renderer.heading isn't overridden yet, so headings won't have IDs by default unless we do it.
+    // Let's rely on a custom renderer for heading IDs to match the TOC.
+
     const slug = path.basename(file, '.md');
-
-
     const wordCount = body.split(/\s+/).length;
     const readTime = Math.ceil(wordCount / 200);
 
     posts.push({
         ...attributes,
         slug,
-        htmlContent,
+        htmlContent, // This will be regenerated with IDs in the loop below properly
         readTime,
-        outputFile: `${slug}/index.html`, // Directory pattern
-        url: `${slug}/` // Clean URL for links
+        tocHTML,
+        outputFile: `${slug}/index.html`,
+        url: `${slug}/`
     });
 });
+
+// Need to update renderer for Headings to have IDs for TOC
+renderer.heading = ({ text, depth }) => {
+    const id = text.toLowerCase().replace(/[^\w]+/g, '-');
+    return `<h${depth} id="${id}">${text}</h${depth}>`;
+};
+
+// Re-process content now that renderer has heading support
+posts.forEach(p => {
+    const content = fs.readFileSync(path.join(CONTENT_DIR, p.slug + '.md'), 'utf8');
+    const { body } = fm(content);
+    p.htmlContent = marked.parse(body);
+});
+
 
 // Sort posts by date (newest first)
 posts.sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
@@ -145,10 +189,78 @@ const HTML_TEMPLATE = `<!doctype html>
             color: var(--text-main);
         }
 
+        /* LAYOUT GRID FOR TOC + CONTENT */
+        .post-wrapper {
+            display: grid;
+            grid-template-columns: 1fr var(--post-max-w) 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* TOC SIDEBAR */
+        .toc-sidebar {
+            position: sticky;
+            top: 40px;
+            font-size: 13px;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            display: none; /* Hidden on small screens by default */
+        }
+        
+        @media (min-width: 1100px) {
+            .toc-sidebar { display: block; }
+        }
+
+        .toc-label {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .toc a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            border-left: 1px solid transparent;
+            padding-left: 12px;
+            display: block;
+            margin-left: -13px; /* visual align */
+        }
+
+        .toc a:hover {
+            color: var(--text-main);
+        }
+
+        .toc a.active {
+            color: var(--text-main);
+            border-left-color: var(--text-main);
+            font-weight: 500;
+        }
+        
+        .toc-level-3 {
+            padding-left: 12px;
+            font-size: 0.95em;
+        }
+
         article {
             max-width: var(--post-max-w);
-            margin: 0 auto;
+            min-width: 0; /* flex/grid fix */
             view-transition-name: article-content;
+            grid-column: 2; /* Center column */
         }
 
         h1 {
@@ -200,6 +312,11 @@ const HTML_TEMPLATE = `<!doctype html>
         .post-content p {
             margin-bottom: 28px;
         }
+        
+        /* Offset anchors for fixed header or spacing */
+        .post-content h2, .post-content h3 {
+            scroll-margin-top: 40px;
+        }
 
         .post-content h2 {
             font-size: 24px;
@@ -250,28 +367,124 @@ const HTML_TEMPLATE = `<!doctype html>
              margin: 40px 0;
              color: var(--text-main);
         }
-
-        /* Syntax Highlighting - Minimal */
-        pre {
-            background-color: var(--surface); 
-            padding: 24px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 40px -24px; /* Slight bleed */
-            font-size: 13px; 
-            font-family: 'JetBrains Mono', monospace;
+        
+        /* FOOTNOTES */
+        .footnote-ref {
+            font-size: 0.8em;
+            vertical-align: super;
+            text-decoration: none !important;
+            margin-left: 2px;
+            color: var(--text-main) !important;
+            cursor: pointer;
+        }
+        
+        /* Popover Footnote */
+        .fn-popover {
+            position: absolute;
+            background: var(--bg);
             border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            width: 300px;
+            font-size: 14px;
+            color: var(--text-main);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(10px) scale(0.98);
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+        
+        .fn-popover.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
         }
 
-        @media (max-width: 600px) {
-            pre {
-                margin: 32px -20px;
+        /* --- CODE BLOCKS & HEADERS --- */
+        .code-block-wrapper {
+            margin: 40px -24px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--surface); 
+            overflow: hidden;
+        }
+        
+        .code-header {
+            padding: 12px 24px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(255,255,255,0.02);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            display: flex;
+            align-items: center;
+        }
+
+        pre {
+            background-color: transparent !important; 
+            padding: 24px;
+            margin: 0 !important;
+            border: none !important;
+            overflow-x: auto;
+            font-size: 13px; 
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* SHARE QUOTE TOOLTIP */
+        .share-tooltip {
+            position: absolute;
+            background: var(--text-main);
+            color: var(--bg);
+            padding: 8px 16px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 600;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, 10px);
+            transition: all 0.2s var(--ease-out);
+            z-index: 2000;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .share-tooltip.visible {
+            opacity: 1;
+            transform: translate(-50%, -140%); /* Sit above selection */
+            pointer-events: auto;
+        }
+        
+        .share-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid var(--text-main);
+        }
+
+        @media (max-width: 1100px) {
+            .post-wrapper {
+                 display: block; /* Stack */
+            }
+            article {
+                 min-width: 100%;
+            }
+            .code-block-wrapper {
                 border-radius: 0;
                 border-left: 0;
                 border-right: 0;
             }
         }
 
+        /* Syntax Highlighting - Minimal */
         .hljs-keyword, .hljs-selector-tag, .hljs-title, .hljs-section, .hljs-doctag, .hljs-name, .hljs-strong {
             font-weight: 500;
             color: var(--text-main);
@@ -360,6 +573,10 @@ const HTML_TEMPLATE = `<!doctype html>
 
 <body>
     <div class="reader-progress" id="progressBar"></div>
+    <div id="shareTooltip" class="share-tooltip">
+        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg> 
+        Share
+    </div>
 
     <nav>
         <a href="../../" class="logo">Maxwell Cofie</a>
@@ -381,48 +598,77 @@ const HTML_TEMPLATE = `<!doctype html>
     </nav>
     
     <a href="../../writing/" class="back-link" data-i18n="nav.back_writing">← Logbook</a>
+    
+    <div class="post-wrapper">
+        <aside class="toc-sidebar">
+            {{TOC}}
+        </aside>
 
-    <article>
-        <h1>{{TITLE}}</h1>
-        <div class="post-meta-row">
-            <span class="post-author">{{AUTHOR}}</span>
-            <span class="post-date">{{DATE}}</span>
-            <span class="reading-time">{{READ_TIME}} min read</span>
-            {{CATEGORY_TAG}}
-        </div>
-
-        <div class="post-content" id="postContent">
-            {{CONTENT}}
-        </div>
-
-        <div class="post-footer">
-            <div class="share-row">
-                <span class="share-label">Share this post</span>
-                <button class="share-btn" id="copyLinkBtn">
-                    🔗 Copy Link
+        <article>
+            <h1>{{TITLE}}</h1>
+            <div class="post-meta-row">
+                <span class="post-author">{{AUTHOR}}</span>
+                <span class="post-date">{{DATE}}</span>
+                <span class="reading-time">{{READ_TIME}} min read</span>
+                {{CATEGORY_TAG}}
+                
+                <button class="like-btn-inline js-like-btn" aria-label="Like this post" data-slug="{{SLUG}}">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span class="like-count js-like-count">--</span>
                 </button>
-                <a href="https://twitter.com/intent/tweet?text={{TITLE}}&url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" class="share-btn">
-                    Twitter
-                </a>
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" class="share-btn">
-                    LinkedIn
-                </a>
             </div>
-
-            <div class="subscribe-box">
-                <div class="sub-title">Enjoyed this reading?</div>
-                <div class="sub-desc">I write about product, design, and building in Africa. Subscribe to my Substack to get updates.</div>
-                <a href="https://open.substack.com/pub/mcofie" target="_blank" class="sub-btn">Subscribe on Substack</a>
+    
+            <div class="post-content" id="postContent">
+                {{CONTENT}}
             </div>
-        </div>
+    
+            <div class="like-section">
+                <!-- Reaction Bar (Micro-Feedback) -->
+                <div class="reaction-bar">
+                   <button class="like-btn js-like-btn" aria-label="Like this post" data-slug="{{SLUG}}">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <span class="like-count js-like-count">--</span>
+                    </button>
+                    <!-- We can add more reactions here later -->
+                </div>
+            </div>
+    
+            <div class="post-footer">
+                <div class="share-row">
+                    <span class="share-label">Share this post</span>
+                    <button class="share-btn" id="copyLinkBtn">
+                        🔗 Copy Link
+                    </button>
+                    <a href="https://twitter.com/intent/tweet?text={{TITLE}}&url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" class="share-btn">
+                        Twitter
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" class="share-btn">
+                        LinkedIn
+                    </a>
+                </div>
+    
+                <div class="subscribe-box">
+                    <div class="sub-title">Enjoyed this reading?</div>
+                    <div class="sub-desc">I write about product, design, and building in Africa. Subscribe to my Substack to get updates.</div>
+                    <a href="https://open.substack.com/pub/mcofie" target="_blank" class="sub-btn">Subscribe on Substack</a>
+                </div>
+            </div>
+            
+            <div class="related-section">
+                <div class="related-label">Read Next</div>
+                <div class="related-grid">
+                    {{RELATED_POSTS}}
+                </div>
+            </div>
+        </article>
         
-        <div class="related-section">
-            <div class="related-label">Read Next</div>
-            <div class="related-grid">
-                {{RELATED_POSTS}}
-            </div>
-        </div>
-    </article>
+        <!-- Right column empty for balance or future use -->
+        <div></div>
+    </div>
     
     <!-- Reader Controls FAB -->
     <div class="reader-controls">
@@ -512,6 +758,7 @@ posts.forEach(post => {
         .replace(/{{SLUG}}/g, post.slug)
         .replace(/{{READ_TIME}}/g, post.readTime)
         .replace(/{{CONTENT}}/g, post.htmlContent)
+        .replace(/{{TOC}}/g, post.tocHTML)
         .replace(/{{CATEGORY_TAG}}/g, post.category ? `<span class="post-category ${post.category.toLowerCase()}">${post.category}</span>` : '')
         .replace(/{{RELATED_POSTS}}/g, relatedHTML);
 
