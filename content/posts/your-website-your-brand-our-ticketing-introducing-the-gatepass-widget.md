@@ -10,7 +10,7 @@ category: "Design"
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/Screenshot_2026-01-20_at_9.04.11_PM_uohtz8.png" alt="Trip photo">
 </div>
 
-> “This event ticketing page feels remarkably similar to the one we attended the other day.”
+> “This event ticketing page feels remarkably similar to the one we visited the other day.”
 
 It’s a comment we’ve heard more than once. And while it may sound harmless, it points to something important.
 
