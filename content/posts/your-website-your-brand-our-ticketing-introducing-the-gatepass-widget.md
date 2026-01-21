@@ -16,9 +16,6 @@ It’s a comment we’ve heard more than once. And while it may sound harmless, 
 
 No two independent events are truly the same. Even when they share a similar format, each event carries its own atmosphere, energy, and distinct vibe. This is why many event organisers care deeply about presentation. They want their event to feel intentional and reflective of the experience they’re creating.
 
-<div class="image-grid">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_scale,h_800,w_500/Screenshot_2026-01-21_at_10.17.31_AM_hqfdgq.png" alt="Trip photo">
-</div>
 
 As a result, it’s not uncommon for organisers to build dedicated promotional websites. These sites help set the tone, tell the story, and create anticipation long before the doors open. Over time, we began receiving requests from GatePass organisers who wanted their ticketing experience to live naturally within these custom environments, rather than feeling like a separate or generic destination.
 
