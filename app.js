@@ -15,18 +15,232 @@ document.addEventListener('DOMContentLoaded', () => {
     initTOC();
     initSmartFootnotes();
     initShareQuote();
-
+    initZenMode();
+    initAudio();
+    initSearch(); // Initialize Search
 
     // Expose functions required by HTML onclick attributes
     window.filterGrid = filterGrid;
     window.playStory = playStory;
     window.closeVideo = closeVideo;
     window.triggerCelebration = triggerCelebration; // Kept for Konami
-    // window.renderProjects is now exposed globally at the bottom of the file
-    // No need to do it here inside the listener if it's defined at top level scope
-
+    window.openSearch = () => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
 
 });
+
+/* =========================================
+   13. ZEN MODE
+   ========================================= */
+function initZenMode() {
+    const btn = document.getElementById('zenBtn');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+        document.body.classList.toggle('zen-mode');
+        // Toggle icon? optional
+        btn.classList.toggle('active');
+    });
+
+    // Optional: Exit on Esc
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.body.classList.contains('zen-mode')) {
+            document.body.classList.remove('zen-mode');
+            btn.classList.remove('active');
+        }
+    });
+}
+
+/* =========================================
+   14. AUDIO / TTS
+   ========================================= */
+function initAudio() {
+    const btn = document.getElementById('audioBtn');
+    if (!btn) return;
+
+    const synth = window.speechSynthesis;
+    let utterance = null;
+
+    btn.addEventListener('click', () => {
+        if (synth.speaking) {
+            // If already speaking, stop/cancel
+            synth.cancel();
+            btn.classList.remove('speaking');
+            btn.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6L8 10H4V14H8L12 18V6Z" /><path d="M15.5 8.5C16.5 9.5 16.5 14.5 15.5 15.5" /><path d="M18.5 5.5C20.5 7.5 20.5 16.5 18.5 18.5" /></svg>`;
+        } else {
+            // Start speaking
+            // Determine content container: try article, post-content, or fallback to body
+            const content = document.querySelector('article') || document.querySelector('.post-content') || document.body;
+            if (!content) return;
+
+            const text = content.innerText;
+            utterance = new SpeechSynthesisUtterance(text);
+
+            // Try to set a nice voice
+            const voices = synth.getVoices();
+            // Prefer a natural sounding google voice or system default
+            const preferred = voices.find(v => v.name.includes('Google US English')) || voices.find(v => v.lang === 'en-US');
+            if (preferred) utterance.voice = preferred;
+
+            utterance.rate = 1;
+
+            utterance.onend = () => {
+                btn.classList.remove('speaking');
+                btn.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6L8 10H4V14H8L12 18V6Z" /><path d="M15.5 8.5C16.5 9.5 16.5 14.5 15.5 15.5" /><path d="M18.5 5.5C20.5 7.5 20.5 16.5 18.5 18.5" /></svg>`;
+            };
+
+            synth.speak(utterance);
+            btn.classList.add('speaking');
+            // Change icon to stop/pause
+            btn.innerHTML = `<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+        }
+    });
+}
+
+/* =========================================
+   15. SEARCH / COMMAND PALETTE
+   ========================================= */
+function initSearch() {
+    // 1. Inject HTML
+    const overlay = document.createElement('div');
+    overlay.className = 'cmd-palette-overlay';
+    overlay.innerHTML = `
+        <div class="cmd-palette">
+            <div class="cmd-input-wrapper">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="opacity:0.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" class="cmd-input" placeholder="Search posts, pages, or commands..." id="cmdInput">
+                <span class="cmd-shortcut">ESC</span>
+            </div>
+            <div class="cmd-results" id="cmdResults">
+                <!-- Results go here -->
+            </div>
+            <div class="cmd-footer">
+                <span>Navigation</span>
+                <span class="cmd-shortcut">↑↓ to navigate, ↵ to select</span>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    const input = document.getElementById('cmdInput');
+    const resultsContainer = document.getElementById('cmdResults');
+    let searchData = [];
+    let selectedIndex = 0;
+
+    // 2. Fetch Data once
+    // We try to fetch search.json from root or relative. Since this runs on all pages, root relative is safest.
+    fetch('/search.json').then(res => res.json()).then(data => {
+        searchData = data;
+
+        // Add static pages
+        searchData.push(
+            { title: 'Home', description: 'Go back to homepage', url: '/', category: 'Page' },
+            { title: 'Work', description: 'Selected projects and case studies', url: '/work/', category: 'Page' },
+            { title: 'Ventures', description: 'Startups and experiments', url: '/ventures/', category: 'Page' },
+            { title: 'Logbook (Writing)', description: 'All articles and thoughts', url: '/writing/', category: 'Page' },
+            { title: 'About', description: 'My story and background', url: '/about/', category: 'Page' }
+        );
+    }).catch(err => console.log('Search index not found (dev mode?)'));
+
+    // 3. Toggle Logic
+    const toggleSearch = (open) => {
+        if (open) {
+            overlay.classList.add('active');
+            input.value = '';
+            renderResults(''); // Show defaults
+            input.focus();
+        } else {
+            overlay.classList.remove('active');
+            input.blur();
+        }
+    };
+
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            const isOpen = overlay.classList.contains('active');
+            toggleSearch(!isOpen);
+        }
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+            toggleSearch(false);
+        }
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) toggleSearch(false);
+    });
+
+    // 4. Filter & Render
+    const renderResults = (query) => {
+        selectedIndex = 0;
+        const q = query.toLowerCase();
+
+        const filtered = query === ''
+            ? searchData.slice(0, 5) // Show top 5 default/recent
+            : searchData.filter(item =>
+                item.title.toLowerCase().includes(q) ||
+                (item.description && item.description.toLowerCase().includes(q))
+            ).slice(0, 10);
+
+        if (filtered.length === 0) {
+            resultsContainer.innerHTML = `<div style="padding:16px; text-align:center; color:var(--text-tertiary)">No results found</div>`;
+            return;
+        }
+
+        resultsContainer.innerHTML = filtered.map((item, idx) => `
+            <a href="${item.url}" class="cmd-item ${idx === 0 ? 'active' : ''}" data-idx="${idx}">
+                <div class="cmd-item-title">${item.title}</div>
+                <div class="cmd-item-desc">${item.category ? `<span style="opacity:0.6; margin-right:6px">[${item.category}]</span>` : ''}${item.description || ''}</div>
+            </a>
+        `).join('');
+
+        // Re-attach click listeners to new DOM
+        document.querySelectorAll('.cmd-item').forEach(item => {
+            item.addEventListener('click', () => toggleSearch(false)); // Allow default link nav
+            item.addEventListener('mouseenter', () => {
+                // Update selection on hover
+                const idx = parseInt(item.dataset.idx);
+                updateSelection(idx);
+            });
+        });
+    };
+
+    const updateSelection = (idx) => {
+        const items = document.querySelectorAll('.cmd-item');
+        if (items.length === 0) return;
+
+        // Wrap
+        if (idx < 0) idx = items.length - 1;
+        if (idx >= items.length) idx = 0;
+
+        selectedIndex = idx;
+        items.forEach(el => el.classList.remove('active'));
+        const activeItem = items[selectedIndex];
+        activeItem.classList.add('active');
+
+        // Scroll into view
+        activeItem.scrollIntoView({ block: 'nearest' });
+    };
+
+    input.addEventListener('input', (e) => {
+        renderResults(e.target.value);
+    });
+
+    input.addEventListener('keydown', (e) => {
+        const items = document.querySelectorAll('.cmd-item');
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            updateSelection(selectedIndex + 1);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            updateSelection(selectedIndex - 1);
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (items[selectedIndex]) {
+                items[selectedIndex].click();
+            }
+        }
+    });
+}
 
 /* =========================================
    1. THEME MANAGEMENT

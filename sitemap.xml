@@ -6,6 +6,16 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://maxwellcofie.com/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maxwellcofie.com/work/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://maxwellcofie.com/ventures/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -14,6 +24,11 @@
     <loc>https://maxwellcofie.com/writing/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+      <loc>https://maxwellcofie.com/dev/</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
   </url>
   
   <url>

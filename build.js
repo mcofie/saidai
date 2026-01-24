@@ -593,6 +593,9 @@ const HTML_TEMPLATE = `<!doctype html>
             <a href="../../work/" class="nav-link" data-i18n="nav.work">Work</a>
             <a href="../../ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
             <a href="../../writing/" class="nav-link" data-i18n="nav.writing">Logbook</a>
+            <button class="theme-toggle" onclick="openSearch()" aria-label="Search" style="margin-right: 4px;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
                 <svg width="18" height="18" fill="currentColor" viewBox="0 0 0 24 24">
                     <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
@@ -681,6 +684,12 @@ const HTML_TEMPLATE = `<!doctype html>
     
     <!-- Reader Controls FAB -->
     <div class="reader-controls">
+        <button class="control-btn" id="audioBtn" aria-label="Listen to Article">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6L8 10H4V14H8L12 18V6Z" /><path d="M15.5 8.5C16.5 9.5 16.5 14.5 15.5 15.5" /><path d="M18.5 5.5C20.5 7.5 20.5 16.5 18.5 18.5" /></svg>
+        </button>
+        <button class="control-btn" id="zenBtn" aria-label="Zen Mode" title="Zen Mode (J/K to scroll)">
+             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        </button>
         <button class="control-btn" id="fontToggle" aria-label="Toggle Serif/Sans">
             <span style="font-family: 'Newsreader', serif; font-size: 18px;">A</span>
         </button>
@@ -845,6 +854,9 @@ const INDEX_HTML = `<!doctype html>
             <a href="../work/" class="nav-link" data-i18n="nav.work">Work</a>
             <a href="../ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
             <a href="./" class="nav-link active" data-i18n="nav.writing">Logbook</a>
+            <button class="theme-toggle" onclick="openSearch()" aria-label="Search" style="margin-right: 4px;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
                 <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
@@ -965,7 +977,19 @@ fs.writeFileSync(INDEX_PATH, updatedIndexContent);
 console.log('--- Updated index.html with latest posts ---');
 
 
-// 5. Generate RSS Feed
+// 5. Generate Search Index
+const searchIndex = posts.map(post => ({
+    title: post.title,
+    description: post.description,
+    category: post.categories[0],
+    url: `/posts/${post.url}`,
+    date: post.date
+}));
+
+fs.writeFileSync(path.join(__dirname, 'search.json'), JSON.stringify(searchIndex));
+console.log('--- Generated search.json ---');
+
+// 6. Generate RSS Feed
 const RSS_TEMPLATE = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
@@ -992,13 +1016,23 @@ const RSS_TEMPLATE = `<?xml version="1.0" encoding="UTF-8" ?>
 fs.writeFileSync(path.join(__dirname, 'rss.xml'), RSS_TEMPLATE);
 console.log('--- Generated rss.xml ---');
 
-// 6. Generate Sitemap
+// 7. Generate Sitemap
 const SITEMAP_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://maxwellcofie.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://maxwellcofie.com/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maxwellcofie.com/work/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://maxwellcofie.com/ventures/</loc>
@@ -1009,6 +1043,11 @@ const SITEMAP_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
     <loc>https://maxwellcofie.com/writing/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+      <loc>https://maxwellcofie.com/dev/</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.5</priority>
   </url>
   ${posts.map(post => `
   <url>
