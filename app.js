@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initZenMode();
     initAudio();
     initSearch(); // Initialize Search
+    initShortcutsHelp(); // Initialize Help Modal
 
     // Expose functions required by HTML onclick attributes
     window.filterGrid = filterGrid;
@@ -29,26 +30,47 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* =========================================
-   13. ZEN MODE
+   13. ZEN MODE & KEYBOARD NAV
    ========================================= */
 function initZenMode() {
     const btn = document.getElementById('zenBtn');
-    if (!btn) return;
 
-    btn.addEventListener('click', () => {
-        document.body.classList.toggle('zen-mode');
-        // Toggle icon? optional
-        btn.classList.toggle('active');
-    });
+    // Toggle Zen Mode
+    if (btn) {
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('zen-mode');
+            btn.classList.toggle('active');
+        });
+    }
 
-    // Optional: Exit on Esc
+    // Keyboard Listeners (Zen toggle + J/K Nav)
     document.addEventListener('keydown', (e) => {
+        // Ignore if user is typing in an input
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.metaKey || e.ctrlKey || e.altKey) return; // Ignore modifiers (except Shift for ?)
+
+        // Zen Mode (Z)
+        if (e.key.toLowerCase() === 'z') {
+            document.body.classList.toggle('zen-mode');
+            if (btn) btn.classList.toggle('active');
+        }
+
+        // Escape to exit Zen
         if (e.key === 'Escape' && document.body.classList.contains('zen-mode')) {
             document.body.classList.remove('zen-mode');
-            btn.classList.remove('active');
+            if (btn) btn.classList.remove('active');
+        }
+
+        // J/K Scrolling (Vim style)
+        if (e.key.toLowerCase() === 'j') {
+            window.scrollBy({ top: 100, behavior: 'smooth' });
+        }
+        if (e.key.toLowerCase() === 'k') {
+            window.scrollBy({ top: -100, behavior: 'smooth' });
         }
     });
 }
+
 
 /* =========================================
    14. AUDIO / TTS
@@ -887,5 +909,88 @@ function initShareQuote() {
 
         window.open(twitterUrl, '_blank', 'width=550,height=420');
         tooltip.classList.remove('visible');
+    });
+}
+
+/* =========================================
+   16. SHORTCUTS HELP MODAL (?)
+   ========================================= */
+function initShortcutsHelp() {
+    // 1. Create Modal
+    const modal = document.createElement('div');
+    modal.className = 'shortcuts-modal';
+    modal.innerHTML = `
+        <div class="shortcuts-content">
+            <div class="shortcuts-header">
+                <h3>Keyboard Shortcuts</h3>
+                <span class="close-shortcuts">×</span>
+            </div>
+            <div class="shortcuts-grid">
+                <div class="shortcut-row">
+                    <span class="key-combo">
+                        <kbd>⌘</kbd> <kbd>K</kbd>
+                    </span>
+                    <span class="sc-desc">Search / Command Palette</span>
+                </div>
+                <div class="shortcut-row">
+                    <span class="key-combo">
+                        <kbd>Z</kbd>
+                    </span>
+                    <span class="sc-desc">Toggle Zen Mode</span>
+                </div>
+                 <div class="shortcut-row">
+                    <span class="key-combo">
+                        <kbd>J</kbd> / <kbd>K</kbd>
+                    </span>
+                    <span class="sc-desc">Scroll Down/Up</span>
+                </div>
+                <div class="shortcut-row">
+                    <span class="key-combo">
+                        <kbd>T</kbd>
+                    </span>
+                    <span class="sc-desc">Toggle Theme</span>
+                </div>
+                <div class="shortcut-row">
+                    <span class="key-combo">
+                        <kbd>?</kbd>
+                    </span>
+                    <span class="sc-desc">Show Shortcuts</span>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    const closeBtn = modal.querySelector('.close-shortcuts');
+    const toggleModal = (show) => {
+        if (show) modal.classList.add('active');
+        else modal.classList.remove('active');
+    };
+
+    closeBtn.addEventListener('click', () => toggleModal(false));
+    
+    // Close on background click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) toggleModal(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        // ? key (Shift + /)
+        if (e.key === '?') {
+            toggleModal(!modal.classList.contains('active'));
+        }
+        
+        // Escape closes it
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            toggleModal(false);
+        }
+
+        // Add 'T' for Theme Toggle while we are here
+        if (e.key.toLowerCase() === 't' && !e.metaKey && !e.ctrlKey) {
+            const themeBtn = document.getElementById('themeBtn');
+            if (themeBtn) themeBtn.click();
+        }
     });
 }
