@@ -16,7 +16,6 @@ For a while now, the most common measure of success for start-ups has been the a
 
 Before critiquing this culture, it is important to acknowledge why fundraising matters in the first place. Context helps keep the conversation honest.
 
----
 
 ## Why Fundraising Exists
 
@@ -28,7 +27,6 @@ In other cases, raising money is a strategic weapon. A well-funded competitor ca
 
 So, if money is effectively fuel, a resource to buy time and speed, why do we treat the act of securing it as the finish line? Why is the size of the raise celebrated more than the mileage it delivers?
 
----
 
 ## The Toxic Psychology
 
@@ -40,13 +38,11 @@ Fundraising also distorts **perception inside the company**. Big announcements m
 
 Finally, raising money creates a **false psychological cushion**. Founders feel they have time. Decisions feel less urgent. Hard trade-offs get postponed. But that safety is temporary. Every round comes with expectations, timelines, and pressure. The runway is real, but so is the clock.
 
----
 
 ## A Note on Intent
 
 To be clear, fundraising is often necessary. But we need to shift our focus from the *act* of raising to what the funding *enables*.
 
----
 
 ## Conclusion: Fuel Is Not Progress
 
