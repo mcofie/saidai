@@ -848,34 +848,42 @@ const INDEX_HTML = `<!doctype html>
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 16px;
-            padding: 32px 0;
-            margin-top: 24px;
+            gap: 24px;
+            padding: 48px 0;
+            margin-top: 40px;
+            border-top: 1px dotted var(--border-color);
         }
         .page-btn {
-            padding: 8px 16px;
-            border: 1px solid var(--border-color);
-            background: var(--surface);
-            color: var(--text-main);
-            border-radius: 4px;
+            background: transparent;
+            border: none;
+            color: var(--text-tertiary);
             cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
+            font-size: 20px;
+            padding: 0;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px; 
+            height: 44px;
+            border-radius: 50%;
         }
         .page-btn:hover:not(:disabled) {
-            background: var(--border-color);
+            color: var(--text-main);
+            background: var(--surface);
+            transform: scale(1.1);
         }
         .page-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            color: var(--text-tertiary);
+            opacity: 0.2;
+            cursor: default;
         }
         .page-info {
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 500;
             color: var(--text-tertiary);
             font-feature-settings: "tnum";
-            min-width: 80px;
-            text-align: center;
+            letter-spacing: 0.1em;
+            user-select: none;
         }
     </style>
 </head>
@@ -912,7 +920,7 @@ const INDEX_HTML = `<!doctype html>
         <div class="section-label" data-i18n="writing.articles">Articles</div>
         ${filterHTML}
 
-        <div class="project-list">
+        <div class="project-list" id="projectList">
             ${posts.map(post => `
             <a href="../posts/${post.url}" class="project-item" data-category="${post.categories.join(',')}">
                 <div class="proj-left">
@@ -930,11 +938,17 @@ const INDEX_HTML = `<!doctype html>
             `).join('')}
         </div>
         
+        <!-- Empty State -->
+        <div id="emptyState" style="display:none; text-align:center; padding: 60px 0; color: var(--text-tertiary);">
+            <div style="font-size: 14px; margin-bottom: 8px;">No articles found</div>
+            <div style="font-size: 13px; opacity: 0.7;">Try selecting a different category</div>
+        </div>
+        
         <!-- Pagination Controls -->
         <div class="pagination-controls" id="paginationControls" style="display:none;">
-            <button class="page-btn" id="prevBtn" onclick="changePage(-1)">Previous</button>
-            <span class="page-info" id="pageInfo">Page 1 of 1</span>
-            <button class="page-btn" id="nextBtn" onclick="changePage(1)">Next</button>
+            <button class="page-btn" id="prevBtn" onclick="changePage(-1)" aria-label="Previous Page">←</button>
+            <span class="page-info" id="pageInfo">1 / 1</span>
+            <button class="page-btn" id="nextBtn" onclick="changePage(1)" aria-label="Next Page">→</button>
         </div>
     </div>
 
@@ -954,8 +968,36 @@ const INDEX_HTML = `<!doctype html>
         let currentPage = 1;
         let currentCategory = 'all';
 
-        function render() {
+        // Initialize from URL
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('category')) currentCategory = params.get('category');
+        if (params.has('page')) currentPage = parseInt(params.get('page')) || 1;
+
+        // Sync UI with URL state on load
+        function syncFilterUI() {
+             document.querySelectorAll('.filter-btn').forEach(b => {
+                 if (b.innerText === currentCategory || (currentCategory === 'all' && b.innerText === 'All')) {
+                     b.classList.add('active');
+                 } else {
+                     b.classList.remove('active');
+                 }
+             });
+        }
+
+        function updateURL() {
+            const url = new URL(window.location);
+            if (currentCategory === 'all') url.searchParams.delete('category');
+            else url.searchParams.set('category', currentCategory);
+            
+            if (currentPage === 1) url.searchParams.delete('page');
+            else url.searchParams.set('page', currentPage);
+            
+            window.history.pushState({}, '', url);
+        }
+
+        function performRender() {
             const allItems = Array.from(document.querySelectorAll('.project-list .project-item'));
+            const emptyState = document.getElementById('emptyState');
             
             // 1. Filter
             const visibleItems = allItems.filter(item => {
@@ -964,7 +1006,17 @@ const INDEX_HTML = `<!doctype html>
                 return currentCategory === 'all' || itemCat.split(',').includes(currentCategory);
             });
 
-            // 2. Paginate
+            // 2. Handle Empty State
+            if (visibleItems.length === 0) {
+                 allItems.forEach(item => item.style.display = 'none');
+                 emptyState.style.display = 'block';
+                 document.getElementById('paginationControls').style.display = 'none';
+                 return;
+            } else {
+                 emptyState.style.display = 'none';
+            }
+
+            // 3. Paginate
             const totalPages = Math.ceil(visibleItems.length / itemsPerPage);
             // Ensure currentPage is valid
             if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
@@ -974,50 +1026,77 @@ const INDEX_HTML = `<!doctype html>
             const end = start + itemsPerPage;
             const itemsToShow = visibleItems.slice(start, end);
 
-            // 3. Update DOM visibility
+            // 4. Update DOM visibility
             allItems.forEach(item => item.style.display = 'none'); // Hide all first
-            itemsToShow.forEach(item => item.style.display = ''); // Show page items (revert to CSS)
+            itemsToShow.forEach(item => item.style.display = ''); // Show page items
 
-            // 4. Update Controls
+            // 5. Update Controls
             const paginationRow = document.getElementById('paginationControls');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             const pageInfo = document.getElementById('pageInfo');
 
-            // Hide controls if no pagination needed (and we are on page 1)
-            // But if we have 0 items, we might want to show "No items" or just nothing.
             if (visibleItems.length <= itemsPerPage && currentPage === 1) {
                 paginationRow.style.display = 'none';
             } else {
                 paginationRow.style.display = 'flex';
-                
                 prevBtn.disabled = currentPage === 1;
                 nextBtn.disabled = currentPage === totalPages || totalPages === 0;
-                pageInfo.textContent = \`Page \${currentPage} of \${totalPages || 1}\`;
+                pageInfo.textContent = \`\${currentPage} / \${totalPages || 1}\`;
             }
         }
 
+        function render() {
+             // View Transitions API
+             if (document.startViewTransition) {
+                 document.startViewTransition(() => performRender());
+             } else {
+                 performRender();
+             }
+        }
+
         function filterPosts(btn, category) {
-            // Update buttons
+            // Update buttons immediately for responsiveness
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
             currentCategory = category;
             currentPage = 1; // Reset to page 1
+            updateURL();
             render();
         }
 
         function changePage(delta) {
             currentPage += delta;
-            render();
-            // Scroll to top of list
-            const list = document.querySelector('.project-list-container');
-            if(list) list.scrollIntoView({ behavior: 'smooth' });
+            updateURL();
+            
+            if (document.startViewTransition) {
+                 document.startViewTransition(() => {
+                     performRender();
+                     // Scroll to top of list
+                     const list = document.querySelector('.project-list-container');
+                     if(list) list.scrollIntoView({ behavior: 'smooth' });
+                 });
+            } else {
+                 performRender();
+                 const list = document.querySelector('.project-list-container');
+                 if(list) list.scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
         // Initial Render
         document.addEventListener('DOMContentLoaded', () => {
-            render();
+            syncFilterUI();
+            performRender(); // No transition on initial load
+            
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', () => {
+                const params = new URLSearchParams(window.location.search);
+                currentCategory = params.get('category') || 'all';
+                currentPage = parseInt(params.get('page')) || 1;
+                syncFilterUI();
+                render();
+            });
         });
     </script>
 </body>
