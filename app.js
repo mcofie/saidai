@@ -27,6 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
     window.triggerCelebration = triggerCelebration; // Kept for Konami
     window.openSearch = () => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
 
+    // Scroll listener for Nav
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
+
 });
 
 /* =========================================
