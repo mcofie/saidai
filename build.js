@@ -843,6 +843,40 @@ const INDEX_HTML = `<!doctype html>
     
     <style>
         .project-item { align-items: center; }
+        
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            padding: 32px 0;
+            margin-top: 24px;
+        }
+        .page-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: var(--surface);
+            color: var(--text-main);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .page-btn:hover:not(:disabled) {
+            background: var(--border-color);
+        }
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            color: var(--text-tertiary);
+        }
+        .page-info {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            font-feature-settings: "tnum";
+            min-width: 80px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -895,6 +929,13 @@ const INDEX_HTML = `<!doctype html>
             </a>
             `).join('')}
         </div>
+        
+        <!-- Pagination Controls -->
+        <div class="pagination-controls" id="paginationControls" style="display:none;">
+            <button class="page-btn" id="prevBtn" onclick="changePage(-1)">Previous</button>
+            <span class="page-info" id="pageInfo">Page 1 of 1</span>
+            <button class="page-btn" id="nextBtn" onclick="changePage(1)">Next</button>
+        </div>
     </div>
 
     <footer>
@@ -909,24 +950,75 @@ const INDEX_HTML = `<!doctype html>
     <script src="../locale.js"></script>
     <script src="../app.js"></script>
     <script>
+        const itemsPerPage = 6;
+        let currentPage = 1;
+        let currentCategory = 'all';
+
+        function render() {
+            const allItems = Array.from(document.querySelectorAll('.project-list .project-item'));
+            
+            // 1. Filter
+            const visibleItems = allItems.filter(item => {
+                const itemCat = item.getAttribute('data-category');
+                if (!itemCat) return false;
+                return currentCategory === 'all' || itemCat.split(',').includes(currentCategory);
+            });
+
+            // 2. Paginate
+            const totalPages = Math.ceil(visibleItems.length / itemsPerPage);
+            // Ensure currentPage is valid
+            if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const itemsToShow = visibleItems.slice(start, end);
+
+            // 3. Update DOM visibility
+            allItems.forEach(item => item.style.display = 'none'); // Hide all first
+            itemsToShow.forEach(item => item.style.display = ''); // Show page items (revert to CSS)
+
+            // 4. Update Controls
+            const paginationRow = document.getElementById('paginationControls');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const pageInfo = document.getElementById('pageInfo');
+
+            // Hide controls if no pagination needed (and we are on page 1)
+            // But if we have 0 items, we might want to show "No items" or just nothing.
+            if (visibleItems.length <= itemsPerPage && currentPage === 1) {
+                paginationRow.style.display = 'none';
+            } else {
+                paginationRow.style.display = 'flex';
+                
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+                pageInfo.textContent = \`Page \${currentPage} of \${totalPages || 1}\`;
+            }
+        }
+
         function filterPosts(btn, category) {
             // Update buttons
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            // Filter items
-            const items = document.querySelectorAll('.project-list .project-item');
-            items.forEach(item => {
-                 const itemCat = item.getAttribute('data-category');
-                 if (!itemCat) return; 
-
-                 if (category === 'all' || itemCat.split(',').includes(category)) {
-                     item.style.display = 'flex';
-                 } else {
-                     item.style.display = 'none';
-                 }
-            });
+            
+            currentCategory = category;
+            currentPage = 1; // Reset to page 1
+            render();
         }
+
+        function changePage(delta) {
+            currentPage += delta;
+            render();
+            // Scroll to top of list
+            const list = document.querySelector('.project-list-container');
+            if(list) list.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initial Render
+        document.addEventListener('DOMContentLoaded', () => {
+            render();
+        });
     </script>
 </body>
 </html>`;
