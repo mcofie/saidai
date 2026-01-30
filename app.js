@@ -80,40 +80,110 @@ function initAudio() {
     if (!btn) return;
 
     const synth = window.speechSynthesis;
-    let utterance = null;
+    let isSpeaking = false;
+    let chunks = [];
+    let chunkIndex = 0;
+
+    // Helper: Split text into meaningful chunks (sentences) to avoid browser TTS timeout
+    const chunkText = (text) => {
+        // Split by punctuation followed by space or newline
+        // complex regex, but essentially looks for sentence endings
+        const sentenceRegex = /([^\.!\?]+[\.!\?]+)(\s+|$)/g;
+        let match;
+        const result = [];
+        let lastIndex = 0;
+
+        while ((match = sentenceRegex.exec(text)) !== null) {
+            result.push(match[1]); // push the sentence (group 1)
+            lastIndex = match.index + match[0].length;
+        }
+
+        // Add any remaining text
+        if (lastIndex < text.length) {
+            result.push(text.substring(lastIndex));
+        }
+
+        // If regex found nothing, just return whole text
+        return result.length > 0 ? result : [text];
+    };
+
+    // Global ref to prevent GC
+    if (!window.currentUtterance) window.currentUtterance = null;
+
+    const stopAudio = () => {
+        synth.cancel();
+        isSpeaking = false;
+        btn.classList.remove('speaking');
+        // Play icon
+        btn.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6L8 10H4V14H8L12 18V6Z" /><path d="M15.5 8.5C16.5 9.5 16.5 14.5 15.5 15.5" /><path d="M18.5 5.5C20.5 7.5 20.5 16.5 18.5 18.5" /></svg>`;
+    };
+
+    // Ensure onbeforeunload stops audio
+    window.addEventListener('beforeunload', stopAudio);
+
+    const speakChunk = () => {
+        if (!isSpeaking) return;
+        if (chunkIndex >= chunks.length) {
+            stopAudio();
+            return;
+        }
+
+        const text = chunks[chunkIndex].trim();
+        if (!text) {
+            chunkIndex++;
+            speakChunk();
+            return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        window.currentUtterance = utterance; // Prevent GC
+
+        // Voice Selection (Do this every time in case voices just loaded)
+        const voices = synth.getVoices();
+        const preferred = voices.find(v => v.name.includes('Google US English')) || voices.find(v => v.lang === 'en-US');
+        if (preferred) utterance.voice = preferred;
+
+        utterance.rate = 1.0;
+
+        utterance.onend = () => {
+            chunkIndex++;
+            speakChunk();
+        };
+
+        utterance.onerror = (e) => {
+            console.error('TTS Error:', e);
+            // Don't necessarily stop, try next chunk?
+            // Usually error means fatal, so stop.
+            stopAudio();
+        };
+
+        synth.speak(utterance);
+    };
 
     btn.addEventListener('click', () => {
-        if (synth.speaking) {
-            // If already speaking, stop/cancel
-            synth.cancel();
-            btn.classList.remove('speaking');
-            btn.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6L8 10H4V14H8L12 18V6Z" /><path d="M15.5 8.5C16.5 9.5 16.5 14.5 15.5 15.5" /><path d="M18.5 5.5C20.5 7.5 20.5 16.5 18.5 18.5" /></svg>`;
+        if (isSpeaking) {
+            stopAudio();
         } else {
-            // Start speaking
-            // Determine content container: try article, post-content, or fallback to body
-            const content = document.querySelector('article') || document.querySelector('.post-content') || document.body;
+            // Get content
+            const content = document.getElementById('postContent') || document.querySelector('article') || document.body;
             if (!content) return;
 
+            // Remove footnotes or other hidden stuff if needed, but innerText usually respects visibility
             const text = content.innerText;
-            utterance = new SpeechSynthesisUtterance(text);
 
-            // Try to set a nice voice
-            const voices = synth.getVoices();
-            // Prefer a natural sounding google voice or system default
-            const preferred = voices.find(v => v.name.includes('Google US English')) || voices.find(v => v.lang === 'en-US');
-            if (preferred) utterance.voice = preferred;
+            chunks = chunkText(text);
+            chunkIndex = 0;
+            isSpeaking = true;
 
-            utterance.rate = 1;
-
-            utterance.onend = () => {
-                btn.classList.remove('speaking');
-                btn.innerHTML = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6L8 10H4V14H8L12 18V6Z" /><path d="M15.5 8.5C16.5 9.5 16.5 14.5 15.5 15.5" /><path d="M18.5 5.5C20.5 7.5 20.5 16.5 18.5 18.5" /></svg>`;
-            };
-
-            synth.speak(utterance);
+            // Pause icon
             btn.classList.add('speaking');
-            // Change icon to stop/pause
             btn.innerHTML = `<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+
+            // Cancel any current speech (e.g. from other tabs or previous errors)
+            synth.cancel();
+
+            // Short timeout to ensure cancel takes effect
+            setTimeout(speakChunk, 50);
         }
     });
 }
@@ -968,7 +1038,7 @@ function initShortcutsHelp() {
     };
 
     closeBtn.addEventListener('click', () => toggleModal(false));
-    
+
     // Close on background click
     modal.addEventListener('click', (e) => {
         if (e.target === modal) toggleModal(false);
@@ -981,7 +1051,7 @@ function initShortcutsHelp() {
         if (e.key === '?') {
             toggleModal(!modal.classList.contains('active'));
         }
-        
+
         // Escape closes it
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             toggleModal(false);
