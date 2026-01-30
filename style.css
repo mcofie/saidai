@@ -385,62 +385,75 @@ p,
     color: var(--text-tertiary);
 }
 
-/* Status Pills (Intro) */
+/* Status Elements (Intro) */
 .status-row {
     display: flex;
-    gap: 12px;
-    margin-top: 32px;
+    gap: 4px;
+    /* Tight gap for ghost items */
+    margin-top: 36px;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .status-pill {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 16px;
-    background: var(--surface);
-    border: 1px solid var(--border-color);
-    border-radius: 99px;
-    /* Pill shape */
+    gap: 8px;
+    padding: 8px 12px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
     font-size: 13px;
     font-weight: 500;
-    color: var(--text-muted);
+    color: var(--text-tertiary);
+    /* Muted by default */
     text-decoration: none;
     transition: all 0.2s var(--ease-out);
     user-select: none;
+    position: relative;
 }
 
 .status-pill:hover {
-    background: var(--bg);
-    border-color: var(--text-tertiary);
+    background: var(--surface);
     color: var(--text-main);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
 }
 
 .status-pill svg {
-    width: 15px;
-    height: 15px;
-    opacity: 0.6;
-    transition: opacity 0.2s;
+    width: 16px;
+    height: 16px;
+    opacity: 0.5;
+    transition: all 0.2s;
+    /* stroke-width: 1.5px; */
 }
 
 .status-pill:hover svg {
     opacity: 1;
-    color: var(--text-main);
+    transform: scale(1.1);
 }
 
-/* Specific pill colors on hover for fun */
+/* Specific pill colors on hover */
 .status-pill.story:hover svg {
-    color: #3B82F6;
+    stroke: #3B82F6;
 }
 
 .status-pill.reading:hover svg {
-    color: #8B5CF6;
+    stroke: #8B5CF6;
 }
 
 .status-pill.music:hover svg {
-    color: #10B981;
+    stroke: #10B981;
+}
+
+.status-pill.search:hover svg {
+    stroke: #F97316;
+}
+
+.status-pill.rss:hover svg {
+    stroke: #EA580C;
+}
+
+.status-pill.clock:hover svg {
+    stroke: #64748B;
 }
 
 .section-label {

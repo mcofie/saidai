@@ -93,7 +93,6 @@
         <p class="intro-desc">
             <span data-i18n="home.mission">Solutions Architect & Tinkerer based in Accra, Ghana 🇬🇭. I build products
                 that solve problems in Africa & beyond.</span>
-            <span id="clock" style="color: var(--text-tertiary); margin-left: 6px;"></span>
         </p>
 
         <div class="status-row">
@@ -121,6 +120,28 @@
                 </svg>
                 <span data-i18n="status.music">On Repeat: Pop Rising</span>
             </a>
+            <div class="status-pill clock" style="cursor: default;">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+                <span id="clock">Loading...</span>
+            </div>
+            <a href="/rss.xml" target="_blank" class="status-pill rss">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M4 11a9 9 0 0 1 9 9" />
+                    <path d="M4 4a16 16 0 0 1 16 16" />
+                    <circle cx="5" cy="19" r="1" />
+                </svg>
+                <span>RSS</span>
+            </a>
+            <button onclick="openSearch()" class="status-pill search" style="cursor: pointer;">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>Search <span style="opacity: 0.5; font-size: 11px; margin-left: 4px;">⌘K</span></span>
+            </button>
         </div>
     </div>
 
