@@ -6,16 +6,21 @@ description: "Why Minutes 2 Match chose real-world chemistry over mindless swipi
 category: "Product"
 ---
 
+
 <div class="image-grid">
-<iframe
-  src="https://player.cloudinary.com/embed/?cloud_name=dmbc2infa&public_id=m2m_2_ozuifo&profile=cld-looping"
-  width="640"
-  height="360" 
-  style="height: auto; width: 100%; aspect-ratio: 640 / 360;"
-  allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-  allowfullscreen
-  frameborder="0"
-></iframe>
+<video 
+  width="100%" 
+  height="auto" 
+  autoplay 
+  loop 
+  muted 
+  playsinline 
+  poster="https://res.cloudinary.com/dmbc2infa/video/upload/v1/m2m_2_ozuifo.jpg"
+  style="width: 100%; border-radius: 8px; margin-bottom: 20px;"
+>
+  <source src="https://res.cloudinary.com/dmbc2infa/video/upload/f_mp4,q_auto/v1/m2m_2_ozuifo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 </div>
 
 In 2024, we set out to solve what seemed like a simple problem, though it turned out to be anything but. The idea came
@@ -60,18 +65,21 @@ To serve this community without losing what made the experience special, we had 
 wasn’t about speed; it was about protecting the quality of the match at a larger scale.**
 
 <div class="image-grid">
-<iframe
-  src="https://player.cloudinary.com/embed/?cloud_name=dmbc2infa&public_id=m2m_1_ujwi3e&profile=cld-looping"
-  width="640"
-  height="360" 
-  style="height: auto; width: 100%; aspect-ratio: 640 / 360;"
-  allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-  allowfullscreen
-  frameborder="0"
-></iframe>
+<video 
+  width="100%" 
+  height="auto" 
+  autoplay 
+  loop 
+  muted 
+  playsinline 
+  poster="https://res.cloudinary.com/dmbc2infa/video/upload/v1/m2m_1_ujwi3e.jpg"
+  style="width: 100%; border-radius: 8px;"
+>
+  <source src="https://res.cloudinary.com/dmbc2infa/video/upload/f_mp4,q_auto/v1/m2m_1_ujwi3e.mp4" type="video/mp4">
+  <source src="https://res.cloudinary.com/dmbc2infa/video/upload/f_webm,q_auto/v1/m2m_1_ujwi3e.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
 </div>
-
-
 
 ### Beyond the Swipe
 
