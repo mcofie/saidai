@@ -2,13 +2,13 @@
 title: "Designing for Intentional Connection"
 date: "Feb 2026"
 isoDate: "2026-02-04"
-description: "How Minutes 2 Match evolved from a personal search for connection into a mission to replace mindless swiping with real-world chemistry. An inside look at why we chose curation and psychometrics over the standard dating app playbook."
+description: "Why Minutes 2 Match chose real-world chemistry over mindless swiping."
 category: "Product"
 ---
 
 <div class="image-grid">
 <iframe
-  src="https://player.cloudinary.com/embed/?cloud_name=dmbc2infa&public_id=m2m_1_ujwi3e"
+  src="https://player.cloudinary.com/embed/?cloud_name=dmbc2infa&public_id=m2m_2_ozuifo&profile=cld-looping"
   width="640"
   height="360" 
   style="height: auto; width: 100%; aspect-ratio: 640 / 360;"
@@ -58,6 +58,20 @@ resonated with far more people than we could manually vet.
 
 To serve this community without losing what made the experience special, we had to rethink our process. **Automation
 wasn’t about speed; it was about protecting the quality of the match at a larger scale.**
+
+<div class="image-grid">
+<iframe
+  src="https://player.cloudinary.com/embed/?cloud_name=dmbc2infa&public_id=m2m_1_ujwi3e&profile=cld-looping"
+  width="640"
+  height="360" 
+  style="height: auto; width: 100%; aspect-ratio: 640 / 360;"
+  allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+  allowfullscreen
+  frameborder="0"
+></iframe>
+</div>
+
+
 
 ### Beyond the Swipe
 
