@@ -6,7 +6,7 @@ description: "A critique of why the Silicon Valley playbook fails in Africa and 
 category: "Africa"
 ---
 
-Numerous media outlets have positioned Africa as an untapped market that investors should prioritize. Compared to other regions, the continent is young and home to a large, active workforce. At the same time, it faces significant structural challenges. For businesspeople and investors who enter early and deliver real value, the potential rewards can be substantial.
+We are often told that Africa is the "next frontier" an untapped market of 1.5 billion people that investors should prioritise. Compared to other regions, the continent is young and home to a large, active workforce. At the same time, it faces significant structural challenges. For businesspeople and investors who enter early and deliver real value, the potential rewards can be substantial.
 
 Silicon Valley has successfully exported a blueprint for building technology companies and startups around the world. This model has become the default playbook. However, it assumes a set of conditions that simply do not exist everywhere. **A one-size-fits-all approach does not work in Africa.**
 
