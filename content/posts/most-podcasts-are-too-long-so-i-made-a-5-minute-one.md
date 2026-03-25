@@ -68,6 +68,8 @@ To keep this sustainable and authentic, I simplified my setup. I stopped worryin
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_crop,g_north_west/6_eoddes.png" alt="Trip photo">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_crop,g_north_west/7_prclkt.png" alt="Trip photo">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_crop,g_north_west/5_mzi7aw.png" alt="Trip photo">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_crop,g_north_west/3_qdzxep.png" alt="Trip photo">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_crop,g_north_west/2_hqnhvp.png" alt="Trip photo">
 </div>
 
 
@@ -79,12 +81,12 @@ It’s early days, but the early signals are interesting. With 5 episodes out an
 
 But more than the numbers, I’m paying attention to the feedback. One of the most fitting responses came as an audio message from one of our guests, which captures exactly why the "short-form" approach works:
 
+> *(Click below to hear a guest share what he thinks about the episode and initiative.)*
+
 <audio controls>
     <source src="https://res.cloudinary.com/dmbc2infa/video/upload/v1774414601/AUDIO-2026-03-24-13-12-02_ipvlqa.m4a" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
-
-> *(Click below to hear a guest share why this format allowed them to share insights they usually keep for private conversations.)*
 
 ---
 
@@ -98,3 +100,5 @@ The Reverb is an attempt to give those moments more life. Just long enough for s
 
 ---
 **Spend 5 minutes with an episode today. You might just find the one idea you've been looking for.**
+
+Catch the echo: [Spotify](https://open.spotify.com/show/1mQUSNNpjenkeUiFVBXWCN) / [Apple Podcasts](https://podcasts.apple.com/gh/podcast/the-reverb/id1884282478)

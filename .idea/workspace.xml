@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/why-the-copy-paste-silicon-valley-model-dies-in-africa/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/why-the-copy-paste-silicon-valley-model-dies-in-africa/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/your-website-your-brand-our-ticketing-introducing-the-gatepass-widget/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/your-website-your-brand-our-ticketing-introducing-the-gatepass-widget/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/posts/most-podcasts-are-too-long-so-i-made-a-5-minute-one.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/most-podcasts-are-too-long-so-i-made-a-5-minute-one.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/most-podcasts-are-too-long-so-i-made-a-5-minute-one/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/most-podcasts-are-too-long-so-i-made-a-5-minute-one/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search.json" beforeDir="false" afterPath="$PROJECT_DIR$/search.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sitemap.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/writing/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/writing/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,15 +148,7 @@
       <workItem from="1769288369138" duration="979000" />
       <workItem from="1769729841641" duration="7275000" />
       <workItem from="1770164164631" duration="6288000" />
-      <workItem from="1774413898649" duration="1716000" />
-    </task>
-    <task id="LOCAL-00037" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1767551777241</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1767551777241</updated>
+      <workItem from="1774413898649" duration="2275000" />
     </task>
     <task id="LOCAL-00038" summary="content changes">
       <option name="closed" value="true" />
@@ -549,7 +534,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770224872315</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1774415629048</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1774415629048</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
