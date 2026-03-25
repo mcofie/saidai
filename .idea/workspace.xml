@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
-      <change beforePath="$PROJECT_DIR$/content/posts/most-podcasts-are-too-long-so-i-made-a-5-minute-one.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/most-podcasts-are-too-long-so-i-made-a-5-minute-one.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/most-podcasts-are-too-long-so-i-made-a-5-minute-one/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/most-podcasts-are-too-long-so-i-made-a-5-minute-one/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -148,15 +144,7 @@
       <workItem from="1769288369138" duration="979000" />
       <workItem from="1769729841641" duration="7275000" />
       <workItem from="1770164164631" duration="6288000" />
-      <workItem from="1774413898649" duration="2275000" />
-    </task>
-    <task id="LOCAL-00038" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1767554269027</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1767554269027</updated>
+      <workItem from="1774413898649" duration="3134000" />
     </task>
     <task id="LOCAL-00039" summary="content changes">
       <option name="closed" value="true" />
@@ -542,7 +530,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774415629048</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1774416434582</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1774416434584</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -8,7 +8,6 @@ category: "Community"
 
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_crop,g_north_west/Sandbox_Re%CC%81seau_4_ye9iq1.png" alt="Trip photo">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_auto/Sandbox_Re%CC%81seau_5_swcdw8.png" alt="Trip photo">
 </div>
 
 If it takes two hours to explain something, there’s a good chance it could have been said in ten minutes.
@@ -36,6 +35,9 @@ When I dug into the history of how this whole thing works, I had an "Aha!" momen
 The answer didn't come from the numbers. It came from the room.
 
 ### Capturing the "Echo"
+<div class="image-grid">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_auto/Sandbox_Re%CC%81seau_5_swcdw8.png" alt="Trip photo">
+</div>
 
 I run a builders community called **[Sandbox Réseau](https://sandboxreseau.com/)**. In rooms like that, meetups, small gatherings, the "after-hours" talk, something important happens. People share lessons, mistakes, and half-formed ideas that are incredibly real, but they rarely write them down.
 
