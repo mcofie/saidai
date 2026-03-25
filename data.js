@@ -1,5 +1,23 @@
 window.works = [
     {
+        id: "vellum",
+        title: "Vellum",
+        year: "2026",
+        url: "https://getvellum.org",
+        descKey: "proj.vellum",
+        metaKey: "meta.platform",
+        category: "work"
+    },
+    {
+        id: "graydocket",
+        title: "GrayDocket",
+        year: "2026",
+        url: "https://graydocket.com",
+        descKey: "proj.graydocket",
+        metaKey: "meta.platform",
+        category: "work"
+    },
+    {
         id: "rentbase",
         title: "RentBase",
         year: "2025",
