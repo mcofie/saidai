@@ -65,6 +65,8 @@ To keep this sustainable and authentic, I simplified my setup. I stopped worryin
 * **Design:** [Canva](https://www.canva.com/).
 * **Host:** Spotify.
 
+And of course, my friend Oppong Barfo, who produced the iconic soundtrack, deserves an honorary mention.
+
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_crop,g_north_west/4_kmtqg9.png" alt="Trip photo">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_crop,g_north_west/6_eoddes.png" alt="Trip photo">
