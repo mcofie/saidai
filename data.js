@@ -102,6 +102,15 @@ window.works = [
 
 window.initiatives = [
     {
+        id: "goodseed",
+        title: "The Good Seed Capital",
+        year: "2026",
+        url: "https://thegoodseedcapital.com",
+        descKey: "proj.goodseed",
+        metaKey: "meta.vc",
+        category: "initiative"
+    },
+    {
         id: "sandbox",
         title: "Sandbox Reseau",
         year: "2025",
