@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/about/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/about/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/locale.js" beforeDir="false" afterPath="$PROJECT_DIR$/locale.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +112,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.242" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.32098.39" />
       </set>
     </attachedChunks>
   </component>
@@ -151,15 +153,8 @@
       <workItem from="1774413898649" duration="3134000" />
       <workItem from="1774458066416" duration="947000" />
       <workItem from="1774473035619" duration="2021000" />
-      <workItem from="1774894257298" duration="686000" />
-    </task>
-    <task id="LOCAL-00042" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1767630632786</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1767630632786</updated>
+      <workItem from="1774894257298" duration="2130000" />
+      <workItem from="1779621781762" duration="612000" />
     </task>
     <task id="LOCAL-00043" summary="content changes">
       <option name="closed" value="true" />
@@ -545,7 +540,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774475161389</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1774896639546</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1774896639546</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

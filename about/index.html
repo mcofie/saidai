@@ -38,106 +38,71 @@
     <meta property="og:url" content="https://maxwellcofie.com/about/">
 
     <style>
-        .about-content {
-            max-width: 800px;
+        .about-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 32px;
             margin-top: 40px;
-        }
-
-        .about-section {
-            margin-bottom: 60px;
+            align-items: start;
             opacity: 0;
             animation: slideIn 0.8s var(--ease-out) forwards;
-        }
-
-        .about-section:nth-child(1) {
             animation-delay: 0.1s;
         }
 
-        .about-section:nth-child(2) {
-            animation-delay: 0.2s;
+        .about-image-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            background: #e11d48;
         }
 
-        .about-section:nth-child(3) {
-            animation-delay: 0.3s;
+        .about-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .about-heading {
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--text-main);
-            margin-bottom: 16px;
-            letter-spacing: -0.01em;
+        .about-image:hover {
+            transform: scale(1.03);
+        }
+
+        .about-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .about-text {
-            font-size: 16px;
-            line-height: 1.6;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-
-        .manifesto-text {
-            font-size: 18px;
-            line-height: 1.6;
-            color: var(--text-main);
-            margin-bottom: 60px;
-            font-weight: 400;
-        }
-
-        .section-divider {
-            height: 1px;
-            background: var(--border-color);
-            margin: 60px 0;
-            width: 100%;
-        }
-
-        .pillar-list {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .pillar-item {
-            display: grid;
-            grid-template-columns: 40px 1fr;
-            gap: 24px;
-            align-items: baseline;
-        }
-
-        .pillar-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            color: var(--text-tertiary);
-        }
-
-        .pillar-content {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .pillar-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-main);
-            letter-spacing: -0.01em;
-        }
-
-        .pillar-desc {
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.65;
             color: var(--text-muted);
-            max-width: 600px;
+            margin: 0;
+        }
+
+        .about-text-highlight {
+            font-family: 'Mansalva', cursive, sans-serif;
+            font-size: 20px;
+            color: var(--text-main);
+            margin-top: 12px;
+            letter-spacing: 0.02em;
+            line-height: 1.4;
         }
 
         @media (max-width: 600px) {
-            .pillar-item {
+            .about-grid {
                 grid-template-columns: 1fr;
-                gap: 8px;
+                gap: 24px;
             }
-
-            .pillar-number {
-                display: none;
+            .about-image-wrapper {
+                max-width: 200px;
+                margin: 0 auto;
+            }
+            .about-text-highlight {
+                font-size: 18px;
             }
         }
     </style>
@@ -166,73 +131,20 @@
     </nav>
 
     <div class="intro">
-        <h1 class="intro-headline" data-i18n="about.headline">Builder, thinker, and optimist.</h1>
-        <p class="intro-desc" data-i18n="about.intro">Who I am, my beliefs, and what I stand for.</p>
-
-        <div
-            style="margin-top: 32px; margin-bottom: 0px; width: 100%; overflow: hidden; border-radius: 8px; opacity: 1; transform: none;">
-            <div class="video-wrapper">
-                <iframe id="greeting-video" title="My Story"
-                    src="https://www.youtube.com/embed/TyPitJhU8jY?rel=0&autoplay=0" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
-                    style="width: 100%; height: 100%; position: absolute; top:0; left:0; border-radius: 8px;">
-                </iframe>
-            </div>
-        </div>
+        <h1 class="intro-headline" data-i18n="about.headline">Hi, I'm Max. I build things, break things, and occasionally make them work.</h1>
+        <p class="intro-desc" data-i18n="about.intro">I am a Product Builder & Systems Thinker based in Accra. I architect digital solutions that solve local problems today while preparing for cross-border expansion tomorrow.</p>
     </div>
 
-    <div class="about-content">
-
-        <div class="about-section">
-            <p class="manifesto-text" data-i18n="about.manifesto_intro">
-                I build digital products and businesses to solve real, persistent problems across Africa. Based in
-                Accra, Ghana, my work focuses on designing platforms that are grounded in local realities while being
-                capable of scaling across borders. I’m deeply interested in how African markets work, from user
-                behaviour and infrastructure constraints to cross-border expansion and sustainable platform growth.
-            </p>
+    <div class="about-grid">
+        <div class="about-image-wrapper">
+            <img src="../assets/images/maxwell-cofie.jpg" alt="Maxwell Cofie" class="about-image">
         </div>
-
-        <div class="section-divider"></div>
-
-        <div class="about-section">
-            <h2 class="about-heading" data-i18n="about.pillars_heading"
-                style="margin-bottom: 32px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary);">
-                Strategic Pillars</h2>
-
-            <div class="pillar-list">
-                <div class="pillar-item">
-                    <span class="pillar-number">01</span>
-                    <div class="pillar-content">
-                        <span class="pillar-title" data-i18n="about.pillar_1_title">Local Relevance</span>
-                        <span class="pillar-desc" data-i18n="about.pillar_1_desc">I don't believe in copy-pasting
-                            Silicon Valley models. I build for the specific infrastructure and behavioral constraints of
-                            the Ghanaian and African context.</span>
-                    </div>
-                </div>
-
-                <div class="pillar-item">
-                    <span class="pillar-number">02</span>
-                    <div class="pillar-content">
-                        <span class="pillar-title" data-i18n="about.pillar_2_title">Cross-Border DNA</span>
-                        <span class="pillar-desc" data-i18n="about.pillar_2_desc">A product shouldn't be landlocked. I
-                            design systems (code and strategy) that are ready to travel to Abidjan, Lagos, and Nairobi
-                            from Day 1.</span>
-                    </div>
-                </div>
-
-                <div class="pillar-item">
-                    <span class="pillar-number">03</span>
-                    <div class="pillar-content">
-                        <span class="pillar-title" data-i18n="about.pillar_3_title">Sustainable Systems</span>
-                        <span class="pillar-desc" data-i18n="about.pillar_3_desc">I focus on the intersection of clean
-                            code and viable business models. If it doesn't solve a problem sustainably, it’s just a
-                            hobby.</span>
-                    </div>
-                </div>
-            </div>
+        <div class="about-text-wrapper">
+            <p class="about-text" data-i18n="about.bio_intro">I'm based in Accra, and I've spent the last decade obsessed with one question: what does it actually take to make Africa's best ideas survive? Not just the idea stage — the messy middle. The registration, the infrastructure, the capital, the community that tells you the truth when your product is broken.</p>
+            <p class="about-text" data-i18n="about.bio_p1">I build products that remove friction for founders and everyday people across legal-tech, proptech, commerce, agriculture, hospitality, and more. But the products are just one layer. The real work is building the ecosystem around them.</p>
+            <p class="about-text" data-i18n="about.bio_p2">Sandbox Réseau is the builder community I run in Accra — high-signal, no fluff. The Reverb is the podcast where I capture the unfiltered founder stories. The Good Seed Capital is the syndicate I'm building to get real capital into the hands of founders who've earned it.</p>
+            <p class="about-text-highlight" data-i18n="about.bio_p3">Engineer by training. Builder by compulsion.</p>
         </div>
-
     </div>
 
     <footer>
