@@ -1,8 +1,8 @@
 ---
-title: "30+ Builders, One Platform: What Hosting The Reverb Taught Me About Building in the Ghana"
+title: "30+ Builders, One Platform: What Hosting The Reverb Taught Me About Building in Ghana"
 date: "Jun 2026"
 isoDate: "2026-06-06"
-description: "'People love my idea' is the most dangerous sentence in tech. What 30+ Ghanaian builders taught me about validation, shipping, and what people actually pay for."
+description: "'People love my idea' is the most dangerous sentence in tech. What 30+ Ghanaian builders taught me about what actually works"
 category: "Community"
 ---
 <div class="image-grid">
@@ -15,7 +15,7 @@ I thought I was collecting separate stories. After more than thirty of these con
 
 ## Validation lives in behaviour and payment, never in applause
 
-The loudest signal across the whole run is also the most uncomfortable one: praise is not validation, and our culture is dangerously good at handing out praise.
+_The loudest signal across the whole run is also the most uncomfortable one: praise is not validation, and our culture is dangerously good at handing out praise._
 
 **Richmond** from [Clerra](https://clerra.app/) put it most sharply. He took his legal-tech idea into Ghana's first legal hackathon, actually hoping the judges would tell him it was trash, so he could walk away before sinking years into it. They didn't. Clerra placed first runner-up. His warning is about the "yes man" trap: the biggest lie a founder hears is "your idea is solid," because people hate delivering bad news. The only validation he trusts now is a user who pays.
 
@@ -25,7 +25,7 @@ The loudest signal across the whole run is also the most uncomfortable one: prai
 
 ## Shipping is just feedback you've stopped delaying
 
-Almost every builder had a version of the same confession: the instinct to perfect is usually the instinct to hide.
+_Almost every builder had a version of the same confession: the instinct to perfect is usually the instinct to hide._
 
 **Yoofi** from [Beeterty](https://beeterty.com/) launched "too early" on purpose. The team kept returning to two questions (what's the minimum someone needs to make a professional invoice, and does it make them look professional), then shipped the moment that core worked. Launching early didn't mean launching carelessly; they were transparent about the roadmap and even tweeted their bugs as they happened. His line stuck with me: "Waiting for one more feature is usually just postponing the feedback."
 
@@ -35,7 +35,7 @@ Almost every builder had a version of the same confession: the instinct to perfe
 
 ## Every technical problem is a human one underneath
 
-I came in expecting to talk about tech stacks. I mostly ended up talking about people.
+_I came in expecting to talk about tech stacks. I mostly ended up talking about people._
 
 **Michael** from [BuukMeNow](https://buukmenow.com/) learned it from one furious phone call. His appointment platform worked flawlessly and was still wrong, because it didn't map to how a real service provider's day actually runs. A booking she couldn't attend was a contradiction in the user's world, not the code's. He rebuilt around configurable availability and a "set yourself away" mode, which became his most-adopted feature and a prerequisite for new sign-ups. His Reverb is the cliché that keeps being true: you are not your user.
 
@@ -45,7 +45,7 @@ I came in expecting to talk about tech stacks. I mostly ended up talking about p
 
 ## The constraint is usually the opportunity
 
-This is the pattern outsiders never see when they look at building here, and the one I find most beautiful.
+_This is the pattern outsiders never see when they look at building here, and the one I find most beautiful._
 
 **Andrew** from [Budge AI](https://www.budgeai.com/) wanted to plug into bank APIs like any founder elsewhere would. The infrastructure wasn't there, and he shelved the project in 2023. The breakthrough came when he stopped asking how to work with the banks and realised the data already lived on users' phones as SMS and notifications. The missing infrastructure became the feature: Budge never touches your money or asks you to link an account, which makes it safer than the alternatives. As he put it, there's a magic that comes from problems, and it's most visible where the problem is most painful.
 
@@ -70,6 +70,10 @@ Every guest ends with their own Reverb, the one lesson they'd hand a younger ver
 Building in the 233 is still noisy. But after more than thirty conversations, laid side by side, the signal is unmistakable. Plug in, sync up, and get back to building.
 
 Since this was built for the builders in the community, it's becoming a go-to resource the ecosystem keeps coming back to, and I can't wait to hear what the next builder or founder has to say. Learning about them doesn't end here. These five minutes are meant to help builders quickly absorb a lesson and see how best to apply it to their own products and start-ups. Environments, context, and conditions vary; the onus is on you to tune each lesson to your own situation.
+
+<div class="image-grid">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/ar_1:1,c_auto/Sandbox_Re%CC%81seau_5_swcdw8.png" alt="Trip photo">
+</div>
 
 Listen to [The Reverb](https://sandboxreseau.com/podcast/) and subscribe ([Apple Podcasts](https://podcasts.apple.com/gh/podcast/the-reverb/id1884282478) or [Spotify](https://open.spotify.com/show/1mQUSNNpjenkeUiFVBXWCN)) so you never miss an episode: [sandboxreseau.com/podcast](https://sandboxreseau.com/podcast/). New lessons drop (every Wednesday) regularly, one builder at a time.
 
