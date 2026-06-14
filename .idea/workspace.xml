@@ -6,10 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/about/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/about/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MINUTES2MATCH_PROMPT.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locale.js" beforeDir="false" afterPath="$PROJECT_DIR$/locale.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/most-podcasts-are-too-long-so-i-made-a-5-minute-one/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/most-podcasts-are-too-long-so-i-made-a-5-minute-one/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/the-genesis-of-the-reseau/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/why-the-copy-paste-silicon-valley-model-dies-in-africa/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/why-the-copy-paste-silicon-valley-model-dies-in-africa/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/your-website-your-brand-our-ticketing-introducing-the-gatepass-widget/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/your-website-your-brand-our-ticketing-introducing-the-gatepass-widget/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search.json" beforeDir="false" afterPath="$PROJECT_DIR$/search.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sitemap.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/writing/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/writing/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,6 +162,8 @@
       <workItem from="1774473035619" duration="2021000" />
       <workItem from="1774894257298" duration="2130000" />
       <workItem from="1779621781762" duration="612000" />
+      <workItem from="1780707500338" duration="10073000" />
+      <workItem from="1781405183857" duration="3787000" />
     </task>
     <task id="LOCAL-00043" summary="content changes">
       <option name="closed" value="true" />
