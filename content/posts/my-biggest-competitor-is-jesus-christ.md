@@ -3,7 +3,7 @@ title: "My Biggest Competitor Is Jesus Christ"
 date: "Aug 2026"
 isoDate: "2026-08-14"
 description: "What I've been learning about why digital products struggle to take root in this part of the world"
-category: "Africa"
+category: "Africa, Technology"
 ---
 
 
