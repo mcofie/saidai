@@ -6,6 +6,11 @@ description: "What I've been learning about why digital products struggle to tak
 category: "Africa"
 ---
 
+
+<div class="image-grid">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/q_auto:good/c_crop,g_north_west,h_2362,w_4724/The_State_of_Accra_s_Startup_Ecosystem_2_guhnxi.png" alt="Trip photo">
+</div>
+
 >"My biggest competitor isn't another insurance company. It's Jesus Christ."
 
 A friend shared this with me recently. It came from a man who sells life insurance here in Ghana. I laughed when I first heard it. Then I sat with it for a while and realised he wasn't joking at all.
@@ -62,7 +67,7 @@ The honest answer is that Airbnb, Uber and Netflix aren't culture-proof. They ju
 They arrive selling to a thin, urban, already globally-referenced segment. People whose reference group isn't their neighbourhood but the internet. For that group, adoption isn't only about utility; it's about identity, and aspiration does the marketing for free in a way no local brand can buy. They also have the balance sheet to sit through five years of slow adoption. A local founder has to be right almost immediately.
 
 And where these brands did hit the cultural wall, they moved.
-Think about Airbnb. When it arrived here around 2015 and 2016, the reaction was almost universal. A stranger, sleeping in my house? It read as a security risk from every angle. It cut against how households and communities in this part of the world actually function.
+Think about Airbnb. When it first arrived here in Africa around 2015 and 2016, the reaction was almost universal. A stranger, sleeping in my house? It read as a security risk from every angle. It cut against how households and communities in this part of the world actually function.
 That objection was never really overcome. Look at what Airbnb is in Accra or Lagos today. It's overwhelmingly whole-apartment short lets. Not a spare room in a family home.
 
 The market didn't learn to accept the original product. It quietly adopted only the part of it that made cultural sense, and the company let it happen.
@@ -70,7 +75,7 @@ The culture didn't move. The product did.
 
 ## Borders Are Real, Even When They Look the Same
 One more thing worth saying, because I saw it up close recently.
-I travelled to Abidjan in December, my first visit to a neighbouring West African country. On the road in, the landscape and vegetation looked so much like Ghana that I assumed the rest would be familiar too.
+I travelled to [Abidjan in December](https://maxwellcofie.com/posts/my-journey-to-the-west-ivory-coast-abidjan/), my first visit to a neighbouring West African country. On the road in, the landscape and vegetation looked so much like Ghana that I assumed the rest would be familiar too.
 Then I opened Uber. No trips available. I opened Bolt. Same thing. Neither operates there. I fell back on traditional taxis and my Translate app.
 Payments told a similar story. My Visa cards were close to useless. But almost every shop owner, restaurant and taxi driver had a QR code on display for Wave or Orange Money. Not MoMo. Not the brands I know at home.
 
