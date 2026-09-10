@@ -23,7 +23,6 @@ I picked it up expecting a few useful frameworks. I got considerably more than I
 
 Mark brings readers up to speed with his journey, tracing how his upbringing and playful childhood home shaped his perspective on engagement and play. Long before Zynga, he built, scaled, and exited multiple ventures. Out of the principles and operating frameworks he unpacks, his breakdown of product creation stood out the most.
 
----
 
 ## The Three Pillars of a Product Maker
 
@@ -51,7 +50,6 @@ Great products rarely survive design by committee. Breakthrough products require
 
 In early-stage building, complete democracy is just disguised indecision. You want radical honesty and candid input during the debate, but strong products need a single hand on the wheel to maintain conviction.
 
----
 
 ## Beyond the MVP: Atomic Units of Learning
 
@@ -63,7 +61,6 @@ An MIS isn't a fully built product. It is simply the smallest expression of an i
 
 While Mark's assertion made total sense when engineering costs were prohibitive, our post-AI reality flips the script. With vibe-coding and modern generative tooling, the cost of spinning up a functional, stripped-down product in record time has cratered. In many cases, it now makes more sense to give users an actual, tangible artifact to touch rather than a conceptual MIS. Still, the fundamental lesson holds: competitive advantage is no longer about *"Can you build it?"* but *"Do you know what to build, what to test, and what to kill?"*
 
----
 
 ## Bold Beats, OMFG Moments, and the Living Roadmap
 
@@ -75,7 +72,6 @@ This is where the Proven, Better, New framework becomes operational through the 
 
 The roadmap is where strategy meets execution. It isn't a static quarterly Gantt chart; it's a living document that allocates resources, defines measurable outcomes, sets shipping dates, and dictates the operational heartbeat of the company. Paired with rigorous weekly reviews, it acts as the team's ongoing report card, defining exactly which hills you take, what impact you expect, and what every bet costs. Without that clear accountability, a team is simply building blind.
 
----
 
 ## Staying Close to the Metal
 
@@ -85,7 +81,7 @@ This resonated deeply. As products gain traction and teams expand, too many foun
 
 You see this in leaders like Brian Chesky at Airbnb or Evan Spiegel at Snap. Both come from design backgrounds; both remain deeply immersed in the levers, pulleys, and craft of their interfaces. That proximity isn't micromanagement; it's full-stack leadership from builders who know how to get in the trenches.
 
----
+
 
 ## Internet Treasures
 
