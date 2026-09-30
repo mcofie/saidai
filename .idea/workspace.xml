@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/static.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/static.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/about/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/about/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locale.js" beforeDir="false" afterPath="$PROJECT_DIR$/locale.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,23 +164,7 @@
       <workItem from="1786707640602" duration="3891000" />
       <workItem from="1789080074540" duration="4670000" />
       <workItem from="1790562309198" duration="2219000" />
-      <workItem from="1790790887465" duration="938000" />
-    </task>
-    <task id="LOCAL-00051" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1767836479306</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1767836479306</updated>
-    </task>
-    <task id="LOCAL-00052" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1767870461202</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1767870461202</updated>
+      <workItem from="1790790887465" duration="1782000" />
     </task>
     <task id="LOCAL-00053" summary="content changes">
       <option name="closed" value="true" />
@@ -559,7 +542,23 @@
       <option name="project" value="LOCAL" />
       <updated>1789084074978</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1790793009773</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1790793009773</updated>
+    </task>
+    <task id="LOCAL-00101" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1790793521203</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1790793521203</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
