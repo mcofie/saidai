@@ -6,16 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/about/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/about/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/build-what-matters-graydocket-handles-the-setup/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/build-what-matters-graydocket-handles-the-setup/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/my-biggest-competitor-is-jesus-christ/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/my-biggest-competitor-is-jesus-christ/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/my-journey-to-the-west-ivory-coast-abidjan/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/why-the-copy-paste-silicon-valley-model-dies-in-africa/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/why-the-copy-paste-silicon-valley-model-dies-in-africa/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/your-website-your-brand-our-ticketing-introducing-the-gatepass-widget/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/your-website-your-brand-our-ticketing-introducing-the-gatepass-widget/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search.json" beforeDir="false" afterPath="$PROJECT_DIR$/search.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sitemap.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/writing/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/writing/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locale.js" beforeDir="false" afterPath="$PROJECT_DIR$/locale.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,23 +163,9 @@
       <workItem from="1781405183857" duration="5048000" />
       <workItem from="1781453244463" duration="1000" />
       <workItem from="1786707640602" duration="3891000" />
-      <workItem from="1789080074540" duration="3395000" />
-    </task>
-    <task id="LOCAL-00049" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1767795236561</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1767795236561</updated>
-    </task>
-    <task id="LOCAL-00050" summary="content changes">
-      <option name="closed" value="true" />
-      <created>1767823746226</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1767823746226</updated>
+      <workItem from="1789080074540" duration="4670000" />
+      <workItem from="1790562309198" duration="2219000" />
+      <workItem from="1790790887465" duration="938000" />
     </task>
     <task id="LOCAL-00051" summary="content changes">
       <option name="closed" value="true" />
@@ -564,7 +543,23 @@
       <option name="project" value="LOCAL" />
       <updated>1786711533006</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1789083944584</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1789083944585</updated>
+    </task>
+    <task id="LOCAL-00099" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1789084074977</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1789084074978</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
