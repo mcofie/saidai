@@ -157,6 +157,13 @@ nav.scrolled {
     transform: rotate(-2deg);
 }
 
+.font-logo {
+    font-family: 'Mansalva', cursive;
+    font-size: 1.15em;
+    color: var(--text-main);
+    letter-spacing: 0.02em;
+}
+
 .nav-links {
     display: flex;
     align-items: center;

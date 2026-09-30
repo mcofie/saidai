@@ -46,9 +46,9 @@
             max-width: 820px;
             font-size: clamp(28px, 4.5vw, 40px);
             line-height: 1.22;
-            letter-spacing: -0.035em;
+            letter-spacing: -0.025em;
             margin-bottom: 0;
-            font-weight: 600;
+            font-weight: 400;
         }
 
         .about-grid {
@@ -149,26 +149,41 @@
         }
 
         .about-bullets a:hover,
-        .about-text a:hover,
-        .about-cta a:hover {
+        .about-text a:hover {
             color: var(--accent);
             text-decoration-color: var(--text-main);
         }
 
-        .about-cta {
-            font-size: 15px;
-            line-height: 1.65;
-            color: var(--text-main);
-            padding: 16px 20px;
-            background: var(--surface);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            margin: 6px 0 0 0;
-            box-shadow: var(--shadow-sm);
+        .about-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            background: var(--accent);
+            color: var(--bg) !important;
+            border-radius: 99px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none !important;
+            white-space: nowrap;
+            transition: all 0.2s var(--ease-out);
+            align-self: flex-start;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-top: -6px;
         }
 
-        .about-cta strong {
-            font-weight: 600;
+        .about-cta-btn svg {
+            transition: transform 0.2s var(--ease-out);
+        }
+
+        .about-cta-btn:hover {
+            transform: translateY(-1px);
+            opacity: 0.92;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .about-cta-btn:hover svg {
+            transform: translate(2px, -2px);
         }
 
         .about-signature {
@@ -229,14 +244,17 @@
         </div>
         <div class="about-text-wrapper">
             <p class="about-text" data-i18n="about.lead">The continent is full of founders building products that genuinely transform how people pay, learn, access healthcare, own property, and do business. The craft of building products that work for people who need them, in markets where the stakes are real.</p>
-            <p class="about-lead-in" data-i18n="about.flows"><em>Everything I do flows from that:</em></p>
+            <p class="about-lead-in" data-i18n="about.flows">Everything I do flows from that:</p>
             <ul class="about-bullets">
-                <li data-i18n="about.bullet_build"><strong>I build</strong> — 8+ years of shipping software and launching ventures across fintech, legal-tech, events, and proptech in Ghana.</li>
+                <li data-i18n="about.bullet_build"><strong>I build</strong> — through <a href="https://stage2.xyz/" target="_blank" rel="noopener"><strong>Stage 2</strong></a>, a product studio, with 8+ years of digital products and launching ventures across fintech, legal-tech, events, commerce and proptech in Ghana.</li>
                 <li data-i18n="about.bullet_capital"><strong>I connect capital</strong> — through <a href="https://thegoodseedcapital.com" target="_blank" rel="noopener"><strong>The Good Seed Capital</strong></a>, where we bridge the gap between early-stage African founders and global investors who back with conviction, not curiosity.</li>
                 <li data-i18n="about.bullet_community"><strong>I build community</strong> — through <a href="https://sandboxreseau.com/" target="_blank" rel="noopener"><strong>Sandbox Réseau</strong></a>, a builder community in Accra, and <a href="https://sandboxreseau.com/podcast/" target="_blank" rel="noopener"><strong>The Reverb Podcast</strong></a>, where founders share what it actually took.</li>
             </ul>
-            <p class="about-text" data-i18n="about.notebook">I document everything I'm learning along the way: deep dives into product, capital, and community across Africa's tech ecosystem. Consider this my open notebook.</p>
-            <div class="about-cta" data-i18n="about.cta"><strong>If you're building something that matters on this continent or investing in those who are — <a href="mailto:hello@maxwellcofie.com">let's talk</a>.</strong></div>
+            <p class="about-text" data-i18n="about.cta_text">If you're building something that matters on this continent or investing in those who are —</p>
+            <a href="mailto:hello@maxwellcofie.com" class="about-cta-btn">
+                <span data-i18n="about.cta_btn">Let's talk</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
             <p class="about-signature" data-i18n="about.signature">Product, Capital, Community</p>
         </div>
     </div>
@@ -246,10 +264,9 @@
         <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
         <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link"
             data-i18n="footer.linkedin">LinkedIn</a>
-        <a href="https://github.com/mcofie" target="_blank" class="footer-link" data-i18n="footer.github">GitHub</a>
-        <a href="../dev/" class="footer-link" data-i18n="nav.dev">Dev</a>
+        <a href="https://thekompound.substack.com" target="_blank" class="footer-link" data-i18n="footer.substack">Substack</a>
         <span style="flex-grow: 1;"></span>
-        <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2025 Maxwell Cofie</span>
+        <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2026 Maxwell Cofie</span>
     </footer>
 
     <script src="../locale.js"></script>
