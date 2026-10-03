@@ -6,6 +6,18 @@
 window.books = [
     {
         "id": "book-1",
+        "title": "The Ultimate Sales Machine",
+        "subtitle": "Turbocharge Your Business with Relentless Focus on 12 Key Strategies",
+        "author": "Chet Holmes",
+        "year": "2007",
+        "status": "currently-reading",
+        "rating": 0,
+        "isbn": "1591841607",
+        "amazonUrl": "https://www.amazon.com/dp/1591841607",
+        "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1311705598l/1258489.jpg"
+    },
+    {
+        "id": "book-2",
         "title": "Lessons in Chemistry",
         "subtitle": "",
         "author": "Bonnie Garmus",
@@ -17,7 +29,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1759925297l/242528917.jpg"
     },
     {
-        "id": "book-2",
+        "id": "book-3",
         "title": "Verity",
         "subtitle": "",
         "author": "Colleen Hoover",
@@ -29,7 +41,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1634158558l/59344312._SY475_.jpg"
     },
     {
-        "id": "book-3",
+        "id": "book-4",
         "title": "Stories That Stick",
         "subtitle": "How Storytelling Can Captivate Customers, Influence Audiences, and Transform Your Business",
         "author": "Kindra Hall",
@@ -41,7 +53,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1550609680l/42772139._SY475_.jpg"
     },
     {
-        "id": "book-4",
+        "id": "book-5",
         "title": "Twice",
         "subtitle": "",
         "author": "Mitch Albom",
@@ -53,7 +65,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1761313469l/223688905._SX318_.jpg"
     },
     {
-        "id": "book-5",
+        "id": "book-6",
         "title": "The Maid",
         "subtitle": "Molly the Maid, #1",
         "author": "Nita Prose",
@@ -65,7 +77,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1673002958l/67352961.jpg"
     },
     {
-        "id": "book-6",
+        "id": "book-7",
         "title": "Yellowface",
         "subtitle": "",
         "author": "R.F. Kuang",
@@ -77,7 +89,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1671336608l/62047984.jpg"
     },
     {
-        "id": "book-7",
+        "id": "book-8",
         "title": "The Ones We Find",
         "subtitle": "",
         "author": "Ama Pomaa",
@@ -89,7 +101,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1693641731l/198245061._SY475_.jpg"
     },
     {
-        "id": "book-8",
+        "id": "book-9",
         "title": "Tomorrow Died Yesterday",
         "subtitle": "",
         "author": "Chimeka Garricks",
@@ -101,7 +113,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1392485234l/20814511.jpg"
     },
     {
-        "id": "book-9",
+        "id": "book-10",
         "title": "Atomic Habits",
         "subtitle": "An Easy & Proven Way to Build Good Habits & Break Bad Ones",
         "author": "James Clear",
@@ -113,7 +125,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1655988385l/40121378.jpg"
     },
     {
-        "id": "book-10",
+        "id": "book-11",
         "title": "The Alchemist",
         "subtitle": "",
         "author": "Paulo Coelho",
@@ -125,7 +137,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1654371463l/18144590._SY475_.jpg"
     },
     {
-        "id": "book-11",
+        "id": "book-12",
         "title": "The Millionaire Fastlane",
         "subtitle": "Crack the Code to Wealth and Live Rich for a Lifetime!",
         "author": "M.J. DeMarco",
@@ -137,7 +149,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1384971700l/18872437.jpg"
     },
     {
-        "id": "book-12",
+        "id": "book-13",
         "title": "Ego Is the Enemy",
         "subtitle": "",
         "author": "Ryan Holiday",
@@ -149,7 +161,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1459114043l/27036528.jpg"
     },
     {
-        "id": "book-13",
+        "id": "book-14",
         "title": "Nearly All the Men in Lagos Are Mad",
         "subtitle": "",
         "author": "Damilare Kuku",
@@ -161,7 +173,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1621694980l/58120777._SY475_.jpg"
     },
     {
-        "id": "book-14",
+        "id": "book-15",
         "title": "Every Last Secret",
         "subtitle": "",
         "author": "A.R. Torre",
@@ -173,7 +185,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1584112810l/52347808._SY475_.jpg"
     },
     {
-        "id": "book-15",
+        "id": "book-16",
         "title": "Do It Today",
         "subtitle": "Overcome Procrastination, Improve Productivity, and Achieve More Meaningful Things",
         "author": "Darius Foroux",
@@ -185,7 +197,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1529553804l/40601527._SY475_.jpg"
     },
     {
-        "id": "book-16",
+        "id": "book-17",
         "title": "Rich Dad Poor Dad",
         "subtitle": "What the Rich Teach Their Kids About Money—That the Poor and Middle Class Do Not!",
         "author": "Robert T. Kiyosaki",
@@ -197,7 +209,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1757619021l/69571._SY475_.jpg"
     },
     {
-        "id": "book-17",
+        "id": "book-18",
         "title": "Ikigai",
         "subtitle": "The Japanese Secret to a Long and Happy Life",
         "author": "Héctor García",
@@ -209,7 +221,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1636345522l/40534545._SX318_.jpg"
     },
     {
-        "id": "book-18",
+        "id": "book-19",
         "title": "Steal Like an Artist",
         "subtitle": "10 Things Nobody Told You About Being Creative",
         "author": "Austin Kleon",
@@ -221,7 +233,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1404576602l/13099738.jpg"
     },
     {
-        "id": "book-19",
+        "id": "book-20",
         "title": "Turning Pro",
         "subtitle": "",
         "author": "Steven Pressfield",
@@ -233,7 +245,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1339000038l/14912777.jpg"
     },
     {
-        "id": "book-20",
+        "id": "book-21",
         "title": "Be Amazing or Go Home",
         "subtitle": "Seven Customer Service Habits That Create Confidence with Everyone",
         "author": "Shep Hyken",
@@ -245,7 +257,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1506320903l/36299824._SY475_.jpg"
     },
     {
-        "id": "book-21",
+        "id": "book-22",
         "title": "The 360 Degree Leader",
         "subtitle": "Developing Your Influence from Anywhere in the Organization",
         "author": "John C. Maxwell",
@@ -257,7 +269,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1388209272l/183396.jpg"
     },
     {
-        "id": "book-22",
+        "id": "book-23",
         "title": "Think and Grow Rich",
         "subtitle": "",
         "author": "Napoleon Hill",
@@ -269,7 +281,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1463241782l/30186948._SY475_.jpg"
     },
     {
-        "id": "book-23",
+        "id": "book-24",
         "title": "Today Matters",
         "subtitle": "12 Daily Practices to Guarantee Tomorrow's Success",
         "author": "John C. Maxwell",
@@ -281,7 +293,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1432343745l/389921._SY475_.jpg"
     },
     {
-        "id": "book-24",
+        "id": "book-25",
         "title": "The 15 Invaluable Laws of Growth",
         "subtitle": "Live Them and Reach Your Potential",
         "author": "John C. Maxwell",
@@ -293,7 +305,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1630508815l/13529210._SX318_.jpg"
     },
     {
-        "id": "book-25",
+        "id": "book-26",
         "title": "Deep Work",
         "subtitle": "Rules for Focused Success in a Distracted World",
         "author": "Cal Newport",
@@ -305,7 +317,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1447957962l/25744928._SY475_.jpg"
     },
     {
-        "id": "book-26",
+        "id": "book-27",
         "title": "Eat That Frog!",
         "subtitle": "21 Great Ways to Stop Procrastinating and Get More Done in Less Time",
         "author": "Brian Tracy",
@@ -317,7 +329,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1328854785l/95887.jpg"
     },
     {
-        "id": "book-27",
+        "id": "book-28",
         "title": "Who Moved My Cheese?",
         "subtitle": "",
         "author": "Spencer Johnson",
@@ -329,7 +341,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1388639717l/4894.jpg"
     },
     {
-        "id": "book-28",
+        "id": "book-29",
         "title": "How to Win Friends & Influence People",
         "subtitle": "",
         "author": "Dale Carnegie",
@@ -341,7 +353,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1442726934l/4865._SY475_.jpg"
     },
     {
-        "id": "book-29",
+        "id": "book-30",
         "title": "The Lean Startup",
         "subtitle": "",
         "author": "Eric Ries",
@@ -353,7 +365,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1629999184l/10127019._SY475_.jpg"
     },
     {
-        "id": "book-30",
+        "id": "book-31",
         "title": "The 5 Second Rule",
         "subtitle": "Transform Your Life, Work, and Confidence with Everyday Courage",
         "author": "Mel Robbins",
@@ -365,7 +377,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1486492516l/34189313._SX318_.jpg"
     },
     {
-        "id": "book-31",
+        "id": "book-32",
         "title": "Crushing It!",
         "subtitle": "How Great Entrepreneurs Build Their Business and Influence and How You Can Too – A State-of-the-Art Guide to Personal Branding and Social Media",
         "author": "Gary Vaynerchuk",
@@ -377,7 +389,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1518378060l/36045512.jpg"
     },
     {
-        "id": "book-32",
+        "id": "book-33",
         "title": "Zero to One",
         "subtitle": "Notes on Startups, or How to Build the Future",
         "author": "Peter Thiel",
@@ -389,7 +401,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1630663027l/18050143.jpg"
     },
     {
-        "id": "book-33",
+        "id": "book-34",
         "title": "The Virgin Way",
         "subtitle": "Everything I Know About Leadership",
         "author": "Richard Branson",
@@ -401,7 +413,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1404477771l/22129114.jpg"
     },
     {
-        "id": "book-34",
+        "id": "book-35",
         "title": "Start with Why",
         "subtitle": "How Great Leaders Inspire Everyone to Take Action",
         "author": "Simon Sinek",
@@ -413,7 +425,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1360936414l/7108725.jpg"
     },
     {
-        "id": "book-35",
+        "id": "book-36",
         "title": "The Go-Giver",
         "subtitle": "A Little Story About a Powerful Business Idea",
         "author": "Bob Burg",
@@ -425,7 +437,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1355085736l/1873060.jpg"
     },
     {
-        "id": "book-36",
+        "id": "book-37",
         "title": "Blink",
         "subtitle": "The Power of Thinking Without Thinking",
         "author": "Malcolm Gladwell",
@@ -437,7 +449,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1440763417l/40102._SX318_.jpg"
     },
     {
-        "id": "book-37",
+        "id": "book-38",
         "title": "Outliers",
         "subtitle": "The Story of Success",
         "author": "Malcolm Gladwell",
@@ -449,7 +461,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1344266315l/3228917.jpg"
     },
     {
-        "id": "book-38",
+        "id": "book-39",
         "title": "The Tipping Point",
         "subtitle": "How Little Things Can Make a Big Difference",
         "author": "Malcolm Gladwell",
@@ -461,7 +473,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1473396980l/2612._SY475_.jpg"
     },
     {
-        "id": "book-39",
+        "id": "book-40",
         "title": "Thinking, Fast and Slow",
         "subtitle": "",
         "author": "Daniel Kahneman",
@@ -473,7 +485,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1317793965l/11468377.jpg"
     },
     {
-        "id": "book-40",
+        "id": "book-41",
         "title": "Made in Japan",
         "subtitle": "Akio Morita and Sony",
         "author": "Akio Morita",
@@ -485,7 +497,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1340866816l/1008101.jpg"
     },
     {
-        "id": "book-41",
+        "id": "book-42",
         "title": "Never Flinch",
         "subtitle": "Holly Gibney, #4",
         "author": "Stephen King",
@@ -497,7 +509,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1732728644l/221633230._SY475_.jpg"
     },
     {
-        "id": "book-42",
+        "id": "book-43",
         "title": "HBR's 10 Must Reads on Communication",
         "subtitle": "Featuring \"The Necessary Art of Persuasion\" by Jay A. Conger",
         "author": "Harvard Business Publishing",
@@ -509,7 +521,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1346806719l/15824367.jpg"
     },
     {
-        "id": "book-43",
+        "id": "book-44",
         "title": "The Autobiography of Benjamin Franklin",
         "subtitle": "",
         "author": "Benjamin Franklin",
@@ -521,7 +533,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1605742168l/55933198._SY475_.jpg"
     },
     {
-        "id": "book-44",
+        "id": "book-45",
         "title": "Stiff",
         "subtitle": "The Curious Lives of Human Cadavers",
         "author": "Mary Roach",
@@ -533,7 +545,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1625851259l/56769575.jpg"
     },
     {
-        "id": "book-45",
+        "id": "book-46",
         "title": "Guns, Germs, and Steel",
         "subtitle": "The Fates of Human Societies",
         "author": "Jared Diamond",
@@ -545,7 +557,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1453215833l/1842._SY475_.jpg"
     },
     {
-        "id": "book-46",
+        "id": "book-47",
         "title": "A Short History of Nearly Everything",
         "subtitle": "",
         "author": "Bill Bryson",
@@ -557,7 +569,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1433086293l/21._SY475_.jpg"
     },
     {
-        "id": "book-47",
+        "id": "book-48",
         "title": "Working Backwards",
         "subtitle": "Insights, Stories, and Secrets from Inside Amazon",
         "author": "Colin Bryar",
@@ -569,7 +581,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1606707026l/53138083.jpg"
     },
     {
-        "id": "book-48",
+        "id": "book-49",
         "title": "Jesus and John Wayne",
         "subtitle": "How White Evangelicals Corrupted a Faith and Fractured a Nation",
         "author": "Kristin Kobes Du Mez",
@@ -581,7 +593,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1611376522l/53121662._SY475_.jpg"
     },
     {
-        "id": "book-49",
+        "id": "book-50",
         "title": "Never Split the Difference",
         "subtitle": "Negotiating as if Your Life Depended on It",
         "author": "Chris Voss",
@@ -593,7 +605,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1680014152l/123857637._SY475_.jpg"
     },
     {
-        "id": "book-50",
+        "id": "book-51",
         "title": "No One Dies Yet",
         "subtitle": "",
         "author": "Kobby Ben Ben",
@@ -605,7 +617,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1681536105l/120519796._SY475_.jpg"
     },
     {
-        "id": "book-51",
+        "id": "book-52",
         "title": "Homegoing",
         "subtitle": "",
         "author": "Yaa Gyasi",
@@ -617,7 +629,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1448108591l/27071490.jpg"
     },
     {
-        "id": "book-52",
+        "id": "book-53",
         "title": "Everything Happens for a Reason",
         "subtitle": "And Other Lies I've Loved",
         "author": "Kate Bowler",
@@ -629,7 +641,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1504731691l/35133923._SY475_.jpg"
     },
     {
-        "id": "book-53",
+        "id": "book-54",
         "title": "The E-myth Revisited",
         "subtitle": "",
         "author": "Michael E. Gerber",
@@ -641,7 +653,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1435673032l/81948._SY475_.jpg"
     },
     {
-        "id": "book-54",
+        "id": "book-55",
         "title": "The Stranger",
         "subtitle": "",
         "author": "Albert Camus",
@@ -653,7 +665,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1738704267l/49552._SY475_.jpg"
     },
     {
-        "id": "book-55",
+        "id": "book-56",
         "title": "The Life-Changing Magic of Tidying Up",
         "subtitle": "The Japanese Art of Decluttering and Organizing",
         "author": "Marie Kondō",
@@ -665,7 +677,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1418767178l/22318578.jpg"
     },
     {
-        "id": "book-56",
+        "id": "book-57",
         "title": "The Compound Effect",
         "subtitle": "Jumpstart Your Income, Your Life, Your Success",
         "author": "Darren Hardy",
@@ -677,7 +689,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1337205071l/9420697.jpg"
     },
     {
-        "id": "book-57",
+        "id": "book-58",
         "title": "Astrophysics for People in a Hurry",
         "subtitle": "",
         "author": "Neil deGrasse Tyson",
@@ -689,7 +701,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562761669l/32191710._SY475_.jpg"
     },
     {
-        "id": "book-58",
+        "id": "book-59",
         "title": "Yinka, Where Is Your Huzband?",
         "subtitle": "",
         "author": "Lizzie Damilola Blackburn",
@@ -701,7 +713,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1634035072l/58395050.jpg"
     },
     {
-        "id": "book-59",
+        "id": "book-60",
         "title": "Maame",
         "subtitle": "",
         "author": "Jessica George",
@@ -713,7 +725,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1666031380l/60784605._SY475_.jpg"
     },
     {
-        "id": "book-60",
+        "id": "book-61",
         "title": "I'm Glad My Mom Died",
         "subtitle": "",
         "author": "Jennette McCurdy",
@@ -725,7 +737,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1649286799l/59364173._SY475_.jpg"
     },
     {
-        "id": "book-61",
+        "id": "book-62",
         "title": "When Breath Becomes Air",
         "subtitle": "",
         "author": "Paul Kalanithi",
@@ -737,7 +749,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1492677644l/25899336.jpg"
     },
     {
-        "id": "book-62",
+        "id": "book-63",
         "title": "Measure What Matters",
         "subtitle": "",
         "author": "John Doerr",
@@ -749,7 +761,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1521104315l/39286958._SY475_.jpg"
     },
     {
-        "id": "book-63",
+        "id": "book-64",
         "title": "Life of Pi",
         "subtitle": "",
         "author": "Yann Martel",
@@ -761,7 +773,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1631251689l/4214._SY475_.jpg"
     },
     {
-        "id": "book-64",
+        "id": "book-65",
         "title": "The Help",
         "subtitle": "",
         "author": "Kathryn Stockett",
@@ -773,7 +785,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1622355533l/4667024._SY475_.jpg"
     },
     {
-        "id": "book-65",
+        "id": "book-66",
         "title": "Man's Search for Meaning",
         "subtitle": "",
         "author": "Viktor E. Frankl",
@@ -785,7 +797,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1535419394l/4069._SY475_.jpg"
     },
     {
-        "id": "book-66",
+        "id": "book-67",
         "title": "It Starts with Us",
         "subtitle": "It Ends with Us, #2",
         "author": "Colleen Hoover",
@@ -797,7 +809,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1644605295l/60393672._SY475_.jpg"
     },
     {
-        "id": "book-67",
+        "id": "book-68",
         "title": "Transcendent Kingdom",
         "subtitle": "",
         "author": "Yaa Gyasi",
@@ -809,7 +821,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1571925550l/48570454.jpg"
     },
     {
-        "id": "book-68",
+        "id": "book-69",
         "title": "High Growth Handbook",
         "subtitle": "Scaling Startups From 10 to 10,000 People",
         "author": "Elad Gil",
@@ -821,7 +833,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1529140496l/40538194._SX318_.jpg"
     },
     {
-        "id": "book-69",
+        "id": "book-70",
         "title": "American Dirt",
         "subtitle": "",
         "author": "Jeanine Cummins",
@@ -833,7 +845,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1579793054l/50634450._SY475_.jpg"
     },
     {
-        "id": "book-70",
+        "id": "book-71",
         "title": "Anxious People",
         "subtitle": "",
         "author": "Fredrik Backman",
@@ -845,7 +857,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1597575031l/49127718.jpg"
     },
     {
-        "id": "book-71",
+        "id": "book-72",
         "title": "The Midnight Library",
         "subtitle": "The Midnight World, #1",
         "author": "Matt Haig",
@@ -857,7 +869,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1602190253l/52578297.jpg"
     },
     {
-        "id": "book-72",
+        "id": "book-73",
         "title": "The Guest List",
         "subtitle": "",
         "author": "Lucy Foley",
@@ -869,7 +881,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1597345150l/54911607._SY475_.jpg"
     },
     {
-        "id": "book-73",
+        "id": "book-74",
         "title": "Sprint",
         "subtitle": "How to Solve Big Problems and Test New Ideas in Just Five Days",
         "author": "Jake Knapp",
@@ -881,7 +893,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1457284924l/25814544._SY475_.jpg"
     },
     {
-        "id": "book-74",
+        "id": "book-75",
         "title": "The Art of War",
         "subtitle": "",
         "author": "Sun Tzu",
@@ -893,7 +905,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1630683326l/10534._SY475_.jpg"
     },
     {
-        "id": "book-75",
+        "id": "book-76",
         "title": "Homo Deus",
         "subtitle": "A History of Tomorrow",
         "author": "Yuval Noah Harari",
@@ -905,7 +917,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1468760805l/31138556._SY475_.jpg"
     },
     {
-        "id": "book-76",
+        "id": "book-77",
         "title": "Digital Minimalism",
         "subtitle": "Choosing a Focused Life in a Noisy World",
         "author": "Cal Newport",
@@ -917,7 +929,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1549433350l/40672036._SY475_.jpg"
     },
     {
-        "id": "book-77",
+        "id": "book-78",
         "title": "The Moment of Lift",
         "subtitle": "How Empowering Women Changes the World",
         "author": "Melinda French Gates",
@@ -929,7 +941,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1540299907l/40776644.jpg"
     },
     {
-        "id": "book-78",
+        "id": "book-79",
         "title": "Talking to Strangers",
         "subtitle": "What We Should Know About the People We Don't Know",
         "author": "Malcolm Gladwell",
@@ -941,7 +953,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1549393502l/43848929._SX318_.jpg"
     },
     {
-        "id": "book-79",
+        "id": "book-80",
         "title": "Everything Is F*cked",
         "subtitle": "A Book About Hope",
         "author": "Mark Manson",
@@ -953,7 +965,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1553934153l/40574441._SY475_.jpg"
     },
     {
-        "id": "book-80",
+        "id": "book-81",
         "title": "How to Stop Worrying and Start Living",
         "subtitle": "Time-Tested Methods for Conquering Worry",
         "author": "Dale Carnegie",
@@ -965,7 +977,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1442129098l/4866._SY475_.jpg"
     },
     {
-        "id": "book-81",
+        "id": "book-82",
         "title": "Alibaba",
         "subtitle": "The House That Jack Ma Built",
         "author": "Duncan Clark",
@@ -977,7 +989,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1442823028l/25817524.jpg"
     },
     {
-        "id": "book-82",
+        "id": "book-83",
         "title": "Singletasking",
         "subtitle": "Get More Done One Thing at a Time",
         "author": "Devora Zack",
@@ -989,7 +1001,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1414947874l/22632368.jpg"
     },
     {
-        "id": "book-83",
+        "id": "book-84",
         "title": "Made to Stick",
         "subtitle": "Why Some Ideas Survive and Others Die",
         "author": "Chip Heath",
@@ -1001,7 +1013,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1402600211l/69242.jpg"
     },
     {
-        "id": "book-84",
+        "id": "book-85",
         "title": "Hooked",
         "subtitle": "How to Build Habit-Forming Products",
         "author": "Nir Eyal",
@@ -1013,7 +1025,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1407112405l/22668729.jpg"
     },
     {
-        "id": "book-85",
+        "id": "book-86",
         "title": "The Subtle Art of Not Giving a F*ck",
         "subtitle": "A Counterintuitive Approach to Living a Good Life",
         "author": "Mark Manson",
@@ -1025,7 +1037,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1465761302l/28257707.jpg"
     },
     {
-        "id": "book-86",
+        "id": "book-87",
         "title": "Steve Jobs",
         "subtitle": "",
         "author": "Walter Isaacson",
@@ -1037,7 +1049,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1511288482l/11084145._SY475_.jpg"
     },
     {
-        "id": "book-87",
+        "id": "book-88",
         "title": "Good to Great",
         "subtitle": "Why Some Companies Make the Leap... and Others Don't",
         "author": "Jim Collins",
@@ -1049,7 +1061,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1546097703l/76865.jpg"
     },
     {
-        "id": "book-88",
+        "id": "book-89",
         "title": "Shoe Dog",
         "subtitle": "A Memoir by the Creator of Nike",
         "author": "Phil Knight",
@@ -1061,7 +1073,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1457284880l/27220736.jpg"
     },
     {
-        "id": "book-89",
+        "id": "book-90",
         "title": "Sapiens",
         "subtitle": "A Brief History of Humankind",
         "author": "Yuval Noah Harari",
@@ -1073,7 +1085,7 @@ window.books = [
         "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1703329310l/23692271._SY475_.jpg"
     },
     {
-        "id": "book-90",
+        "id": "book-91",
         "title": "Elon Musk",
         "subtitle": "Tesla, SpaceX, and the Quest for a Fantastic Future",
         "author": "Ashlee Vance",
