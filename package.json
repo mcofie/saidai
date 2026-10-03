@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.js",
+    "sync-books": "node sync-books.js",
     "new-post": "node bin/new-post.js"
   },
   "repository": {
