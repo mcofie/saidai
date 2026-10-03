@@ -1219,6 +1219,11 @@ const SITEMAP_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://maxwellcofie.com/music/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
       <loc>https://maxwellcofie.com/dev/</loc>
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>

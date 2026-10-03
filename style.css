@@ -2561,3 +2561,97 @@ kbd {
 .book-section:last-child {
     margin-bottom: 0;
 }
+
+/* ===== MUSIC PAGE ===== */
+.music-player-container {
+    margin-bottom: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 18px;
+    transition: all 0.3s ease;
+}
+
+.music-player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.now-playing-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.active-playlist-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.music-iframe-wrapper {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: transparent;
+}
+
+.music-iframe-wrapper iframe {
+    width: 100%;
+    height: 450px;
+    border: none;
+    display: block;
+}
+
+.music-item {
+    cursor: pointer;
+}
+
+.music-item.active-item {
+    background-color: var(--surface-hover);
+}
+
+.music-genre-tag {
+    font-size: 11px;
+    color: var(--text-tertiary);
+}
+
+.apple-music-link {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.apple-music-link:hover {
+    color: var(--text-main);
+}
+
+.play-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    font-size: 8px;
+    margin-left: 6px;
+    vertical-align: middle;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+}
+
+.music-item:hover .play-badge {
+    background: var(--text-main);
+    color: var(--bg);
+}
