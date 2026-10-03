@@ -18,15 +18,6 @@ window.works = [
         category: "work"
     },
     {
-        id: "rentbase",
-        title: "RentBase",
-        year: "2025",
-        url: "https://rentbase.app/",
-        descKey: "proj.rentbase",
-        metaKey: "meta.platform",
-        category: "work"
-    },
-    {
         id: "amigo",
         title: "Amigo Lease",
         year: "2025",
@@ -45,30 +36,12 @@ window.works = [
         category: "work"
     },
     {
-        id: "happening",
-        title: "HappeningNow",
-        year: "2025",
-        url: "https://happeningnow.online/",
-        descKey: "proj.happening",
-        metaKey: "meta.eventtech",
-        category: "work"
-    },
-    {
         id: "itinero",
         title: "Itinero",
         year: "2025",
         url: "https://tryitinero.com",
         descKey: "proj.itinero",
         metaKey: "meta.aitravel",
-        category: "work"
-    },
-    {
-        id: "knitted",
-        title: "Knitted",
-        year: "2020",
-        url: "https://getknitted.app",
-        descKey: "proj.knitted",
-        metaKey: "meta.saas",
         category: "work"
     },
     {
@@ -90,12 +63,12 @@ window.works = [
         category: "work"
     },
     {
-        id: "stage",
-        title: "Stage & Bloom",
-        year: "2025",
-        url: "https://stageandbloom.co",
-        descKey: "proj.stage",
-        metaKey: "meta.platform",
+        id: "minutes",
+        title: "Minutes 2 Match",
+        year: "2024",
+        url: "https://minutes2match.com/",
+        descKey: "proj.minutes",
+        metaKey: "meta.events",
         category: "work"
     }
 ];

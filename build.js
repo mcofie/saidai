@@ -703,6 +703,7 @@ const HTML_TEMPLATE = `<!doctype html>
         <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
         <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
         <a href="https://thekompound.substack.com" target="_blank" class="footer-link" data-i18n="footer.substack">Substack</a>
+        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.youtube">YouTube</a>
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2026 Maxwell Cofie</span>
     </footer>
@@ -956,6 +957,7 @@ const INDEX_HTML = `<!doctype html>
         <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
         <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
         <a href="https://thekompound.substack.com" target="_blank" class="footer-link" data-i18n="footer.substack">Substack</a>
+        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.youtube">YouTube</a>
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2026 Maxwell Cofie</span>
     </footer>
