@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/about/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/about/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/books/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/books/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/build.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/data.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locale.js" beforeDir="false" afterPath="$PROJECT_DIR$/locale.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/music/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/music/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts/30-plus-builders-one-platform-what-hosting-the-reverb-taught-me-about-building-in-the-ghana/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/30-plus-builders-one-platform-what-hosting-the-reverb-taught-me-about-building-in-the-ghana/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/posts/build-what-matters-graydocket-handles-the-setup/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/build-what-matters-graydocket-handles-the-setup/index.html" afterDir="false" />
@@ -201,15 +198,7 @@
       <workItem from="1786707640602" duration="3891000" />
       <workItem from="1789080074540" duration="4670000" />
       <workItem from="1790562309198" duration="2219000" />
-      <workItem from="1790790887465" duration="7677000" />
-    </task>
-    <task id="LOCAL-00058" summary="pushed an article">
-      <option name="closed" value="true" />
-      <created>1768575655186</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1768575655186</updated>
+      <workItem from="1790790887465" duration="8308000" />
     </task>
     <task id="LOCAL-00059" summary="pushed an article">
       <option name="closed" value="true" />
@@ -595,7 +584,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791050647552</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1791054249164</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1791054249164</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

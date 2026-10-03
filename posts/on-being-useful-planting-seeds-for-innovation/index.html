@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>On Being Useful: Planting Seeds for Innovation | Maxwell Cofie</title>
     <meta name="description" content="Reflecting on usefulness as the driver of legacy. How a casual conversation planted the seed for a new venture, and why problems are the raw material of innovation.">
-    <link rel="canonical" href="https://maxwellcofie.com/posts/on-being-useful-planting-seeds-for-innovation//">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇬🇭</text></svg>">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
     <!-- View Transitions -->
     <meta name="view-transition" content="same-origin" />
 
@@ -62,26 +64,28 @@
             color: var(--text-main);
         }
 
-        /* LAYOUT GRID FOR TOC + CONTENT */
+        /* POST LAYOUT */
         .post-wrapper {
-            display: grid;
-            grid-template-columns: 1fr var(--post-max-w) 1fr;
-            gap: 40px;
-            align-items: start;
+            position: relative;
+            width: 100%;
         }
 
         /* TOC SIDEBAR */
         .toc-sidebar {
-            position: sticky;
-            top: 40px;
-            font-size: 13px;
-            max-height: calc(100vh - 80px);
-            overflow-y: auto;
-            display: none; /* Hidden on small screens by default */
+            display: none;
         }
         
-        @media (min-width: 1100px) {
-            .toc-sidebar { display: block; }
+        @media (min-width: 1200px) {
+            .toc-sidebar {
+                display: block;
+                position: absolute;
+                right: calc(100% + 40px);
+                top: 0;
+                width: 180px;
+                font-size: 13px;
+                max-height: calc(100vh - 80px);
+                overflow-y: auto;
+            }
         }
 
         .toc-label {
@@ -130,10 +134,10 @@
         }
 
         article {
-            max-width: var(--post-max-w);
+            width: 100%;
+            max-width: 100%;
             min-width: 0; /* flex/grid fix */
             view-transition-name: article-content;
-            grid-column: 2; /* Center column */
         }
 
         h1 {
@@ -343,13 +347,7 @@
             border-top: 6px solid var(--text-main);
         }
 
-        @media (max-width: 1100px) {
-            .post-wrapper {
-                 display: block; /* Stack */
-            }
-            article {
-                 min-width: 100%;
-            }
+        @media (max-width: 600px) {
             .code-block-wrapper {
                 border-radius: 0;
                 border-left: 0;
@@ -582,9 +580,6 @@
                 </div>
             </div>
         </article>
-        
-        <!-- Right column empty for balance or future use -->
-        <div></div>
     </div>
     
     <!-- Reader Controls FAB -->
