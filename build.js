@@ -101,8 +101,16 @@ files.forEach(file => {
     if (attributes.categories) {
         categories = Array.isArray(attributes.categories) ? attributes.categories : [attributes.categories];
     } else if (attributes.category) {
-        categories = [attributes.category];
+        if (typeof attributes.category === 'string' && attributes.category.includes(',')) {
+            categories = attributes.category.split(',').map(c => c.trim());
+        } else {
+            categories = [attributes.category];
+        }
     }
+    categories = categories
+        .filter(Boolean)
+        .map(c => c.trim())
+        .map(c => c.charAt(0).toUpperCase() + c.slice(1));
 
     posts.push({
         ...attributes,
@@ -822,7 +830,7 @@ const INDEX_HTML = `<!doctype html>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css?v=8">
     <style>
         /* FOUC fix for i18n */
         [data-i18n] { visibility: visible; }
@@ -975,6 +983,9 @@ const INDEX_HTML = `<!doctype html>
              document.querySelectorAll('.filter-btn').forEach(b => {
                  if (b.innerText === currentCategory || (currentCategory === 'all' && b.innerText === 'All')) {
                      b.classList.add('active');
+                     if (b.scrollIntoView && window.innerWidth <= 640) {
+                         b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                     }
                  } else {
                      b.classList.remove('active');
                  }
@@ -1056,6 +1067,10 @@ const INDEX_HTML = `<!doctype html>
             // Update buttons immediately for responsiveness
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            
+            if (btn.scrollIntoView && window.innerWidth <= 640) {
+                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
             
             currentCategory = category;
             currentPage = 1; // Reset to page 1

@@ -3,7 +3,7 @@ title: "Your Ideas Are 75 Percent Wrong. Your Instincts Aren't"
 date: "Sep 2026"
 isoDate: "2026-09-10"
 description: "Here are three distinct options tailored to where you might share it:"
-category: "thoughts"
+category: "Thoughts"
 ---
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/f_jpg/q_auto:best/The_State_of_Accra_s_Startup_Ecosystem_5_qotck4.png" alt="Trip photo">

@@ -31,7 +31,7 @@
         })();
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css?v=1.1">
 
     <!-- Open Graph / SEO -->
     <meta property="og:title" content="Playlists | Maxwell Cofie">
@@ -66,26 +66,6 @@
         <p data-i18n="music.intro">A curated selection of playlists that soundtrack my work, late-night building, and daily life. Listen directly on Apple Music.</p>
     </div>
 
-    <!-- Active Apple Music Embed Player -->
-    <div class="music-player-container" id="playerContainer">
-        <div class="music-player-header">
-            <div class="now-playing-label">
-                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #fa2d48;"></span>
-                <span>Active Playlist</span>
-            </div>
-            <span class="active-playlist-name" id="activePlaylistTitle">Roots</span>
-        </div>
-        <div class="music-iframe-wrapper">
-            <iframe id="musicIframe"
-                allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-                frameborder="0"
-                height="450"
-                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-                src="https://embed.music.apple.com/gh/playlist/roots/pl.u-4JomXNJtJj0lr5J">
-            </iframe>
-        </div>
-    </div>
-
     <!-- Playlists Directory -->
     <div class="project-list-container">
         <div class="section-label" data-i18n="section.curated_playlists">Curated Playlists</div>
@@ -113,49 +93,51 @@
             if (!playlists.length) return;
 
             const container = document.getElementById('playlistList');
-            const iframe = document.getElementById('musicIframe');
-            const titleEl = document.getElementById('activePlaylistTitle');
-            const playerContainer = document.getElementById('playerContainer');
 
-            let currentActiveId = playlists[0].id;
+            function escapeHtml(str) {
+                if (!str) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
 
             function renderPlaylists() {
                 container.innerHTML = '';
                 playlists.forEach((p, idx) => {
-                    const item = document.createElement('div');
-                    item.className = `project-item music-item ${p.id === currentActiveId ? 'active-item' : ''}`;
+                    const item = document.createElement('a');
+                    item.href = p.url;
+                    item.target = '_blank';
+                    item.rel = 'noopener noreferrer';
+                    item.className = 'project-item music-item';
                     item.setAttribute('data-id', p.id);
-                    item.style.animation = `slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.04}s forwards`;
+                    item.style.animation = `slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.03}s forwards`;
 
                     item.innerHTML = `
-                        <div class="proj-left">
-                            <div class="proj-header">
-                                <span class="proj-title">${p.title} <span class="year-label">(${p.songs} songs · ${p.duration})</span></span>
-                                <span class="play-badge">▶</span>
+                        <div class="music-item-left">
+                            <div class="playlist-thumb-wrapper">
+                                <img src="${p.artwork}" alt="${escapeHtml(p.title)}" class="playlist-thumb" loading="lazy" width="56" height="56" />
+                                <div class="playlist-play-icon" aria-hidden="true">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </div>
                             </div>
-                            <span class="proj-desc">${p.description}</span>
+                            <div class="proj-left">
+                                <div class="proj-header">
+                                    <span class="proj-title">${escapeHtml(p.title)} <span class="year-label">(${p.songs} songs · ${p.duration})</span></span>
+                                    <span class="arrow">↗</span>
+                                </div>
+                                <span class="proj-desc">${escapeHtml(p.description)}</span>
+                            </div>
                         </div>
                         <div class="proj-meta">
-                            <span class="music-genre-tag">${p.tag}</span>
-                            <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="apple-music-link" title="Open on Apple Music" onclick="event.stopPropagation();">
-                                Apple Music ↗
-                            </a>
+                            <span class="music-genre-tag">${escapeHtml(p.tag)}</span>
+                            <span class="apple-music-tag">Apple Music ↗</span>
                         </div>
                     `;
-
-                    item.addEventListener('click', () => {
-                        currentActiveId = p.id;
-                        titleEl.textContent = p.title;
-                        iframe.src = p.embedUrl;
-
-                        document.querySelectorAll('.music-item').forEach(el => el.classList.remove('active-item'));
-                        item.classList.add('active-item');
-
-                        // Smooth scroll to player on mobile
-                        if (window.innerWidth <= 600) {
-                            playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        }
-                    });
 
                     container.appendChild(item);
                 });

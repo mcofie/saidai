@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css?v=8">
     <style>
         /* FOUC fix for i18n */
         [data-i18n] { visibility: visible; }
@@ -113,13 +113,13 @@
         
     <div class="filter-bar">
         <button class="filter-btn active" onclick="filterPosts(this, 'all')">All</button>
-        <button class="filter-btn" onclick="filterPosts(this, 'Africa')">Africa</button><button class="filter-btn" onclick="filterPosts(this, 'Africa, Technology')">Africa, Technology</button><button class="filter-btn" onclick="filterPosts(this, 'Community')">Community</button><button class="filter-btn" onclick="filterPosts(this, 'Design')">Design</button><button class="filter-btn" onclick="filterPosts(this, 'Product')">Product</button><button class="filter-btn" onclick="filterPosts(this, 'Product & Business')">Product & Business</button><button class="filter-btn" onclick="filterPosts(this, 'Thoughts')">Thoughts</button><button class="filter-btn" onclick="filterPosts(this, 'Travel & Technology')">Travel & Technology</button><button class="filter-btn" onclick="filterPosts(this, 'thoughts')">thoughts</button>
+        <button class="filter-btn" onclick="filterPosts(this, 'Africa')">Africa</button><button class="filter-btn" onclick="filterPosts(this, 'Community')">Community</button><button class="filter-btn" onclick="filterPosts(this, 'Design')">Design</button><button class="filter-btn" onclick="filterPosts(this, 'Product')">Product</button><button class="filter-btn" onclick="filterPosts(this, 'Product & Business')">Product & Business</button><button class="filter-btn" onclick="filterPosts(this, 'Technology')">Technology</button><button class="filter-btn" onclick="filterPosts(this, 'Thoughts')">Thoughts</button><button class="filter-btn" onclick="filterPosts(this, 'Travel & Technology')">Travel & Technology</button>
     </div>
 
 
         <div class="project-list" id="projectList">
             
-            <a href="../posts/your-ideas-are-75-percent-wrong/" class="project-item" data-category="thoughts">
+            <a href="../posts/your-ideas-are-75-percent-wrong/" class="project-item" data-category="Thoughts">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">Your Ideas Are 75 Percent Wrong. Your Instincts Aren't</span>
@@ -128,12 +128,12 @@
                     <span class="proj-desc">Here are three distinct options tailored to where you might share it:</span>
                 </div>
                 <div class="proj-meta">
-                     <span class="post-category thoughts">thoughts</span>
+                     <span class="post-category thoughts">Thoughts</span>
                      <span>Sep 2026</span>
                 </div>
             </a>
             
-            <a href="../posts/my-biggest-competitor-is-jesus-christ/" class="project-item" data-category="Africa, Technology">
+            <a href="../posts/my-biggest-competitor-is-jesus-christ/" class="project-item" data-category="Africa,Technology">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">My Biggest Competitor Is Jesus Christ</span>
@@ -142,7 +142,7 @@
                     <span class="proj-desc">What I've been learning about why digital products struggle to take root in this part of the world</span>
                 </div>
                 <div class="proj-meta">
-                     <span class="post-category africa,-technology">Africa, Technology</span>
+                     <span class="post-category africa">Africa</span><span class="post-category technology">Technology</span>
                      <span>Aug 2026</span>
                 </div>
             </a>
@@ -371,6 +371,9 @@
              document.querySelectorAll('.filter-btn').forEach(b => {
                  if (b.innerText === currentCategory || (currentCategory === 'all' && b.innerText === 'All')) {
                      b.classList.add('active');
+                     if (b.scrollIntoView && window.innerWidth <= 640) {
+                         b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                     }
                  } else {
                      b.classList.remove('active');
                  }
@@ -452,6 +455,10 @@
             // Update buttons immediately for responsiveness
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            
+            if (btn.scrollIntoView && window.innerWidth <= 640) {
+                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
             
             currentCategory = category;
             currentPage = 1; // Reset to page 1
