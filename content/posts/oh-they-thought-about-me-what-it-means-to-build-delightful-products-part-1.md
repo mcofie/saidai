@@ -11,7 +11,7 @@ category: "Product"
 
 This piece is an ode to something I love: digital products. Specifically, *delightful* ones.
 
-It's a sunny Saturday in October, 32°C and typical Accra weather. I should be in a pool downtown. Instead, I'm daydreaming about a trip out of town, maybe a staycation. I pick up my phone and swipe through a sea of apps, looking for a pop of coral with a sliver of white. You guessed it: Airbnb.
+It's a sunny Saturday in October, 32°C and typical Accra weather. I should be in a pool downtown. Instead, I'm daydreaming about a trip out of town, maybe a staycation. I pick up my phone and swipe through a sea of apps, looking for a pop of coral with a sliver of white. You guessed it: __Airbnb__.
 
 I've been a user for 11 years. That's long enough to stay married to someone and give an honest verdict on their character. Allow me to do the same for Airbnb.
 
@@ -40,8 +40,6 @@ Many pulleys and gears work together to create that feeling. This four-part seri
 
 Let's start with the first.
 
----
-
 ## Part 1: Velocity and Invisible Mechanics
 
 Our expectations of speed keep moving. Research on human-computer interaction has long shown that around **100 milliseconds feels instant**, while **about one second** is enough to break a user's flow of thought. Anything longer and we start wondering if something is broken.
@@ -66,10 +64,10 @@ Great apps eliminate blank-state paralysis. Sensible defaults, auto-detected inp
 
 The best speed is the kind you never notice. Delightful apps do work before you ask:
 
-- **Prefetching** the screen you're most likely to open next
-- **Skeleton screens** instead of spinners, so the layout appears before the content
-- **Auto-saved drafts.** Close WhatsApp mid-message and your unsent text is still there when you return.
-- **Remembering where you left off**, whether that's a search, a cart or a half-filled form
+- __Prefetching__ the screen you're most likely to open next
+- __Skeleton screens__ instead of spinners, so the layout appears before the content
+- __Auto-saved drafts.__ Close WhatsApp mid-message and your unsent text is still there when you return.
+- __Remembering where__ you left off, whether that's a search, a cart or a half-filled form
 
 Airbnb's "we kept searching" notification belongs here too: a background process, surfaced at exactly the right moment.
 
