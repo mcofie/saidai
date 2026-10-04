@@ -31,7 +31,7 @@
         })();
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css?v=1.1">
+    <link rel="stylesheet" href="../style.css?v=1.2">
 
     <!-- Open Graph / SEO -->
     <meta property="og:title" content="Playlists | Maxwell Cofie">
@@ -116,24 +116,26 @@
                     item.style.animation = `slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.03}s forwards`;
 
                     item.innerHTML = `
-                        <div class="music-item-left">
-                            <div class="playlist-thumb-wrapper">
-                                <img src="${p.artwork}" alt="${escapeHtml(p.title)}" class="playlist-thumb" loading="lazy" width="56" height="56" />
-                                <div class="playlist-play-icon" aria-hidden="true">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="proj-left">
-                                <div class="proj-header">
-                                    <span class="proj-title">${escapeHtml(p.title)} <span class="year-label">(${p.songs} songs · ${p.duration})</span></span>
-                                    <span class="arrow">↗</span>
-                                </div>
-                                <span class="proj-desc">${escapeHtml(p.description)}</span>
+                        <div class="playlist-thumb-wrapper">
+                            <img src="${p.artwork}" alt="${escapeHtml(p.title)}" class="playlist-thumb" loading="lazy" width="56" height="56" />
+                            <div class="playlist-play-icon" aria-hidden="true">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
                             </div>
                         </div>
-                        <div class="proj-meta">
+                        <div class="music-item-content">
+                            <div class="proj-header">
+                                <span class="proj-title">${escapeHtml(p.title)} <span class="year-label">(${p.songs} songs · ${p.duration})</span></span>
+                                <span class="arrow">↗</span>
+                            </div>
+                            <span class="proj-desc">${escapeHtml(p.description)}</span>
+                            <div class="music-meta-mobile">
+                                <span class="music-genre-tag">${escapeHtml(p.tag)}</span>
+                                <span class="apple-music-tag">Apple Music ↗</span>
+                            </div>
+                        </div>
+                        <div class="proj-meta music-meta-desktop">
                             <span class="music-genre-tag">${escapeHtml(p.tag)}</span>
                             <span class="apple-music-tag">Apple Music ↗</span>
                         </div>
