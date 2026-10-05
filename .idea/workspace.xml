@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d481e828-0ffd-449e-b3ee-c0ebdd1561c7" name="Changes" comment="pushed an article">
-      <change beforePath="$PROJECT_DIR$/content/posts/oh-they-thought-about-me-what-it-means-to-build-delightful-products-part-1.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/oh-they-thought-about-me-what-it-means-to-build-delightful-products-part-1.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/posts/oh-they-thought-about-me-what-it-means-to-build-delightful-products-part-1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/oh-they-thought-about-me-what-it-means-to-build-delightful-products-part-1/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rss.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rss.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/posts/gas-in-the-tank-not-miles-on-the-road-the-fundraising-fallacy.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/posts/gas-in-the-tank-not-miles-on-the-road-the-fundraising-fallacy.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,15 +176,7 @@
       <workItem from="1790562309198" duration="2219000" />
       <workItem from="1790790887465" duration="11199000" />
       <workItem from="1791068988490" duration="2111000" />
-      <workItem from="1791150252341" duration="1977000" />
-    </task>
-    <task id="LOCAL-00063" summary="pushed an article">
-      <option name="closed" value="true" />
-      <created>1768738254906</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1768738254906</updated>
+      <workItem from="1791150252341" duration="5626000" />
     </task>
     <task id="LOCAL-00064" summary="pushed an article">
       <option name="closed" value="true" />
@@ -572,7 +562,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791153729372</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="pushed an article">
+      <option name="closed" value="true" />
+      <created>1791154119452</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1791154119452</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

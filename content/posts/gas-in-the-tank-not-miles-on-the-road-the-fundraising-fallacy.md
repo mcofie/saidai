@@ -6,6 +6,10 @@ description: "We celebrate the fuel, but ignore the mileage. Why fundraising is 
 category: "Thoughts"
 ---
 
+<div class="image-grid">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/f_jpg/q_auto:good/The_State_of_Accra_s_Startup_Ecosystem_7_qc436r.png" alt="Trip photo">
+</div>
+
 ## The Fundraising Obsession
 
 > “Thrilled to announce we’ve raised $10M…”, “We’re happy to announce that…”
