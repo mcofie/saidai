@@ -6,6 +6,10 @@ description: "A first-time visit to Abidjan that sparked reflections on language
 category: "Travel & Technology"
 ---
 
+<div class="image-grid">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_crop,g_north_west,h_1890,w_3780/The_State_of_Accra_s_Startup_Ecosystem_8_epapql.png" alt="Trip photo">
+</div>
+
 > “Max, have you visited any of the neighbouring West African countries like Benin, Togo, Burkina Faso, Ivory Coast, Nigeria, etc.?”
 
 My usual answer is a big **“no”**, though I’ve driven close enough to the Togo–Ghana border so that’s about as close as I’ve been. As amusing as that sounds, in December 2025, I finally decided to visit one of our neighbouring countries, just for fun.

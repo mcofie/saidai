@@ -6,6 +6,10 @@ description: "A critique of why the Silicon Valley playbook fails in Africa and 
 category: "Africa"
 ---
 
+<div class="image-grid">
+    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/f_jpg/q_auto:good/The_State_of_Accra_s_Startup_Ecosystem_9_lt1jhz.png" alt="Trip photo">
+</div>
+
 We are often told that Africa is the "next frontier" an untapped market of 1.5 billion people that investors should prioritise. Compared to other regions, the continent is young and home to a large, active workforce. At the same time, it faces significant structural challenges. For businesspeople and investors who enter early and deliver real value, the potential rewards can be substantial.
 
 Silicon Valley has successfully exported a blueprint for building technology companies and startups around the world. This model has become the default playbook. However, it assumes a set of conditions that simply do not exist everywhere. **A one-size-fits-all approach does not work in Africa.**
