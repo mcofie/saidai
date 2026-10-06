@@ -1704,12 +1704,26 @@ th .post-video {
 }
 
 .post-content blockquote {
-    border-left: 3px solid var(--accent);
-    padding-left: 24px;
-    margin: 32px 0;
-    font-style: italic;
-    color: var(--text-muted);
-    font-size: 17px;
+    border-left: 2px solid var(--text-main);
+    padding: 4px 0 4px 24px;
+    font-family: 'Newsreader', serif;
+    font-style: normal;
+    font-size: 1.15em;
+    line-height: 1.6;
+    margin: 36px 0;
+    color: var(--text-main);
+}
+
+.post-content blockquote p {
+    margin-bottom: 16px;
+}
+
+.post-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.post-content blockquote strong {
+    font-weight: 600;
 }
 
 .post-content hr {

@@ -380,13 +380,26 @@ const HTML_TEMPLATE = `<!doctype html>
         }
 
         .post-content blockquote {
-             border-left: 2px solid var(--text-main);
-             padding-left: 24px;
-             font-family: 'Newsreader', serif;
-             font-style: italic;
-             font-size: 1.1em;
-             margin: 40px 0;
-             color: var(--text-main);
+            border-left: 2px solid var(--text-main);
+            padding: 4px 0 4px 24px;
+            font-family: 'Newsreader', serif;
+            font-style: normal;
+            font-size: 1.15em;
+            line-height: 1.6;
+            margin: 36px 0;
+            color: var(--text-main);
+        }
+
+        .post-content blockquote p {
+            margin-bottom: 16px;
+        }
+
+        .post-content blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        .post-content blockquote strong {
+            font-weight: 600;
         }
         
         /* FOOTNOTES */
