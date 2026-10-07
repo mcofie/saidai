@@ -21,6 +21,8 @@ const askQuestion = (query) => {
     return new Promise(resolve => rl.question(query, resolve));
 };
 
+const quoteYaml = value => JSON.stringify(value);
+
 const createPost = async () => {
     console.log('--- Create New Post ---');
 
@@ -40,9 +42,18 @@ const createPost = async () => {
     // Generate Slug
     const slug = title
         .toLowerCase()
-        .replace(/[^\w\s-]/g, '') // Remove non-word chars
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^\p{L}\p{N}\s-]/gu, '') // Remove punctuation while preserving international letters
         .replace(/\s+/g, '-')     // Replace spaces with -
-        .replace(/-+/g, '-');     // Remove duplicate dashes
+        .replace(/-+/g, '-')      // Remove duplicate dashes
+        .replace(/^-+|-+$/g, ''); // Trim dashes
+
+    if (!slug) {
+        console.error('Error: Title must contain at least one letter or number to create a URL slug.');
+        rl.close();
+        return;
+    }
 
     const filename = `${slug}.md`;
     const filePath = path.join(POSTS_DIR, filename);
@@ -60,11 +71,11 @@ const createPost = async () => {
     const isoDate = now.toISOString().split('T')[0]; // "2026-01-04"
 
     const content = `---
-title: "${title}"
-date: "${dateStr}"
-isoDate: "${isoDate}"
-description: "${description}"
-category: "${category}"
+title: ${quoteYaml(title)}
+date: ${quoteYaml(dateStr)}
+isoDate: ${quoteYaml(isoDate)}
+description: ${quoteYaml(description)}
+category: ${quoteYaml(category)}
 ---
 
 Write your content here...

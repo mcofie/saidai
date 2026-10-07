@@ -81,6 +81,13 @@ This script performs the following actions:
     -   `rss.xml` for blog subscribers.
     -   `sitemap.xml` for SEO.
 
+Generated-content source of truth:
+
+- Edit posts in `content/posts/`; `posts/[slug]/index.html` and `writing/index.html` are build output.
+- The homepage writing list is replaced from its `WRITING_LIST_START` / `WRITING_LIST_END` markers.
+- `search.json`, `rss.xml`, and `sitemap.xml` are rebuilt from the Markdown posts.
+- The build validates required post metadata and removes stale post HTML carrying the generator marker. Keep non-generated assets in `posts/` folders separate from `index.html`.
+
 ## ✨ Features
 
 ### Multimedia Support

@@ -25,17 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
     window.playStory = playStory;
     window.closeVideo = closeVideo;
     window.triggerCelebration = triggerCelebration; // Kept for Konami
-    window.openSearch = () => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
 
     // Scroll listener for Nav
     const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
+    if (nav) window.addEventListener('scroll', () => {
         if (window.scrollY > 20) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
-    });
+    }, { passive: true });
 
 });
 
@@ -202,36 +201,52 @@ function initAudio() {
    15. SEARCH / COMMAND PALETTE
    ========================================= */
 function initSearch() {
+    let lastFocusedElement = null;
+    let inertSiblings = [];
     // 1. Inject HTML
     const overlay = document.createElement('div');
     overlay.className = 'cmd-palette-overlay';
+    overlay.setAttribute('role', 'presentation');
+    overlay.hidden = true;
     overlay.innerHTML = `
-        <div class="cmd-palette">
+        <section class="cmd-palette" role="dialog" aria-modal="true" aria-labelledby="cmdTitle" aria-describedby="cmdHelp">
             <div class="cmd-input-wrapper">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="opacity:0.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                <input type="text" class="cmd-input" placeholder="Search posts, pages, or commands..." id="cmdInput">
+                <label class="visually-hidden" id="cmdTitle" for="cmdInput" data-i18n="search.label">Search posts and pages</label>
+                <input type="search" class="cmd-input" placeholder="Search posts, pages, or commands..." data-i18n="search.placeholder" data-i18n-attr="placeholder" id="cmdInput" role="combobox" aria-autocomplete="list" aria-controls="cmdResults" aria-expanded="true" autocomplete="off">
                 <span class="cmd-shortcut">ESC</span>
             </div>
-            <div class="cmd-results" id="cmdResults">
+            <div class="cmd-results" id="cmdResults" role="listbox" aria-label="Search results" aria-live="polite">
                 <!-- Results go here -->
             </div>
             <div class="cmd-footer">
-                <span>Navigation</span>
-                <span class="cmd-shortcut">↑↓ to navigate, ↵ to select</span>
+                <span data-i18n="search.navigation">Navigation</span>
+                <span class="cmd-shortcut" id="cmdHelp" data-i18n="search.help">Use ↑↓ to move, Enter to open</span>
             </div>
-        </div>
+        </section>
     `;
     document.body.appendChild(overlay);
+    if (typeof window.applyTranslations === 'function') {
+        window.applyTranslations(document.documentElement.lang || 'en', overlay);
+    }
 
     const input = document.getElementById('cmdInput');
     const resultsContainer = document.getElementById('cmdResults');
     let searchData = [];
     let selectedIndex = 0;
+    let searchReady = false;
 
     // 2. Fetch Data once
     // We try to fetch search.json from root or relative. Since this runs on all pages, root relative is safest.
-    fetch('/search.json').then(res => res.json()).then(data => {
-        searchData = data;
+    const appScript = Array.from(document.scripts).find(script => /(?:^|\/)app\.js(?:\?|$)/.test(script.src));
+    const siteRoot = appScript ? new URL('.', appScript.src) : new URL('.', window.location.href);
+    const searchIndexUrl = new URL('search.json', siteRoot);
+    fetch(searchIndexUrl).then(res => {
+        if (!res.ok) throw new Error(`Search index request failed (${res.status})`);
+        return res.json();
+    }).then(data => {
+        if (!Array.isArray(data)) throw new Error('Search index must be an array');
+        searchData = data.filter(item => item && typeof item.title === 'string' && typeof item.url === 'string');
 
         // Add static pages
         searchData.push(
@@ -241,20 +256,45 @@ function initSearch() {
             { title: 'Logbook (Writing)', description: 'All articles and thoughts', url: '/writing/', category: 'Page' },
             { title: 'About', description: 'My story and background', url: '/about/', category: 'Page' }
         );
-    }).catch(err => console.log('Search index not found (dev mode?)'));
+        searchReady = true;
+        if (overlay.classList.contains('active')) renderResults(input.value);
+    }).catch(() => {
+        searchData = [
+            { title: 'Home', description: 'Go back to homepage', url: '/', category: 'Page' },
+            { title: 'Work', description: 'Selected projects and case studies', url: '/work/', category: 'Page' },
+            { title: 'Ventures', description: 'Startups and experiments', url: '/ventures/', category: 'Page' },
+            { title: 'Logbook (Writing)', description: 'All articles and thoughts', url: '/writing/', category: 'Page' },
+            { title: 'About', description: 'My story and background', url: '/about/', category: 'Page' }
+        ];
+        searchReady = true;
+        if (overlay.classList.contains('active')) renderResults(input.value);
+    });
 
     // 3. Toggle Logic
     const toggleSearch = (open) => {
         if (open) {
+            lastFocusedElement = document.activeElement;
+            inertSiblings = Array.from(document.body.children)
+                .filter(element => element !== overlay)
+                .map(element => [element, element.inert]);
+            inertSiblings.forEach(([element]) => { element.inert = true; });
+            overlay.hidden = false;
             overlay.classList.add('active');
+            input.setAttribute('aria-expanded', 'true');
             input.value = '';
             renderResults(''); // Show defaults
             input.focus();
         } else {
             overlay.classList.remove('active');
+            input.setAttribute('aria-expanded', 'false');
+            overlay.hidden = true;
+            inertSiblings.forEach(([element, wasInert]) => { element.inert = wasInert; });
+            inertSiblings = [];
             input.blur();
+            if (lastFocusedElement instanceof HTMLElement) lastFocusedElement.focus();
         }
     };
+    window.openSearch = () => toggleSearch(true);
 
     document.addEventListener('keydown', (e) => {
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -264,6 +304,15 @@ function initSearch() {
         }
         if (e.key === 'Escape' && overlay.classList.contains('active')) {
             toggleSearch(false);
+        }
+        if (e.key === 'Tab' && overlay.classList.contains('active')) {
+            const focusable = [input, ...overlay.querySelectorAll('.cmd-item')];
+            const currentIndex = focusable.indexOf(document.activeElement);
+            const nextIndex = e.shiftKey
+                ? (currentIndex <= 0 ? focusable.length - 1 : currentIndex - 1)
+                : (currentIndex < 0 || currentIndex === focusable.length - 1 ? 0 : currentIndex + 1);
+            e.preventDefault();
+            focusable[nextIndex]?.focus();
         }
     });
 
@@ -284,19 +333,49 @@ function initSearch() {
             ).slice(0, 10);
 
         if (filtered.length === 0) {
-            resultsContainer.innerHTML = `<div style="padding:16px; text-align:center; color:var(--text-tertiary)">No results found</div>`;
+            input.removeAttribute('aria-activedescendant');
+            const emptyState = document.createElement('div');
+            emptyState.className = 'cmd-empty-state';
+            emptyState.dataset.i18n = !searchReady ? 'search.loading' : (searchData.length ? 'search.empty' : 'search.unavailable');
+            emptyState.textContent = !searchReady ? 'Loading search…' : (searchData.length ? 'No results found' : 'Search is unavailable right now.');
+            if (typeof window.applyTranslations === 'function') {
+                window.applyTranslations(document.documentElement.lang || 'en', emptyState);
+            }
+            resultsContainer.replaceChildren(emptyState);
             return;
         }
 
-        resultsContainer.innerHTML = filtered.map((item, idx) => `
-            <a href="${item.url}" class="cmd-item ${idx === 0 ? 'active' : ''}" data-idx="${idx}">
-                <div class="cmd-item-title">${item.title}</div>
-                <div class="cmd-item-desc">${item.category ? `<span style="opacity:0.6; margin-right:6px">[${item.category}]</span>` : ''}${item.description || ''}</div>
-            </a>
-        `).join('');
+        resultsContainer.replaceChildren(...filtered.map((item, idx) => {
+            const link = document.createElement('a');
+            const targetUrl = new URL(String(item.url).replace(/^\/+/, ''), siteRoot);
+            if (targetUrl.origin !== siteRoot.origin) return null;
+            link.href = targetUrl.href;
+            link.className = `cmd-item ${idx === 0 ? 'active' : ''}`;
+            link.dataset.idx = String(idx);
+            link.id = `cmdOption-${idx}`;
+            link.setAttribute('role', 'option');
+            link.setAttribute('aria-selected', String(idx === 0));
+
+            const title = document.createElement('div');
+            title.className = 'cmd-item-title';
+            title.textContent = item.title;
+            const description = document.createElement('div');
+            description.className = 'cmd-item-desc';
+            if (item.category) {
+                const category = document.createElement('span');
+                category.style.cssText = 'opacity:0.6; margin-right:6px';
+                category.textContent = `[${item.category}]`;
+                description.append(category);
+            }
+            description.append(document.createTextNode(item.description || ''));
+            link.append(title, description);
+            return link;
+        }).filter(Boolean));
+        if (resultsContainer.querySelector('.cmd-item')) input.setAttribute('aria-activedescendant', 'cmdOption-0');
+        else input.removeAttribute('aria-activedescendant');
 
         // Re-attach click listeners to new DOM
-        document.querySelectorAll('.cmd-item').forEach(item => {
+        resultsContainer.querySelectorAll('.cmd-item').forEach(item => {
             item.addEventListener('click', () => toggleSearch(false)); // Allow default link nav
             item.addEventListener('mouseenter', () => {
                 // Update selection on hover
@@ -307,7 +386,7 @@ function initSearch() {
     };
 
     const updateSelection = (idx) => {
-        const items = document.querySelectorAll('.cmd-item');
+        const items = resultsContainer.querySelectorAll('.cmd-item');
         if (items.length === 0) return;
 
         // Wrap
@@ -315,9 +394,14 @@ function initSearch() {
         if (idx >= items.length) idx = 0;
 
         selectedIndex = idx;
-        items.forEach(el => el.classList.remove('active'));
+        items.forEach(el => {
+            el.classList.remove('active');
+            el.setAttribute('aria-selected', 'false');
+        });
         const activeItem = items[selectedIndex];
         activeItem.classList.add('active');
+        activeItem.setAttribute('aria-selected', 'true');
+        input.setAttribute('aria-activedescendant', activeItem.id);
 
         // Scroll into view
         activeItem.scrollIntoView({ block: 'nearest' });
@@ -328,7 +412,7 @@ function initSearch() {
     });
 
     input.addEventListener('keydown', (e) => {
-        const items = document.querySelectorAll('.cmd-item');
+        const items = resultsContainer.querySelectorAll('.cmd-item');
         if (e.key === 'ArrowDown') {
             e.preventDefault();
             updateSelection(selectedIndex + 1);

@@ -53,6 +53,13 @@ const translations = {
         "about.cta_btn": "Let's talk",
         "about.signature": "Product, Capital, Community",
         "writing.intro": "A running catalog of my work in product, adventures in travel, and lessons in life.",
+        "search.label": "Search posts and pages",
+        "search.placeholder": "Search posts, pages, or commands...",
+        "search.navigation": "Navigation",
+        "search.help": "Use ↑↓ to move, Enter to open",
+        "search.loading": "Loading search…",
+        "search.empty": "No results found",
+        "search.unavailable": "Search is unavailable right now.",
         "writing.articles": "The Logbook",
         "proj.rentbase": "A secure rental infrastructure platform for Africa that verifies agents, generates legal tenancy agreements, and protects deposits through digital condition reports.",
         "proj.amigo": "A professional roommate matching platform for urban living that connects young people based on lifestyle compatibility, vibe, and verified identity.",
@@ -157,6 +164,13 @@ const translations = {
         "about.cta_btn": "Parlons-en",
         "about.signature": "Produit, Capital, Communauté",
         "writing.intro": "Réflexions sur la technologie, le design et la création de produits.",
+        "search.label": "Rechercher des articles et des pages",
+        "search.placeholder": "Rechercher des articles, pages ou commandes…",
+        "search.navigation": "Navigation",
+        "search.help": "↑↓ pour parcourir, Entrée pour ouvrir",
+        "search.loading": "Chargement de la recherche…",
+        "search.empty": "Aucun résultat",
+        "search.unavailable": "La recherche est momentanément indisponible.",
         "writing.articles": "Articles",
         "proj.rentbase": "Une plateforme d'infrastructure locative sécurisée pour l'Afrique qui vérifie les agents, génère des contrats de bail légaux et protège les dépôts.",
         "proj.amigo": "Une plateforme professionnelle de colocation urbaine qui connecte les jeunes en fonction de la compatibilité de style de vie et d'identité vérifiée.",
@@ -263,6 +277,13 @@ const translations = {
         "about.cta_btn": "Hablemos",
         "about.signature": "Producto, Capital, Comunidad",
         "writing.intro": "Pensamientos sobre tecnología, diseño y construcción de productos.",
+        "search.label": "Buscar publicaciones y páginas",
+        "search.placeholder": "Buscar publicaciones, páginas o comandos…",
+        "search.navigation": "Navegación",
+        "search.help": "↑↓ para moverte, Intro para abrir",
+        "search.loading": "Cargando búsqueda…",
+        "search.empty": "No se encontraron resultados",
+        "search.unavailable": "La búsqueda no está disponible en este momento.",
         "writing.articles": "Artículos",
         "proj.rentbase": "Una plataforma segura de infraestructura de alquiler para África que verifica agentes, genera contratos de arredamiento legales y protege depósitos.",
         "proj.amigo": "Una plataforma profesional de búsqueda de compañeros de cuarto que conecta a jóvenes según su compatibilidad de estilo de vida e identidad verificada.",
@@ -320,7 +341,9 @@ function setLanguage(lang) {
     if (!translations[lang]) return;
 
     // Save preference
-    localStorage.setItem('lang', lang);
+    try { localStorage.setItem('lang', lang); } catch (_) { /* Storage may be disabled. */ }
+
+    document.documentElement.lang = lang;
 
     // Update URL if supported
     const url = new URL(window.location);
@@ -329,10 +352,29 @@ function setLanguage(lang) {
         window.history.replaceState({}, '', url);
     }
 
-    // Update DOM
-    document.querySelectorAll('[data-i18n]').forEach(el => {
+    applyTranslations(lang);
+
+    // Update active state in switcher
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        const active = btn.getAttribute('data-lang') === lang;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', String(active));
+    });
+}
+
+function applyTranslations(lang, root = document) {
+    if (!translations[lang]) return;
+    const nodes = [];
+    if (root instanceof Element && root.hasAttribute('data-i18n')) nodes.push(root);
+    nodes.push(...root.querySelectorAll('[data-i18n]'));
+    nodes.forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang][key]) {
+            const targetAttribute = el.getAttribute('data-i18n-attr');
+            if (targetAttribute && ['placeholder', 'aria-label', 'title'].includes(targetAttribute)) {
+                el.setAttribute(targetAttribute, translations[lang][key]);
+                return;
+            }
             // Check if content has HTML (like the clock span in intro)
             if (translations[lang][key].includes('<')) {
                 el.innerHTML = translations[lang][key];
@@ -352,17 +394,15 @@ function setLanguage(lang) {
             }
         }
     });
-
-    // Update active state in switcher
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-    });
 }
+
+window.applyTranslations = applyTranslations;
 
 function initLanguage() {
     const urlParams = new URLSearchParams(window.location.search);
-    const savedLang = localStorage.getItem('lang');
-    const browserLang = navigator.language.slice(0, 2);
+    let savedLang = null;
+    try { savedLang = localStorage.getItem('lang'); } catch (_) { /* Storage may be disabled. */ }
+    const browserLang = (navigator.language || 'en').slice(0, 2).toLowerCase();
 
     let lang = urlParams.get('lang') || savedLang || (['fr', 'es'].includes(browserLang) ? browserLang : 'en');
 
@@ -374,7 +414,7 @@ function initLanguage() {
     // Add click listeners to switcher
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            setLanguage(e.target.getAttribute('data-lang'));
+            setLanguage(e.currentTarget.getAttribute('data-lang'));
         });
     });
 }

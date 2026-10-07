@@ -11,6 +11,72 @@ const INDEX_PATH = path.join(__dirname, 'index.html');
 const WRITING_DIR = path.join(__dirname, 'writing');
 const WRITING_INDEX_PATH = path.join(WRITING_DIR, 'index.html');
 
+function writeGeneratedFile(filePath, contents) {
+    const tempPath = `${filePath}.tmp`;
+    fs.writeFileSync(tempPath, contents);
+    fs.renameSync(tempPath, filePath);
+}
+
+function renderSiteNav(root, activePage = '') {
+    const link = (page, href, key, label) => `<a href="${root}${href}" class="nav-link${activePage === page ? ' active' : ''}" data-i18n="${key}">${label}</a>`;
+    return `<nav>
+        <a href="${root}" class="logo">Maxwell Cofie</a>
+        <div class="nav-links">
+            ${link('work', 'work/', 'nav.work', 'Work')}
+            ${link('ventures', 'ventures/', 'nav.ventures', 'Ventures')}
+            ${link('writing', 'writing/', 'nav.writing', 'Logbook')}
+            <button class="theme-toggle" onclick="openSearch()" aria-label="Search" style="margin-right: 4px;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
+            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" /></svg>
+            </button>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+                <button class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+                <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+            </div>
+        </div>
+    </nav>`;
+}
+
+function renderSiteFooter() {
+    return `<footer>
+        <a href="mailto:hello@maxwellcofie.com" class="footer-link" data-i18n="footer.email">Email</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.twitter">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
+        <a href="https://thekompound.substack.com" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.substack">Substack</a>
+        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.youtube">YouTube</a>
+        <span style="flex-grow: 1;"></span>
+        <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; ${new Date().getFullYear()} Maxwell Cofie</span>
+    </footer>`;
+}
+
+const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+}[char]));
+const escapeXml = value => String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;'
+}[char]));
+
+const slugifyHeading = value => value
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\p{L}\p{N}_-]+/gu, '-')
+    .replace(/^-+|-+$/g, '') || 'section';
+
+function assignHeadingIds(tokens) {
+    const counts = new Map();
+    return tokens.map(token => {
+        if (token.type !== 'heading') return token;
+        const base = slugifyHeading(token.text);
+        const count = (counts.get(base) || 0) + 1;
+        counts.set(base, count);
+        return { ...token, headingId: count === 1 ? base : `${base}-${count}` };
+    });
+}
+
 // Ensure output dirs exist
 if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -21,17 +87,21 @@ if (!fs.existsSync(WRITING_DIR)) {
 
 // 1. Configure Marked with Highlight.js and Custom Renderer
 const renderer = new marked.Renderer();
+let headingIds = [];
 
 // Override image renderer to support video embeds
 renderer.image = ({ href, title, text }) => {
-    if (href && (href.endsWith('.webm') || href.endsWith('.mp4') || href.endsWith('.mov'))) {
+    const safeHref = escapeHtml(href);
+    const safeTitle = escapeHtml(title || '');
+    const safeAlt = escapeHtml(text || '');
+    if (href && /\.(webm|mp4|mov)(?:[?#].*)?$/i.test(href)) {
         return `
-        <video controls playsinline loop muted autoplay class="post-video">
-            <source src="${href}" type="video/${href.split('.').pop()}">
+        <video controls playsinline preload="metadata" class="post-video">
+            <source src="${safeHref}">
             Your browser does not support the video tag.
         </video>`;
     }
-    return `<img src="${href}" alt="${text}" title="${title || ''}" class="post-img">`;
+    return `<img src="${safeHref}" alt="${safeAlt}" title="${safeTitle}" class="post-img" loading="lazy" decoding="async">`;
 };
 
 // Override code renderer to support filenames
@@ -71,8 +141,17 @@ files.forEach(file => {
     const content = fs.readFileSync(path.join(CONTENT_DIR, file), 'utf8');
     const { attributes, body } = fm(content);
 
-    // Extract TOC before parsing full body
-    const tokens = marked.lexer(body);
+    const requiredFields = ['title', 'description', 'date', 'isoDate'];
+    const missing = requiredFields.filter(field => !String(attributes[field] ?? '').trim());
+    if (missing.length) {
+        throw new Error(`${file}: missing required front matter field${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}`);
+    }
+    const parsedDate = new Date(`${attributes.isoDate}T00:00:00Z`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(attributes.isoDate) || Number.isNaN(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== attributes.isoDate) {
+        throw new Error(`${file}: isoDate must be a valid YYYY-MM-DD date`);
+    }
+
+    const { tokens, html: htmlContent } = renderMarkdown(body);
     const headings = tokens.filter(t => t.type === 'heading' && (t.depth === 2 || t.depth === 3));
 
     const tocHTML = headings.length > 0 ? `
@@ -80,17 +159,11 @@ files.forEach(file => {
             <div class="toc-label">Table of Contents</div>
             <ul>
                 ${headings.map(h => {
-        const id = h.text.toLowerCase().replace(/[^\w]+/g, '-');
-        return `<li class="toc-level-${h.depth}"><a href="#${id}">${h.text}</a></li>`;
+        const title = marked.parseInline(h.text);
+        return `<li class="toc-level-${h.depth}"><a href="#${escapeHtml(h.headingId)}">${title}</a></li>`;
     }).join('')}
             </ul>
         </div>` : '';
-
-    const htmlContent = marked.parse(body);
-
-    // Inject IDs into headings in htmlContent? 
-    // Marked renderer.heading isn't overridden yet, so headings won't have IDs by default unless we do it.
-    // Let's rely on a custom renderer for heading IDs to match the TOC.
 
     const slug = path.basename(file, '.md');
     const wordCount = body.split(/\s+/).length;
@@ -116,7 +189,7 @@ files.forEach(file => {
         ...attributes,
         categories,
         slug,
-        htmlContent, // This will be regenerated with IDs in the loop below properly
+        htmlContent,
         readTime,
         tocHTML,
         outputFile: `${slug}/index.html`,
@@ -126,23 +199,22 @@ files.forEach(file => {
 
 // Need to update renderer for Headings to have IDs for TOC
 renderer.heading = ({ text, depth }) => {
-    const id = text.toLowerCase().replace(/[^\w]+/g, '-');
-    return `<h${depth} id="${id}">${text}</h${depth}>`;
+    const id = headingIds.shift() || slugifyHeading(text);
+    return `<h${depth} id="${escapeHtml(id)}">${text}</h${depth}>`;
 };
 
-// Re-process content now that renderer has heading support
-posts.forEach(p => {
-    const content = fs.readFileSync(path.join(CONTENT_DIR, p.slug + '.md'), 'utf8');
-    const { body } = fm(content);
-    p.htmlContent = marked.parse(body);
-});
-
+function renderMarkdown(body) {
+    const tokens = assignHeadingIds(marked.lexer(body));
+    headingIds = tokens.filter(token => token.type === 'heading').map(token => token.headingId);
+    return { tokens, html: marked.parser(tokens) };
+}
 
 // Sort posts by date (newest first)
 posts.sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
 
 // 3. Generate HTML Files for each post
 const HTML_TEMPLATE = `<!doctype html>
+<!-- GENERATED BY build.js FROM content/posts/*.md. DO NOT EDIT THIS FILE DIRECTLY. -->
 <html lang="en" data-theme="system" itemscope itemtype="https://schema.org/BlogPosting">
 <head>
     <meta charset="utf-8">
@@ -606,27 +678,7 @@ const HTML_TEMPLATE = `<!doctype html>
         Share
     </div>
 
-    <nav>
-        <a href="../../" class="logo">Maxwell Cofie</a>
-        <div class="nav-links">
-            <a href="../../work/" class="nav-link" data-i18n="nav.work">Work</a>
-            <a href="../../ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
-            <a href="../../writing/" class="nav-link" data-i18n="nav.writing">Logbook</a>
-            <button class="theme-toggle" onclick="openSearch()" aria-label="Search" style="margin-right: 4px;">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-            </button>
-            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
-                </svg>
-            </button>
-            <div class="lang-switcher">
-                <button class="lang-btn active" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="fr">FR</button>
-                <button class="lang-btn" data-lang="es">ES</button>
-            </div>
-        </div>
-    </nav>
+    ${renderSiteNav('../../')}
     
     <a href="../../writing/" class="back-link" data-i18n="nav.back_writing">← Logbook</a>
     
@@ -714,17 +766,7 @@ const HTML_TEMPLATE = `<!doctype html>
         </button>
     </div>
 
-    <footer>
-        <a href="mailto:hello@maxwellcofie.com" class="footer-link" data-i18n="footer.email">Email</a>
-        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
-        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
-        <a href="https://thekompound.substack.com" target="_blank" class="footer-link" data-i18n="footer.substack">Substack</a>
-        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.youtube">YouTube</a>
-        <span style="flex-grow: 1;"></span>
-        <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2026 Maxwell Cofie</span>
-    </footer>
-    <script src="../../locale.js"></script>
-
+    ${renderSiteFooter()}
     <script src="../../locale.js"></script>
     <script src="../../app.js"></script>
 
@@ -810,17 +852,29 @@ posts.forEach(post => {
         fs.mkdirSync(postDir, { recursive: true });
     }
 
-    fs.writeFileSync(postPath, html);
+    writeGeneratedFile(postPath, html);
     console.log(`Generated: ${post.outputFile}`);
 });
+
+// Remove only stale generated post HTML. Other files in post folders are preserved.
+const currentPostFiles = new Set(posts.map(post => path.resolve(OUTPUT_DIR, post.outputFile)));
+for (const entry of fs.readdirSync(OUTPUT_DIR, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const stalePath = path.join(OUTPUT_DIR, entry.name, 'index.html');
+    if (!fs.existsSync(stalePath) || currentPostFiles.has(path.resolve(stalePath))) continue;
+    const existingHtml = fs.readFileSync(stalePath, 'utf8');
+    if (existingHtml.startsWith('<!doctype html>\n<!-- GENERATED BY build.js FROM content/posts/*.md. DO NOT EDIT THIS FILE DIRECTLY. -->')) {
+        fs.unlinkSync(stalePath);
+    }
+}
 
 
 // 4. Update writing/index.html Index
 const categories = [...new Set(posts.flatMap(p => p.categories))].sort();
 const filterHTML = `
-    <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterPosts(this, 'all')">All</button>
-        ${categories.map(cat => `<button class="filter-btn" onclick="filterPosts(this, '${cat}')">${cat}</button>`).join('')}
+    <div class="filter-bar" role="group" aria-label="Filter articles by category">
+        <button class="filter-btn active" aria-pressed="true" onclick="filterPosts(this, 'all')">All</button>
+        ${categories.map(cat => `<button class="filter-btn" aria-pressed="false" onclick="filterPosts(this, ${escapeHtml(JSON.stringify(cat))})">${escapeHtml(cat)}</button>`).join('')}
     </div>
 `;
 
@@ -908,27 +962,7 @@ const INDEX_HTML = `<!doctype html>
 
 <body>
 
-    <nav>
-        <a href="../" class="logo">Maxwell Cofie</a>
-        <div class="nav-links">
-            <a href="../work/" class="nav-link" data-i18n="nav.work">Work</a>
-            <a href="../ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
-            <a href="./" class="nav-link active" data-i18n="nav.writing">Logbook</a>
-            <button class="theme-toggle" onclick="openSearch()" aria-label="Search" style="margin-right: 4px;">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-            </button>
-            <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
-                </svg>
-            </button>
-            <div class="lang-switcher">
-                <button class="lang-btn active" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="fr">FR</button>
-                <button class="lang-btn" data-lang="es">ES</button>
-            </div>
-        </div>
-    </nav>
+    ${renderSiteNav('../', 'writing')}
 
     <div class="intro">
             <p data-i18n="writing.intro">Thoughts on technology, design, and building products.</p>
@@ -970,15 +1004,7 @@ const INDEX_HTML = `<!doctype html>
         </div>
     </div>
 
-    <footer>
-        <a href="mailto:hello@maxwellcofie.com" class="footer-link" data-i18n="footer.email">Email</a>
-        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
-        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
-        <a href="https://thekompound.substack.com" target="_blank" class="footer-link" data-i18n="footer.substack">Substack</a>
-        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.youtube">YouTube</a>
-        <span style="flex-grow: 1;"></span>
-        <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2026 Maxwell Cofie</span>
-    </footer>
+    ${renderSiteFooter()}
     <script src="../locale.js"></script>
     <script src="../app.js"></script>
     <script>
@@ -994,7 +1020,9 @@ const INDEX_HTML = `<!doctype html>
         // Sync UI with URL state on load
         function syncFilterUI() {
              document.querySelectorAll('.filter-btn').forEach(b => {
-                 if (b.innerText === currentCategory || (currentCategory === 'all' && b.innerText === 'All')) {
+                 const active = b.innerText === currentCategory || (currentCategory === 'all' && b.innerText === 'All');
+                 b.setAttribute('aria-pressed', String(active));
+                 if (active) {
                      b.classList.add('active');
                      if (b.scrollIntoView && window.innerWidth <= 640) {
                          b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -1127,7 +1155,7 @@ const INDEX_HTML = `<!doctype html>
 </body>
 </html>`;
 
-fs.writeFileSync(WRITING_INDEX_PATH, INDEX_HTML);
+writeGeneratedFile(WRITING_INDEX_PATH, INDEX_HTML.replace('<!doctype html>', '<!doctype html>\n<!-- GENERATED BY build.js FROM content/posts/*.md. DO NOT EDIT THIS FILE DIRECTLY. -->'));
 console.log(`--- Updated ${WRITING_INDEX_PATH} ---`);
 
 // 4.5 Update Homepage (index.html) with Latest Posts
@@ -1164,12 +1192,17 @@ const latestPostsHTML = `<!-- WRITING_LIST_START -->
         <!-- WRITING_LIST_END -->`;
 
 // Regex replacement to find the block
+const hasWritingMarkers = (indexContent.match(/<!-- WRITING_LIST_START -->/g) || []).length === 1 &&
+    (indexContent.match(/<!-- WRITING_LIST_END -->/g) || []).length === 1;
+if (!hasWritingMarkers) {
+    throw new Error('index.html must contain exactly one WRITING_LIST_START and WRITING_LIST_END marker pair.');
+}
 const updatedIndexContent = indexContent.replace(
     /<!-- WRITING_LIST_START -->[\s\S]*<!-- WRITING_LIST_END -->/,
     latestPostsHTML
 );
 
-fs.writeFileSync(INDEX_PATH, updatedIndexContent);
+writeGeneratedFile(INDEX_PATH, updatedIndexContent);
 console.log('--- Updated index.html with latest posts ---');
 
 
@@ -1182,24 +1215,25 @@ const searchIndex = posts.map(post => ({
     date: post.date
 }));
 
-fs.writeFileSync(path.join(__dirname, 'search.json'), JSON.stringify(searchIndex));
+writeGeneratedFile(path.join(__dirname, 'search.json'), JSON.stringify(searchIndex));
 console.log('--- Generated search.json ---');
 
 // 6. Generate RSS Feed
+const feedDate = posts.length ? new Date(`${posts[0].isoDate}T00:00:00Z`) : new Date(0);
 const RSS_TEMPLATE = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
  <title>Maxwell Cofie</title>
  <description>Thoughts on technology, design, and building products in Africa.</description>
  <link>https://maxwellcofie.com</link>
- <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
- <pubDate>${new Date().toUTCString()}</pubDate>
+ <lastBuildDate>${feedDate.toUTCString()}</lastBuildDate>
+ <pubDate>${feedDate.toUTCString()}</pubDate>
  <ttl>1800</ttl>
 
  ${posts.map(post => `
   <item>
-   <title>${post.title}</title>
-   <description>${post.description}</description>
+   <title>${escapeXml(post.title)}</title>
+   <description>${escapeXml(post.description)}</description>
    <link>https://maxwellcofie.com/posts/${post.url}</link>
    <guid>https://maxwellcofie.com/posts/${post.url}</guid>
    <pubDate>${new Date(post.isoDate).toUTCString()}</pubDate>
@@ -1209,7 +1243,7 @@ const RSS_TEMPLATE = `<?xml version="1.0" encoding="UTF-8" ?>
 </channel>
 </rss>`;
 
-fs.writeFileSync(path.join(__dirname, 'rss.xml'), RSS_TEMPLATE);
+writeGeneratedFile(path.join(__dirname, 'rss.xml'), RSS_TEMPLATE);
 console.log('--- Generated rss.xml ---');
 
 // 7. Generate Sitemap
@@ -1264,7 +1298,7 @@ const SITEMAP_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
   </url>`).join('')}
 </urlset>`;
 
-fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), SITEMAP_TEMPLATE);
+writeGeneratedFile(path.join(__dirname, 'sitemap.xml'), SITEMAP_TEMPLATE);
 console.log('--- Generated sitemap.xml ---');
 
 console.log('Build Complete! 🚀');
