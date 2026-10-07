@@ -130,10 +130,10 @@ body::before {
 
     .nav-links > a,
     .nav-links > button,
-    .lang-switcher button,
-    .filter-btn,
     .page-btn {
         min-height: 44px;
+        display: flex;
+        align-items: center;
     }
 
     .intro-grid {
@@ -406,22 +406,37 @@ p,
         /* Bleed to edge */
     }
 
+    .nav-link.active::after {
+        bottom: 8px; /* Offset to remain visible inside the 44px touch target */
+    }
+
     .nav-links {
-        width: 100%;
-        gap: 20px;
+        width: calc(100% + 40px);
+        margin: 0 -20px;
+        padding: 0 20px;
+        min-width: 0;
+        max-width: none;
+        gap: 16px;
         overflow-x: auto;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        padding-right: 20px;
-        /* End padding for scroll */
         padding-bottom: 4px;
-        /* Space for scrollbar if visible/touch */
-        mask-image: linear-gradient(to right, black 85%, transparent 100%);
-        -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        mask-image: linear-gradient(to right, black calc(100% - 36px), transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black calc(100% - 36px), transparent 100%);
+    }
+
+    .nav-links::after {
+        content: '';
+        flex: 0 0 1px;
+    }
+
+    .nav-links > * {
+        flex: 0 0 auto;
     }
 
     .lang-switcher {
+        flex: 0 0 auto;
         margin-left: 0;
         /* Reset margin */
     }
