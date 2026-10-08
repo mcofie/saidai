@@ -65,7 +65,6 @@ I won't go into detail here. It also isn't something you casually bring up with 
 
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_crop,g_north_west,h_4032,w_3024/IMG_1747_ngnvly.jpg" alt="Trip photo">
-    <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_crop,g_north_west,h_4032,w_3024/IMG_1747_ngnvly.jpg" alt="Trip photo">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_crop,g_north_west,h_4032,w_3024/IMG_1748_rda25f.jpg" alt="Trip photo">
 </div>
 
