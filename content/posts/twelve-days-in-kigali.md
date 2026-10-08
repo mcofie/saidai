@@ -12,7 +12,6 @@ category: "Africa & Travel"
 
 *No Uber, no late nights, no Kinyarwanda, and somehow Kigali still won me over.*
 
----
 
 By 2024, I hadn't left Ghana in a while. When I finally had the chance to travel, my friends assumed I'd head for Europe or the States. I didn't even leave the continent. Kigali had been on my radar for years. Everyone raved about its peace, its cleanliness, its forward-thinking energy, and no video ever seemed to capture it. I had to see it for myself.
 
