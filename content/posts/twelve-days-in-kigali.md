@@ -25,9 +25,6 @@ My host suggested I take a nap. *"I'm losing daylight,"* I told him. *"I've only
 
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_crop,g_north_west,h_4032,w_3024/IMG_1554_uodrxl.jpg" alt="Trip photo">
-</div>
-
-<div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_crop,g_north_west,h_4032,w_3024/IMG_1553_mqruol.jpg" alt="Trip photo">
 </div>
 
@@ -68,13 +65,7 @@ I won't go into detail here. It also isn't something you casually bring up with 
 
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_crop,g_north_west,h_4032,w_3024/IMG_1747_ngnvly.jpg" alt="Trip photo">
-</div>
-
-<div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_crop,g_north_west,h_4032,w_3024/IMG_1747_ngnvly.jpg" alt="Trip photo">
-</div>
-
-<div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_crop,g_north_west,h_4032,w_3024/IMG_1748_rda25f.jpg" alt="Trip photo">
 </div>
 
@@ -105,6 +96,7 @@ I'm still in the WhatsApp group.
 You can feel Rwanda positioning itself for the future. There are programmes to attract foreign talent and investors, and a real government push towards tech and ICT. The **Kigali Convention Centre** hosts international conferences all year round. I walked the grounds and took a photo with the **Giant Palm**, Rwanda's Anti-Corruption Monument.
 
 <!-- Add your Giant Palm photo here, e.g. ![Me at the Giant Palm, Kigali](giant-palm.jpg) -->
+
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/c_crop,g_north_west,h_4032,w_3024/IMG_1567_narqte.jpg" alt="Trip photo">
 </div>
