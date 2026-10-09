@@ -67,4 +67,4 @@ Phones used to be flat glass: you tapped, and something changed on screen. Now t
 
 That's what happened at Tidal Rave. In a crowd with no signal, I didn't need to see the message go through. I felt it.
 
-See you in part 3, where we'll explore empathy at edge cases.
+See you in part 3, where we'll explore **empathy at edge cases**.
