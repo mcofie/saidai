@@ -44,15 +44,7 @@ window.works = [
         metaKey: "meta.aitravel",
         category: "work"
     },
-    {
-        id: "lazypick",
-        title: "LazyPick",
-        year: "2025",
-        url: "https://lazypick.app",
-        descKey: "proj.lazypick",
-        metaKey: "meta.lifestyle",
-        category: "work"
-    },
+
     {
         id: "motorambos",
         title: "Motor Ambos",
