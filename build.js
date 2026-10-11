@@ -3,6 +3,7 @@ const path = require('path');
 const { marked } = require('marked');
 const fm = require('front-matter');
 const hljs = require('highlight.js');
+const { pages, renderMetadata, updatePageMetadata } = require('./lib/metadata');
 
 // Configuration
 const CONTENT_DIR = path.join(__dirname, 'content/posts');
@@ -219,8 +220,7 @@ const HTML_TEMPLATE = `<!doctype html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{TITLE}} | Maxwell Cofie</title>
-    <meta name="description" content="{{DESCRIPTION}}">
+    {{METADATA}}
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
@@ -651,24 +651,6 @@ const HTML_TEMPLATE = `<!doctype html>
         }
 
     </style>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": "{{TITLE}}",
-      "description": "{{DESCRIPTION}}",
-      "author": {
-        "@type": "Person",
-        "name": "Maxwell Cofie",
-        "url": "https://maxwellcofie.com"
-      },
-      "datePublished": "{{ISO_DATE}}",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://maxwellcofie.com/posts/{{SLUG}}/"
-      }
-    }
-    </script>
 </head>
 
 <body>
@@ -843,7 +825,20 @@ posts.forEach(post => {
         .replace(/{{CATEGORY_TAG}}/g, post.categories.map(cat =>
             `<span class="post-category ${cat.toLowerCase().replace(/\s+/g, '-')}">${cat}</span>`
         ).join(''))
-        .replace(/{{RELATED_POSTS}}/g, relatedHTML);
+        .replace(/{{RELATED_POSTS}}/g, relatedHTML)
+        .replace('{{METADATA}}', () => renderMetadata({
+            title: `${post.title} | Maxwell Cofie`,
+            description: post.description,
+            path: `/posts/${encodeURIComponent(post.slug)}/`,
+            image: post.image,
+            imageAlt: post.imageAlt,
+            article: {
+                title: post.title,
+                author: post.author,
+                published: new Date(post.isoDate).toISOString(),
+                categories: post.categories,
+            },
+        }));
 
     const postPath = path.join(OUTPUT_DIR, post.outputFile); // posts/slug/index.html
     const postDir = path.dirname(postPath);
@@ -884,8 +879,7 @@ const INDEX_HTML = `<!doctype html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Logbook | Maxwell Cofie</title>
-    <meta name="description" content="Thoughts on technology, design, and building products in Africa.">
+    ${renderMetadata(pages['writing/index.html'])}
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -1300,5 +1294,12 @@ const SITEMAP_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
 
 writeGeneratedFile(path.join(__dirname, 'sitemap.xml'), SITEMAP_TEMPLATE);
 console.log('--- Generated sitemap.xml ---');
+
+// Refresh static page metadata from the same configuration on every build.
+for (const [file, metadata] of Object.entries(pages)) {
+    if (file === 'writing/index.html') continue;
+    const filePath = path.join(__dirname, file);
+    writeGeneratedFile(filePath, updatePageMetadata(fs.readFileSync(filePath, 'utf8'), metadata));
+}
 
 console.log('Build Complete! 🚀');

@@ -2,7 +2,7 @@
 title: "Your Ideas Are 75 Percent Wrong. Your Instincts Aren't"
 date: "Sep 2026"
 isoDate: "2026-09-10"
-description: "Here are three distinct options tailored to where you might share it:"
+description: "Lessons from Mark Pincus on trusting human instincts, testing product ideas, and building on proven patterns without losing the vision that makes a product matter."
 category: "Thoughts"
 ---
 <div class="image-grid">
