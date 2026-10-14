@@ -3,7 +3,7 @@ title: "Help is closer than you think: building roadside assistance for how Accr
 date: "Oct 2026"
 isoDate: "2026-10-14"
 description: "Four hours and GHS 500 at the Ofankor overpass taught me that roadside help in Accra is always nearby, just hard to find. Here’s how Motor Ambos is changing that."
-category: "Engineering & Technology"
+category: "Engineering"
 ---
 
 <div class="image-grid">
@@ -16,20 +16,20 @@ The one I remember most: the Ofankor overpass, at about 7 pm. Dark Raven gave up
 
 Help did come eventually. But the rescue took **four hours** and cost me about **GHS 500** that evening.
 
-It wasn’t the only time. I’ve broken down in places I barely knew, places where help seemed nowhere in sight, and places that felt dangerous for me, for passing vehicles and for pedestrians. Every time, somehow, I got help. But it always took longer than it should have and cost more than I expected, mostly because I didn’t know who was close by or what was fair to pay.
+It wasn’t the only time. It's broken down in places I barely knew, places where help seemed nowhere in sight, and places that felt dangerous for me, for passing vehicles and for pedestrians. Every time, somehow, I got help. But it always took longer than it should have and cost more than I expected, mostly because I didn’t know who was close by or what was fair to pay.
 
 For a while, I put getting help at all down to luck. Then I started paying attention, and what I noticed became the foundation of what we’re building at Motor Ambos.
 
 ### What I noticed
 
-**First: help is almost always nearby.** Accra is full of “fitting shops”, makeshift roadside mechanic shops run by people who can fix most of what goes wrong on the road. Around Abossey Okai, I counted 5. In our conversations with drivers, most said fitters like these are who they actually turn to, far more often than established workshops.
+**First: help is almost always nearby.** Accra is full of “fitting shops”, makeshift roadside mechanic shops run by people who can fix most of what goes wrong on the road. Around Achimota, I counted 5. In our conversations with drivers, most said fitters like these are who they actually turn to, far more often than established workshops.
 
 <div class="image-grid">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/q_auto:low/IMG_7996_aoz1hy.jpg" alt="Trip photo">
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/q_auto:low/IMG_7994_wb3cf8.jpg" alt="Trip photo">
 </div>
 
-**Second: when you’re stranded, you don’t care about certificates.** You want to know someone is coming, how soon, and what it’ll cost. You want a plan to get you and your car somewhere safe. The questions about qualifications come later, once you’ve calmed down. Everyone we’ve interviewed said the same.
+**Second: when you’re stranded, you don’t care about certificates.** You want to know someone is coming, how soon, and what it’ll cost. You want a plan to get you and your car somewhere safe. The questions about qualifications may come later, once you’ve calmed down. Everyone we’ve interviewed shared the same sentiment.
 
 **Third: people want to talk to a person.** When you’re in distress, a voice on the phone saying “I’m coming” does something an app notification can’t. And most of the mechanics we met prefer feature phones. Their work is hard on phones, and a simple handset just works.
 
