@@ -90,10 +90,5 @@ We have about **50 mechanics** mapped across Dzorwulu, Achimota, Labone and Osu,
     <img src="https://res.cloudinary.com/dmbc2infa/image/upload/q_auto:good/Screenshot_2026-10-14_at_1.23.00_AM_gj4xrq.png" alt="Trip photo">
 </div>
 
-### How you can help
-
-- **Drivers:** save [motorambos.com/help](https://motorambos.com/help) on your phone today, before you need it.
-- **Mechanics and fitting shops:** want to join the network? [WhatsApp number or contact link]
-- **Fleet owners and partners:** let’s talk. [email]
 
 Learn more at [motorambos.com](https://motorambos.com).
