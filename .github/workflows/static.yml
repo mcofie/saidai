@@ -38,11 +38,11 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies & Build
+      - name: Install dependencies, Test & Build
         run: |
           npm ci
+          npm test
           npm run build
-          touch .nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -50,8 +50,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          # Only the packaged site; see bin/package-site.js
+          path: 'dist'
 
       - name: Deploy to GitHub Pages
         id: deployment

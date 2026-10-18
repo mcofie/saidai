@@ -1,9 +1,11 @@
 const fs = require('fs');
 const path = require('path');
+const vm = require('vm');
 const { marked } = require('marked');
 const fm = require('front-matter');
 const hljs = require('highlight.js');
 const { pages, renderMetadata, updatePageMetadata } = require('./lib/metadata');
+const { cloudinaryUrl, readImageSizes } = require('./lib/images');
 
 // Configuration
 const CONTENT_DIR = path.join(__dirname, 'content/posts');
@@ -132,6 +134,36 @@ marked.setOptions({
     langPrefix: 'hljs language-'
 });
 
+// Serve post images at the size they're shown, with dimensions so the page doesn't
+// jump as they load. Only the first image loads eagerly; it's often the largest thing in view.
+const imageSizes = readImageSizes();
+
+function optimizeImages(html) {
+    let imageIndex = 0;
+    return html.replace(/<img\b[^>]*>/g, tag => {
+        const isFirst = imageIndex++ === 0;
+        const src = tag.match(/\ssrc="([^"]+)"/)?.[1];
+        const decodedSrc = src && src.replace(/&amp;/g, '&');
+        const small = decodedSrc && cloudinaryUrl(decodedSrc, 640);
+        let result = tag;
+        if (small && !/\ssrcset=/.test(tag)) {
+            const medium = cloudinaryUrl(decodedSrc, 960);
+            const large = cloudinaryUrl(decodedSrc, 1280);
+            const size = imageSizes[decodedSrc];
+            const dimensions = size && !/\swidth=/.test(tag) ? ` width="${size.width}" height="${size.height}"` : '';
+            result = result.replace(` src="${src}"`,
+                ` src="${escapeHtml(large)}" srcset="${escapeHtml(small)} 640w, ${escapeHtml(medium)} 960w, ${escapeHtml(large)} 1280w" sizes="(max-width: 640px) 100vw, 640px"${dimensions}`);
+        }
+        if (isFirst) {
+            result = result.replace(/\sloading="lazy"/, '').replace(/^<img\b/, '<img fetchpriority="high"');
+        } else if (!/\sloading=/.test(result)) {
+            result = result.replace(/^<img\b/, '<img loading="lazy"');
+        }
+        if (!/\sdecoding=/.test(result)) result = result.replace(/^<img\b/, '<img decoding="async"');
+        return result;
+    });
+}
+
 // 2. Read All Posts
 const posts = [];
 const files = fs.readdirSync(CONTENT_DIR);
@@ -207,7 +239,7 @@ renderer.heading = ({ text, depth }) => {
 function renderMarkdown(body) {
     const tokens = assignHeadingIds(marked.lexer(body));
     headingIds = tokens.filter(token => token.type === 'heading').map(token => token.headingId);
-    return { tokens, html: marked.parser(tokens) };
+    return { tokens, html: optimizeImages(marked.parser(tokens)) };
 }
 
 // Sort posts by date (newest first)
@@ -228,12 +260,10 @@ const HTML_TEMPLATE = `<!doctype html>
     <!-- View Transitions -->
     <meta name="view-transition" content="same-origin" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
-    <!-- Readability Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,200..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/mansalva-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+    {{IMAGE_PRECONNECT}}
     
     <link rel="stylesheet" href="../../style.css?v=6">
     
@@ -708,10 +738,10 @@ const HTML_TEMPLATE = `<!doctype html>
                     <button class="share-btn" id="copyLinkBtn">
                         🔗 Copy Link
                     </button>
-                    <a href="https://twitter.com/intent/tweet?text={{TITLE}}&url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" class="share-btn">
+                    <a href="https://twitter.com/intent/tweet?text={{TITLE}}&url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" rel="noopener noreferrer" class="share-btn">
                         Twitter
                     </a>
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" class="share-btn">
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" rel="noopener noreferrer" class="share-btn">
                         LinkedIn
                     </a>
                 </div>
@@ -719,7 +749,7 @@ const HTML_TEMPLATE = `<!doctype html>
                 <div class="subscribe-box">
                     <div class="sub-title">Enjoyed this reading?</div>
                     <div class="sub-desc">I write about product, design, and building in Africa. Subscribe to my Substack to get updates.</div>
-                    <a href="https://open.substack.com/pub/mcofie" target="_blank" class="sub-btn">Subscribe on Substack</a>
+                    <a href="https://open.substack.com/pub/mcofie" target="_blank" rel="noopener noreferrer" class="sub-btn">Subscribe on Substack</a>
                 </div>
             </div>
             
@@ -749,8 +779,8 @@ const HTML_TEMPLATE = `<!doctype html>
     </div>
 
     ${renderSiteFooter()}
-    <script src="../../locale.js"></script>
-    <script src="../../app.js"></script>
+    <script src="../../locale.js" defer></script>
+    <script src="../../app.js" defer></script>
 
     <script>
         // --- READER MODE ---
@@ -821,6 +851,8 @@ posts.forEach(post => {
         .replace(/{{SLUG}}/g, post.slug)
         .replace(/{{READ_TIME}}/g, post.readTime)
         .replace(/{{CONTENT}}/g, post.htmlContent)
+        .replace('{{IMAGE_PRECONNECT}}', () => post.htmlContent.includes('https://res.cloudinary.com/')
+            ? '<link rel="preconnect" href="https://res.cloudinary.com">' : '')
         .replace(/{{TOC}}/g, post.tocHTML)
         .replace(/{{CATEGORY_TAG}}/g, post.categories.map(cat =>
             `<span class="post-category ${cat.toLowerCase().replace(/\s+/g, '-')}">${cat}</span>`
@@ -887,10 +919,8 @@ const INDEX_HTML = `<!doctype html>
     <!-- View Transitions -->
     <meta name="view-transition" content="same-origin" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
+    <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/mansalva-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css?v=8">
     <style>
         /* FOUC fix for i18n */
@@ -999,8 +1029,8 @@ const INDEX_HTML = `<!doctype html>
     </div>
 
     ${renderSiteFooter()}
-    <script src="../locale.js"></script>
-    <script src="../app.js"></script>
+    <script src="../locale.js" defer></script>
+    <script src="../app.js" defer></script>
     <script>
         const itemsPerPage = 6;
         let currentPage = 1;
@@ -1173,7 +1203,7 @@ const latestPostsHTML = `<!-- WRITING_LIST_START -->
             </a>
             `).join('')}
              <!-- Fallback Substack Link (Optional) -->
-             <a href="https://open.substack.com/pub/mcofie" target="_blank" class="project-item" data-category="writing">
+             <a href="https://open.substack.com/pub/mcofie" target="_blank" rel="noopener noreferrer" class="project-item" data-category="writing">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title" style="color: var(--text-tertiary);" data-i18n="writing.archives">Archives (Substack)</span>
@@ -1294,6 +1324,68 @@ const SITEMAP_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
 
 writeGeneratedFile(path.join(__dirname, 'sitemap.xml'), SITEMAP_TEMPLATE);
 console.log('--- Generated sitemap.xml ---');
+
+// 8. Shared nav/footer and pre-rendered project lists for hand-written pages
+// data.js and locale.js are browser scripts, so run them in a sandbox to read their values.
+function loadBrowserScript(file, expose = '') {
+    const context = { window: {}, document: { addEventListener() {} } };
+    vm.runInNewContext(`${fs.readFileSync(path.join(__dirname, file), 'utf8')}\n${expose}`, context, { filename: file });
+    return context;
+}
+const siteData = loadBrowserScript('data.js').window;
+const englishStrings = loadBrowserScript('locale.js', 'exported = translations;').exported.en;
+
+// Mirrors renderProjects() in app.js so the list is in the HTML before JavaScript runs.
+const renderProjectItems = items => [...items]
+    .sort((a, b) => a.title.localeCompare(b.title))
+    .map(proj => `
+            <a href="${escapeHtml(proj.url)}" target="_blank" rel="noopener noreferrer" class="project-item" data-category="${escapeHtml(proj.category)}">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">${escapeHtml(proj.title)} <span class="year-label">(${escapeHtml(proj.year)})</span></span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc" data-i18n="${proj.descKey}">${escapeHtml(englishStrings[proj.descKey])}</span>
+                </div>
+                <div class="proj-meta" data-i18n="${proj.metaKey}">${escapeHtml(englishStrings[proj.metaKey])}</div>
+            </a>`).join('');
+
+const STATIC_PAGES = {
+    'index.html': { root: './' },
+    'about/index.html': { root: '../' },
+    'work/index.html': {
+        root: '../',
+        active: 'work',
+        lists: { WORKS_LIST: siteData.works, INITIATIVES_LIST: siteData.initiatives },
+    },
+    'ventures/index.html': { root: '../', active: 'ventures' },
+    'books/index.html': { root: '../' },
+    'music/index.html': { root: '../' },
+    // Served at any missing URL, so its links must be root-absolute.
+    '404.html': { root: '/' },
+};
+
+function replaceMarkedBlock(content, marker, replacement, file) {
+    const start = `<!-- ${marker}_START -->`;
+    const end = `<!-- ${marker}_END -->`;
+    if (content.split(start).length !== 2 || content.split(end).length !== 2) {
+        throw new Error(`${file} must contain exactly one ${start} and ${end} marker pair.`);
+    }
+    return content.replace(new RegExp(`([ \\t]*)${start}[\\s\\S]*${end}`),
+        (match, indent) => `${indent}${start}\n${indent}${replacement.trim()}\n${indent}${end}`);
+}
+
+for (const [file, { root, active, lists = {} }] of Object.entries(STATIC_PAGES)) {
+    const filePath = path.join(__dirname, file);
+    let content = fs.readFileSync(filePath, 'utf8');
+    content = replaceMarkedBlock(content, 'SITE_NAV', renderSiteNav(root, active), file);
+    content = replaceMarkedBlock(content, 'SITE_FOOTER', renderSiteFooter(), file);
+    for (const [marker, items] of Object.entries(lists)) {
+        content = replaceMarkedBlock(content, marker, renderProjectItems(items), file);
+    }
+    writeGeneratedFile(filePath, content);
+}
+console.log('--- Updated shared nav, footer and project lists ---');
 
 // Refresh static page metadata from the same configuration on every build.
 for (const [file, metadata] of Object.entries(pages)) {

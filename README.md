@@ -6,7 +6,7 @@ This is the custom static site generator powering [MaxwellCofie.com](https://max
 
 ### Prerequisites
 
--   Node.js (v14 or later recommended)
+-   Node.js 20 or later (the version CI uses)
 -   npm
 
 ### Installation
@@ -80,11 +80,17 @@ This script performs the following actions:
     -   Updates the **Homepage** (`index.html`) to feature the 3 most recent posts.
     -   `rss.xml` for blog subscribers.
     -   `sitemap.xml` for SEO.
+-   **Shares Page Chrome**: Writes the same nav and footer into every hand-written page, and pre-renders the project lists on `work/index.html` from `data.js` and `locale.js`.
+-   **Optimizes Post Images**: Cloudinary images get a `srcset` of 640/960/1280px copies in WebP/AVIF, plus `width`/`height` so the page doesn't jump while they load. Sizes come from `content/image-sizes.json`, which `bin/image-sizes.js` fills in for new images at the start of every build (commit it). The first image in a post loads eagerly; the rest lazy-load.
+-   **Packages the Site**: Copies only the files the live site needs into `dist/` (see `bin/package-site.js`) and fails if any page links to a local file that is missing. Shared CSS/JS links get a `?v=<content hash>` so every page shares one cached copy. Only `dist/` is deployed.
 
 Generated-content source of truth:
 
 - Edit posts in `content/posts/`; `posts/[slug]/index.html` and `writing/index.html` are build output.
 - The homepage writing list is replaced from its `WRITING_LIST_START` / `WRITING_LIST_END` markers.
+- The nav and footer on hand-written pages are replaced between `SITE_NAV_*` / `SITE_FOOTER_*` markers; edit `renderSiteNav()` / `renderSiteFooter()` in `build.js`, not the pages.
+- The project lists on the Work page are replaced between `WORKS_LIST_*` / `INITIATIVES_LIST_*` markers; edit `data.js` and `locale.js`.
+- New files the site needs (a script, an image folder, a new page) must be added to the allowlist in `bin/package-site.js`, or they won't be deployed.
 - `search.json`, `rss.xml`, and `sitemap.xml` are rebuilt from the Markdown posts.
 - The build validates required post metadata and removes stale post HTML carrying the generator marker. Keep non-generated assets in `posts/` folders separate from `index.html`.
 
@@ -92,10 +98,10 @@ Generated-content source of truth:
 
 Edit titles, descriptions, and canonical paths for the main pages in `lib/metadata.js`.
 Article metadata comes from each post's `title`, `description`, `isoDate`, and optional `author` fields.
-An optional `image` (an absolute HTTPS URL or a path relative to the site root) and `imageAlt` set a custom article sharing cover; otherwise, the site uses `assets/images/maxwell-cofie-social-red.png`, a red portrait card with white lettering styled after the site's Mansalva and Inter typefaces, Maxwell's name, title, and website. Both use large Twitter cards. The original portrait remains the Person structured-data image. See `docs/social-preview.md` for the image generation prompts.
+An optional `image` (an absolute HTTPS URL or a path relative to the site root) and `imageAlt` set a custom article sharing cover; otherwise, the site uses `assets/images/maxwell-cofie-social-red.jpg`, a red portrait card with white lettering styled after the site's Mansalva and Inter typefaces, Maxwell's name, title, and website. Both use large Twitter cards. The original portrait remains the Person structured-data image. See `docs/social-preview.md` for the image generation prompts.
 
 Run `npm run build` after changing metadata. It updates canonical links, Open Graph and Twitter tags, and JSON-LD in both static and generated pages. The 404 page receives `noindex` metadata.
-Run `node --test test/metadata.test.js` to check metadata escaping, canonical links, preview defaults, and repeatable updates.
+Run `npm test` to check metadata escaping, canonical links, preview defaults, and repeatable updates.
 
 ## ✨ Features
 
@@ -111,13 +117,18 @@ Blog posts come equipped with tools for long-form reading:
 ### Localization (i18n)
 The site supports client-side localization for **English**, **French**, and **Spanish**. Text replacement is handled via `locale.js` based on `data-i18n` attributes.
 
+### Performance
+-   Fonts (Inter, Mansalva, Newsreader, JetBrains Mono) are self-hosted in `assets/fonts/` and declared at the top of `style.css`; pages preload the Inter and Mansalva files (posts also preload Newsreader).
+-   Local scripts use `defer`, so inline page scripts that need them must wait for `DOMContentLoaded`.
+-   The homepage YouTube player loads only when the video is opened.
+
 ### Theming
 -   **Dark Mode**: Respects system preferences by default, with a manual toggle (sun/moon) saved to `localStorage`.
 -   **Design System**: Built on a "Swiss/Ultra-Minimal" aesthetic with refined typography and strict spacing.
 
 ## 📂 Project Structure
 
--   `bin/`: Helper scripts (e.g., `new-post.js`) for CLI commands.
+-   `bin/`: Helper scripts: `new-post.js` for new posts, `package-site.js` for building `dist/`.
 -   `content/posts/`: Source Markdown files for all blog posts.
 -   `posts/`: **Generated** HTML output directory for individual posts.
 -   `writing/`: Contains the blog index page.
@@ -125,12 +136,15 @@ The site supports client-side localization for **English**, **French**, and **Sp
 -   `assets/`: Images, fonts, and other static resources.
 -   `build.js`: The core logic for the static site generator.
 -   `style.css`: Global stylesheet.
+-   `dist/`: **Generated** deployable site (git-ignored).
 
 ## 🔧 Scripts
 
 | Script | Command | Description |
 | :--- | :--- | :--- |
-| `npm run build` | `node build.js` | Compiles the static site, updating all indices and generating new pages. |
+| `npm run build` | `node bin/image-sizes.js && node build.js && node bin/package-site.js` | Compiles the static site, updates all indices and pages, and packages the deployable site into `dist/`. |
+| `npm run image-sizes` | `node bin/image-sizes.js` | Looks up dimensions for new post images (also runs as part of `build`). |
+| `npm test` | `node --test test/*.test.js` | Runs the metadata tests. CI runs these before every deploy. |
 | `npm run new-post` | `node bin/new-post.js` | Interactive CLI to scaffold a new blog post with correct metadata. |
 
 ## 📝 Tech Stack

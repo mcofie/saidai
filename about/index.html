@@ -14,15 +14,15 @@
     <meta property="og:title" content="About Maxwell Cofie | Building in Africa">
     <meta property="og:description" content="Meet Maxwell Cofie: building products through Stage 2, connecting founders with capital, and bringing builders together through Sandbox Réseau in Accra.">
     <meta property="og:url" content="https://maxwellcofie.com/about/">
-    <meta property="og:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.png">
+    <meta property="og:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.jpg">
     <meta property="og:image:alt" content="Maxwell Cofie — Product, Capital &amp; Community. Accra, Ghana. maxwellcofie.com. Portrait on a red background.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@maxwellcofie">
     <meta name="twitter:title" content="About Maxwell Cofie | Building in Africa">
     <meta name="twitter:description" content="Meet Maxwell Cofie: building products through Stage 2, connecting founders with capital, and bringing builders together through Sandbox Réseau in Accra.">
-    <meta name="twitter:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.png">
+    <meta name="twitter:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.jpg">
     <meta name="twitter:image:alt" content="Maxwell Cofie — Product, Capital &amp; Community. Accra, Ghana. maxwellcofie.com. Portrait on a red background.">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1730">
     <meta property="og:image:height" content="909">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","@id":"https://maxwellcofie.com/about/","url":"https://maxwellcofie.com/about/","name":"About Maxwell Cofie | Building in Africa","description":"Meet Maxwell Cofie: building products through Stage 2, connecting founders with capital, and bringing builders together through Sandbox Réseau in Accra.","inLanguage":"en","isPartOf":{"@type":"WebSite","@id":"https://maxwellcofie.com/#website","url":"https://maxwellcofie.com/","name":"Maxwell Cofie"},"mainEntity":{"@type":"Person","@id":"https://maxwellcofie.com/#person","name":"Maxwell Cofie","url":"https://maxwellcofie.com/","image":"https://maxwellcofie.com/assets/images/maxwell-cofie.jpg","sameAs":["https://x.com/maxwellcofie","https://linkedin.com/in/maxwell-cofie","https://github.com/mcofie"]}}</script>
@@ -33,9 +33,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
     <link rel="shortcut icon" href="../favicon.ico">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/mansalva-latin.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         /* FOUC fix for i18n */
         [data-i18n] {
@@ -52,7 +51,6 @@
             } catch (e) { }
         })();
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 
     <!-- Open Graph / SEO -->
@@ -234,25 +232,27 @@
 
 <body>
 
+    <!-- SITE_NAV_START -->
     <nav>
         <a href="../" class="logo">Maxwell Cofie</a>
         <div class="nav-links">
             <a href="../work/" class="nav-link" data-i18n="nav.work">Work</a>
             <a href="../ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
             <a href="../writing/" class="nav-link" data-i18n="nav.writing">Logbook</a>
+            <button class="theme-toggle" onclick="openSearch()" aria-label="Search" style="margin-right: 4px;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                        d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
-                </svg>
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" /></svg>
             </button>
             <div class="lang-switcher">
-                <button class="lang-btn active" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="fr">FR</button>
-                <button class="lang-btn" data-lang="es">ES</button>
+                <button class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+                <button class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+                <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
             </div>
         </div>
     </nav>
+    <!-- SITE_NAV_END -->
 
     <div class="intro">
         <h1 class="intro-headline" data-i18n="about.headline">I'm fascinated by what technology can do for people, and nowhere is that more exciting than across Africa.</h1>
@@ -260,7 +260,10 @@
 
     <div class="about-grid">
         <div class="about-image-wrapper">
-            <img src="../assets/images/maxwell-cofie.jpg" alt="Maxwell Cofie" class="about-image">
+            <picture>
+                <source srcset="../assets/images/maxwell-cofie-400.webp" type="image/webp">
+                <img src="../assets/images/maxwell-cofie-400.jpg" alt="Maxwell Cofie" class="about-image" width="400" height="500" fetchpriority="high">
+            </picture>
         </div>
         <div class="about-text-wrapper">
             <p class="about-text" data-i18n="about.lead">The continent is full of founders building products that genuinely transform how people pay, learn, access healthcare, own property, and do business. The craft of building products that work for people who need them, in markets where the stakes are real.</p>
@@ -279,19 +282,20 @@
         </div>
     </div>
 
+    <!-- SITE_FOOTER_START -->
     <footer>
         <a href="mailto:hello@maxwellcofie.com" class="footer-link" data-i18n="footer.email">Email</a>
-        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
-        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link"
-            data-i18n="footer.linkedin">LinkedIn</a>
-        <a href="https://thekompound.substack.com" target="_blank" class="footer-link" data-i18n="footer.substack">Substack</a>
-        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.youtube">YouTube</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.twitter">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
+        <a href="https://thekompound.substack.com" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.substack">Substack</a>
+        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.youtube">YouTube</a>
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2026 Maxwell Cofie</span>
     </footer>
+    <!-- SITE_FOOTER_END -->
 
-    <script src="../locale.js"></script>
-    <script src="../app.js"></script>
+    <script src="../locale.js" defer></script>
+    <script src="../app.js" defer></script>
 </body>
 
 </html>

@@ -77,7 +77,7 @@ window.initiatives = [
     },
     {
         id: "sandbox",
-        title: "Sandbox Reseau",
+        title: "Sandbox Réseau",
         year: "2025",
         url: "https://sandboxreseau.com/",
         descKey: "proj.sandbox",

@@ -16,15 +16,15 @@
     <meta property="og:title" content="The Logbook | Product, Africa &amp; Life — Maxwell Cofie">
     <meta property="og:description" content="Essays by Maxwell Cofie on building digital products, funding ventures, growing communities, and travelling across Africa. Notes from the work and the journey.">
     <meta property="og:url" content="https://maxwellcofie.com/writing/">
-    <meta property="og:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.png">
+    <meta property="og:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.jpg">
     <meta property="og:image:alt" content="Maxwell Cofie — Product, Capital &amp; Community. Accra, Ghana. maxwellcofie.com. Portrait on a red background.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@maxwellcofie">
     <meta name="twitter:title" content="The Logbook | Product, Africa &amp; Life — Maxwell Cofie">
     <meta name="twitter:description" content="Essays by Maxwell Cofie on building digital products, funding ventures, growing communities, and travelling across Africa. Notes from the work and the journey.">
-    <meta name="twitter:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.png">
+    <meta name="twitter:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.jpg">
     <meta name="twitter:image:alt" content="Maxwell Cofie — Product, Capital &amp; Community. Accra, Ghana. maxwellcofie.com. Portrait on a red background.">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1730">
     <meta property="og:image:height" content="909">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://maxwellcofie.com/writing/","url":"https://maxwellcofie.com/writing/","name":"The Logbook | Product, Africa & Life — Maxwell Cofie","description":"Essays by Maxwell Cofie on building digital products, funding ventures, growing communities, and travelling across Africa. Notes from the work and the journey.","inLanguage":"en","isPartOf":{"@type":"WebSite","@id":"https://maxwellcofie.com/#website","url":"https://maxwellcofie.com/","name":"Maxwell Cofie"}}</script>
@@ -36,10 +36,8 @@
     <!-- View Transitions -->
     <meta name="view-transition" content="same-origin" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
+    <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/mansalva-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css?v=8">
     <style>
         /* FOUC fix for i18n */
@@ -431,8 +429,8 @@
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2026 Maxwell Cofie</span>
     </footer>
-    <script src="../locale.js"></script>
-    <script src="../app.js"></script>
+    <script src="../locale.js" defer></script>
+    <script src="../app.js" defer></script>
     <script>
         const itemsPerPage = 6;
         let currentPage = 1;

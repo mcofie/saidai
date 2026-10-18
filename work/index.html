@@ -14,15 +14,15 @@
     <meta property="og:title" content="Product Design &amp; Engineering Work | Maxwell Cofie">
     <meta property="og:description" content="Explore products and initiatives by Maxwell Cofie across fintech, events, commerce, and community, built for the realities of African markets.">
     <meta property="og:url" content="https://maxwellcofie.com/work/">
-    <meta property="og:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.png">
+    <meta property="og:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.jpg">
     <meta property="og:image:alt" content="Maxwell Cofie — Product, Capital &amp; Community. Accra, Ghana. maxwellcofie.com. Portrait on a red background.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@maxwellcofie">
     <meta name="twitter:title" content="Product Design &amp; Engineering Work | Maxwell Cofie">
     <meta name="twitter:description" content="Explore products and initiatives by Maxwell Cofie across fintech, events, commerce, and community, built for the realities of African markets.">
-    <meta name="twitter:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.png">
+    <meta name="twitter:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.jpg">
     <meta name="twitter:image:alt" content="Maxwell Cofie — Product, Capital &amp; Community. Accra, Ghana. maxwellcofie.com. Portrait on a red background.">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1730">
     <meta property="og:image:height" content="909">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://maxwellcofie.com/work/","url":"https://maxwellcofie.com/work/","name":"Product Design & Engineering Work | Maxwell Cofie","description":"Explore products and initiatives by Maxwell Cofie across fintech, events, commerce, and community, built for the realities of African markets.","inLanguage":"en","isPartOf":{"@type":"WebSite","@id":"https://maxwellcofie.com/#website","url":"https://maxwellcofie.com/","name":"Maxwell Cofie"}}</script>
@@ -33,9 +33,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
     <link rel="shortcut icon" href="../favicon.ico">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/mansalva-latin.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         /* FOUC fix for i18n */
         [data-i18n] {
@@ -52,7 +51,6 @@
             } catch (e) { }
         })();
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 
     <!-- Open Graph / SEO -->
@@ -60,25 +58,27 @@
 
 <body>
 
+    <!-- SITE_NAV_START -->
     <nav>
         <a href="../" class="logo">Maxwell Cofie</a>
         <div class="nav-links">
-            <a href="./" class="nav-link active" data-i18n="nav.work">Work</a>
+            <a href="../work/" class="nav-link active" data-i18n="nav.work">Work</a>
             <a href="../ventures/" class="nav-link" data-i18n="nav.ventures">Ventures</a>
             <a href="../writing/" class="nav-link" data-i18n="nav.writing">Logbook</a>
+            <button class="theme-toggle" onclick="openSearch()" aria-label="Search" style="margin-right: 4px;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                        d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
-                </svg>
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" /></svg>
             </button>
             <div class="lang-switcher">
-                <button class="lang-btn active" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="fr">FR</button>
-                <button class="lang-btn" data-lang="es">ES</button>
+                <button class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+                <button class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+                <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
             </div>
         </div>
     </nav>
+    <!-- SITE_NAV_END -->
 
     <div class="intro">
         <p data-i18n="work.intro">A selection of projects where I've led product design and engineering. Visit <a
@@ -88,29 +88,126 @@
     <div class="project-list-container">
 
         <div class="section-label" data-i18n="section.selected_works">Selected Works</div>
-        <div id="works-list" class="project-list"></div>
+        <div id="works-list" class="project-list">
+            <!-- WORKS_LIST_START -->
+            <a href="https://amigolease.com" target="_blank" rel="noopener noreferrer" class="project-item" data-category="work">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Amigo Lease <span class="year-label">(2025)</span></span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc" data-i18n="proj.amigo">Lifestyle-based roommate matching and room listings in Accra. Take a lifestyle quiz, discover your roommate archetype, and find compatible people and rooms before you commit to sharing a home.</span>
+                </div>
+                <div class="proj-meta" data-i18n="meta.marketplace">Marketplace</div>
+            </a>
+            <a href="https://gatepass.so" target="_blank" rel="noopener noreferrer" class="project-item" data-category="work">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">GatePass <span class="year-label">(2025)</span></span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc" data-i18n="proj.gatepass">Video-first event discovery and ticketing. Attendees book in seconds with the option to pay in parts, while organizers sell, message attendees and get paid fast to bank or mobile money.</span>
+                </div>
+                <div class="proj-meta" data-i18n="meta.marketplace">Marketplace</div>
+            </a>
+            <a href="https://graydocket.com" target="_blank" rel="noopener noreferrer" class="project-item" data-category="work">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">GrayDocket <span class="year-label">(2026)</span></span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc" data-i18n="proj.graydocket">Business registration and ongoing compliance for founders in Ghana. GrayDocket checks your name, files your registration with the Office of the Registrar of Companies, and keeps you compliant afterwards.</span>
+                </div>
+                <div class="proj-meta" data-i18n="meta.platform">Platform</div>
+            </a>
+            <a href="https://tryitinero.com" target="_blank" rel="noopener noreferrer" class="project-item" data-category="work">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Itinero <span class="year-label">(2025)</span></span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc" data-i18n="proj.itinero">A friendly guide to turning the photos in your camera roll into a printed, hardcover album, designed in minutes and delivered in Accra.</span>
+                </div>
+                <div class="proj-meta" data-i18n="meta.consumer">Consumer</div>
+            </a>
+            <a href="https://minutes2match.com/" target="_blank" rel="noopener noreferrer" class="project-item" data-category="work">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Minutes 2 Match <span class="year-label">(2024)</span></span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc" data-i18n="proj.minutes">Date without swiping. Values-based weekly introductions and small, curated in-person events, live in Accra and Nairobi.</span>
+                </div>
+                <div class="proj-meta" data-i18n="meta.dating">Dating</div>
+            </a>
+            <a href="https://motorambos.com" target="_blank" rel="noopener noreferrer" class="project-item" data-category="work">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Motor Ambos <span class="year-label">(2025)</span></span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc" data-i18n="proj.motorambos">Car papers, renewal reminders and roadside help in one place, so drivers and fleets in Ghana stay legal and get help fast.</span>
+                </div>
+                <div class="proj-meta" data-i18n="meta.service">Service</div>
+            </a>
+            <a href="https://getvellum.org" target="_blank" rel="noopener noreferrer" class="project-item" data-category="work">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Vellum <span class="year-label">(2026)</span></span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc" data-i18n="proj.vellum">Wills and digital legacy planning for Ghanaian families. Write a will, plan for your mobile money, savings and online accounts, and leave clear instructions for the people you love.</span>
+                </div>
+                <div class="proj-meta" data-i18n="meta.platform">Platform</div>
+            </a>
+            <!-- WORKS_LIST_END -->
+        </div>
 
         <div class="section-label" data-i18n="section.initiatives">Initiatives</div>
-        <div id="initiatives-list" class="project-list"></div>
+        <div id="initiatives-list" class="project-list">
+            <!-- INITIATIVES_LIST_START -->
+            <a href="https://sandboxreseau.com/" target="_blank" rel="noopener noreferrer" class="project-item" data-category="initiative">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">Sandbox Réseau <span class="year-label">(2025)</span></span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc" data-i18n="proj.sandbox">A gathering in Accra for Africa&#39;s founders, builders and curious minds, with builder demos, mini-talks and open networking. Signal over noise, progress over polish.</span>
+                </div>
+                <div class="proj-meta" data-i18n="meta.community">Community</div>
+            </a>
+            <a href="https://thegoodseedcapital.com" target="_blank" rel="noopener noreferrer" class="project-item" data-category="initiative">
+                <div class="proj-left">
+                    <div class="proj-header">
+                        <span class="proj-title">The Good Seed Capital <span class="year-label">(2026)</span></span>
+                        <span class="arrow">↗</span>
+                    </div>
+                    <span class="proj-desc" data-i18n="proj.goodseed">A syndicate bridging early-stage African founders and global investors who back with conviction, not curiosity, providing pre-seed and seed capital, operator guidance, introductions and market access.</span>
+                </div>
+                <div class="proj-meta" data-i18n="meta.vc">VC Syndicate</div>
+            </a>
+            <!-- INITIATIVES_LIST_END -->
+        </div>
 
     </div>
 
+    <!-- SITE_FOOTER_START -->
     <footer>
         <a href="mailto:hello@maxwellcofie.com" class="footer-link" data-i18n="footer.email">Email</a>
-        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
-        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link"
-            data-i18n="footer.linkedin">LinkedIn</a>
-        <a href="https://thekompound.substack.com" target="_blank" class="footer-link" data-i18n="footer.substack">Substack</a>
-        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.youtube">YouTube</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.twitter">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
+        <a href="https://thekompound.substack.com" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.substack">Substack</a>
+        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.youtube">YouTube</a>
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2026 Maxwell Cofie</span>
     </footer>
+    <!-- SITE_FOOTER_END -->
 
     <!-- Scripts -->
     <!-- Load data first -->
-    <script src="../data.js"></script>
-    <script src="../locale.js"></script>
-    <script src="../app.js"></script>
+    <script src="../data.js" defer></script>
+    <script src="../locale.js" defer></script>
+    <script src="../app.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.renderProjects) {

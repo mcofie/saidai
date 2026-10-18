@@ -43,7 +43,7 @@ test('static metadata updates are idempotent and preserve page content and unrel
 
 test('default and custom sharing covers use large cards while the person keeps the original portrait', () => {
     const defaults = renderMetadata(pages['writing/index.html']);
-    assert.match(defaults, /content="https:\/\/maxwellcofie.com\/assets\/images\/maxwell-cofie-social-red.png"/);
+    assert.match(defaults, /content="https:\/\/maxwellcofie.com\/assets\/images\/maxwell-cofie-social-red.jpg"/);
     assert.match(defaults, /name="twitter:card" content="summary_large_image"/);
     assert.match(defaults, /property="og:image:width" content="1730"/);
     assert.match(defaults, /property="og:image:height" content="909"/);

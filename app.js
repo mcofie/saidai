@@ -540,8 +540,11 @@ function playStory() {
             container.classList.add('animate-on');
         }
 
-        // Auto play with slight delay to match animation peak
-        if (video && video.contentWindow) {
+        // First open: load the player now (its URL autoplays) instead of on page load
+        if (video && !video.src && video.dataset.src) {
+            video.src = video.dataset.src;
+        } else if (video && video.contentWindow) {
+            // Auto play with slight delay to match animation peak
             setTimeout(() => {
                 // Send Play command to YouTube iframe
                 video.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
@@ -743,6 +746,7 @@ function renderProjects(containerId, options = {}) {
         const item = document.createElement('a');
         item.href = proj.url;
         item.target = '_blank';
+        item.rel = 'noopener noreferrer';
         item.className = 'project-item';
         item.setAttribute('data-category', proj.category);
 

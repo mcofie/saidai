@@ -2,3 +2,7 @@ node_modules/
 .DS_Store
 .idea/
 *.log
+dist/
+
+# Private working notes (kept locally, never published)
+RENTBASE_PROMPT.md

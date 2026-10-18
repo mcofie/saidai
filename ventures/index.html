@@ -14,15 +14,15 @@
     <meta property="og:title" content="Ventures &amp; Experiments in Ghana | Maxwell Cofie">
     <meta property="og:description" content="Explore Maxwell Cofie’s ventures and experiments in Ghana, spanning theatre, apparel, modular furniture, hospitality, and sustainable agriculture.">
     <meta property="og:url" content="https://maxwellcofie.com/ventures/">
-    <meta property="og:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.png">
+    <meta property="og:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.jpg">
     <meta property="og:image:alt" content="Maxwell Cofie — Product, Capital &amp; Community. Accra, Ghana. maxwellcofie.com. Portrait on a red background.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@maxwellcofie">
     <meta name="twitter:title" content="Ventures &amp; Experiments in Ghana | Maxwell Cofie">
     <meta name="twitter:description" content="Explore Maxwell Cofie’s ventures and experiments in Ghana, spanning theatre, apparel, modular furniture, hospitality, and sustainable agriculture.">
-    <meta name="twitter:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.png">
+    <meta name="twitter:image" content="https://maxwellcofie.com/assets/images/maxwell-cofie-social-red.jpg">
     <meta name="twitter:image:alt" content="Maxwell Cofie — Product, Capital &amp; Community. Accra, Ghana. maxwellcofie.com. Portrait on a red background.">
-    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1730">
     <meta property="og:image:height" content="909">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://maxwellcofie.com/ventures/","url":"https://maxwellcofie.com/ventures/","name":"Ventures & Experiments in Ghana | Maxwell Cofie","description":"Explore Maxwell Cofie’s ventures and experiments in Ghana, spanning theatre, apparel, modular furniture, hospitality, and sustainable agriculture.","inLanguage":"en","isPartOf":{"@type":"WebSite","@id":"https://maxwellcofie.com/#website","url":"https://maxwellcofie.com/","name":"Maxwell Cofie"}}</script>
@@ -33,9 +33,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
     <link rel="shortcut icon" href="../favicon.ico">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/mansalva-latin.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         /* FOUC fix for i18n */
         [data-i18n] {
@@ -52,7 +51,6 @@
             } catch (e) { }
         })();
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
 
     <!-- Open Graph / SEO -->
@@ -60,25 +58,27 @@
 
 <body>
 
+    <!-- SITE_NAV_START -->
     <nav>
         <a href="../" class="logo">Maxwell Cofie</a>
         <div class="nav-links">
             <a href="../work/" class="nav-link" data-i18n="nav.work">Work</a>
-            <a href="./" class="nav-link active" data-i18n="nav.ventures">Ventures</a>
+            <a href="../ventures/" class="nav-link active" data-i18n="nav.ventures">Ventures</a>
             <a href="../writing/" class="nav-link" data-i18n="nav.writing">Logbook</a>
+            <button class="theme-toggle" onclick="openSearch()" aria-label="Search" style="margin-right: 4px;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </button>
             <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                        d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />
-                </svg>
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" /></svg>
             </button>
             <div class="lang-switcher">
-                <button class="lang-btn active" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="fr">FR</button>
-                <button class="lang-btn" data-lang="es">ES</button>
+                <button class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+                <button class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+                <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
             </div>
         </div>
     </nav>
+    <!-- SITE_NAV_END -->
 
     <div class="intro">
         <p data-i18n="ventures.intro">A collection of commercial ventures and experiments in Ghana 🇬🇭.</p>
@@ -91,7 +91,7 @@
         <div class="project-list">
 
             <!-- Off-Stage Accra -->
-            <a href="https://offstageaccra.com" target="_blank" class="project-item">
+            <a href="https://offstageaccra.com" target="_blank" rel="noopener noreferrer" class="project-item">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">Off-Stage Accra <span class="year-label">(2026)</span></span>
@@ -104,7 +104,7 @@
             </a>
 
             <!-- Loose wear -->
-            <a href="https://paystack.shop/loose-wear" target="_blank" class="project-item">
+            <a href="https://paystack.shop/loose-wear" target="_blank" rel="noopener noreferrer" class="project-item">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">Loose wear <span class="year-label">(2025)</span></span>
@@ -117,7 +117,7 @@
             </a>
 
             <!-- Monochrome Spaces -->
-            <a href="https://monochromespaces.com/" target="_blank" class="project-item">
+            <a href="https://monochromespaces.com/" target="_blank" rel="noopener noreferrer" class="project-item">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">Monochrome Spaces <span class="year-label">(2023)</span></span>
@@ -131,7 +131,7 @@
             </a>
 
             <!-- Outpost 233 -->
-            <a href="https://outpost233.com/" target="_blank" class="project-item">
+            <a href="https://outpost233.com/" target="_blank" rel="noopener noreferrer" class="project-item">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">Outpost 233 <span class="year-label">(2023)</span></span>
@@ -145,7 +145,7 @@
             </a>
 
             <!-- Vita & Pine Farms -->
-            <a href="https://voltapinefarms.com/" target="_blank" class="project-item">
+            <a href="https://voltapinefarms.com/" target="_blank" rel="noopener noreferrer" class="project-item">
                 <div class="proj-left">
                     <div class="proj-header">
                         <span class="proj-title">Vita & Pine Farms <span class="year-label">(2021)</span></span>
@@ -159,19 +159,20 @@
         </div>
     </div>
 
+    <!-- SITE_FOOTER_START -->
     <footer>
         <a href="mailto:hello@maxwellcofie.com" class="footer-link" data-i18n="footer.email">Email</a>
-        <a href="https://x.com/maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.twitter">Twitter</a>
-        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" class="footer-link"
-            data-i18n="footer.linkedin">LinkedIn</a>
-        <a href="https://thekompound.substack.com" target="_blank" class="footer-link" data-i18n="footer.substack">Substack</a>
-        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" class="footer-link" data-i18n="footer.youtube">YouTube</a>
+        <a href="https://x.com/maxwellcofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.twitter">Twitter</a>
+        <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
+        <a href="https://thekompound.substack.com" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.substack">Substack</a>
+        <a href="https://www.youtube.com/@maxwellcofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.youtube">YouTube</a>
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; 2026 Maxwell Cofie</span>
     </footer>
+    <!-- SITE_FOOTER_END -->
 
-    <script src="../locale.js"></script>
-    <script src="../app.js"></script>
+    <script src="../locale.js" defer></script>
+    <script src="../app.js" defer></script>
 </body>
 
 </html>
