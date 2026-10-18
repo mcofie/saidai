@@ -6,7 +6,7 @@ This is the custom static site generator powering [MaxwellCofie.com](https://max
 
 ### Prerequisites
 
--   Node.js 20 or later (the version CI uses)
+-   Node.js 20 or later (CI builds with Node 24)
 -   npm
 
 ### Installation
