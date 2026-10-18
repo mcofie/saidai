@@ -41,7 +41,7 @@ window.works = [
         year: "2025",
         url: "https://tryitinero.com",
         descKey: "proj.itinero",
-        metaKey: "meta.aitravel",
+        metaKey: "meta.consumer",
         category: "work"
     },
 
@@ -60,7 +60,7 @@ window.works = [
         year: "2024",
         url: "https://minutes2match.com/",
         descKey: "proj.minutes",
-        metaKey: "meta.events",
+        metaKey: "meta.dating",
         category: "work"
     }
 ];
