@@ -457,6 +457,50 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Signature: the SVG is used as a mask so it takes the text colour in light and dark mode */
+        .post-signature {
+            margin-top: 56px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .signature-mark {
+            display: block;
+            width: 120px;
+            aspect-ratio: 792 / 776;
+            margin-left: -6px; /* the loop's left edge sits flush with the text */
+            background-color: var(--text-main);
+            -webkit-mask: url("../../assets/images/signature.svg") center / contain no-repeat;
+            mask: url("../../assets/images/signature.svg") center / contain no-repeat;
+        }
+
+        /* Signed left to right when it scrolls into view (set up by the reader script) */
+        .post-signature.is-waiting .signature-mark {
+            clip-path: inset(0 100% 0 0);
+        }
+
+        .post-signature.is-signed .signature-mark {
+            clip-path: inset(0 0 0 0);
+            transition: clip-path 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .signature-name {
+            display: block;
+            margin-top: 2px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: opacity 0.6s ease 1.1s;
+        }
+
+        .post-signature.is-waiting .signature-name {
+            opacity: 0;
+        }
+
+        .post-signature.is-signed .signature-name {
+            opacity: 1;
+        }
+
     </style>
 </head>
 
@@ -595,6 +639,11 @@
 <p>Catch the echo: <a href="https://open.spotify.com/show/1mQUSNNpjenkeUiFVBXWCN">Spotify</a> / <a href="https://podcasts.apple.com/gh/podcast/the-reverb/id1884282478">Apple Podcasts</a></p>
 
             </div>
+
+            <div class="post-signature">
+                <span class="signature-mark" role="img" aria-label="Signature of Maxwell Cofie"></span>
+                <span class="signature-name">Maxwell Cofie</span>
+            </div>
     
             <div class="like-section">
                 <!-- Reaction Bar (Micro-Feedback) -->
@@ -680,6 +729,19 @@
     <script src="../../app.js" defer></script>
 
     <script>
+        // --- SIGNATURE ---
+        // Hidden until it scrolls into view, then signed left to right. Stays visible without JS
+        // or with reduced motion.
+        const signature = document.querySelector('.post-signature');
+        if (signature && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            signature.classList.add('is-waiting');
+            new IntersectionObserver((entries, observer) => {
+                if (!entries[0].isIntersecting) return;
+                signature.classList.add('is-signed');
+                observer.disconnect();
+            }, { threshold: 0.6 }).observe(signature);
+        }
+
         // --- READER MODE ---
         // 1. Progress Bar
         window.addEventListener('scroll', () => {
