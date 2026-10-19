@@ -1,7 +1,7 @@
 ---
 title: "Get your go-to-market strategy built for you"
 date: "Oct 2026"
-isoDate: "2026-10-19"
+isoDate: "2026-10-16"
 description: "Sandbox Réseau × MAD Conversations present Zero to Market. Members get priority."
 category: "Community"
 ---
