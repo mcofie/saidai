@@ -98,7 +98,7 @@ Generated-content source of truth:
 
 Edit titles, descriptions, and canonical paths for the main pages in `lib/metadata.js`.
 Article metadata comes from each post's `title`, `description`, `isoDate`, and optional `author` fields.
-An optional `image` (an absolute HTTPS URL or a path relative to the site root) and `imageAlt` set a custom article sharing cover; otherwise, the site uses `assets/images/maxwell-cofie-social-red.jpg`, a red portrait card with white lettering styled after the site's Mansalva and Inter typefaces, Maxwell's name, title, and website. Both use large Twitter cards. The original portrait remains the Person structured-data image. See `docs/social-preview.md` for the image generation prompts.
+An optional `image` (an absolute HTTPS URL or a path relative to the site root) and `imageAlt` set a custom article sharing cover; otherwise, the site uses `assets/images/maxwell-cofie-social-circle.jpg`, a red card with a circular portrait with white lettering styled after the site's Mansalva and Inter typefaces, Maxwell's name, title, and website. Both use large Twitter cards. The original portrait remains the Person structured-data image. See `docs/social-preview.md` for the image generation prompts.
 
 Run `npm run build` after changing metadata. It updates canonical links, Open Graph and Twitter tags, and JSON-LD in both static and generated pages. The 404 page receives `noindex` metadata.
 Run `npm test` to check metadata escaping, canonical links, preview defaults, and repeatable updates.
