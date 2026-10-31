@@ -43,13 +43,14 @@ function renderSiteNav(root, activePage = '') {
     </nav>`;
 }
 
-function renderSiteFooter() {
+function renderSiteFooter(root) {
     return `<footer>
         <a href="mailto:hello@maxwellcofie.com" class="footer-link" data-i18n="footer.email">Email</a>
         <a href="https://x.com/maxwellcofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.twitter">Twitter</a>
         <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.linkedin">LinkedIn</a>
         <a href="https://thekompound.substack.com" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.substack">Substack</a>
         <a href="https://www.youtube.com/@maxwellcofie" target="_blank" rel="noopener noreferrer" class="footer-link" data-i18n="footer.youtube">YouTube</a>
+        <a href="${root}brand-kit/" class="footer-link" data-i18n="footer.brand_kit">Brand Kit</a>
         <span style="flex-grow: 1;"></span>
         <span class="footer-link" style="color: var(--text-tertiary); cursor: default;">&copy; ${new Date().getFullYear()} Maxwell Cofie</span>
     </footer>`;
@@ -827,7 +828,7 @@ const HTML_TEMPLATE = `<!doctype html>
         </button>
     </div>
 
-    ${renderSiteFooter()}
+    ${renderSiteFooter('../../')}
     <script src="../../locale.js" defer></script>
     <script src="../../app.js" defer></script>
 
@@ -1090,7 +1091,7 @@ const INDEX_HTML = `<!doctype html>
         </div>
     </div>
 
-    ${renderSiteFooter()}
+    ${renderSiteFooter('../')}
     <script src="../locale.js" defer></script>
     <script src="../app.js" defer></script>
     <script>
@@ -1371,6 +1372,11 @@ const SITEMAP_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://maxwellcofie.com/brand-kit/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
       <loc>https://maxwellcofie.com/dev/</loc>
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>
@@ -1423,6 +1429,7 @@ const STATIC_PAGES = {
     'ventures/index.html': { root: '../', active: 'ventures' },
     'books/index.html': { root: '../' },
     'music/index.html': { root: '../' },
+    'brand-kit/index.html': { root: '../' },
     // Served at any missing URL, so its links must be root-absolute.
     '404.html': { root: '/' },
 };
@@ -1441,7 +1448,7 @@ for (const [file, { root, active, lists = {} }] of Object.entries(STATIC_PAGES))
     const filePath = path.join(__dirname, file);
     let content = fs.readFileSync(filePath, 'utf8');
     content = replaceMarkedBlock(content, 'SITE_NAV', renderSiteNav(root, active), file);
-    content = replaceMarkedBlock(content, 'SITE_FOOTER', renderSiteFooter(), file);
+    content = replaceMarkedBlock(content, 'SITE_FOOTER', renderSiteFooter(root), file);
     for (const [marker, items] of Object.entries(lists)) {
         content = replaceMarkedBlock(content, marker, renderProjectItems(items), file);
     }

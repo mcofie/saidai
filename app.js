@@ -254,7 +254,8 @@ function initSearch() {
             { title: 'Work', description: 'Selected projects and case studies', url: '/work/', category: 'Page' },
             { title: 'Ventures', description: 'Startups and experiments', url: '/ventures/', category: 'Page' },
             { title: 'Logbook (Writing)', description: 'All articles and thoughts', url: '/writing/', category: 'Page' },
-            { title: 'About', description: 'My story and background', url: '/about/', category: 'Page' }
+            { title: 'About', description: 'My story and background', url: '/about/', category: 'Page' },
+            { title: 'Brand Kit', description: 'Bios, headshots and assets for speaking and press', url: '/brand-kit/', category: 'Page' }
         );
         searchReady = true;
         if (overlay.classList.contains('active')) renderResults(input.value);
