@@ -5,8 +5,12 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
+const { loadBrandKit, biosText } = require('../lib/brand-kit');
+const { createZip } = require('../lib/zip');
+
 const ROOT = path.join(__dirname, '..');
 const DIST = path.join(ROOT, 'dist');
+const SPEAKER_SHEET_HASH = path.join(ROOT, 'content', 'speaker-sheet.hash');
 
 const SITE_FILES = [
     'index.html', '404.html', 'CNAME', '.nojekyll', 'robots.txt',
@@ -14,7 +18,7 @@ const SITE_FILES = [
     'rss.xml', 'sitemap.xml', 'search.json',
     'favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png', 'apple-touch-icon.png',
 ];
-const SITE_DIRS = ['about', 'work', 'ventures', 'writing', 'books', 'music', 'dev', 'posts', 'assets', 'brand-kit'];
+const SITE_DIRS = ['about', 'work', 'ventures', 'writing', 'books', 'music', 'dev', 'posts', 'log', 'assets', 'brand-kit'];
 
 // Files inside SITE_DIRS that are no longer used by any page.
 const EXCLUDED = new Set([
@@ -42,7 +46,38 @@ function copy(relativePath) {
 for (const file of SITE_FILES) {
     if (fs.existsSync(path.join(ROOT, file))) copy(file);
 }
-for (const dir of SITE_DIRS) copy(dir);
+for (const dir of SITE_DIRS) {
+    if (fs.existsSync(path.join(ROOT, dir))) copy(dir);
+}
+
+// The brand kit's "download everything" ZIP: photos, signature, speaker sheet and bios in each language.
+const KIT_DIR = path.join(DIST, 'assets', 'brand-kit');
+const SPEAKER_SHEET_PDF = 'maxwell-cofie-speaker-sheet.pdf';
+const { strings: kitStrings, updated } = loadBrandKit();
+const kitFile = name => fs.readFileSync(path.join(KIT_DIR, name));
+const kitFiles = [
+    ['headshots/maxwell-cofie-headshot-circle.png', kitFile('maxwell-cofie-headshot-circle.png')],
+    ['headshots/maxwell-cofie-headshot-square.jpg', kitFile('maxwell-cofie-headshot-medium.jpg')],
+    ['headshots/maxwell-cofie-headshot-portrait.jpg', kitFile('maxwell-cofie-headshot-portrait.jpg')],
+    ['signature/maxwell-cofie-signature-black.png', kitFile('maxwell-cofie-signature-black.png')],
+    ['signature/maxwell-cofie-signature-black.svg', kitFile('maxwell-cofie-signature-black.svg')],
+    ['signature/maxwell-cofie-signature-white.png', kitFile('maxwell-cofie-signature-white.png')],
+    ['signature/maxwell-cofie-signature-white.svg', kitFile('maxwell-cofie-signature-white.svg')],
+    ['maxwell-cofie-social-card.jpg', kitFile('maxwell-cofie-social-card.jpg')],
+    [SPEAKER_SHEET_PDF, kitFile(SPEAKER_SHEET_PDF)],
+    ...Object.keys(kitStrings).map(lang => [`bios/bios-${lang}.txt`, Buffer.from(biosText(kitStrings[lang]))]),
+];
+fs.writeFileSync(path.join(KIT_DIR, 'maxwell-cofie-brand-kit.zip'),
+    createZip(kitFiles.map(([name, data]) => ({ name: `maxwell-cofie-brand-kit/${name}`, data })), new Date(`${updated}T12:00:00Z`)));
+
+// The speaker sheet PDF is made locally with Chrome (npm run speaker-sheet), so flag it when
+// the sheet's text has changed since.
+const sheetHash = crypto.createHash('sha256')
+    .update(fs.readFileSync(path.join(DIST, 'brand-kit', 'speaker-sheet', 'index.html'))).digest('hex');
+const recordedHash = fs.existsSync(SPEAKER_SHEET_HASH) ? fs.readFileSync(SPEAKER_SHEET_HASH, 'utf8').trim() : '';
+if (sheetHash !== recordedHash) {
+    console.warn('!!! The speaker sheet PDF is out of date. Run `npm run speaker-sheet` to refresh it.');
+}
 
 function htmlFiles(dir) {
     return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => {

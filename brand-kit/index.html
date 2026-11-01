@@ -25,7 +25,7 @@
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1730">
     <meta property="og:image:height" content="909">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://maxwellcofie.com/brand-kit/","url":"https://maxwellcofie.com/brand-kit/","name":"Brand Kit | Maxwell Cofie","description":"Bios, headshots, speaking topics and brand assets for event organisers, hosts and press featuring Maxwell Cofie.","inLanguage":"en","isPartOf":{"@type":"WebSite","@id":"https://maxwellcofie.com/#website","url":"https://maxwellcofie.com/","name":"Maxwell Cofie"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","@id":"https://maxwellcofie.com/brand-kit/","url":"https://maxwellcofie.com/brand-kit/","name":"Brand Kit | Maxwell Cofie","description":"Bios, headshots, speaking topics and brand assets for event organisers, hosts and press featuring Maxwell Cofie.","inLanguage":"en","isPartOf":{"@type":"WebSite","@id":"https://maxwellcofie.com/#website","url":"https://maxwellcofie.com/","name":"Maxwell Cofie"},"mainEntity":{"@type":"Person","@id":"https://maxwellcofie.com/#person","name":"Maxwell Cofie","url":"https://maxwellcofie.com/","image":"https://maxwellcofie.com/assets/images/maxwell-cofie.jpg","jobTitle":"Founder","worksFor":[{"@type":"Organization","name":"Stage 2","url":"https://stage2.xyz/"},{"@type":"Organization","name":"The Good Seed Capital","url":"https://thegoodseedcapital.com/"},{"@type":"Organization","name":"Sandbox Réseau","url":"https://sandboxreseau.com/"}],"homeLocation":{"@type":"Place","name":"Accra, Ghana"},"knowsAbout":["Product design","Startups in Africa","Venture capital","Community building"],"sameAs":["https://x.com/maxwellcofie","https://linkedin.com/in/maxwell-cofie","https://github.com/mcofie","https://www.youtube.com/@maxwellcofie","https://thekompound.substack.com"]}}</script>
     <!-- METADATA_END -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -395,16 +395,111 @@
             margin: 32px 0 12px;
         }
 
+        .kit-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .kit-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 999px;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .kit-secondary:hover {
+            background: var(--surface-hover);
+        }
+
+        .kit-meta {
+            margin-top: 12px;
+            font-size: 13px !important;
+            line-height: 1.6 !important;
+            color: var(--text-tertiary) !important;
+            margin-bottom: 0 !important;
+        }
+
+        /* Speaking: formats and logistics side by side */
+        .speaking-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0 32px;
+            margin-bottom: 8px;
+        }
+
+        .speaking-grid .kit-subhead {
+            margin-top: 0;
+        }
+
+        .pill-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .pill-list li {
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: var(--surface-hover);
+            font-size: 13px;
+        }
+
+        .check-list {
+            list-style: none;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .check-list li {
+            position: relative;
+            padding-left: 22px;
+            line-height: 1.5;
+        }
+
+        .check-list li + li {
+            margin-top: 8px;
+        }
+
+        .check-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--text-main);
+        }
+
+        #speaking > .kit-subhead {
+            margin-top: 40px;
+        }
+
         /* Phones: one column, and every link or button is at least 40px tall for thumbs */
         @media (max-width: 480px) {
             .kit-intro {
                 margin-bottom: 40px;
             }
 
-            .kit-contact {
+            .kit-actions {
+                flex-direction: column;
+            }
+
+            .kit-contact,
+            .kit-secondary {
                 display: flex;
                 justify-content: center;
                 min-height: 48px;
+            }
+
+            .speaking-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
             }
 
             .kit-toc {
@@ -564,233 +659,248 @@
 
     <main>
         <section class="kit-intro">
-            <h1>Brand Kit</h1>
-            <p>Bios, headshots and brand assets for event organisers, hosts and press. Everything here is free to use
-                when featuring or introducing me.</p>
-            <a class="kit-contact" href="mailto:maxcofie@gmail.com?subject=Speaking%20enquiry">
-                Invite me to speak <span aria-hidden="true">→</span>
-            </a>
+            <h1 data-i18n="kit.title">Brand Kit</h1>
+            <p data-i18n="kit.lead">Bios, headshots and brand assets for event organisers, hosts and press. Everything here is free to use when featuring or introducing me.</p>
+            <div class="kit-actions">
+                <a class="kit-contact" href="mailto:maxcofie@gmail.com?subject=Speaking%20enquiry">
+                    <span data-i18n="kit.cta">Invite me to speak</span> <span aria-hidden="true">→</span>
+                </a>
+                <a class="kit-secondary" href="../assets/brand-kit/maxwell-cofie-brand-kit.zip" download>
+                    <span data-i18n="kit.download_all">Download the full kit</span> <span aria-hidden="true">↓</span>
+                </a>
+            </div>
+            <p class="kit-meta"><span data-i18n="kit.download_all_meta">ZIP with photos, bios in three languages, signature and speaker sheet</span><br><span data-i18n="kit.updated">Last updated 1 November 2026</span></p>
             <div class="kit-toc" role="navigation" aria-label="On this page">
-                <a href="#headshots">Headshots</a>
-                <a href="#bios">Bios</a>
-                <a href="#introduction">Introduction</a>
-                <a href="#topics">Speaking topics</a>
-                <a href="#facts">Quick facts</a>
-                <a href="#brand">Brand assets</a>
+                <a href="#headshots" data-i18n="kit.toc_headshots">Headshots</a>
+                <a href="#bios" data-i18n="kit.toc_bios">Bios</a>
+                <a href="#introduction" data-i18n="kit.toc_intro">Introduction</a>
+                <a href="#speaking" data-i18n="kit.toc_speaking">Speaking</a>
+                <a href="#facts" data-i18n="kit.toc_facts">Quick facts</a>
+                <a href="#brand" data-i18n="kit.toc_brand">Brand assets</a>
             </div>
         </section>
 
         <section class="kit-section" id="headshots">
-            <h2 class="section-label">Headshots</h2>
-            <p class="kit-note">Three shapes for different uses. The circle has a transparent background.</p>
+            <h2 class="section-label" data-i18n="kit.headshots_label">Headshots</h2>
+            <p class="kit-note" data-i18n="kit.headshots_note">Three shapes for different uses. The circle has a transparent background.</p>
             <div class="headshot-grid">
                 <figure class="headshot headshot--circle">
                     <img src="../assets/brand-kit/maxwell-cofie-headshot-close-480.webp" width="480" height="480"
                         alt="Close crop of Maxwell Cofie smiling against a warm beige background, in a circle">
                     <figcaption>
-                        <span class="headshot-name">Circle</span>
-                        <span class="headshot-use">Speaker line-ups and avatars</span>
+                        <span class="headshot-name" data-i18n="kit.shape_circle">Circle</span>
+                        <span class="headshot-use" data-i18n="kit.use_circle">Speaker line-ups and avatars</span>
                         <span class="headshot-use">550 × 550</span>
                     </figcaption>
-                    <a class="download-link" href="../assets/brand-kit/maxwell-cofie-headshot-circle.png" download>Download PNG</a>
+                    <a class="download-link" href="../assets/brand-kit/maxwell-cofie-headshot-circle.png" download data-i18n="kit.download_png">Download PNG</a>
                 </figure>
                 <figure class="headshot headshot--square">
                     <img src="../assets/brand-kit/maxwell-cofie-headshot-medium-480.webp" width="480" height="480"
                         alt="Maxwell Cofie smiling, wearing a red and grey striped shirt against a warm beige background">
                     <figcaption>
-                        <span class="headshot-name">Square</span>
-                        <span class="headshot-use">Profiles and social posts</span>
+                        <span class="headshot-name" data-i18n="kit.shape_square">Square</span>
+                        <span class="headshot-use" data-i18n="kit.use_square">Profiles and social posts</span>
                         <span class="headshot-use">750 × 750</span>
                     </figcaption>
-                    <a class="download-link" href="../assets/brand-kit/maxwell-cofie-headshot-medium.jpg" download>Download JPG</a>
+                    <a class="download-link" href="../assets/brand-kit/maxwell-cofie-headshot-medium.jpg" download data-i18n="kit.download_jpg">Download JPG</a>
                 </figure>
                 <figure class="headshot headshot--portrait">
                     <img src="../assets/brand-kit/maxwell-cofie-headshot-portrait-480.webp" width="480" height="600"
                         alt="Maxwell Cofie from the shoulders up, smiling against a warm beige background">
                     <figcaption>
-                        <span class="headshot-name">Portrait 4:5</span>
-                        <span class="headshot-use">Posters and speaker cards</span>
+                        <span class="headshot-name" data-i18n="kit.shape_portrait">Portrait 4:5</span>
+                        <span class="headshot-use" data-i18n="kit.use_portrait">Posters and speaker cards</span>
                         <span class="headshot-use">640 × 800</span>
                     </figcaption>
-                    <a class="download-link" href="../assets/brand-kit/maxwell-cofie-headshot-portrait.jpg" download>Download JPG</a>
+                    <a class="download-link" href="../assets/brand-kit/maxwell-cofie-headshot-portrait.jpg" download data-i18n="kit.download_jpg">Download JPG</a>
                 </figure>
             </div>
         </section>
 
         <section class="kit-section" id="bios">
-            <h2 class="section-label">Bios</h2>
-            <p class="kit-note">Pick the length that fits. Please use them as written; trimming for space is fine.</p>
-
+            <h2 class="section-label" data-i18n="kit.bios_label">Bios</h2>
+            <p class="kit-note" data-i18n="kit.bios_note">Pick the length that fits. Please use them as written; trimming for space is fine.</p>
             <article class="bio-card">
                 <div class="bio-card-header">
-                    <h3 class="bio-card-title">Short <span class="bio-card-meta">for programmes and social posts</span></h3>
-                    <button class="kit-copy-btn" type="button" data-copy="bio-short">Copy</button>
+                    <h3 class="bio-card-title"><span data-i18n="kit.bio_short_title">Short</span>
+                        <span class="bio-card-meta" data-i18n="kit.bio_short_meta">for programmes and social posts</span></h3>
+                    <button class="kit-copy-btn" type="button" data-copy="bio-short" data-i18n="kit.copy">Copy</button>
                 </div>
                 <div class="bio-text" id="bio-short">
-                    <p>Maxwell Cofie is an Accra-based builder working across product, capital and community in Africa's
-                        tech ecosystem. He builds products through Stage 2, connects founders with investors through The
-                        Good Seed Capital, and brings builders together through Sandbox Réseau.</p>
+                    <p data-i18n="kit.bio_short">Maxwell Cofie is the founder of Stage 2, The Good Seed Capital and Sandbox Réseau. Based in Accra, he works across product, capital and community in Africa's tech ecosystem: building products, connecting founders with investors and bringing builders together.</p>
                 </div>
             </article>
 
             <article class="bio-card">
                 <div class="bio-card-header">
-                    <h3 class="bio-card-title">Medium <span class="bio-card-meta">for event pages and articles</span></h3>
-                    <button class="kit-copy-btn" type="button" data-copy="bio-medium">Copy</button>
+                    <h3 class="bio-card-title"><span data-i18n="kit.bio_medium_title">Medium</span>
+                        <span class="bio-card-meta" data-i18n="kit.bio_medium_meta">for event pages and articles</span></h3>
+                    <button class="kit-copy-btn" type="button" data-copy="bio-medium" data-i18n="kit.copy">Copy</button>
                 </div>
                 <div class="bio-text" id="bio-medium">
-                    <p>Maxwell Cofie is an Accra-based builder working across product, capital and community in Africa's
-                        tech ecosystem. Through Stage 2, a product studio, he has spent more than eight years building
-                        digital products and launching ventures across fintech, legal-tech, events, commerce and proptech
-                        in Ghana. He connects early-stage African founders with global investors through The Good Seed
-                        Capital, and brings builders together through Sandbox Réseau, a builder community in Accra, and
-                        The Reverb podcast.</p>
+                    <p data-i18n="kit.bio_medium">Maxwell Cofie is an Accra-based founder working across product, capital and community in Africa's tech ecosystem. Through Stage 2, the product studio he founded, he has spent more than eight years building digital products and launching ventures across fintech, legal-tech, events, commerce and proptech in Ghana. He also founded The Good Seed Capital, which connects early-stage African founders with global investors, and Sandbox Réseau, a builder community in Accra and home of The Reverb podcast.</p>
                 </div>
             </article>
 
             <article class="bio-card">
                 <div class="bio-card-header">
-                    <h3 class="bio-card-title">Long <span class="bio-card-meta">for press and speaker profiles</span></h3>
-                    <button class="kit-copy-btn" type="button" data-copy="bio-long">Copy</button>
+                    <h3 class="bio-card-title"><span data-i18n="kit.bio_long_title">Long</span>
+                        <span class="bio-card-meta" data-i18n="kit.bio_long_meta">for press and speaker profiles</span></h3>
+                    <button class="kit-copy-btn" type="button" data-copy="bio-long" data-i18n="kit.copy">Copy</button>
                 </div>
                 <div class="bio-text" id="bio-long">
-                    <p>Maxwell Cofie is fascinated by what technology can do for people, and nowhere more than across
-                        Africa. Based in Accra, Ghana, he works across three connected areas: product, capital and
-                        community.</p>
-                    <p>Through Stage 2, an Accra-based product studio, he has spent more than eight years building digital
-                        products and launching ventures across fintech, legal-tech, events, commerce and proptech. Stage
-                        2's products include Vellum, for wills and digital legacy planning; GrayDocket, for business
-                        registration and compliance; GatePass, for event discovery and ticketing; and Motor Ambos, for car
-                        papers and roadside help.</p>
-                    <p>Through The Good Seed Capital, he bridges the gap between early-stage African founders and global
-                        investors who back with conviction, not curiosity. Through Sandbox Réseau, a gathering in Accra
-                        for Africa's founders and builders, and The Reverb, a podcast of short, honest conversations, he
-                        helps builders learn from one another.</p>
-                    <p>He writes about building, funding and connecting in Africa's tech ecosystem in The Logbook at
-                        maxwellcofie.com.</p>
+                    <p data-i18n="kit.bio_long_1">Maxwell Cofie is fascinated by what technology can do for people, and nowhere more than across Africa. Based in Accra, Ghana, he is the founder of Stage 2, The Good Seed Capital and Sandbox Réseau, and works across three connected areas: product, capital and community.</p>
+                    <p data-i18n="kit.bio_long_2">Through Stage 2, an Accra-based product studio, he has spent more than eight years building digital products and launching ventures across fintech, legal-tech, events, commerce and proptech. Stage 2's products include Vellum, for wills and digital legacy planning; GrayDocket, for business registration and compliance; GatePass, for event discovery and ticketing; and Motor Ambos, for car papers and roadside help.</p>
+                    <p data-i18n="kit.bio_long_3">Through The Good Seed Capital, he bridges the gap between early-stage African founders and global investors who back with conviction, not curiosity. Through Sandbox Réseau, a gathering in Accra for Africa's founders and builders, and its podcast, The Reverb, he helps builders learn from one another.</p>
+                    <p data-i18n="kit.bio_long_4">He writes about building, funding and connecting in Africa's tech ecosystem in The Logbook at maxwellcofie.com.</p>
                 </div>
             </article>
         </section>
 
         <section class="kit-section" id="introduction">
-            <h2 class="section-label">Introduction for hosts</h2>
-            <p class="kit-note">About 30 seconds, written to be read aloud.</p>
+            <h2 class="section-label" data-i18n="kit.intro_label">Introduction for hosts</h2>
+            <p class="kit-note" data-i18n="kit.intro_note">About 30 seconds, written to be read aloud.</p>
             <article class="bio-card">
                 <div class="bio-card-header">
-                    <h3 class="bio-card-title">Stage introduction</h3>
-                    <button class="kit-copy-btn" type="button" data-copy="bio-intro">Copy</button>
+                    <h3 class="bio-card-title"><span data-i18n="kit.intro_title">Stage introduction</span>
+                        <span class="bio-card-meta" data-i18n="kit.pronounce">Say it: MAX-well KOH-fee</span></h3>
+                    <button class="kit-copy-btn" type="button" data-copy="bio-intro" data-i18n="kit.copy">Copy</button>
                 </div>
                 <div class="bio-text" id="bio-intro">
-                    <p>Our next speaker believes there's no more exciting place to build technology than Africa. Maxwell
-                        Cofie builds products through Stage 2, a product studio in Accra. He connects early-stage African
-                        founders with global investors through The Good Seed Capital, and brings builders together
-                        through the Sandbox Réseau community and The Reverb podcast. Please welcome Maxwell Cofie.</p>
+                    <p data-i18n="kit.intro_text">Our next speaker believes there's no more exciting place to build technology than Africa. Maxwell Cofie is the founder of Stage 2, a product studio in Accra; The Good Seed Capital, which connects early-stage African founders with global investors; and Sandbox Réseau, a community that brings builders together. Please welcome Maxwell Cofie.</p>
                 </div>
             </article>
         </section>
 
-        <section class="kit-section" id="topics">
-            <h2 class="section-label">Speaking topics</h2>
-            <p class="kit-note">Talks, panels and fireside chats. Happy to tailor any of these to your audience.</p>
+        <section class="kit-section" id="speaking">
+            <h2 class="section-label" data-i18n="kit.speaking_label">Speaking</h2>
+            <p class="kit-note" data-i18n="kit.speaking_note">Happy to tailor any of these to your audience. Tell me the format and length you have in mind.</p>
+            <div class="speaking-grid">
+                <div>
+                    <h3 class="kit-subhead" data-i18n="kit.formats_title">Formats</h3>
+                    <ul class="pill-list">
+                        <li data-i18n="kit.format_keynote">Keynotes</li>
+                        <li data-i18n="kit.format_panel">Panels</li>
+                        <li data-i18n="kit.format_fireside">Fireside chats</li>
+                        <li data-i18n="kit.format_workshop">Workshops</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="kit-subhead" data-i18n="kit.logistics_title">Good to know</h3>
+                    <ul class="check-list">
+                        <li data-i18n="kit.logistics_travel">Based in Accra and happy to travel</li>
+                        <li data-i18n="kit.logistics_virtual">Virtual talks and podcasts welcome</li>
+                        <li data-i18n="kit.logistics_language">Talks in English</li>
+                    </ul>
+                </div>
+            </div>
 
+            <h3 class="kit-subhead" data-i18n="kit.topics_title">Topics</h3>
             <div class="topic">
-                <h3>Building for how African markets actually work</h3>
-                <p>Why products copied from Silicon Valley stall here, and how to design around real-world friction:
-                    payments, trust, informal networks and the way people actually get things done.</p>
-                <p class="topic-reading">Read: <a href="../posts/why-the-copy-paste-silicon-valley-model-dies-in-africa/">Why the 'Copy-Paste' Silicon Valley Model Dies in Africa</a></p>
+                <h3 data-i18n="kit.topic1_title">Building for how African markets actually work</h3>
+                <p data-i18n="kit.topic1_desc">Why products copied from Silicon Valley stall here, and how to design around real-world friction: payments, trust, informal networks and the way people actually get things done.</p>
+                <p class="topic-reading"><span data-i18n="kit.read">Read:</span> <a href="../posts/why-the-copy-paste-silicon-valley-model-dies-in-africa/">Why the 'Copy-Paste' Silicon Valley Model Dies in Africa</a></p>
             </div>
             <div class="topic">
-                <h3>Designing products people love</h3>
-                <p>What makes users say "they thought about me", and how small, deliberate details turn a working
-                    product into one people recommend.</p>
-                <p class="topic-reading">Read: <a href="../posts/oh-they-thought-about-me-what-it-means-to-build-delightful-products-part-1/">'Oh, they thought about me': What It Means to Build Delightful Products</a></p>
+                <h3 data-i18n="kit.topic2_title">Designing products people love</h3>
+                <p data-i18n="kit.topic2_desc">What makes users say "they thought about me", and how small, deliberate details turn a working product into one people recommend.</p>
+                <p class="topic-reading"><span data-i18n="kit.read">Read:</span> <a href="../posts/oh-they-thought-about-me-what-it-means-to-build-delightful-products-part-1/">'Oh, they thought about me': What It Means to Build Delightful Products</a></p>
             </div>
             <div class="topic">
-                <h3>Telling the story that wins the room</h3>
-                <p>Why great African startups still lose investors and customers, and the stories founders need to tell
-                    to close the gap, from the first pitch to the fundraise.</p>
-                <p class="topic-reading">Read: <a href="../posts/mind-the-story-gap-why-great-african-startups-still-lose-the-room/">Mind the Story Gap</a> · <a href="../posts/gas-in-the-tank-not-miles-on-the-road-the-fundraising-fallacy/">The Fundraising Fallacy</a></p>
+                <h3 data-i18n="kit.topic3_title">Telling the story that wins the room</h3>
+                <p data-i18n="kit.topic3_desc">Why great African startups still lose investors and customers, and the stories founders need to tell to close the gap, from the first pitch to the fundraise.</p>
+                <p class="topic-reading"><span data-i18n="kit.read">Read:</span> <a href="../posts/mind-the-story-gap-why-great-african-startups-still-lose-the-room/">Mind the Story Gap</a> · <a href="../posts/gas-in-the-tank-not-miles-on-the-road-the-fundraising-fallacy/">The Fundraising Fallacy</a></p>
             </div>
             <div class="topic">
-                <h3>Building communities of builders</h3>
-                <p>Lessons from starting Sandbox Réseau and The Reverb: how to bring founders, engineers and curious
-                    minds together, and keep the room worth coming back to.</p>
-                <p class="topic-reading">Read: <a href="../posts/the-genesis-of-the-reseau/">The Genesis of the Sandbox Réseau</a> · <a href="../posts/30-plus-builders-one-platform-what-hosting-the-reverb-taught-me-about-building-in-the-ghana/">What Hosting The Reverb Taught Me</a></p>
+                <h3 data-i18n="kit.topic4_title">Building communities of builders</h3>
+                <p data-i18n="kit.topic4_desc">Lessons from starting Sandbox Réseau and The Reverb: how to bring founders, engineers and curious minds together, and keep the room worth coming back to.</p>
+                <p class="topic-reading"><span data-i18n="kit.read">Read:</span> <a href="../posts/the-genesis-of-the-reseau/">The Genesis of the Sandbox Réseau</a> · <a href="../posts/30-plus-builders-one-platform-what-hosting-the-reverb-taught-me-about-building-in-the-ghana/">What Hosting The Reverb Taught Me</a></p>
             </div>
         </section>
 
         <section class="kit-section" id="facts">
-            <h2 class="section-label">Quick facts</h2>
+            <h2 class="section-label" data-i18n="kit.facts_label">Quick facts</h2>
             <dl class="facts">
-                <dt>Name</dt>
+                <dt data-i18n="kit.fact_name">Name</dt>
                 <dd>Maxwell Cofie</dd>
-                <dt>Based in</dt>
-                <dd>Accra, Ghana</dd>
-                <dt>Works across</dt>
-                <dd>Product, capital and community</dd>
-                <dt>Organisations</dt>
+                <dt data-i18n="kit.fact_pronounce">Pronunciation</dt>
+                <dd>MAX-well KOH-fee</dd>
+                <dt data-i18n="kit.fact_role">Role</dt>
+                <dd data-i18n="kit.fact_role_value">Founder of Stage 2, The Good Seed Capital and Sandbox Réseau</dd>
+                <dt data-i18n="kit.fact_based">Based in</dt>
+                <dd data-i18n="kit.fact_based_value">Accra, Ghana</dd>
+                <dt data-i18n="kit.fact_works">Works across</dt>
+                <dd data-i18n="kit.fact_works_value">Product, capital and community</dd>
+                <dt data-i18n="kit.fact_orgs">Organisations</dt>
                 <dd><a href="https://stage2.xyz/" target="_blank" rel="noopener noreferrer">Stage 2</a> · <a href="https://thegoodseedcapital.com" target="_blank" rel="noopener noreferrer">The Good Seed Capital</a> · <a href="https://sandboxreseau.com/" target="_blank" rel="noopener noreferrer">Sandbox Réseau</a> · <a href="https://sandboxreseau.com/podcast/" target="_blank" rel="noopener noreferrer">The Reverb</a></dd>
-                <dt>Website</dt>
+                <dt data-i18n="kit.fact_website">Website</dt>
                 <dd><a href="https://maxwellcofie.com">maxwellcofie.com</a></dd>
-                <dt>Bookings &amp; press</dt>
+                <dt data-i18n="kit.fact_contact">Bookings & press</dt>
                 <dd><a href="mailto:maxcofie@gmail.com">maxcofie@gmail.com</a></dd>
-                <dt>Social</dt>
+                <dt data-i18n="kit.fact_social">Social</dt>
                 <dd><a href="https://x.com/maxwellcofie" target="_blank" rel="noopener noreferrer">X @maxwellcofie</a> · <a href="https://linkedin.com/in/maxwell-cofie" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://www.youtube.com/@maxwellcofie" target="_blank" rel="noopener noreferrer">YouTube</a> · <a href="https://thekompound.substack.com" target="_blank" rel="noopener noreferrer">Substack</a></dd>
             </dl>
         </section>
 
         <section class="kit-section" id="brand">
-            <h2 class="section-label">Brand assets</h2>
+            <h2 class="section-label" data-i18n="kit.brand_label">Brand assets</h2>
 
             <div class="brand-specimen" aria-label="Wordmark and signature">
                 <span class="brand-wordmark">Maxwell Cofie</span>
                 <span class="brand-signature" role="img" aria-label="Signature of Maxwell Cofie"></span>
             </div>
 
-            <h3 class="kit-subhead">Colours</h3>
+            <h3 class="kit-subhead" data-i18n="kit.colours">Colours</h3>
             <div class="swatches">
-                <div><div class="swatch-chip" style="background:#111111"></div><div class="swatch-name">Ink</div><div class="swatch-hex">#111111</div></div>
-                <div><div class="swatch-chip" style="background:#FAFAFA"></div><div class="swatch-name">Paper</div><div class="swatch-hex">#FAFAFA</div></div>
-                <div><div class="swatch-chip" style="background:#666666"></div><div class="swatch-name">Graphite</div><div class="swatch-hex">#666666</div></div>
-                <div><div class="swatch-chip" style="background:#BA1811"></div><div class="swatch-name">Vermilion</div><div class="swatch-hex">#BA1811</div></div>
+                <div><div class="swatch-chip" style="background:#111111"></div><div class="swatch-name" data-i18n="kit.colour_ink">Ink</div><div class="swatch-hex">#111111</div></div>
+                <div><div class="swatch-chip" style="background:#FAFAFA"></div><div class="swatch-name" data-i18n="kit.colour_paper">Paper</div><div class="swatch-hex">#FAFAFA</div></div>
+                <div><div class="swatch-chip" style="background:#666666"></div><div class="swatch-name" data-i18n="kit.colour_graphite">Graphite</div><div class="swatch-hex">#666666</div></div>
+                <div><div class="swatch-chip" style="background:#BA1811"></div><div class="swatch-name" data-i18n="kit.colour_vermilion">Vermilion</div><div class="swatch-hex">#BA1811</div></div>
             </div>
 
-            <h3 class="kit-subhead">Typefaces</h3>
+            <h3 class="kit-subhead" data-i18n="kit.typefaces">Typefaces</h3>
             <ul class="type-list">
-                <li><span style="font-family:'Mansalva', cursive; font-size:18px">Mansalva</span><span>Wordmark</span></li>
-                <li><span>Inter</span><span>Headings and interface</span></li>
-                <li><span style="font-family:'Newsreader', serif; font-size:16px">Newsreader</span><span>Long-form reading</span></li>
+                <li><span style="font-family:'Mansalva', cursive; font-size:18px">Mansalva</span><span data-i18n="kit.type_wordmark">Wordmark</span></li>
+                <li><span>Inter</span><span data-i18n="kit.type_interface">Headings and interface</span></li>
+                <li><span style="font-family:'Newsreader', serif; font-size:16px">Newsreader</span><span data-i18n="kit.type_reading">Long-form reading</span></li>
             </ul>
 
-            <h3 class="kit-subhead">Downloads</h3>
+            <h3 class="kit-subhead" data-i18n="kit.downloads">Downloads</h3>
             <ul class="asset-list">
                 <li>
-                    <span>Signature, black <span class="asset-meta">· transparent</span></span>
+                    <span><span data-i18n="kit.asset_sheet">Speaker sheet</span> <span class="asset-meta">· <span data-i18n="kit.asset_sheet_meta">one page, A4</span></span></span>
+                    <span class="asset-links">
+                        <a class="download-link" href="../assets/brand-kit/maxwell-cofie-speaker-sheet.pdf" download>PDF</a>
+                        <a class="download-link" href="speaker-sheet/">HTML</a>
+                    </span>
+                </li>
+                <li>
+                    <span><span data-i18n="kit.asset_sig_black">Signature, black</span> <span class="asset-meta">· <span data-i18n="kit.asset_transparent">transparent</span></span></span>
                     <span class="asset-links">
                         <a class="download-link" href="../assets/brand-kit/maxwell-cofie-signature-black.png" download>PNG</a>
                         <a class="download-link" href="../assets/brand-kit/maxwell-cofie-signature-black.svg" download>SVG</a>
                     </span>
                 </li>
                 <li>
-                    <span>Signature, white <span class="asset-meta">· transparent, for dark backgrounds</span></span>
+                    <span><span data-i18n="kit.asset_sig_white">Signature, white</span> <span class="asset-meta">· <span data-i18n="kit.asset_dark_bg">transparent, for dark backgrounds</span></span></span>
                     <span class="asset-links">
                         <a class="download-link" href="../assets/brand-kit/maxwell-cofie-signature-white.png" download>PNG</a>
                         <a class="download-link" href="../assets/brand-kit/maxwell-cofie-signature-white.svg" download>SVG</a>
                     </span>
                 </li>
                 <li>
-                    <span>Social card <span class="asset-meta">· 1730 × 909</span></span>
+                    <span><span data-i18n="kit.asset_social">Social card</span> <span class="asset-meta">· 1730 × 909</span></span>
                     <span class="asset-links">
                         <a class="download-link" href="../assets/brand-kit/maxwell-cofie-social-card.jpg" download>JPG</a>
                     </span>
                 </li>
             </ul>
 
-            <h3 class="kit-subhead">Using these assets</h3>
+            <h3 class="kit-subhead" data-i18n="kit.usage_title">Using these assets</h3>
             <ul class="usage-list">
-                <li>Write the name as <strong>Maxwell Cofie</strong>.</li>
-                <li>Use photos as provided. Resizing is fine; please don't add filters or retouch them.</li>
-                <li>Questions, or need something that isn't here? Email <a href="mailto:maxcofie@gmail.com">maxcofie@gmail.com</a>.</li>
+                <li data-i18n="kit.usage_name">Write the name as <strong>Maxwell Cofie</strong>.</li>
+                <li data-i18n="kit.usage_photos">Use photos as provided. Resizing is fine; please don't add filters or retouch them.</li>
+                <li data-i18n="kit.usage_contact">Questions, or need something that isn't here? Email <a href="mailto:maxcofie@gmail.com">maxcofie@gmail.com</a>.</li>
             </ul>
         </section>
     </main>
@@ -809,20 +919,25 @@
     <!-- SITE_FOOTER_END -->
 
     <script src="../locale.js" defer></script>
+    <script src="strings.js" defer></script>
     <script src="../app.js" defer></script>
     <script>
-        // Copy a bio as plain text, keeping its paragraph breaks.
+        // Copy a bio as plain text in the language shown, keeping its paragraph breaks.
         document.querySelectorAll('.kit-copy-btn').forEach(button => {
             button.addEventListener('click', async () => {
+                const label = key => {
+                    const lang = document.documentElement.lang || 'en';
+                    return (translations[lang] || translations.en)[key];
+                };
                 const paragraphs = document.getElementById(button.dataset.copy).querySelectorAll('p');
                 const text = Array.from(paragraphs, p => p.textContent.replace(/\s+/g, ' ').trim()).join('\n\n');
                 try {
                     await navigator.clipboard.writeText(text);
-                    button.textContent = 'Copied';
+                    button.textContent = label('kit.copied');
                 } catch (e) {
-                    button.textContent = 'Select and copy';
+                    button.textContent = label('kit.copy_failed');
                 }
-                setTimeout(() => { button.textContent = 'Copy'; }, 2000);
+                setTimeout(() => { button.textContent = label('kit.copy'); }, 2000);
             });
         });
     </script>

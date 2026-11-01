@@ -8,7 +8,8 @@
     "build": "node bin/image-sizes.js && node build.js && node bin/package-site.js",
     "sync-books": "node sync-books.js",
     "new-post": "node bin/new-post.js",
-    "image-sizes": "node bin/image-sizes.js"
+    "image-sizes": "node bin/image-sizes.js",
+    "speaker-sheet": "node build.js && node bin/speaker-sheet-pdf.js && npm run build"
   },
   "repository": {
     "type": "git",

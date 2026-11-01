@@ -90,6 +90,56 @@
             opacity: 0.2;
             cursor: default;
         }
+        .logbook-tabs {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .logbook-tab {
+            margin-bottom: -1px;
+            padding: 10px 0;
+            background: none;
+            border: 0;
+            border-bottom: 2px solid transparent;
+            font: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .logbook-tab:hover { color: var(--text-main); }
+        .logbook-tab[aria-selected="true"] {
+            color: var(--text-main);
+            border-bottom-color: var(--text-main);
+        }
+        .project-item.log-entry-item {
+            grid-template-columns: 160px 1fr auto;
+            gap: 20px;
+            align-items: center;
+        }
+        .log-thumb {
+            aspect-ratio: 5 / 2;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .log-thumb svg,
+        .log-thumb img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 480px) {
+            .log-thumb { margin-bottom: 14px; }
+        }
+        .log-year { margin-top: 8px; }
+        .log-panel-intro {
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
         .page-info {
             font-size: 13px;
             font-weight: 500;
@@ -128,7 +178,13 @@
     </div>
 
     <div class="project-list-container">
-        <div class="section-label" data-i18n="writing.articles">Articles</div>
+        
+        <div class="logbook-tabs" role="tablist" aria-label="Logbook">
+            <button class="logbook-tab" role="tab" id="tab-essays" data-tab="essays" aria-selected="true" aria-controls="essaysPanel" data-i18n="writing.tab_essays">Essays</button>
+            <button class="logbook-tab" role="tab" id="tab-log" data-tab="log" aria-selected="false" aria-controls="logPanel" tabindex="-1" data-i18n="writing.tab_log">Monthly Log</button>
+        </div>
+        <div id="essaysPanel" role="tabpanel" aria-labelledby="tab-essays">
+        
         
     <div class="filter-bar" role="group" aria-label="Filter articles by category">
         <button class="filter-btn active" aria-pressed="true" onclick="filterPosts(this, 'all')">All</button>
@@ -446,6 +502,50 @@
             <span class="page-info" id="pageInfo">1 / 1</span>
             <button class="page-btn" id="nextBtn" onclick="changePage(1)" aria-label="Next Page">→</button>
         </div>
+        </div>
+        
+        <div id="logPanel" role="tabpanel" aria-labelledby="tab-log" hidden>
+            <p class="log-panel-intro" data-i18n="writing.log_intro">What I read, watched and listened to, wrapped up at the end of every month.</p>
+            
+            <div class="section-label log-year">2026</div>
+            <div class="project-list">
+                
+                <a href="../log/2026-10/" class="project-item log-entry-item">
+                    <div class="log-thumb" aria-hidden="true"><svg class="log-cover-art" viewBox="0 0 1200 480" role="img" aria-label="October" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="480" fill="#4A2F24"/><circle cx="906" cy="103" r="17" fill="#FFFFFF" opacity="0.07"/><circle cx="731" cy="478" r="14" fill="#FFFFFF" opacity="0.07"/><circle cx="645" cy="454" r="34" fill="#FFFFFF" opacity="0.07"/><circle cx="251" cy="70" r="42" fill="#FFFFFF" opacity="0.07"/><circle cx="1004" cy="408" r="52" fill="#FFFFFF" opacity="0.07"/><circle cx="911" cy="416" r="15" fill="#FFFFFF" opacity="0.07"/><circle cx="441" cy="202" r="39" fill="#FFFFFF" opacity="0.07"/><circle cx="340" cy="37" r="25" fill="#FFFFFF" opacity="0.07"/><circle cx="13" cy="95" r="24" fill="#FFFFFF" opacity="0.07"/><circle cx="299" cy="202" r="53" fill="#FFFFFF" opacity="0.07"/><circle cx="67" cy="122" r="22" fill="#FFFFFF" opacity="0.07"/><circle cx="922" cy="261" r="30" fill="#FFFFFF" opacity="0.07"/><g transform="translate(45 50) rotate(-20) scale(1.9)"><rect x="-5" y="-72" width="10" height="20" rx="4" fill="#24140E" opacity="0.7"/>
+        <ellipse cx="0" cy="0" rx="32" ry="58" fill="#7BA05B"/>
+        <path d="M-14,-52 C-22,-20 -22,20 -14,52 M0,-58 V58 M14,-52 C22,-20 22,20 14,52" stroke="#24140E" stroke-width="3" fill="none" opacity="0.3"/></g><g transform="translate(212 40) rotate(15) scale(1.05)"><path d="M0,-60 C34,-30 34,30 0,60 C-34,30 -34,-30 0,-60Z" fill="#C4562E"/>
+        <path d="M0,-48 V54 M0,-20 L16,-34 M0,0 L19,-14 M0,20 L16,6 M0,-20 L-16,-34 M0,0 L-19,-14 M0,20 L-16,6" stroke="#24140E" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.35"/></g><g transform="translate(400 30) rotate(40) scale(0.7)"><path d="M0,-38 C14,-12 24,4 24,16 A24,24 0 0 1 -24,16 C-24,4 -14,-12 0,-38Z" fill="#E9A23B"/></g><g transform="translate(803 28) rotate(-29) scale(0.75)"><rect x="-5" y="-72" width="10" height="20" rx="4" fill="#24140E" opacity="0.7"/>
+        <ellipse cx="0" cy="0" rx="32" ry="58" fill="#F2C46B"/>
+        <path d="M-14,-52 C-22,-20 -22,20 -14,52 M0,-58 V58 M14,-52 C22,-20 22,20 14,52" stroke="#24140E" stroke-width="3" fill="none" opacity="0.3"/></g><g transform="translate(991 44) rotate(25) scale(1.1)"><path d="M0,62 C2,20 0,-20 -4,-62" stroke="#7BA05B" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <ellipse cx="14" cy="-44" rx="18" ry="6" transform="rotate(-30 0 -44)" fill="#7BA05B"/><ellipse cx="-14" cy="-44" rx="18" ry="6" transform="rotate(30 0 -44)" fill="#7BA05B"/><ellipse cx="14" cy="-24" rx="18" ry="6" transform="rotate(-30 0 -24)" fill="#7BA05B"/><ellipse cx="-14" cy="-24" rx="18" ry="6" transform="rotate(30 0 -24)" fill="#7BA05B"/><ellipse cx="14" cy="-4" rx="18" ry="6" transform="rotate(-30 0 -4)" fill="#7BA05B"/><ellipse cx="-14" cy="-4" rx="18" ry="6" transform="rotate(30 0 -4)" fill="#7BA05B"/><ellipse cx="14" cy="16" rx="18" ry="6" transform="rotate(-30 0 16)" fill="#7BA05B"/><ellipse cx="-14" cy="16" rx="18" ry="6" transform="rotate(30 0 16)" fill="#7BA05B"/><ellipse cx="14" cy="36" rx="18" ry="6" transform="rotate(-30 0 36)" fill="#7BA05B"/><ellipse cx="-14" cy="36" rx="18" ry="6" transform="rotate(30 0 36)" fill="#7BA05B"/></g><g transform="translate(1164 60) rotate(-15) scale(1.9)"><path d="M0,-60 C34,-30 34,30 0,60 C-34,30 -34,-30 0,-60Z" fill="#C4562E"/>
+        <path d="M0,-48 V54 M0,-20 L16,-34 M0,0 L19,-14 M0,20 L16,6 M0,-20 L-16,-34 M0,0 L-19,-14 M0,20 L-16,6" stroke="#24140E" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.35"/></g><g transform="translate(32 250) rotate(16) scale(1.4)"><rect x="-5" y="-72" width="10" height="20" rx="4" fill="#24140E" opacity="0.7"/>
+        <ellipse cx="0" cy="0" rx="32" ry="58" fill="#E9A23B"/>
+        <path d="M-14,-52 C-22,-20 -22,20 -14,52 M0,-58 V58 M14,-52 C22,-20 22,20 14,52" stroke="#24140E" stroke-width="3" fill="none" opacity="0.3"/></g><g transform="translate(1177 250) rotate(-19) scale(1.45)"><path d="M0,-60 C34,-30 34,30 0,60 C-34,30 -34,-30 0,-60Z" fill="#F2C46B"/>
+        <path d="M0,-48 V54 M0,-20 L16,-34 M0,0 L19,-14 M0,20 L16,6 M0,-20 L-16,-34 M0,0 L-19,-14 M0,20 L-16,6" stroke="#24140E" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.35"/></g><g transform="translate(180 175) rotate(2) scale(0.6)"><path d="M0,-38 C14,-12 24,4 24,16 A24,24 0 0 1 -24,16 C-24,4 -14,-12 0,-38Z" fill="#7BA05B"/></g><g transform="translate(1030 180) rotate(7) scale(0.6)"><rect x="-5" y="-72" width="10" height="20" rx="4" fill="#24140E" opacity="0.7"/>
+        <ellipse cx="0" cy="0" rx="32" ry="58" fill="#C4562E"/>
+        <path d="M-14,-52 C-22,-20 -22,20 -14,52 M0,-58 V58 M14,-52 C22,-20 22,20 14,52" stroke="#24140E" stroke-width="3" fill="none" opacity="0.3"/></g><g transform="translate(63 445) rotate(33) scale(1.8)"><path d="M0,62 C2,20 0,-20 -4,-62" stroke="#E9A23B" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <ellipse cx="14" cy="-44" rx="18" ry="6" transform="rotate(-30 0 -44)" fill="#E9A23B"/><ellipse cx="-14" cy="-44" rx="18" ry="6" transform="rotate(30 0 -44)" fill="#E9A23B"/><ellipse cx="14" cy="-24" rx="18" ry="6" transform="rotate(-30 0 -24)" fill="#E9A23B"/><ellipse cx="-14" cy="-24" rx="18" ry="6" transform="rotate(30 0 -24)" fill="#E9A23B"/><ellipse cx="14" cy="-4" rx="18" ry="6" transform="rotate(-30 0 -4)" fill="#E9A23B"/><ellipse cx="-14" cy="-4" rx="18" ry="6" transform="rotate(30 0 -4)" fill="#E9A23B"/><ellipse cx="14" cy="16" rx="18" ry="6" transform="rotate(-30 0 16)" fill="#E9A23B"/><ellipse cx="-14" cy="16" rx="18" ry="6" transform="rotate(30 0 16)" fill="#E9A23B"/><ellipse cx="14" cy="36" rx="18" ry="6" transform="rotate(-30 0 36)" fill="#E9A23B"/><ellipse cx="-14" cy="36" rx="18" ry="6" transform="rotate(30 0 36)" fill="#E9A23B"/></g><g transform="translate(258 462) rotate(-6) scale(1.05)"><path d="M0,-60 C34,-30 34,30 0,60 C-34,30 -34,-30 0,-60Z" fill="#F2C46B"/>
+        <path d="M0,-48 V54 M0,-20 L16,-34 M0,0 L19,-14 M0,20 L16,6 M0,-20 L-16,-34 M0,0 L-19,-14 M0,20 L-16,6" stroke="#24140E" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.35"/></g><g transform="translate(462 468) rotate(15) scale(0.65)"><rect x="-5" y="-72" width="10" height="20" rx="4" fill="#24140E" opacity="0.7"/>
+        <ellipse cx="0" cy="0" rx="32" ry="58" fill="#7BA05B"/>
+        <path d="M-14,-52 C-22,-20 -22,20 -14,52 M0,-58 V58 M14,-52 C22,-20 22,20 14,52" stroke="#24140E" stroke-width="3" fill="none" opacity="0.3"/></g><g transform="translate(750 466) rotate(-13) scale(0.7)"><path d="M0,-60 C34,-30 34,30 0,60 C-34,30 -34,-30 0,-60Z" fill="#C4562E"/>
+        <path d="M0,-48 V54 M0,-20 L16,-34 M0,0 L19,-14 M0,20 L16,6 M0,-20 L-16,-34 M0,0 L-19,-14 M0,20 L-16,6" stroke="#24140E" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.35"/></g><g transform="translate(956 455) rotate(18) scale(1.1)"><path d="M0,-38 C14,-12 24,4 24,16 A24,24 0 0 1 -24,16 C-24,4 -14,-12 0,-38Z" fill="#E9A23B"/></g><g transform="translate(1143 440) rotate(-41) scale(1.9)"><rect x="-5" y="-72" width="10" height="20" rx="4" fill="#24140E" opacity="0.7"/>
+        <ellipse cx="0" cy="0" rx="32" ry="58" fill="#F2C46B"/>
+        <path d="M-14,-52 C-22,-20 -22,20 -14,52 M0,-58 V58 M14,-52 C22,-20 22,20 14,52" stroke="#24140E" stroke-width="3" fill="none" opacity="0.3"/></g>
+            <text x="600" y="262" text-anchor="middle" font-family="Mansalva, cursive" font-size="150" fill="#F6DFC6">October</text>
+            </svg></div>
+                    <div class="proj-left">
+                        <div class="proj-header">
+                            <span class="proj-title">October 2026</span>
+                            <span class="arrow">→</span>
+                        </div>
+                        <span class="proj-desc">October&#39;s reading ran from early-stage growth and the craft of understanding things to branding, interface design and the state of the tech industry, with…</span>
+                    </div>
+                    <div class="proj-meta">
+                        <span>18 picks</span>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -469,6 +569,41 @@
         const params = new URLSearchParams(window.location.search);
         if (params.has('category')) currentCategory = params.get('category');
         if (params.has('page')) currentPage = parseInt(params.get('page')) || 1;
+        let currentTab = params.get('tab') === 'log' ? 'log' : 'essays';
+
+        // Essays / Monthly Log tabs
+        const tabButtons = Array.from(document.querySelectorAll('.logbook-tab'));
+        function showTab(tab) {
+            if (!tabButtons.length) return;
+            currentTab = tab;
+            tabButtons.forEach(button => {
+                const selected = button.dataset.tab === tab;
+                button.setAttribute('aria-selected', String(selected));
+                button.tabIndex = selected ? 0 : -1;
+            });
+            document.getElementById('essaysPanel').hidden = tab !== 'essays';
+            document.getElementById('logPanel').hidden = tab !== 'log';
+        }
+        tabButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                if (button.dataset.tab === currentTab) return;
+                showTab(button.dataset.tab);
+                const url = new URL(window.location);
+                ['category', 'page', 'tab'].forEach(key => url.searchParams.delete(key));
+                if (currentTab === 'log') url.searchParams.set('tab', 'log');
+                currentCategory = 'all';
+                currentPage = 1;
+                window.history.pushState({}, '', url);
+                syncFilterUI();
+                performRender();
+            });
+            button.addEventListener('keydown', event => {
+                if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+                const next = tabButtons[(index + (event.key === 'ArrowRight' ? 1 : tabButtons.length - 1)) % tabButtons.length];
+                next.focus();
+                next.click();
+            });
+        });
 
         // Sync UI with URL state on load
         function syncFilterUI() {
@@ -488,6 +623,7 @@
 
         function updateURL() {
             const url = new URL(window.location);
+            url.searchParams.delete('tab');
             if (currentCategory === 'all') url.searchParams.delete('category');
             else url.searchParams.set('category', currentCategory);
             
@@ -498,7 +634,7 @@
         }
 
         function performRender() {
-            const allItems = Array.from(document.querySelectorAll('.project-list .project-item'));
+            const allItems = Array.from(document.querySelectorAll('#projectList .project-item'));
             const emptyState = document.getElementById('emptyState');
             
             // 1. Filter
@@ -592,6 +728,7 @@
 
         // Initial Render
         document.addEventListener('DOMContentLoaded', () => {
+            showTab(currentTab);
             syncFilterUI();
             performRender(); // No transition on initial load
             
@@ -600,6 +737,7 @@
                 const params = new URLSearchParams(window.location.search);
                 currentCategory = params.get('category') || 'all';
                 currentPage = parseInt(params.get('page')) || 1;
+                showTab(params.get('tab') === 'log' ? 'log' : 'essays');
                 syncFilterUI();
                 render();
             });

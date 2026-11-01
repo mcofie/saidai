@@ -103,6 +103,29 @@ An optional `image` (an absolute HTTPS URL or a path relative to the site root) 
 Run `npm run build` after changing metadata. It updates canonical links, Open Graph and Twitter tags, and JSON-LD in both static and generated pages. The 404 page receives `noindex` metadata.
 Run `npm test` to check metadata escaping, canonical links, preview defaults, and repeatable updates.
 
+### Monthly Log (`/log/YYYY-MM/`)
+
+A monthly wrap-up of what I read, watched and listened to, shown under the **Monthly Log** tab on the Logbook page (the tab appears once the first entry is published).
+
+1. Add `content/log/YYYY-MM.md` (copy `content/log/2026-10.md` as a template).
+2. Write a `brief` (a few sentences on the month) and, optionally, a `pick` of the month with a `type`, `title`, `url` and `note`.
+3. List items under any `##` headings you like (Read, Watched, Listened, Links), one per line: `- [Title](https://…) — why it stayed with me`. The site name is added automatically.
+4. Remove `draft: true` and run `npm run build`.
+
+Each month gets an illustrated header (the month's name framed by motifs for that month in Ghana, like Harmattan haze in January or cocoa season in October), drawn in `lib/log-covers.js`. To change it for one month, add to the front matter:
+
+- `coverCaption: "Black Stars qualify"` changes the line under the month's name (`""` removes it).
+- `coverStyle: "linework"` borrows another year's look. Each year has its own: 2026 Canopy (`canopy`), 2027 Kente (`kente`), 2028 Linework (`linework`), 2029 Cut paper (`cutout`), then round again.
+- `cover: "https://res.cloudinary.com/…" with `coverAlt: "What the photo shows"` uses a photo instead.
+
+Entries go into the RSS feed, sitemap and search, but not the homepage's latest writing. The title defaults to "Monthly Log · Month Year" and the date to the last day of the month; set `title` or `isoDate` to change them.
+
+### Brand kit (`/brand-kit/`)
+
+-   **Words live in `brand-kit/strings.js`**: bios, topics, labels and the "last updated" date (`UPDATED`), in English, French and Spanish. The build writes the English into `brand-kit/index.html` and the speaker sheet; the browser loads the rest for the language switcher. Edit the strings, not the HTML.
+-   **The download-everything ZIP** (`assets/brand-kit/maxwell-cofie-brand-kit.zip`) is created by `npm run build` from the files in `assets/brand-kit/` plus a bios text file per language. It only exists in `dist/`.
+-   **The speaker sheet** is a one-page A4 page at `brand-kit/speaker-sheet/`. Its PDF is printed with your local Chrome by `npm run speaker-sheet` and committed. The build warns if the sheet's text has changed since the PDF was made. Set `CHROME_PATH` if Chrome isn't in the usual place.
+
 ## ✨ Features
 
 ### Multimedia Support
@@ -144,6 +167,7 @@ The site supports client-side localization for **English**, **French**, and **Sp
 | :--- | :--- | :--- |
 | `npm run build` | `node bin/image-sizes.js && node build.js && node bin/package-site.js` | Compiles the static site, updates all indices and pages, and packages the deployable site into `dist/`. |
 | `npm run image-sizes` | `node bin/image-sizes.js` | Looks up dimensions for new post images (also runs as part of `build`). |
+| `npm run speaker-sheet` | `node build.js && node bin/speaker-sheet-pdf.js && npm run build` | Refreshes the brand kit's speaker sheet PDF (needs Chrome). |
 | `npm test` | `node --test test/*.test.js` | Runs the metadata tests. CI runs these before every deploy. |
 | `npm run new-post` | `node bin/new-post.js` | Interactive CLI to scaffold a new blog post with correct metadata. |
 

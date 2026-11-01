@@ -1,0 +1,291 @@
+<!doctype html>
+<!-- One-page A4 speaker sheet. Its text comes from brand-kit/strings.js at build time;
+     run `npm run speaker-sheet` after editing to refresh the PDF. -->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!-- METADATA_START -->
+    <title>Speaker Sheet | Maxwell Cofie</title>
+    <meta name="description" content="A one-page speaker sheet for Maxwell Cofie: bio, speaking topics, formats and contact details.">
+    <meta name="robots" content="noindex, follow">
+    <!-- METADATA_END -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <style>
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 300 600;
+            src: url(../../assets/fonts/inter-latin.woff2) format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 300 600;
+            src: url(../../assets/fonts/inter-latin-ext.woff2) format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        @font-face {
+            font-family: 'Mansalva';
+            font-style: normal;
+            font-weight: 400;
+            src: url(../../assets/fonts/mansalva-latin.woff2) format('woff2');
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            background: #E5E5E5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #111111;
+            font-size: 9.5pt;
+            line-height: 1.5;
+        }
+
+        .sheet {
+            width: 210mm;
+            height: 297mm;
+            margin: 24px auto;
+            padding: 18mm 18mm 14mm;
+            background: #FAFAFA;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .sheet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10mm;
+            padding-bottom: 9mm;
+            border-bottom: 0.4mm solid #111111;
+        }
+
+        .sheet-name {
+            font-family: 'Mansalva', cursive;
+            font-size: 40pt;
+            line-height: 1;
+            margin-bottom: 4mm;
+        }
+
+        .sheet-role {
+            font-size: 11pt;
+            font-weight: 500;
+            max-width: 105mm;
+            line-height: 1.4;
+        }
+
+        .sheet-sub {
+            margin-top: 2mm;
+            color: #666666;
+        }
+
+        .sheet-photo {
+            width: 46mm;
+            height: 46mm;
+            border-radius: 3mm;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .sheet-bio {
+            margin: 8mm 0;
+            font-size: 10.5pt;
+            line-height: 1.6;
+            color: #333333;
+        }
+
+        .sheet-columns {
+            display: grid;
+            grid-template-columns: 1.55fr 1fr;
+            gap: 10mm;
+            flex: 1;
+        }
+
+        h2 {
+            font-size: 7.5pt;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #666666;
+            margin-bottom: 3.5mm;
+        }
+
+        .topic + .topic {
+            margin-top: 4mm;
+        }
+
+        .topic h3 {
+            font-size: 10pt;
+            font-weight: 600;
+            margin-bottom: 1mm;
+        }
+
+        .topic p {
+            color: #444444;
+        }
+
+        .side-block + .side-block {
+            margin-top: 7mm;
+        }
+
+        .side-block ul {
+            list-style: none;
+        }
+
+        .side-block li + li {
+            margin-top: 1.5mm;
+        }
+
+        .contact-line {
+            font-weight: 500;
+        }
+
+        .accent {
+            display: block;
+            width: 10mm;
+            height: 1.2mm;
+            background: #BA1811;
+            margin-bottom: 3mm;
+        }
+
+        .sheet-footer {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 5mm;
+            border-top: 0.2mm solid #D4D4D4;
+            font-size: 8pt;
+            color: #666666;
+        }
+
+        @media print {
+            html {
+                background: none;
+            }
+
+            .sheet {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+
+        /* On a phone, let the sheet fit the screen instead of overflowing it */
+        @media screen and (max-width: 840px) {
+            .sheet {
+                width: auto;
+                height: auto;
+                min-height: 0;
+                margin: 0;
+                padding: 28px 20px;
+                box-shadow: none;
+            }
+
+            .sheet-header {
+                flex-direction: column-reverse;
+            }
+
+            .sheet-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <article class="sheet">
+        <header class="sheet-header">
+            <div>
+                <h1 class="sheet-name">Maxwell Cofie</h1>
+                <p class="sheet-role" data-i18n="kit.fact_role_value">Founder of Stage 2, The Good Seed Capital and Sandbox Réseau</p>
+                <p class="sheet-sub"><span data-i18n="kit.fact_based_value">Accra, Ghana</span> · <span data-i18n="kit.pronounce">Say it: MAX-well KOH-fee</span></p>
+            </div>
+            <img class="sheet-photo" src="../../assets/brand-kit/maxwell-cofie-headshot-medium.jpg" width="750" height="750"
+                alt="Maxwell Cofie smiling, wearing a red and grey striped shirt against a warm beige background">
+        </header>
+
+        <p class="sheet-bio" data-i18n="kit.bio_medium">Maxwell Cofie is an Accra-based founder working across product, capital and community in Africa's tech ecosystem. Through Stage 2, the product studio he founded, he has spent more than eight years building digital products and launching ventures across fintech, legal-tech, events, commerce and proptech in Ghana. He also founded The Good Seed Capital, which connects early-stage African founders with global investors, and Sandbox Réseau, a builder community in Accra and home of The Reverb podcast.</p>
+
+        <div class="sheet-columns">
+            <section>
+                <span class="accent"></span>
+                <h2 data-i18n="kit.topics_title">Topics</h2>
+                <div class="topic">
+                    <h3 data-i18n="kit.topic1_title">Building for how African markets actually work</h3>
+                    <p data-i18n="kit.topic1_desc">Why products copied from Silicon Valley stall here, and how to design around real-world friction: payments, trust, informal networks and the way people actually get things done.</p>
+                </div>
+                <div class="topic">
+                    <h3 data-i18n="kit.topic2_title">Designing products people love</h3>
+                    <p data-i18n="kit.topic2_desc">What makes users say "they thought about me", and how small, deliberate details turn a working product into one people recommend.</p>
+                </div>
+                <div class="topic">
+                    <h3 data-i18n="kit.topic3_title">Telling the story that wins the room</h3>
+                    <p data-i18n="kit.topic3_desc">Why great African startups still lose investors and customers, and the stories founders need to tell to close the gap, from the first pitch to the fundraise.</p>
+                </div>
+                <div class="topic">
+                    <h3 data-i18n="kit.topic4_title">Building communities of builders</h3>
+                    <p data-i18n="kit.topic4_desc">Lessons from starting Sandbox Réseau and The Reverb: how to bring founders, engineers and curious minds together, and keep the room worth coming back to.</p>
+                </div>
+            </section>
+
+            <aside>
+                <div class="side-block">
+                    <span class="accent"></span>
+                    <h2 data-i18n="kit.formats_title">Formats</h2>
+                    <ul>
+                        <li data-i18n="kit.format_keynote">Keynotes</li>
+                        <li data-i18n="kit.format_panel">Panels</li>
+                        <li data-i18n="kit.format_fireside">Fireside chats</li>
+                        <li data-i18n="kit.format_workshop">Workshops</li>
+                    </ul>
+                </div>
+                <div class="side-block">
+                    <h2 data-i18n="kit.logistics_title">Good to know</h2>
+                    <ul>
+                        <li data-i18n="kit.logistics_travel">Based in Accra and happy to travel</li>
+                        <li data-i18n="kit.logistics_virtual">Virtual talks and podcasts welcome</li>
+                        <li data-i18n="kit.logistics_language">Talks in English</li>
+                    </ul>
+                </div>
+                <div class="side-block">
+                    <h2 data-i18n="kit.sheet_contact">Bookings & press</h2>
+                    <ul>
+                        <li class="contact-line">maxcofie@gmail.com</li>
+                        <li>maxwellcofie.com</li>
+                        <li>X @maxwellcofie</li>
+                    </ul>
+                </div>
+                <div class="side-block">
+                    <h2 data-i18n="kit.sheet_more">Photos, bios and assets</h2>
+                    <ul>
+                        <li class="contact-line">maxwellcofie.com/brand-kit</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="sheet-footer">
+            <span>maxwellcofie.com</span>
+            <span data-i18n="kit.updated">Last updated 1 November 2026</span>
+        </footer>
+    </article>
+</body>
+
+</html>

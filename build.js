@@ -6,6 +6,9 @@ const fm = require('front-matter');
 const hljs = require('highlight.js');
 const { pages, renderMetadata, updatePageMetadata } = require('./lib/metadata');
 const { cloudinaryUrl, readImageSizes } = require('./lib/images');
+const { loadBrandKit, applyBrandKitStrings } = require('./lib/brand-kit');
+const { parseLogEntry, decorateLogItems, hostOf } = require('./lib/log');
+const { renderLogCover } = require('./lib/log-covers');
 
 // Configuration
 const CONTENT_DIR = path.join(__dirname, 'content/posts');
@@ -13,6 +16,8 @@ const OUTPUT_DIR = path.join(__dirname, 'posts');
 const INDEX_PATH = path.join(__dirname, 'index.html');
 const WRITING_DIR = path.join(__dirname, 'writing');
 const WRITING_INDEX_PATH = path.join(WRITING_DIR, 'index.html');
+const LOG_CONTENT_DIR = path.join(__dirname, 'content/log');
+const LOG_OUTPUT_DIR = path.join(__dirname, 'log');
 
 function writeGeneratedFile(filePath, contents) {
     const tempPath = `${filePath}.tmp`;
@@ -165,6 +170,17 @@ function optimizeImages(html) {
     });
 }
 
+function renderToc(headings) {
+    if (!headings.length) return '';
+    return `
+        <div class="toc">
+            <div class="toc-label">Table of Contents</div>
+            <ul>
+                ${headings.map(h => `<li class="toc-level-${h.depth}"><a href="#${escapeHtml(h.headingId)}">${marked.parseInline(h.text)}</a></li>`).join('')}
+            </ul>
+        </div>`;
+}
+
 // 2. Read All Posts
 const posts = [];
 const files = fs.readdirSync(CONTENT_DIR);
@@ -188,16 +204,7 @@ files.forEach(file => {
     const { tokens, html: htmlContent } = renderMarkdown(body);
     const headings = tokens.filter(t => t.type === 'heading' && (t.depth === 2 || t.depth === 3));
 
-    const tocHTML = headings.length > 0 ? `
-        <div class="toc">
-            <div class="toc-label">Table of Contents</div>
-            <ul>
-                ${headings.map(h => {
-        const title = marked.parseInline(h.text);
-        return `<li class="toc-level-${h.depth}"><a href="#${escapeHtml(h.headingId)}">${title}</a></li>`;
-    }).join('')}
-            </ul>
-        </div>` : '';
+    const tocHTML = renderToc(headings);
 
     const slug = path.basename(file, '.md');
     const wordCount = body.split(/\s+/).length;
@@ -726,6 +733,7 @@ const HTML_TEMPLATE = `<!doctype html>
         }
 
     </style>
+    {{EXTRA_STYLE}}
 </head>
 
 <body>
@@ -737,7 +745,7 @@ const HTML_TEMPLATE = `<!doctype html>
 
     ${renderSiteNav('../../')}
     
-    <a href="../../writing/" class="back-link" data-i18n="nav.back_writing">← Logbook</a>
+    <a href="{{BACK_HREF}}" class="back-link" data-i18n="nav.back_writing">← Logbook</a>
     
     <div class="post-wrapper">
         <aside class="toc-sidebar">
@@ -745,11 +753,12 @@ const HTML_TEMPLATE = `<!doctype html>
         </aside>
 
         <article>
+            {{COVER}}
             <h1>{{TITLE}}</h1>
             <div class="post-meta-row">
                 <span class="post-author">{{AUTHOR}}</span>
                 <span class="post-date">{{DATE}}</span>
-                <span class="reading-time">{{READ_TIME}} min read</span>
+                <span class="reading-time">{{READ_LABEL}}</span>
                 {{CATEGORY_TAG}}
                 
                 <button class="like-btn-inline js-like-btn" aria-label="Like this post" data-slug="{{SLUG}}">
@@ -788,10 +797,10 @@ const HTML_TEMPLATE = `<!doctype html>
                     <button class="share-btn" id="copyLinkBtn">
                         🔗 Copy Link
                     </button>
-                    <a href="https://twitter.com/intent/tweet?text={{TITLE}}&url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" rel="noopener noreferrer" class="share-btn">
+                    <a href="https://twitter.com/intent/tweet?text={{TITLE}}&url={{SHARE_URL}}" target="_blank" rel="noopener noreferrer" class="share-btn">
                         Twitter
                     </a>
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://maxwellcofie.com/posts/{{SLUG}}" target="_blank" rel="noopener noreferrer" class="share-btn">
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{SHARE_URL}}" target="_blank" rel="noopener noreferrer" class="share-btn">
                         LinkedIn
                     </a>
                 </div>
@@ -804,7 +813,7 @@ const HTML_TEMPLATE = `<!doctype html>
             </div>
             
             <div class="related-section">
-                <div class="related-label">Read Next</div>
+                <div class="related-label">{{RELATED_LABEL}}</div>
                 <div class="related-grid">
                     {{RELATED_POSTS}}
                 </div>
@@ -912,7 +921,12 @@ posts.forEach(post => {
         .replace(/{{ISO_DATE}}/g, new Date(post.isoDate).toISOString())
         .replace(/{{DESCRIPTION}}/g, post.description)
         .replace(/{{SLUG}}/g, post.slug)
-        .replace(/{{READ_TIME}}/g, post.readTime)
+        .replace(/{{READ_LABEL}}/g, `${post.readTime} min read`)
+        .replace(/{{BACK_HREF}}/g, '../../writing/')
+        .replace(/{{SHARE_URL}}/g, `https://maxwellcofie.com/posts/${post.slug}/`)
+        .replace(/{{RELATED_LABEL}}/g, 'Read Next')
+        .replace('{{EXTRA_STYLE}}', '')
+        .replace('{{COVER}}', '')
         .replace(/{{CONTENT}}/g, post.htmlContent)
         .replace('{{IMAGE_PRECONNECT}}', () => post.htmlContent.includes('https://res.cloudinary.com/')
             ? '<link rel="preconnect" href="https://res.cloudinary.com">' : '')
@@ -959,6 +973,180 @@ for (const entry of fs.readdirSync(OUTPUT_DIR, { withFileTypes: true })) {
 }
 
 
+// 3.5 Monthly Log: what I read, watched and listened to, one page per month at /log/YYYY-MM/.
+// Uses the post template, with each link shown with its site and my note underneath.
+const LOG_STYLE = `<style>
+        .log-cover {
+            margin: 0 0 40px;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 5 / 2;
+            background: var(--surface);
+        }
+        .log-cover svg,
+        .log-cover img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .log-brief {
+            font-size: 1.1em;
+            color: var(--text-main);
+            margin-bottom: 40px;
+        }
+        .log-brief p { margin-bottom: 16px; }
+        .log-pick {
+            margin: 0 0 16px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--surface);
+        }
+        .log-pick-label {
+            display: block;
+            margin-bottom: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+        }
+        .post-content .log-pick-title {
+            font-size: 1.2em;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .log-pick .log-source { margin-left: 10px; }
+        .log-pick p { margin: 10px 0 0; }
+        .post-content ul.log-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .post-content .log-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 4px 10px;
+            margin: 0;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .post-content .log-item:last-child { border-bottom: 0; }
+        .post-content .log-link { font-weight: 500; }
+        .log-source {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+        .log-note {
+            flex-basis: 100%;
+            font-size: 0.92em;
+        }
+    </style>`;
+
+if (!fs.existsSync(LOG_OUTPUT_DIR)) {
+    fs.mkdirSync(LOG_OUTPUT_DIR, { recursive: true });
+}
+const logEntries = (fs.existsSync(LOG_CONTENT_DIR) ? fs.readdirSync(LOG_CONTENT_DIR) : [])
+    .filter(file => path.extname(file) === '.md')
+    .map(file => parseLogEntry(file, fs.readFileSync(path.join(LOG_CONTENT_DIR, file), 'utf8')))
+    .filter(Boolean)
+    .sort((a, b) => b.month.localeCompare(a.month));
+
+const LOG_CATEGORY = 'Monthly Log';
+const LOG_GENERATED_HEADER = '<!doctype html>\n<!-- GENERATED BY build.js FROM content/log/*.md. DO NOT EDIT THIS FILE DIRECTLY. -->';
+
+// The month's header: a photo if the entry names one, otherwise its illustration.
+function renderLogCoverHTML(entry) {
+    if (entry.cover) {
+        return `<img src="${escapeHtml(entry.cover)}" alt="${escapeHtml(entry.coverAlt)}">`;
+    }
+    return renderLogCover(entry.month, { caption: entry.coverCaption, style: entry.coverStyle });
+}
+
+function renderLogPick(pick) {
+    if (!pick) return '';
+    const host = hostOf(pick.url);
+    const label = ['Pick of the month', pick.type].filter(Boolean).map(escapeHtml).join(' · ');
+    return `<aside class="log-pick">
+                <span class="log-pick-label">${label}</span>
+                <a href="${escapeHtml(pick.url)}" class="log-pick-title" target="_blank" rel="noopener noreferrer">${escapeHtml(pick.title)}</a>${host ? `<span class="log-source">${escapeHtml(host)}</span>` : ''}
+                ${pick.note ? `<p>${marked.parseInline(String(pick.note))}</p>` : ''}
+            </aside>`;
+}
+
+logEntries.forEach((entry, index) => {
+    const { tokens, html: bodyHTML } = renderMarkdown(entry.body);
+    const headings = tokens.filter(t => t.type === 'heading' && (t.depth === 2 || t.depth === 3));
+    const contentHTML = `<div class="log-brief">${marked.parse(entry.brief)}</div>
+            ${renderLogPick(entry.pick)}
+            ${decorateLogItems(bodyHTML)}`;
+
+    // Read next: the months either side, then the latest essays if there aren't two.
+    const neighbours = [logEntries[index - 1], logEntries[index + 1]].filter(Boolean)
+        .map(e => ({ href: `../../log/${e.url}`, label: LOG_CATEGORY, title: e.monthName, date: e.date }));
+    const essays = posts.map(p => ({ href: `../../posts/${p.url}`, label: p.categories[0] || 'Writing', title: p.title, date: p.date }));
+    const relatedHTML = [...neighbours, ...essays].slice(0, 2).map(card => `
+        <a href="${card.href}" class="related-card">
+            <span class="related-cat">${escapeHtml(card.label)}</span>
+            <div class="related-title">${escapeHtml(card.title)}</div>
+            <div class="related-date">${card.date}</div>
+        </a>
+    `).join('');
+
+    const values = {
+        TITLE: escapeHtml(entry.title),
+        AUTHOR: 'Maxwell Cofie',
+        DATE: entry.date,
+        SLUG: `log-${entry.slug}`,
+        READ_LABEL: `${entry.itemCount} ${entry.itemCount === 1 ? 'pick' : 'picks'}`,
+        BACK_HREF: '../../writing/?tab=log',
+        SHARE_URL: `https://maxwellcofie.com/log/${entry.url}`,
+        RELATED_LABEL: 'Read Next',
+        EXTRA_STYLE: LOG_STYLE,
+        COVER: `<figure class="log-cover">${optimizeImages(renderLogCoverHTML(entry))}</figure>`,
+        CONTENT: contentHTML,
+        IMAGE_PRECONNECT: contentHTML.includes('https://res.cloudinary.com/') ? '<link rel="preconnect" href="https://res.cloudinary.com">' : '',
+        TOC: renderToc(headings),
+        CATEGORY_TAG: `<span class="post-category monthly-log">${LOG_CATEGORY}</span>`,
+        RELATED_POSTS: relatedHTML,
+        METADATA: renderMetadata({
+            title: `${entry.title} | Maxwell Cofie`,
+            description: entry.description,
+            path: `/log/${entry.url}`,
+            article: {
+                title: entry.title,
+                published: new Date(`${entry.isoDate}T00:00:00Z`).toISOString(),
+                categories: [LOG_CATEGORY],
+            },
+        }),
+    };
+    // One pass, so nothing in the content is mistaken for a placeholder.
+    const html = HTML_TEMPLATE
+        .replace('<!-- GENERATED BY build.js FROM content/posts/*.md. DO NOT EDIT THIS FILE DIRECTLY. -->',
+            '<!-- GENERATED BY build.js FROM content/log/*.md. DO NOT EDIT THIS FILE DIRECTLY. -->')
+        .replace(/{{([A-Z_]+)}}/g, (match, key) => (key in values ? String(values[key]) : match));
+
+    const logPath = path.join(LOG_OUTPUT_DIR, entry.outputFile);
+    fs.mkdirSync(path.dirname(logPath), { recursive: true });
+    writeGeneratedFile(logPath, html);
+    console.log(`Generated: log/${entry.outputFile}`);
+});
+
+// Remove pages for log entries that were deleted or turned back into drafts.
+const currentLogFiles = new Set(logEntries.map(entry => path.resolve(LOG_OUTPUT_DIR, entry.outputFile)));
+for (const entry of fs.readdirSync(LOG_OUTPUT_DIR, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const stalePath = path.join(LOG_OUTPUT_DIR, entry.name, 'index.html');
+    if (!fs.existsSync(stalePath) || currentLogFiles.has(path.resolve(stalePath))) continue;
+    if (fs.readFileSync(stalePath, 'utf8').startsWith(LOG_GENERATED_HEADER)) {
+        fs.unlinkSync(stalePath);
+        if (!fs.readdirSync(path.join(LOG_OUTPUT_DIR, entry.name)).length) fs.rmdirSync(path.join(LOG_OUTPUT_DIR, entry.name));
+    }
+}
+
 // 4. Update writing/index.html Index
 const categories = [...new Set(posts.flatMap(p => p.categories))].sort();
 const filterHTML = `
@@ -967,6 +1155,38 @@ const filterHTML = `
         ${categories.map(cat => `<button class="filter-btn" aria-pressed="false" onclick="filterPosts(this, ${escapeHtml(JSON.stringify(cat))})">${escapeHtml(cat)}</button>`).join('')}
     </div>
 `;
+
+// Essays and the Monthly Log share the Logbook page as two tabs (the tabs appear once there's a log entry).
+const hasLog = logEntries.length > 0;
+const logbookTabsHTML = hasLog ? `
+        <div class="logbook-tabs" role="tablist" aria-label="Logbook">
+            <button class="logbook-tab" role="tab" id="tab-essays" data-tab="essays" aria-selected="true" aria-controls="essaysPanel" data-i18n="writing.tab_essays">Essays</button>
+            <button class="logbook-tab" role="tab" id="tab-log" data-tab="log" aria-selected="false" aria-controls="logPanel" tabindex="-1" data-i18n="writing.tab_log">Monthly Log</button>
+        </div>` : '';
+const logPanelHTML = hasLog ? `
+        <div id="logPanel" role="tabpanel" aria-labelledby="tab-log" hidden>
+            <p class="log-panel-intro" data-i18n="writing.log_intro">What I read, watched and listened to, wrapped up at the end of every month.</p>
+            ${[...new Set(logEntries.map(entry => entry.month.slice(0, 4)))].map(year => `
+            <div class="section-label log-year">${year}</div>
+            <div class="project-list">
+                ${logEntries.filter(entry => entry.month.startsWith(year)).map(entry => `
+                <a href="../log/${entry.url}" class="project-item log-entry-item">
+                    <div class="log-thumb" aria-hidden="true">${entry.cover
+        ? `<img src="${escapeHtml(entry.cover)}" alt="" loading="lazy">`
+        : renderLogCover(entry.month, { caption: '', style: entry.coverStyle })}</div>
+                    <div class="proj-left">
+                        <div class="proj-header">
+                            <span class="proj-title">${escapeHtml(entry.monthName)}</span>
+                            <span class="arrow">→</span>
+                        </div>
+                        <span class="proj-desc">${escapeHtml(entry.description)}</span>
+                    </div>
+                    <div class="proj-meta">
+                        <span>${entry.itemCount} ${entry.itemCount === 1 ? 'pick' : 'picks'}</span>
+                    </div>
+                </a>`).join('')}
+            </div>`).join('')}
+        </div>` : '';
 
 const INDEX_HTML = `<!doctype html>
 <html lang="en" data-theme="system">
@@ -1036,6 +1256,56 @@ const INDEX_HTML = `<!doctype html>
             opacity: 0.2;
             cursor: default;
         }
+        .logbook-tabs {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .logbook-tab {
+            margin-bottom: -1px;
+            padding: 10px 0;
+            background: none;
+            border: 0;
+            border-bottom: 2px solid transparent;
+            font: inherit;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .logbook-tab:hover { color: var(--text-main); }
+        .logbook-tab[aria-selected="true"] {
+            color: var(--text-main);
+            border-bottom-color: var(--text-main);
+        }
+        .project-item.log-entry-item {
+            grid-template-columns: 160px 1fr auto;
+            gap: 20px;
+            align-items: center;
+        }
+        .log-thumb {
+            aspect-ratio: 5 / 2;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .log-thumb svg,
+        .log-thumb img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 480px) {
+            .log-thumb { margin-bottom: 14px; }
+        }
+        .log-year { margin-top: 8px; }
+        .log-panel-intro {
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
         .page-info {
             font-size: 13px;
             font-weight: 500;
@@ -1056,7 +1326,9 @@ const INDEX_HTML = `<!doctype html>
     </div>
 
     <div class="project-list-container">
-        <div class="section-label" data-i18n="writing.articles">Articles</div>
+        ${logbookTabsHTML}
+        <div id="essaysPanel"${hasLog ? ' role="tabpanel" aria-labelledby="tab-essays"' : ''}>
+        ${hasLog ? '' : '<div class="section-label" data-i18n="writing.articles">Articles</div>'}
         ${filterHTML}
 
         <div class="project-list" id="projectList">
@@ -1089,6 +1361,8 @@ const INDEX_HTML = `<!doctype html>
             <span class="page-info" id="pageInfo">1 / 1</span>
             <button class="page-btn" id="nextBtn" onclick="changePage(1)" aria-label="Next Page">→</button>
         </div>
+        </div>
+        ${logPanelHTML}
     </div>
 
     ${renderSiteFooter('../')}
@@ -1103,6 +1377,41 @@ const INDEX_HTML = `<!doctype html>
         const params = new URLSearchParams(window.location.search);
         if (params.has('category')) currentCategory = params.get('category');
         if (params.has('page')) currentPage = parseInt(params.get('page')) || 1;
+        let currentTab = params.get('tab') === 'log' ? 'log' : 'essays';
+
+        // Essays / Monthly Log tabs
+        const tabButtons = Array.from(document.querySelectorAll('.logbook-tab'));
+        function showTab(tab) {
+            if (!tabButtons.length) return;
+            currentTab = tab;
+            tabButtons.forEach(button => {
+                const selected = button.dataset.tab === tab;
+                button.setAttribute('aria-selected', String(selected));
+                button.tabIndex = selected ? 0 : -1;
+            });
+            document.getElementById('essaysPanel').hidden = tab !== 'essays';
+            document.getElementById('logPanel').hidden = tab !== 'log';
+        }
+        tabButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                if (button.dataset.tab === currentTab) return;
+                showTab(button.dataset.tab);
+                const url = new URL(window.location);
+                ['category', 'page', 'tab'].forEach(key => url.searchParams.delete(key));
+                if (currentTab === 'log') url.searchParams.set('tab', 'log');
+                currentCategory = 'all';
+                currentPage = 1;
+                window.history.pushState({}, '', url);
+                syncFilterUI();
+                performRender();
+            });
+            button.addEventListener('keydown', event => {
+                if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+                const next = tabButtons[(index + (event.key === 'ArrowRight' ? 1 : tabButtons.length - 1)) % tabButtons.length];
+                next.focus();
+                next.click();
+            });
+        });
 
         // Sync UI with URL state on load
         function syncFilterUI() {
@@ -1122,6 +1431,7 @@ const INDEX_HTML = `<!doctype html>
 
         function updateURL() {
             const url = new URL(window.location);
+            url.searchParams.delete('tab');
             if (currentCategory === 'all') url.searchParams.delete('category');
             else url.searchParams.set('category', currentCategory);
             
@@ -1132,7 +1442,7 @@ const INDEX_HTML = `<!doctype html>
         }
 
         function performRender() {
-            const allItems = Array.from(document.querySelectorAll('.project-list .project-item'));
+            const allItems = Array.from(document.querySelectorAll('#projectList .project-item'));
             const emptyState = document.getElementById('emptyState');
             
             // 1. Filter
@@ -1226,6 +1536,7 @@ const INDEX_HTML = `<!doctype html>
 
         // Initial Render
         document.addEventListener('DOMContentLoaded', () => {
+            showTab(currentTab);
             syncFilterUI();
             performRender(); // No transition on initial load
             
@@ -1234,6 +1545,7 @@ const INDEX_HTML = `<!doctype html>
                 const params = new URLSearchParams(window.location.search);
                 currentCategory = params.get('category') || 'all';
                 currentPage = parseInt(params.get('page')) || 1;
+                showTab(params.get('tab') === 'log' ? 'log' : 'essays');
                 syncFilterUI();
                 render();
             });
@@ -1300,13 +1612,24 @@ const searchIndex = posts.map(post => ({
     category: post.categories[0],
     url: `/posts/${post.url}`,
     date: post.date
-}));
+})).concat(logEntries.map(entry => ({
+    title: entry.title,
+    description: entry.description,
+    category: LOG_CATEGORY,
+    url: `/log/${entry.url}`,
+    date: entry.date
+})));
 
 writeGeneratedFile(path.join(__dirname, 'search.json'), JSON.stringify(searchIndex));
 console.log('--- Generated search.json ---');
 
 // 6. Generate RSS Feed
-const feedDate = posts.length ? new Date(`${posts[0].isoDate}T00:00:00Z`) : new Date(0);
+// Essays and Monthly Log entries, newest first.
+const feedItems = [
+    ...posts.map(post => ({ ...post, link: `https://maxwellcofie.com/posts/${post.url}` })),
+    ...logEntries.map(entry => ({ ...entry, link: `https://maxwellcofie.com/log/${entry.url}` })),
+].sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+const feedDate = feedItems.length ? new Date(`${feedItems[0].isoDate}T00:00:00Z`) : new Date(0);
 const RSS_TEMPLATE = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
@@ -1317,12 +1640,12 @@ const RSS_TEMPLATE = `<?xml version="1.0" encoding="UTF-8" ?>
  <pubDate>${feedDate.toUTCString()}</pubDate>
  <ttl>1800</ttl>
 
- ${posts.map(post => `
+ ${feedItems.map(post => `
   <item>
    <title>${escapeXml(post.title)}</title>
    <description>${escapeXml(post.description)}</description>
-   <link>https://maxwellcofie.com/posts/${post.url}</link>
-   <guid>https://maxwellcofie.com/posts/${post.url}</guid>
+   <link>${post.link}</link>
+   <guid>${post.link}</guid>
    <pubDate>${new Date(post.isoDate).toUTCString()}</pubDate>
   </item>
  `).join('')}
@@ -1387,6 +1710,13 @@ const SITEMAP_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>${new Date(post.isoDate).toISOString().split('T')[0]}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>`).join('')}
+  ${logEntries.map(entry => `
+  <url>
+    <loc>https://maxwellcofie.com/log/${entry.url}</loc>
+    <lastmod>${entry.isoDate}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>`).join('')}
 </urlset>`;
 
@@ -1455,6 +1785,14 @@ for (const [file, { root, active, lists = {} }] of Object.entries(STATIC_PAGES))
     writeGeneratedFile(filePath, content);
 }
 console.log('--- Updated shared nav, footer and project lists ---');
+
+// 9. Brand kit: its English copy comes from brand-kit/strings.js (French and Spanish load in the browser)
+const brandKitStrings = loadBrandKit().strings;
+for (const file of ['brand-kit/index.html', 'brand-kit/speaker-sheet/index.html']) {
+    const filePath = path.join(__dirname, file);
+    writeGeneratedFile(filePath, applyBrandKitStrings(fs.readFileSync(filePath, 'utf8'), brandKitStrings.en, file));
+}
+console.log('--- Updated brand kit copy ---');
 
 // Refresh static page metadata from the same configuration on every build.
 for (const [file, metadata] of Object.entries(pages)) {
