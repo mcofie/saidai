@@ -1788,7 +1788,7 @@ console.log('--- Updated shared nav, footer and project lists ---');
 
 // 9. Brand kit: its English copy comes from brand-kit/strings.js (French and Spanish load in the browser)
 const brandKitStrings = loadBrandKit().strings;
-for (const file of ['brand-kit/index.html', 'brand-kit/speaker-sheet/index.html']) {
+for (const file of ['brand-kit/index.html', 'brand-kit/profile/index.html']) {
     const filePath = path.join(__dirname, file);
     writeGeneratedFile(filePath, applyBrandKitStrings(fs.readFileSync(filePath, 'utf8'), brandKitStrings.en, file));
 }

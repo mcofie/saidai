@@ -10,7 +10,7 @@ const { createZip } = require('../lib/zip');
 
 const ROOT = path.join(__dirname, '..');
 const DIST = path.join(ROOT, 'dist');
-const SPEAKER_SHEET_HASH = path.join(ROOT, 'content', 'speaker-sheet.hash');
+const PROFILE_HASH = path.join(ROOT, 'content', 'profile.hash');
 
 const SITE_FILES = [
     'index.html', '404.html', 'CNAME', '.nojekyll', 'robots.txt',
@@ -50,9 +50,9 @@ for (const dir of SITE_DIRS) {
     if (fs.existsSync(path.join(ROOT, dir))) copy(dir);
 }
 
-// The brand kit's "download everything" ZIP: photos, signature, speaker sheet and bios in each language.
+// The brand kit's "download everything" ZIP: photos, signature, one-page profile and bios in each language.
 const KIT_DIR = path.join(DIST, 'assets', 'brand-kit');
-const SPEAKER_SHEET_PDF = 'maxwell-cofie-speaker-sheet.pdf';
+const PROFILE_PDF = 'maxwell-cofie-profile.pdf';
 const { strings: kitStrings, updated } = loadBrandKit();
 const kitFile = name => fs.readFileSync(path.join(KIT_DIR, name));
 const kitFiles = [
@@ -64,19 +64,19 @@ const kitFiles = [
     ['signature/maxwell-cofie-signature-white.png', kitFile('maxwell-cofie-signature-white.png')],
     ['signature/maxwell-cofie-signature-white.svg', kitFile('maxwell-cofie-signature-white.svg')],
     ['maxwell-cofie-social-card.jpg', kitFile('maxwell-cofie-social-card.jpg')],
-    [SPEAKER_SHEET_PDF, kitFile(SPEAKER_SHEET_PDF)],
+    [PROFILE_PDF, kitFile(PROFILE_PDF)],
     ...Object.keys(kitStrings).map(lang => [`bios/bios-${lang}.txt`, Buffer.from(biosText(kitStrings[lang]))]),
 ];
 fs.writeFileSync(path.join(KIT_DIR, 'maxwell-cofie-brand-kit.zip'),
     createZip(kitFiles.map(([name, data]) => ({ name: `maxwell-cofie-brand-kit/${name}`, data })), new Date(`${updated}T12:00:00Z`)));
 
-// The speaker sheet PDF is made locally with Chrome (npm run speaker-sheet), so flag it when
+// The one-page profile PDF is made locally with Chrome (npm run profile-pdf), so flag it when
 // the sheet's text has changed since.
 const sheetHash = crypto.createHash('sha256')
-    .update(fs.readFileSync(path.join(DIST, 'brand-kit', 'speaker-sheet', 'index.html'))).digest('hex');
-const recordedHash = fs.existsSync(SPEAKER_SHEET_HASH) ? fs.readFileSync(SPEAKER_SHEET_HASH, 'utf8').trim() : '';
+    .update(fs.readFileSync(path.join(DIST, 'brand-kit', 'profile', 'index.html'))).digest('hex');
+const recordedHash = fs.existsSync(PROFILE_HASH) ? fs.readFileSync(PROFILE_HASH, 'utf8').trim() : '';
 if (sheetHash !== recordedHash) {
-    console.warn('!!! The speaker sheet PDF is out of date. Run `npm run speaker-sheet` to refresh it.');
+    console.warn('!!! The one-page profile PDF is out of date. Run `npm run profile-pdf` to refresh it.');
 }
 
 function htmlFiles(dir) {

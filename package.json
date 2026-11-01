@@ -9,7 +9,7 @@
     "sync-books": "node sync-books.js",
     "new-post": "node bin/new-post.js",
     "image-sizes": "node bin/image-sizes.js",
-    "speaker-sheet": "node build.js && node bin/speaker-sheet-pdf.js && npm run build"
+    "profile-pdf": "node build.js && node bin/profile-pdf.js && npm run build"
   },
   "repository": {
     "type": "git",

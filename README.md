@@ -122,9 +122,11 @@ Entries go into the RSS feed, sitemap and search, but not the homepage's latest 
 
 ### Brand kit (`/brand-kit/`)
 
--   **Words live in `brand-kit/strings.js`**: bios, topics, labels and the "last updated" date (`UPDATED`), in English, French and Spanish. The build writes the English into `brand-kit/index.html` and the speaker sheet; the browser loads the rest for the language switcher. Edit the strings, not the HTML.
+For anyone featuring, partnering with or writing about me: what I do, bios, headshots, ways to work together and brand assets.
+
+-   **Words live in `brand-kit/strings.js`**: bios, what I do, topics, labels and the "last updated" date (`UPDATED`), in English, French and Spanish. The build writes the English into `brand-kit/index.html` and the one-page profile; the browser loads the rest for the language switcher. Edit the strings, not the HTML.
 -   **The download-everything ZIP** (`assets/brand-kit/maxwell-cofie-brand-kit.zip`) is created by `npm run build` from the files in `assets/brand-kit/` plus a bios text file per language. It only exists in `dist/`.
--   **The speaker sheet** is a one-page A4 page at `brand-kit/speaker-sheet/`. Its PDF is printed with your local Chrome by `npm run speaker-sheet` and committed. The build warns if the sheet's text has changed since the PDF was made. Set `CHROME_PATH` if Chrome isn't in the usual place.
+-   **The one-page profile** is an A4 page at `brand-kit/profile/`. Its PDF is printed with your local Chrome by `npm run profile-pdf` and committed. The build warns if the sheet's text has changed since the PDF was made. Set `CHROME_PATH` if Chrome isn't in the usual place.
 
 ## ✨ Features
 
@@ -167,7 +169,7 @@ The site supports client-side localization for **English**, **French**, and **Sp
 | :--- | :--- | :--- |
 | `npm run build` | `node bin/image-sizes.js && node build.js && node bin/package-site.js` | Compiles the static site, updates all indices and pages, and packages the deployable site into `dist/`. |
 | `npm run image-sizes` | `node bin/image-sizes.js` | Looks up dimensions for new post images (also runs as part of `build`). |
-| `npm run speaker-sheet` | `node build.js && node bin/speaker-sheet-pdf.js && npm run build` | Refreshes the brand kit's speaker sheet PDF (needs Chrome). |
+| `npm run profile-pdf` | `node build.js && node bin/profile-pdf.js && npm run build` | Refreshes the brand kit's one-page profile PDF (needs Chrome). |
 | `npm test` | `node --test test/*.test.js` | Runs the metadata tests. CI runs these before every deploy. |
 | `npm run new-post` | `node bin/new-post.js` | Interactive CLI to scaffold a new blog post with correct metadata. |
 

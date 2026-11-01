@@ -1,13 +1,13 @@
 <!doctype html>
-<!-- One-page A4 speaker sheet. Its text comes from brand-kit/strings.js at build time;
-     run `npm run speaker-sheet` after editing to refresh the PDF. -->
+<!-- One-page A4 profile. Its text comes from brand-kit/strings.js at build time;
+     run `npm run profile-pdf` after editing to refresh the PDF. -->
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <!-- METADATA_START -->
-    <title>Speaker Sheet | Maxwell Cofie</title>
-    <meta name="description" content="A one-page speaker sheet for Maxwell Cofie: bio, speaking topics, formats and contact details.">
+    <title>Profile | Maxwell Cofie</title>
+    <meta name="description" content="A one-page profile of Maxwell Cofie: bio, the organisations he founded, ways to work together and contact details.">
     <meta name="robots" content="noindex, follow">
     <!-- METADATA_END -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -143,6 +143,24 @@
             color: #444444;
         }
 
+        .topic-type {
+            font-weight: 400;
+            color: #666666;
+        }
+
+        .topics-heading {
+            margin-top: 7mm;
+        }
+
+        .topic-list {
+            padding-left: 4mm;
+            color: #444444;
+        }
+
+        .topic-list li + li {
+            margin-top: 1.5mm;
+        }
+
         .side-block + .side-block {
             margin-top: 7mm;
         }
@@ -226,46 +244,51 @@
         <div class="sheet-columns">
             <section>
                 <span class="accent"></span>
-                <h2 data-i18n="kit.topics_title">Topics</h2>
+                <h2 data-i18n="kit.does_label">What I do</h2>
                 <div class="topic">
-                    <h3 data-i18n="kit.topic1_title">Building for how African markets actually work</h3>
-                    <p data-i18n="kit.topic1_desc">Why products copied from Silicon Valley stall here, and how to design around real-world friction: payments, trust, informal networks and the way people actually get things done.</p>
+                    <h3>Stage 2 <span class="topic-type">· <span data-i18n="kit.venture_stage2_type">Product studio</span></span></h3>
+                    <p data-i18n="kit.venture_stage2_desc">Builds digital products and launches ventures across fintech, legal-tech, events, commerce and proptech in Ghana.</p>
                 </div>
                 <div class="topic">
-                    <h3 data-i18n="kit.topic2_title">Designing products people love</h3>
-                    <p data-i18n="kit.topic2_desc">What makes users say "they thought about me", and how small, deliberate details turn a working product into one people recommend.</p>
+                    <h3>The Good Seed Capital <span class="topic-type">· <span data-i18n="kit.venture_goodseed_type">Investment syndicate</span></span></h3>
+                    <p data-i18n="kit.venture_goodseed_desc">Connects early-stage African founders with global investors who back with conviction, not curiosity: pre-seed and seed capital, operator guidance and introductions.</p>
                 </div>
                 <div class="topic">
-                    <h3 data-i18n="kit.topic3_title">Telling the story that wins the room</h3>
-                    <p data-i18n="kit.topic3_desc">Why great African startups still lose investors and customers, and the stories founders need to tell to close the gap, from the first pitch to the fundraise.</p>
+                    <h3>Sandbox Réseau <span class="topic-type">· <span data-i18n="kit.venture_sandbox_type">Builder community</span></span></h3>
+                    <p data-i18n="kit.venture_sandbox_desc">A gathering in Accra for Africa's founders and builders, with demos, mini-talks and open networking. Home of The Reverb, a five-minute podcast of builders' hard-earned lessons.</p>
                 </div>
-                <div class="topic">
-                    <h3 data-i18n="kit.topic4_title">Building communities of builders</h3>
-                    <p data-i18n="kit.topic4_desc">Lessons from starting Sandbox Réseau and The Reverb: how to bring founders, engineers and curious minds together, and keep the room worth coming back to.</p>
-                </div>
+
+                <h2 class="topics-heading" data-i18n="kit.topics_title">What I write and talk about</h2>
+                <ul class="topic-list">
+                    <li data-i18n="kit.topic1_title">Building for how African markets actually work</li>
+                    <li data-i18n="kit.topic2_title">Designing products people love</li>
+                    <li data-i18n="kit.topic3_title">Telling the story that wins the room</li>
+                    <li data-i18n="kit.topic4_title">Building communities of builders</li>
+                </ul>
             </section>
 
             <aside>
                 <div class="side-block">
                     <span class="accent"></span>
-                    <h2 data-i18n="kit.formats_title">Formats</h2>
+                    <h2 data-i18n="kit.ways_title">Ways to work together</h2>
                     <ul>
-                        <li data-i18n="kit.format_keynote">Keynotes</li>
-                        <li data-i18n="kit.format_panel">Panels</li>
-                        <li data-i18n="kit.format_fireside">Fireside chats</li>
-                        <li data-i18n="kit.format_workshop">Workshops</li>
+                        <li data-i18n="kit.way_partnerships">Brand partnerships</li>
+                        <li data-i18n="kit.way_advisory">Product and advisory</li>
+                        <li data-i18n="kit.way_speaking">Speaking and panels</li>
+                        <li data-i18n="kit.way_media">Podcasts and interviews</li>
+                        <li data-i18n="kit.way_writing">Writing and features</li>
                     </ul>
                 </div>
                 <div class="side-block">
                     <h2 data-i18n="kit.logistics_title">Good to know</h2>
                     <ul>
-                        <li data-i18n="kit.logistics_travel">Based in Accra and happy to travel</li>
-                        <li data-i18n="kit.logistics_virtual">Virtual talks and podcasts welcome</li>
-                        <li data-i18n="kit.logistics_language">Talks in English</li>
+                        <li data-i18n="kit.logistics_travel">Based in Accra, working across Africa and beyond</li>
+                        <li data-i18n="kit.logistics_virtual">Remote or in person</li>
+                        <li data-i18n="kit.logistics_language">Works in English</li>
                     </ul>
                 </div>
                 <div class="side-block">
-                    <h2 data-i18n="kit.sheet_contact">Bookings & press</h2>
+                    <h2 data-i18n="kit.sheet_contact">Partnerships & press</h2>
                     <ul>
                         <li class="contact-line">maxcofie@gmail.com</li>
                         <li>maxwellcofie.com</li>
