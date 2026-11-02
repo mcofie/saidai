@@ -1,5 +1,14 @@
 window.works = [
     {
+        id: "kilulu",
+        title: "Kilulu",
+        year: "2026",
+        url: "https://kilulu.app",
+        descKey: "proj.kilulu",
+        metaKey: "meta.education",
+        category: "work"
+    },
+    {
         id: "vellum",
         title: "Vellum",
         year: "2026",
