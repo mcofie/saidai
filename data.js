@@ -20,7 +20,7 @@ window.works = [
     {
         id: "graydocket",
         title: "GrayDocket",
-        year: "2026",
+        year: "2025",
         url: "https://graydocket.com",
         descKey: "proj.graydocket",
         metaKey: "meta.platform",
@@ -57,7 +57,7 @@ window.works = [
     {
         id: "motorambos",
         title: "Motor Ambos",
-        year: "2025",
+        year: "2024",
         url: "https://motorambos.com",
         descKey: "proj.motorambos",
         metaKey: "meta.service",
@@ -66,7 +66,7 @@ window.works = [
     {
         id: "minutes",
         title: "Minutes 2 Match",
-        year: "2024",
+        year: "2023",
         url: "https://minutes2match.com/",
         descKey: "proj.minutes",
         metaKey: "meta.dating",
