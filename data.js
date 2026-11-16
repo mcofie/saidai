@@ -27,12 +27,12 @@ window.works = [
         category: "work"
     },
     {
-        id: "amigo",
-        title: "Amigo Lease",
-        year: "2025",
-        url: "https://amigolease.com",
-        descKey: "proj.amigo",
-        metaKey: "meta.marketplace",
+        id: "krataa",
+        title: "Krataa",
+        year: "2026",
+        url: "https://krataa.app/",
+        descKey: "proj.krataa",
+        metaKey: "meta.service",
         category: "work"
     },
     {

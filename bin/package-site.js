@@ -18,7 +18,7 @@ const SITE_FILES = [
     'rss.xml', 'sitemap.xml', 'search.json',
     'favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png', 'apple-touch-icon.png',
 ];
-const SITE_DIRS = ['about', 'work', 'ventures', 'writing', 'books', 'music', 'dev', 'posts', 'log', 'assets', 'brand-kit'];
+const SITE_DIRS = ['about', 'work', 'ventures', 'writing', 'books', 'music', 'posts', 'log', 'assets', 'brand-kit'];
 
 // Files inside SITE_DIRS that are no longer used by any page.
 const EXCLUDED = new Set([

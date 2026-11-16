@@ -1699,11 +1699,6 @@ const SITEMAP_TEMPLATE = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-      <loc>https://maxwellcofie.com/dev/</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.5</priority>
-  </url>
   ${posts.map(post => `
   <url>
     <loc>https://maxwellcofie.com/posts/${post.url}</loc>

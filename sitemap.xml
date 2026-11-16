@@ -40,11 +40,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-      <loc>https://maxwellcofie.com/dev/</loc>
-      <changefreq>monthly</changefreq>
-      <priority>0.5</priority>
-  </url>
   
   <url>
     <loc>https://maxwellcofie.com/posts/mind-the-story-gap-why-great-african-startups-still-lose-the-room/</loc>
